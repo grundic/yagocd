@@ -79,6 +79,18 @@ class PipelineManager(object):
             if pipeline.data.name == name:
                 return pipeline
 
+    def get(self, name, counter):
+        response = self._client.get(
+            path='{base_api}/pipelines/{name}/instance/{counter}'.format(
+                base_api=self.base_api,
+                name=name,
+                counter=counter
+            ),
+            headers={'Accept': 'application/json'},
+        )
+
+        return PipelineInstance(client=self._client, data=response.json())
+
 
 class PipelineEntity(Base):
     def __init__(self, client, data, group=None, descendants=None):
