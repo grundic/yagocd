@@ -63,7 +63,7 @@ class Client(object):
         """
         return "/".join(map(lambda x: str(x).rstrip('/'), args))
 
-    def get(self, path, headers=None):
+    def request(self, method, path, data=None, headers=None):
         # TODO: think how to make this method private.
         # One possibility is to create internal variable with baseurl for making all requests.
 
@@ -72,13 +72,24 @@ class Client(object):
 
         if headers is None:
             headers = self._options['headers']
-        response = requests.get(
-            url,
+        response = requests.request(
+            method=method,
+            url=url,
             auth=self._auth,
+            data=data,
             verify=self._options['verify'],
             headers=headers
         )
+        # raise exception if we got 4xx/5xx response
+        response.raise_for_status()
+
         return response
+
+    def get(self, path, headers=None):
+        return self.request(method='get', path=path, headers=headers)
+
+    def post(self, path, data=None, headers=None):
+        return self.request(method='post', path=path, data=data, headers=headers)
 
     def base_api(self, context_path=None, rest_base_path=None):
         # TODO: think how to make this method private.
