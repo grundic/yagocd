@@ -31,8 +31,6 @@ from yagocd.resources.stage import StageInstance
 
 
 class PipelineManager(object):
-    endpoint_path = '{context_path}/{rest_base_path}/pipelines'
-
     def __init__(self, client):
         """
 
