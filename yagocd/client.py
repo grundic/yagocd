@@ -38,12 +38,13 @@ class Client(object):
     DEFAULT_OPTIONS = {
         'context_path': 'go/',
         'rest_base_path': 'api/',
+        'verify': True,
         'headers': {
             'Accept': 'application/vnd.go.cd.v1+json',
         }
     }
 
-    def __init__(self, server='https://localhost:8154', auth=None, options=None):
+    def __init__(self, server='http://localhost:8153', auth=None, options=None):
         options = {} if options is None else options
 
         options['server'] = server
@@ -69,7 +70,12 @@ class Client(object):
 
         if headers is None:
             headers = self._options['headers']
-        response = requests.get(url, auth=self._auth, headers=headers)
+        response = requests.get(
+            url,
+            auth=self._auth,
+            verify=self._options['verify'],
+            headers=headers
+        )
         return response
 
     def base_api(self, context_path=None, rest_base_path=None):
