@@ -28,6 +28,7 @@
 ###############################################################################
 
 import copy
+from urlparse import urljoin
 
 from yagocd.resources.pipeline import PipelineManager
 import requests
@@ -62,16 +63,22 @@ class Client(object):
     def get(self, path, headers=None):
         # TODO: think how to make this method private.
         # One possibility is to create internal variable with baseurl for making all requests.
-        url = self.urljoin(self._options['server'], path)
+
+        # this should work even if path is absolute (e.g. for files)
+        url = urljoin(self._options['server'], path)
+
         if headers is None:
             headers = self._options['headers']
         response = requests.get(url, auth=self._auth, headers=headers)
         return response
 
-    def base_api(self):
+    def base_api(self, context_path=None, rest_base_path=None):
         # TODO: think how to make this method private.
         # One possibility is to create internal variable with baseurl for making all requests.
-        return self.urljoin(self._options['context_path'], self._options['rest_base_path'])
+        return self.urljoin(
+            context_path or self._options['context_path'],
+            rest_base_path or self._options['rest_base_path']
+        )
 
     def pipeline(self):
         return PipelineManager(self)

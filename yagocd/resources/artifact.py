@@ -27,26 +27,43 @@
 ###############################################################################
 
 from yagocd.resources.base import Base
-from yagocd.resources.artifact import ArtifactManager
 
 
-class JobInstance(Base):
-    def __init__(self, client, data, stage):
-        super(JobInstance, self).__init__(client, data)
-        self._stage = stage
+class ArtifactManager(object):
+    def __init__(self, client):
+        """
+        :type client: yagocd.client.Client
+        """
+        self._client = client
+        self.base_api = self._client.base_api(rest_base_path='files/')
 
-    @property
-    def stage(self):
-        return self._stage
-
-    def artifacts(self):
-        return ArtifactManager(self._client).list(
-            pipeline_name=self.stage.pipeline.data.name,
-            pipeline_counter=self.stage.pipeline.data.counter,
-            stage_name=self.stage.data.name,
-            stage_counter=self.stage.data.counter,
-            job_name=self.data.name
+    def list(self, pipeline_name, pipeline_counter, stage_name, stage_counter, job_name):
+        response = self._client.get(
+            path='{base_api}/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}.json'.format(
+                base_api=self.base_api,
+                pipeline_name=pipeline_name,
+                pipeline_counter=pipeline_counter,
+                stage_name=stage_name,
+                stage_counter=stage_counter,
+                job_name=job_name
+            ),
         )
+        artifacts = list()
+        for data in response.json():
+            artifacts.append(Artifact(client=self._client, data=data))
+
+        return artifacts
+
+
+class Artifact(Base):
+    def files(self):
+        return [ArtifactFile(client=self._client, data=data) for data in self.data.files]
+
+
+class ArtifactFile(Base):
+    def fetch(self):
+        response = self._client.get(self.data.url)
+        return response.text
 
 
 if __name__ == '__main__':
