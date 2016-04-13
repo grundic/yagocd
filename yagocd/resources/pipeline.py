@@ -120,6 +120,25 @@ class PipelineManager(object):
 
         return EasyDict(response.json())
 
+    def pause(self, name, cause):
+        self._client.post(
+            path='{base_api}/pipelines/{name}/pause'.format(
+                base_api=self.base_api,
+                name=name,
+            ),
+            data={'pauseCause': cause},
+            headers={'Accept': 'application/json'},
+        )
+
+    def unpause(self, name):
+        self._client.post(
+            path='{base_api}/pipelines/{name}/unpause'.format(
+                base_api=self.base_api,
+                name=name,
+            ),
+            headers={'Accept': 'application/json'},
+        )
+
 
 class PipelineEntity(Base):
     def __init__(self, client, data, group=None, descendants=None):
@@ -144,6 +163,12 @@ class PipelineEntity(Base):
 
     def status(self):
         return self._client.pipeline.status(name=self.data.name)
+
+    def pause(self, cause):
+        self._client.pipeline.pause(name=self.data.name, cause=cause)
+
+    def unpause(self):
+        self._client.pipeline.unpause(name=self.data.name)
 
 
 class PipelineInstance(Base):
