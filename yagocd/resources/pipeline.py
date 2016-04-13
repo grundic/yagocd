@@ -29,6 +29,8 @@
 from yagocd.resources.base import Base
 from yagocd.resources.stage import StageInstance
 
+from easydict import EasyDict
+
 
 class PipelineManager(object):
     def __init__(self, client):
@@ -91,6 +93,17 @@ class PipelineManager(object):
 
         return PipelineInstance(client=self._client, data=response.json())
 
+    def status(self, name):
+        response = self._client.get(
+            path='{base_api}/pipelines/{name}/status'.format(
+                base_api=self.base_api,
+                name=name,
+            ),
+            headers={'Accept': 'application/json'},
+        )
+
+        return EasyDict(response.json())
+
 
 class PipelineEntity(Base):
     def __init__(self, client, data, group=None, descendants=None):
@@ -125,6 +138,9 @@ class PipelineEntity(Base):
             instances.append(PipelineInstance(client=self._client, data=instance))
 
         return instances
+
+    def status(self):
+        return self._client.pipeline.status(name=self.data.name)
 
 
 class PipelineInstance(Base):
