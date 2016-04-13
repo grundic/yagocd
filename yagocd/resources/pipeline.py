@@ -27,6 +27,7 @@
 ###############################################################################
 
 from yagocd.resources.base import Base
+from yagocd.resources.stage import StageInstance
 
 
 class PipelineManager(object):
@@ -38,6 +39,7 @@ class PipelineManager(object):
         :type client: yagocd.client.Client
         """
         self._client = client
+        self.base_api = self._client.base_api()
 
     @staticmethod
     def tie_descendants(pipelines):
@@ -52,7 +54,7 @@ class PipelineManager(object):
 
     def list(self):
         response = self._client.get(
-            path='{base_api}/config/pipeline_groups'.format(base_api=self._client.base_api()),
+            path='{base_api}/config/pipeline_groups'.format(base_api=self.base_api),
             headers={'Accept': 'application/json'},
         )
 
@@ -72,6 +74,9 @@ class PipelineManager(object):
         return pipelines
 
     def find(self, name):
+        """
+        :rtype: yagocd.resources.PipelineEntity
+        """
         for pipeline in self.list():
             if pipeline.data.name == name:
                 return pipeline
@@ -95,9 +100,30 @@ class PipelineEntity(Base):
     def descendants(self, value):
         self._descendants = value
 
+    def history(self, offset=0):
+        response = self._client.get(
+            path='{base_api}/pipelines/{name}/history/{offset}'.format(
+                base_api=self.base_api,
+                name=self.data.name,
+                offset=offset
+            ),
+            headers={'Accept': 'application/json'},
+        )
+
+        instances = list()
+        for instance in response.json().get('pipelines'):
+            instances.append(PipelineInstance(client=self._client, data=instance))
+
+        return instances
+
 
 class PipelineInstance(Base):
-    pass
+    def stages(self):
+        stages = list()
+        for data in self.data.stages:
+            stages.append(StageInstance(client=self._client, data=data, pipeline=self))
+
+        return stages
 
 
 if __name__ == '__main__':

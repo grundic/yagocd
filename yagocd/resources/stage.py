@@ -26,20 +26,25 @@
 #
 ###############################################################################
 
-from easydict import EasyDict
+from yagocd.resources.base import Base
+from yagocd.resources.job import JobInstance
 
 
-class Base(object):
-    def __init__(self, client, data):
-        self._client = client
-        self._data = EasyDict(data)
-
-        self.base_api = self._client.base_api()
+class StageInstance(Base):
+    def __init__(self, client, data, pipeline):
+        super(StageInstance, self).__init__(client, data)
+        self._pipeline = pipeline
 
     @property
-    def data(self):
-        return self._data
+    def pipeline(self):
+        return self._pipeline
 
+    def jobs(self):
+        jobs = list()
+        for data in self.data.jobs:
+            jobs.append(JobInstance(client=self._client, data=data, stage=self))
+
+        return jobs
 
 if __name__ == '__main__':
     pass

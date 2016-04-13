@@ -26,19 +26,20 @@
 #
 ###############################################################################
 
-from easydict import EasyDict
+from yagocd.resources.base import Base
 
 
-class Base(object):
-    def __init__(self, client, data):
-        self._client = client
-        self._data = EasyDict(data)
-
-        self.base_api = self._client.base_api()
+class JobInstance(Base):
+    def __init__(self, client, data, stage):
+        super(JobInstance, self).__init__(client, data)
+        self._stage = stage
 
     @property
-    def data(self):
-        return self._data
+    def stage(self):
+        return self._stage
+
+    def artifacts(self):
+        raise NotImplementedError
 
 
 if __name__ == '__main__':
