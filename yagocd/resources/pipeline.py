@@ -139,6 +139,16 @@ class PipelineManager(object):
             headers={'Accept': 'application/json'},
         )
 
+    def release_lock(self, name):
+        response = self._client.post(
+            path='{base_api}/pipelines/{name}/releaseLock'.format(
+                base_api=self.base_api,
+                name=name,
+            ),
+            headers={'Accept': 'application/json'},
+        )
+        return response.text
+
 
 class PipelineEntity(Base):
     def __init__(self, client, data, group=None, descendants=None):
@@ -169,6 +179,9 @@ class PipelineEntity(Base):
 
     def unpause(self):
         self._client.pipeline.unpause(name=self.data.name)
+
+    def release_lock(self):
+        return self._client.pipeline.release_lock(name=self.data.name)
 
 
 class PipelineInstance(Base):
