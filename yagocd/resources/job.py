@@ -35,12 +35,7 @@ class JobInstance(Base):
         super(JobInstance, self).__init__(client, data)
         self._stage = stage
 
-    @property
-    def stage(self):
-        return self._stage
-
-    def artifact(self):
-        return ArtifactManager(
+        self._artifact = ArtifactManager(
             client=self._client,
             pipeline_name=self.stage.pipeline.data.name,
             pipeline_counter=self.stage.pipeline.data.counter,
@@ -48,6 +43,14 @@ class JobInstance(Base):
             stage_counter=self.stage.data.counter,
             job_name=self.data.name
         )
+
+    @property
+    def stage(self):
+        return self._stage
+
+    @property
+    def artifact(self):
+        return self._artifact
 
 
 if __name__ == '__main__':

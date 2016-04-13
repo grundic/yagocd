@@ -53,6 +53,8 @@ class Client(object):
         self._options.update(options)
         self._auth = auth
 
+        self._pipeline = PipelineManager(self)
+
     @staticmethod
     def urljoin(*args):
         """
@@ -86,8 +88,9 @@ class Client(object):
             rest_base_path or self._options['rest_base_path']
         )
 
+    @property
     def pipeline(self):
-        return PipelineManager(self)
+        return self._pipeline
 
 
 if __name__ == '__main__':
