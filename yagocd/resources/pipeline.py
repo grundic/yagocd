@@ -81,6 +81,22 @@ class PipelineManager(object):
             if pipeline.data.name == name:
                 return pipeline
 
+    def history(self, name, offset=0):
+        response = self._client.get(
+            path='{base_api}/pipelines/{name}/history/{offset}'.format(
+                base_api=self.base_api,
+                name=name,
+                offset=offset
+            ),
+            headers={'Accept': 'application/json'},
+        )
+
+        instances = list()
+        for instance in response.json().get('pipelines'):
+            instances.append(PipelineInstance(client=self._client, data=instance))
+
+        return instances
+
     def get(self, name, counter):
         response = self._client.get(
             path='{base_api}/pipelines/{name}/instance/{counter}'.format(
@@ -124,20 +140,7 @@ class PipelineEntity(Base):
         self._descendants = value
 
     def history(self, offset=0):
-        response = self._client.get(
-            path='{base_api}/pipelines/{name}/history/{offset}'.format(
-                base_api=self.base_api,
-                name=self.data.name,
-                offset=offset
-            ),
-            headers={'Accept': 'application/json'},
-        )
-
-        instances = list()
-        for instance in response.json().get('pipelines'):
-            instances.append(PipelineInstance(client=self._client, data=instance))
-
-        return instances
+        return self._client.pipeline.history(name=self.data.name, offset=offset)
 
     def status(self):
         return self._client.pipeline.status(name=self.data.name)
