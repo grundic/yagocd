@@ -39,8 +39,9 @@ class JobInstance(Base):
     def stage(self):
         return self._stage
 
-    def artifacts(self):
-        return ArtifactManager(self._client).list(
+    def artifact(self):
+        return ArtifactManager(
+            client=self._client,
             pipeline_name=self.stage.pipeline.data.name,
             pipeline_counter=self.stage.pipeline.data.counter,
             stage_name=self.stage.data.name,

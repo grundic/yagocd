@@ -30,22 +30,28 @@ from yagocd.resources.base import Base
 
 
 class ArtifactManager(object):
-    def __init__(self, client):
+    def __init__(self, client, pipeline_name, pipeline_counter, stage_name, stage_counter, job_name):
         """
         :type client: yagocd.client.Client
         """
         self._client = client
         self.base_api = self._client.base_api(rest_base_path='files/')
 
-    def list(self, pipeline_name, pipeline_counter, stage_name, stage_counter, job_name):
+        self._pipeline_name = pipeline_name
+        self._pipeline_counter = pipeline_counter
+        self._stage_name = stage_name
+        self._stage_counter = stage_counter
+        self._job_name = job_name
+
+    def list(self):
         response = self._client.get(
             path='{base_api}/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}.json'.format(
                 base_api=self.base_api,
-                pipeline_name=pipeline_name,
-                pipeline_counter=pipeline_counter,
-                stage_name=stage_name,
-                stage_counter=stage_counter,
-                job_name=job_name
+                pipeline_name=self._pipeline_name,
+                pipeline_counter=self._pipeline_counter,
+                stage_name=self._stage_name,
+                stage_counter=self._stage_counter,
+                job_name=self._job_name
             ),
         )
         artifacts = list()
@@ -53,6 +59,12 @@ class ArtifactManager(object):
             artifacts.append(Artifact(client=self._client, data=data))
 
         return artifacts
+
+    def directory(self, path):
+        raise NotImplementedError
+
+    def create(self, path, filename):
+        raise NotImplementedError
 
 
 class Artifact(Base):
