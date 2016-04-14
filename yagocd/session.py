@@ -43,7 +43,7 @@ class Session(object):
         Joins given arguments into a url. Trailing but not leading slashes are
         stripped for each argument.
         """
-        return "/".join(map(lambda x: str(x).rstrip('/'), args))
+        return "/".join(map(lambda x: str(x).rstrip('/').rstrip('/'), args)).rstrip('/')
 
     def request(self, method, path, data=None, headers=None):
         # this should work even if path is absolute (e.g. for files)
@@ -72,8 +72,8 @@ class Session(object):
 
     def base_api(self, context_path=None, rest_base_path=None):
         return self.urljoin(
-            context_path or self._options['context_path'],
-            rest_base_path or self._options['rest_base_path']
+            context_path if context_path is not None else self._options['context_path'],
+            rest_base_path if rest_base_path is not None else self._options['rest_base_path']
         )
 
 
