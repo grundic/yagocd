@@ -30,6 +30,54 @@ from yagocd.resources.base import Base
 from yagocd.resources.job import JobInstance
 
 
+class StageManager(object):
+    def __init__(self, session):
+        self._session = session
+        self.base_api = self._session.base_api()
+
+    def cancel(self, pipeline, stage):
+        response = self._session.post(
+            path='{base_api}/stages/{pipeline}/{stage}/cancel'.format(
+                base_api=self.base_api,
+                pipeline=pipeline,
+                stage=stage
+            ),
+            headers={'Accept': 'application/json'},
+        )
+        return response.text
+
+    def get(self, pipeline, stage, pipeline_counter, stage_counter):
+        response = self._session.get(
+            path='{base_api}/stages/{pipeline}/{stage}/instance/{pipeline_counter}/{stage_counter}'.format(
+                base_api=self.base_api,
+                pipeline=pipeline,
+                stage=stage,
+                pipeline_counter=pipeline_counter,
+                stage_counter=stage_counter
+            ),
+            headers={'Accept': 'application/json'},
+        )
+
+        return StageInstance(session=self._session, data=response.json(), pipeline=None)
+
+    def history(self, pipeline, stage, offset=0):
+        response = self._session.get(
+            path='{base_api}/stages/{pipeline}/{stage}/history/{offset}'.format(
+                base_api=self.base_api,
+                pipeline=pipeline,
+                stage=stage,
+                offset=offset,
+            ),
+            headers={'Accept': 'application/json'},
+        )
+
+        instances = list()
+        for instance in response.json().get('stages'):
+            instances.append(StageInstance(session=self._session, data=instance, pipeline=None))
+
+        return instances
+
+
 class StageInstance(Base):
     def __init__(self, session, data, pipeline):
         super(StageInstance, self).__init__(session, data)
@@ -45,6 +93,7 @@ class StageInstance(Base):
             jobs.append(JobInstance(session=self._session, data=data, stage=self))
 
         return jobs
+
 
 if __name__ == '__main__':
     pass

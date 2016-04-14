@@ -37,8 +37,8 @@ class JobInstance(Base):
 
         self._artifact = ArtifactManager(
             session=self._session,
-            pipeline_name=self.stage.pipeline.data.name,
-            pipeline_counter=self.stage.pipeline.data.counter,
+            pipeline_name=self.stage.data.pipeline_name,
+            pipeline_counter=self.stage.data.pipeline_counter,
             stage_name=self.stage.data.name,
             stage_counter=self.stage.data.counter,
             job_name=self.data.name
