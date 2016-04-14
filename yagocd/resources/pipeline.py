@@ -149,6 +149,9 @@ class PipelineManager(object):
         )
         return response.text
 
+    def schedule(self, name):
+        raise NotImplementedError
+
 
 class PipelineEntity(Base):
     def __init__(self, client, data, group=None, descendants=None):
