@@ -70,10 +70,10 @@ class Session(object):
     def post(self, path, data=None, headers=None):
         return self.request(method='post', path=path, data=data, headers=headers)
 
-    def base_api(self, context_path=None, rest_base_path=None):
+    def base_api(self, context_path=None, api_path=None):
         return self.urljoin(
             context_path if context_path is not None else self._options['context_path'],
-            rest_base_path if rest_base_path is not None else self._options['rest_base_path']
+            api_path if api_path is not None else self._options['api_path']
         )
 
 

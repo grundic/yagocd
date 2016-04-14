@@ -36,7 +36,7 @@ from yagocd.resources.stage import StageManager
 class Client(object):
     DEFAULT_OPTIONS = {
         'context_path': 'go/',
-        'rest_base_path': 'api/',
+        'api_path': 'api/',
         'verify': True,
         'headers': {
             'Accept': 'application/vnd.go.cd.v1+json',

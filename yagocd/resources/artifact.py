@@ -35,7 +35,7 @@ class ArtifactManager(object):
         :type session: yagocd.session.Session
         """
         self._session = session
-        self.base_api = self._session.base_api(rest_base_path='files/')
+        self.base_api = self._session.base_api(api_path='')
 
         self._pipeline_name = pipeline_name
         self._pipeline_counter = pipeline_counter
@@ -45,7 +45,7 @@ class ArtifactManager(object):
 
     def list(self):
         response = self._session.get(
-            path='{base_api}/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}.json'.format(
+            path='{base_api}/files/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}.json'.format(
                 base_api=self.base_api,
                 pipeline_name=self._pipeline_name,
                 pipeline_counter=self._pipeline_counter,

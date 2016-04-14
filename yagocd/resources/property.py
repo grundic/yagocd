@@ -40,7 +40,7 @@ class PropertyManager(object):
         job_name=None
     ):
         self._session = session
-        self.base_api = self._session.base_api(rest_base_path='')
+        self.base_api = self._session.base_api(api_path='')
 
         self._pipeline_name = pipeline_name
         self._pipeline_counter = pipeline_counter
