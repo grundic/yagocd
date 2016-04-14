@@ -30,11 +30,11 @@ from easydict import EasyDict
 
 
 class Base(object):
-    def __init__(self, client, data):
-        self._client = client
+    def __init__(self, session, data):
+        self._session = session
         self._data = EasyDict(data)
 
-        self.base_api = self._client.base_api()
+        self.base_api = self._session.base_api()
 
     @property
     def data(self):

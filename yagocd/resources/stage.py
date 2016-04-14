@@ -31,8 +31,8 @@ from yagocd.resources.job import JobInstance
 
 
 class StageInstance(Base):
-    def __init__(self, client, data, pipeline):
-        super(StageInstance, self).__init__(client, data)
+    def __init__(self, session, data, pipeline):
+        super(StageInstance, self).__init__(session, data)
         self._pipeline = pipeline
 
     @property
@@ -42,7 +42,7 @@ class StageInstance(Base):
     def jobs(self):
         jobs = list()
         for data in self.data.jobs:
-            jobs.append(JobInstance(client=self._client, data=data, stage=self))
+            jobs.append(JobInstance(session=self._session, data=data, stage=self))
 
         return jobs
 

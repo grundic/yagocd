@@ -33,13 +33,13 @@ from easydict import EasyDict
 
 
 class PipelineManager(object):
-    def __init__(self, client):
+    def __init__(self, session):
         """
 
-        :type client: yagocd.client.Client
+        :type session: yagocd.session.Session
         """
-        self._client = client
-        self.base_api = self._client.base_api()
+        self._session = session
+        self.base_api = self._session.base_api()
 
     @staticmethod
     def tie_descendants(pipelines):
@@ -53,7 +53,7 @@ class PipelineManager(object):
             pipeline.descendants = descendants
 
     def list(self):
-        response = self._client.get(
+        response = self._session.get(
             path='{base_api}/config/pipeline_groups'.format(base_api=self.base_api),
             headers={'Accept': 'application/json'},
         )
@@ -62,7 +62,7 @@ class PipelineManager(object):
         for group in response.json():
             for data in group['pipelines']:
                 pipeline = PipelineEntity(
-                    client=self._client,
+                    session=self._session,
                     data=data,
                     group=group['name']
                 )
@@ -82,7 +82,7 @@ class PipelineManager(object):
                 return pipeline
 
     def history(self, name, offset=0):
-        response = self._client.get(
+        response = self._session.get(
             path='{base_api}/pipelines/{name}/history/{offset}'.format(
                 base_api=self.base_api,
                 name=name,
@@ -93,12 +93,12 @@ class PipelineManager(object):
 
         instances = list()
         for instance in response.json().get('pipelines'):
-            instances.append(PipelineInstance(client=self._client, data=instance))
+            instances.append(PipelineInstance(session=self._session, data=instance))
 
         return instances
 
     def get(self, name, counter):
-        response = self._client.get(
+        response = self._session.get(
             path='{base_api}/pipelines/{name}/instance/{counter}'.format(
                 base_api=self.base_api,
                 name=name,
@@ -107,10 +107,10 @@ class PipelineManager(object):
             headers={'Accept': 'application/json'},
         )
 
-        return PipelineInstance(client=self._client, data=response.json())
+        return PipelineInstance(session=self._session, data=response.json())
 
     def status(self, name):
-        response = self._client.get(
+        response = self._session.get(
             path='{base_api}/pipelines/{name}/status'.format(
                 base_api=self.base_api,
                 name=name,
@@ -121,7 +121,7 @@ class PipelineManager(object):
         return EasyDict(response.json())
 
     def pause(self, name, cause):
-        self._client.post(
+        self._session.post(
             path='{base_api}/pipelines/{name}/pause'.format(
                 base_api=self.base_api,
                 name=name,
@@ -131,7 +131,7 @@ class PipelineManager(object):
         )
 
     def unpause(self, name):
-        self._client.post(
+        self._session.post(
             path='{base_api}/pipelines/{name}/unpause'.format(
                 base_api=self.base_api,
                 name=name,
@@ -140,7 +140,7 @@ class PipelineManager(object):
         )
 
     def release_lock(self, name):
-        response = self._client.post(
+        response = self._session.post(
             path='{base_api}/pipelines/{name}/releaseLock'.format(
                 base_api=self.base_api,
                 name=name,
@@ -154,10 +154,11 @@ class PipelineManager(object):
 
 
 class PipelineEntity(Base):
-    def __init__(self, client, data, group=None, descendants=None):
-        super(PipelineEntity, self).__init__(client, data)
+    def __init__(self, session, data, group=None, descendants=None):
+        super(PipelineEntity, self).__init__(session, data)
         self._group = group
         self._descendants = descendants
+        self._pipeline = PipelineManager(session=session)
 
     @property
     def group(self):
@@ -172,26 +173,26 @@ class PipelineEntity(Base):
         self._descendants = value
 
     def history(self, offset=0):
-        return self._client.pipeline.history(name=self.data.name, offset=offset)
+        return self._pipeline.history(name=self.data.name, offset=offset)
 
     def status(self):
-        return self._client.pipeline.status(name=self.data.name)
+        return self._pipeline.status(name=self.data.name)
 
     def pause(self, cause):
-        self._client.pipeline.pause(name=self.data.name, cause=cause)
+        self._pipeline.pause(name=self.data.name, cause=cause)
 
     def unpause(self):
-        self._client.pipeline.unpause(name=self.data.name)
+        self._pipeline.unpause(name=self.data.name)
 
     def release_lock(self):
-        return self._client.pipeline.release_lock(name=self.data.name)
+        return self._pipeline.release_lock(name=self.data.name)
 
 
 class PipelineInstance(Base):
     def stages(self):
         stages = list()
         for data in self.data.stages:
-            stages.append(StageInstance(client=self._client, data=data, pipeline=self))
+            stages.append(StageInstance(session=self._session, data=data, pipeline=self))
 
         return stages
 

@@ -28,10 +28,8 @@
 ###############################################################################
 
 import copy
-from urlparse import urljoin
-
 from yagocd.resources.pipeline import PipelineManager
-import requests
+from yagocd.session import Session
 
 
 class Client(object):
@@ -49,61 +47,15 @@ class Client(object):
 
         options['server'] = server
 
-        self._options = copy.deepcopy(self.DEFAULT_OPTIONS)
-        self._options.update(options)
-        self._auth = auth
+        defaults = copy.deepcopy(self.DEFAULT_OPTIONS)
+        options.update(defaults)
 
-        self._pipeline = PipelineManager(self)
-
-    @staticmethod
-    def urljoin(*args):
-        """
-        Joins given arguments into a url. Trailing but not leading slashes are
-        stripped for each argument.
-        """
-        return "/".join(map(lambda x: str(x).rstrip('/'), args))
-
-    def request(self, method, path, data=None, headers=None):
-        # TODO: think how to make this method private.
-        # One possibility is to create internal variable with baseurl for making all requests.
-
-        # this should work even if path is absolute (e.g. for files)
-        url = urljoin(self._options['server'], path)
-
-        if headers is None:
-            headers = self._options['headers']
-        response = requests.request(
-            method=method,
-            url=url,
-            auth=self._auth,
-            data=data,
-            verify=self._options['verify'],
-            headers=headers
-        )
-        # raise exception if we got 4xx/5xx response
-        response.raise_for_status()
-
-        return response
-
-    def get(self, path, headers=None):
-        return self.request(method='get', path=path, headers=headers)
-
-    def post(self, path, data=None, headers=None):
-        return self.request(method='post', path=path, data=data, headers=headers)
-
-    def base_api(self, context_path=None, rest_base_path=None):
-        # TODO: think how to make this method private.
-        # One possibility is to create internal variable with baseurl for making all requests.
-        return self.urljoin(
-            context_path or self._options['context_path'],
-            rest_base_path or self._options['rest_base_path']
-        )
+        self._session = Session(auth, options)
 
     @property
     def pipeline(self):
-        return self._pipeline
+        return PipelineManager(session=self._session)
 
 
 if __name__ == '__main__':
     pass
-

@@ -31,12 +31,12 @@ from yagocd.resources.artifact import ArtifactManager
 
 
 class JobInstance(Base):
-    def __init__(self, client, data, stage):
-        super(JobInstance, self).__init__(client, data)
+    def __init__(self, session, data, stage):
+        super(JobInstance, self).__init__(session, data)
         self._stage = stage
 
         self._artifact = ArtifactManager(
-            client=self._client,
+            session=self._session,
             pipeline_name=self.stage.pipeline.data.name,
             pipeline_counter=self.stage.pipeline.data.counter,
             stage_name=self.stage.data.name,

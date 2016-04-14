@@ -30,12 +30,12 @@ from yagocd.resources.base import Base
 
 
 class ArtifactManager(object):
-    def __init__(self, client, pipeline_name, pipeline_counter, stage_name, stage_counter, job_name):
+    def __init__(self, session, pipeline_name, pipeline_counter, stage_name, stage_counter, job_name):
         """
-        :type client: yagocd.client.Client
+        :type session: yagocd.session.Session
         """
-        self._client = client
-        self.base_api = self._client.base_api(rest_base_path='files/')
+        self._session = session
+        self.base_api = self._session.base_api(rest_base_path='files/')
 
         self._pipeline_name = pipeline_name
         self._pipeline_counter = pipeline_counter
@@ -44,7 +44,7 @@ class ArtifactManager(object):
         self._job_name = job_name
 
     def list(self):
-        response = self._client.get(
+        response = self._session.get(
             path='{base_api}/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}.json'.format(
                 base_api=self.base_api,
                 pipeline_name=self._pipeline_name,
@@ -56,7 +56,7 @@ class ArtifactManager(object):
         )
         artifacts = list()
         for data in response.json():
-            artifacts.append(Artifact(client=self._client, data=data))
+            artifacts.append(Artifact(session=self._session, data=data))
 
         return artifacts
 
@@ -69,12 +69,12 @@ class ArtifactManager(object):
 
 class Artifact(Base):
     def files(self):
-        return [ArtifactFile(client=self._client, data=data) for data in self.data.files]
+        return [ArtifactFile(session=self._session, data=data) for data in self.data.files]
 
 
 class ArtifactFile(Base):
     def fetch(self):
-        response = self._client.get(self.data.url)
+        response = self._session.get(self.data.url)
         return response.text
 
 
