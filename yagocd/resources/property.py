@@ -98,7 +98,7 @@ class PropertyManager(object):
         assert self._stage_counter or stage_counter
         assert self._job_name or job_name
 
-        response = self._session.post(
+        response = self._session.get(
             path='{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}/{name}'.format(
                 base_api=self.base_api,
                 pipeline_name=self._pipeline_name or pipeline_name,
@@ -115,6 +115,32 @@ class PropertyManager(object):
         properties = dict(zip(parsed[0], parsed[1]))
 
         return properties
+
+    def historical(self, pipeline_name=None, stage_name=None, job_name=None, limit_pipeline=None, limit_count=None):
+        assert self._pipeline_name or pipeline_name
+        assert self._stage_name or stage_name
+        assert self._job_name or job_name
+
+        params = {
+            'pipelineName': self._pipeline_name or pipeline_name,
+            'stageName': self._stage_name or stage_name,
+            'jobName': self._job_name or job_name,
+        }
+        if limit_pipeline is not None:
+            params['limitPipeline'] = limit_pipeline
+        if limit_count is not None:
+            params['limitCount'] = limit_count
+
+        response = self._session.get(
+            path='{base_api}/properties/search'.format(base_api=self.base_api),
+            params=params,
+            headers={'Accept': 'application/json'},
+        )
+
+        text = StringIO(response.text)
+        result = list(csv.DictReader(text))
+
+        return result
 
 
 if __name__ == '__main__':

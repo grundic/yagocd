@@ -45,7 +45,7 @@ class Session(object):
         """
         return "/".join(map(lambda x: str(x).rstrip('/').rstrip('/'), args)).rstrip('/')
 
-    def request(self, method, path, data=None, headers=None):
+    def request(self, method, path, params=None, data=None, headers=None):
         # this should work even if path is absolute (e.g. for files)
         url = urljoin(self._options['server'], path)
 
@@ -54,18 +54,19 @@ class Session(object):
         response = self._session.request(
             method=method,
             url=url,
-            auth=self._auth,
+            params=params,
             data=data,
-            verify=self._options['verify'],
-            headers=headers
+            headers=headers,
+            auth=self._auth,
+            verify=self._options['verify']
         )
         # raise exception if we got 4xx/5xx response
         response.raise_for_status()
 
         return response
 
-    def get(self, path, headers=None):
-        return self.request(method='get', path=path, headers=headers)
+    def get(self, path, params=None, headers=None):
+        return self.request(method='get', path=path, params=params, headers=headers)
 
     def post(self, path, data=None, headers=None):
         return self.request(method='post', path=path, data=data, headers=headers)
