@@ -142,6 +142,37 @@ class PropertyManager(object):
 
         return result
 
+    def create(
+        self,
+        name,
+        value,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+        job_name=None
+    ):
+        assert self._pipeline_name or pipeline_name
+        assert self._pipeline_counter or pipeline_counter
+        assert self._stage_name or stage_name
+        assert self._stage_counter or stage_counter
+        assert self._job_name or job_name
+
+        response = self._session.post(
+            path='{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}/{name}'.format(
+                base_api=self.base_api,
+                pipeline_name=self._pipeline_name or pipeline_name,
+                pipeline_counter=self._pipeline_counter or pipeline_counter,
+                stage_name=self._stage_name or stage_name,
+                stage_counter=self._stage_counter or stage_counter,
+                job_name=self._job_name or job_name,
+                name=name
+            ),
+            data={'value': value},
+            headers={'Accept': 'application/json'},
+        )
+        return response.text
+
 
 if __name__ == '__main__':
     pass
