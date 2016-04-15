@@ -29,6 +29,7 @@
 from StringIO import StringIO
 import csv
 
+
 class PropertyManager(object):
     def __init__(
         self,
@@ -39,6 +40,9 @@ class PropertyManager(object):
         stage_counter=None,
         job_name=None
     ):
+        """
+        :type session: yagocd.session.Session
+        """
         self._session = session
         self.base_api = self._session.base_api(api_path='')
 
@@ -63,21 +67,21 @@ class PropertyManager(object):
         assert self._job_name or job_name
 
         response = self._session.post(
-            path='{base_api}/properties/{pipeline}/{pipeline_counter}/{stage}/{stage_counter}/{job}'.format(
+            path='{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}'.format(
                 base_api=self.base_api,
-                pipeline=self._pipeline_name or pipeline_name,
+                pipeline_name=self._pipeline_name or pipeline_name,
                 pipeline_counter=self._pipeline_counter or pipeline_counter,
-                stage=self._stage_name or stage_name,
+                stage_name=self._stage_name or stage_name,
                 stage_counter=self._stage_counter or stage_counter,
-                job=self._job_name or job_name
+                job_name=self._job_name or job_name
             ),
             headers={'Accept': 'application/json'},
         )
         text = StringIO(response.text)
         parsed = list(csv.reader(text))
-        result = dict(zip(parsed[0], parsed[1]))
+        properties = dict(zip(parsed[0], parsed[1]))
 
-        return result
+        return properties
 
 
 if __name__ == '__main__':

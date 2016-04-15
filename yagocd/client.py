@@ -29,8 +29,9 @@
 
 import copy
 from yagocd.session import Session
-from yagocd.resources.pipeline import PipelineManager
 from yagocd.resources.stage import StageManager
+from yagocd.resources.pipeline import PipelineManager
+from yagocd.resources.property import PropertyManager
 
 
 class Client(object):
@@ -60,6 +61,10 @@ class Client(object):
     @property
     def stage(self):
         return StageManager(session=self._session)
+
+    @property
+    def property(self):
+        return PropertyManager(session=self._session)
 
 
 if __name__ == '__main__':

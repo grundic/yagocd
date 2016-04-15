@@ -30,7 +30,15 @@ from yagocd.resources.base import Base
 
 
 class ArtifactManager(object):
-    def __init__(self, session, pipeline_name, pipeline_counter, stage_name, stage_counter, job_name):
+    def __init__(
+        self,
+        session,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+        job_name=None
+    ):
         """
         :type session: yagocd.session.Session
         """
@@ -43,15 +51,28 @@ class ArtifactManager(object):
         self._stage_counter = stage_counter
         self._job_name = job_name
 
-    def list(self):
+    def list(
+        self,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+        job_name=None
+    ):
+        assert self._pipeline_name or pipeline_name
+        assert self._pipeline_counter or pipeline_counter
+        assert self._stage_name or stage_name
+        assert self._stage_counter or stage_counter
+        assert self._job_name or job_name
+
         response = self._session.get(
             path='{base_api}/files/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}.json'.format(
                 base_api=self.base_api,
-                pipeline_name=self._pipeline_name,
-                pipeline_counter=self._pipeline_counter,
-                stage_name=self._stage_name,
-                stage_counter=self._stage_counter,
-                job_name=self._job_name
+                pipeline_name=self._pipeline_name or pipeline_name,
+                pipeline_counter=self._pipeline_counter or pipeline_counter,
+                stage_name=self._stage_name or stage_name,
+                stage_counter=self._stage_counter or stage_counter,
+                job_name=self._job_name or job_name
             ),
         )
         artifacts = list()
