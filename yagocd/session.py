@@ -26,6 +26,7 @@
 #
 ###############################################################################
 
+import copy
 from urlparse import urljoin
 
 import requests
@@ -49,14 +50,15 @@ class Session(object):
         # this should work even if path is absolute (e.g. for files)
         url = urljoin(self._options['server'], path)
 
-        if headers is None:
-            headers = self._options['headers']
+        merged_headers = copy.deepcopy(self._options['headers'])
+        merged_headers.update(headers or {})
+
         response = self._session.request(
             method=method,
             url=url,
             params=params,
             data=data,
-            headers=headers,
+            headers=merged_headers,
             auth=self._auth,
             verify=self._options['verify']
         )

@@ -26,6 +26,8 @@
 #
 ###############################################################################
 
+import json
+
 from yagocd.resources.base import Base
 from yagocd.resources.job import JobInstance
 
@@ -48,7 +50,7 @@ class AgentManager(object):
         )
 
         agents = list()
-        for data in response.json():
+        for data in response.json().get('_embedded', {}).get('agents', {}):
             agents.append(AgentEntity(session=self._session, data=data))
 
         return agents
@@ -56,7 +58,6 @@ class AgentManager(object):
     def get(self, uuid):
         """
         Gets an agent by its unique identifier (uuid).
-        [WTF?!!] This constantly returns 404 :(
 
         :param uuid: uuid of the agent
         :return: Agent entity.
@@ -74,7 +75,6 @@ class AgentManager(object):
     def update(self, uuid, config):
         """
         Update some attributes of an agent.
-        [WTF?!!] This constantly returns 400 :(
 
         :param uuid: uuid of the agent
         :param config: dictionary of parameters for update
@@ -85,9 +85,9 @@ class AgentManager(object):
                 base_api=self.base_api,
                 uuid=uuid,
             ),
-            data=config,
+            data=json.dumps(config),
             headers={
-                'Accept': self.ACCEPT_HEADER,
+                # 'Accept': self.ACCEPT_HEADER,  # WTF?!!
                 'Content-Type': 'application/json'
             },
         )
@@ -97,7 +97,6 @@ class AgentManager(object):
     def delete(self, uuid):
         """
         Deletes an agent.
-        [WTF?!!] Doesn't work either...
 
         :param uuid: uuid of the agent.
         """
@@ -106,10 +105,10 @@ class AgentManager(object):
                 base_api=self.base_api,
                 uuid=uuid,
             ),
-            headers={'Accept': self.ACCEPT_HEADER},
+            # headers={'Accept': self.ACCEPT_HEADER},  # WTF?!!
         )
 
-        return response.text
+        return response.json().get('message')
 
     def job_history(self, uuid, offset=0):
         response = self._session.get(
