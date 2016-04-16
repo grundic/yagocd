@@ -26,15 +26,11 @@
 #
 ###############################################################################
 
-from yagocd.resources.base import Base
 from yagocd.resources.job import JobInstance
+from yagocd.resources import BaseManager, Base
 
 
-class StageManager(object):
-    def __init__(self, session):
-        self._session = session
-        self.base_api = self._session.base_api()
-
+class StageManager(BaseManager):
     def cancel(self, pipeline, stage):
         response = self._session.post(
             path='{base_api}/stages/{pipeline}/{stage}/cancel'.format(

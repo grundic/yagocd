@@ -26,17 +26,10 @@
 #
 ###############################################################################
 
-from yagocd.resources.base import Base
+from yagocd.resources import BaseManager, Base
 
 
-class MaterialManager(object):
-    def __init__(self, session):
-        """
-        :type session: yagocd.session.Session
-        """
-        self._session = session
-        self.base_api = self._session.base_api()
-
+class MaterialManager(BaseManager):
     def list(self):
         response = self._session.get(
             path='{base_api}/config/materials'.format(base_api=self.base_api),

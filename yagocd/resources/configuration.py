@@ -26,15 +26,10 @@
 #
 ###############################################################################
 
+from yagocd.resources import BaseManager
 
-class ConfigurationManager(object):
-    def __init__(self, session):
-        """
-        :type session: yagocd.session.Session
-        """
-        self._session = session
-        self.base_api = self._session.base_api()
 
+class ConfigurationManager(BaseManager):
     def modifications(self):
         response = self._session.get(
             path='{base_api}/config/revisions'.format(base_api=self.base_api),

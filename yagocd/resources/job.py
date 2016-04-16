@@ -26,9 +26,19 @@
 #
 ###############################################################################
 
-from yagocd.resources.base import Base
+from yagocd.resources import BaseManager, Base
 from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.property import PropertyManager
+
+
+class JobManager(BaseManager):
+    def scheduled(self):
+        # TODO: implement me!
+        raise NotImplementedError
+
+    def history(self):
+        # TODO: implement me!
+        raise NotImplementedError
 
 
 class JobInstance(Base):
@@ -84,7 +94,7 @@ class JobInstance(Base):
         )
 
     @property
-    def property(self):
+    def prop(self):
         return PropertyManager(
             session=self._session,
             pipeline_name=self.pipeline_name,

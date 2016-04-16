@@ -26,21 +26,13 @@
 #
 ###############################################################################
 
-from yagocd.resources.base import Base
+from yagocd.resources import BaseManager, Base
 from yagocd.resources.stage import StageInstance
 
 from easydict import EasyDict
 
 
-class PipelineManager(object):
-    def __init__(self, session):
-        """
-
-        :type session: yagocd.session.Session
-        """
-        self._session = session
-        self.base_api = self._session.base_api()
-
+class PipelineManager(BaseManager):
     @staticmethod
     def tie_descendants(pipelines):
         for pipeline in pipelines:
@@ -150,6 +142,7 @@ class PipelineManager(object):
         return response.text
 
     def schedule(self, name):
+        # TODO: implement me!
         raise NotImplementedError
 
 

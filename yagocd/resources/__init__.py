@@ -26,3 +26,32 @@
 # THE SOFTWARE.
 #
 ###############################################################################
+
+from easydict import EasyDict
+
+
+class BaseManager(object):
+    def __init__(self, session):
+        """
+        :type session: yagocd.session.Session
+        """
+        self._session = session
+        self.base_api = self._session.base_api()
+
+
+class Base(object):
+    def __init__(self, session, data):
+        self._session = session
+        self._data = EasyDict(data)
+
+        self.base_api = self._session.base_api()
+
+    @property
+    def data(self):
+        return self._data
+
+    def __str__(self):
+        return self.data.__str__()
+
+    def __repr__(self):
+        return self.data.__repr__()

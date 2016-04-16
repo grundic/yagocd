@@ -26,10 +26,10 @@
 #
 ###############################################################################
 
-from yagocd.resources.base import Base
+from yagocd.resources import BaseManager, Base
 
 
-class ArtifactManager(object):
+class ArtifactManager(BaseManager):
     def __init__(
         self,
         session,
@@ -42,7 +42,8 @@ class ArtifactManager(object):
         """
         :type session: yagocd.session.Session
         """
-        self._session = session
+        super(ArtifactManager, self).__init__(session)
+
         self.base_api = self._session.base_api(api_path='')
 
         self._pipeline_name = pipeline_name
@@ -82,9 +83,15 @@ class ArtifactManager(object):
         return artifacts
 
     def directory(self, path):
+        # TODO: implement me!
         raise NotImplementedError
 
     def create(self, path, filename):
+        # TODO: implement me!
+        raise NotImplementedError
+
+    def append(self):
+        # TODO: implement me!
         raise NotImplementedError
 
 

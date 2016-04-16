@@ -29,8 +29,10 @@
 from StringIO import StringIO
 import csv
 
+from yagocd.resources import BaseManager
 
-class PropertyManager(object):
+
+class PropertyManager(BaseManager):
     def __init__(
         self,
         session,
@@ -43,7 +45,8 @@ class PropertyManager(object):
         """
         :type session: yagocd.session.Session
         """
-        self._session = session
+        super(PropertyManager, self).__init__(session)
+
         self.base_api = self._session.base_api(api_path='')
 
         self._pipeline_name = pipeline_name

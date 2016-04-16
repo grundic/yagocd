@@ -28,20 +28,12 @@
 
 import json
 
-from yagocd.resources.base import Base
+from yagocd.resources import BaseManager, Base
 from yagocd.resources.job import JobInstance
 
 
-class AgentManager(object):
+class AgentManager(BaseManager):
     ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
-
-    def __init__(self, session):
-        """
-
-        :type session: yagocd.session.Session
-        """
-        self._session = session
-        self.base_api = self._session.base_api()
 
     def list(self):
         response = self._session.get(
