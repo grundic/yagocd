@@ -38,7 +38,7 @@ class ConfigurationManager(object):
     def modifications(self):
         response = self._session.get(
             path='{base_api}/config/revisions'.format(base_api=self.base_api),
-            headers={'Accept': 'application/xhtml+xml'},
+            headers={'Accept': 'application/json'},
         )
 
         return response.json()
@@ -50,7 +50,18 @@ class ConfigurationManager(object):
                 start=start,
                 end=end
             ),
-            headers={'Accept': 'application/xhtml+xml'},
+            headers={'Accept': 'text/plain'},
+        )
+
+        return response.text
+
+    def config(self, md5=None):
+        response = self._session.get(
+            path='{base_api}/admin/config/{version}'.format(
+                base_api=self.base_api,
+                version='current.xml' if md5 is None else (md5 + '.xml'),
+            ),
+            headers={'Accept': 'application/xml'},
         )
 
         return response.text
