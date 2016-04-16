@@ -31,6 +31,7 @@ import copy
 from yagocd.session import Session
 from yagocd.resources.agent import AgentManager
 from yagocd.resources.user import UserManager
+from yagocd.resources.material import MaterialManager
 from yagocd.resources.stage import StageManager
 from yagocd.resources.pipeline import PipelineManager
 from yagocd.resources.property import PropertyManager
@@ -65,6 +66,10 @@ class Client(object):
     @property
     def user(self):
         return UserManager(session=self._session)
+
+    @property
+    def material(self):
+        return MaterialManager(session=self._session)
 
     @property
     def pipeline(self):
