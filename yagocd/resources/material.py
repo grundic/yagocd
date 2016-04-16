@@ -67,7 +67,7 @@ class MaterialManager(BaseManager):
         set autoUpdate flag in cruise configuration to false for the relevant material.
         Otherwise you will get:
            requests.exceptions.HTTPError: 404 Client Error:
-           Not Found for url: http://localhost:8153/go/api/material/notify/git
+           Not Found for url: http://localhost:8153/go/api/material/notify/svn
 
         :param uuid: The subversion repository UUID.
         :return: A text confirmation.
@@ -115,7 +115,7 @@ class MaterialManager(BaseManager):
         set autoUpdate flag in cruise configuration to false for the relevant material.
         Otherwise you will get:
            requests.exceptions.HTTPError: 404 Client Error:
-           Not Found for url: http://localhost:8153/go/api/material/notify/git
+           Not Found for url: http://localhost:8153/go/api/material/notify/hg
 
         :param url: The git repository url as defined in cruise-config.xml.
         :return: A text confirmation.
