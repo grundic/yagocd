@@ -29,6 +29,7 @@
 
 import copy
 from yagocd.session import Session
+from yagocd.resources.agent import AgentManager
 from yagocd.resources.stage import StageManager
 from yagocd.resources.pipeline import PipelineManager
 from yagocd.resources.property import PropertyManager
@@ -55,6 +56,10 @@ class Client(object):
         options.update(defaults)
 
         self._session = Session(auth, options)
+
+    @property
+    def agent(self):
+        return AgentManager(session=self._session)
 
     @property
     def pipeline(self):

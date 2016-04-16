@@ -71,6 +71,12 @@ class Session(object):
     def post(self, path, data=None, headers=None):
         return self.request(method='post', path=path, data=data, headers=headers)
 
+    def patch(self, path, data=None, headers=None):
+        return self.request(method='patch', path=path, data=data, headers=headers)
+
+    def delete(self, path, data=None, headers=None):
+        return self.request(method='delete', path=path, data=data, headers=headers)
+
     def base_api(self, context_path=None, api_path=None):
         return self.urljoin(
             context_path if context_path is not None else self._options['context_path'],
