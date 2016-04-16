@@ -40,6 +40,12 @@ class Base(object):
     def data(self):
         return self._data
 
+    def __str__(self):
+        return self.data.__str__()
+
+    def __repr__(self):
+        return self.data.__repr__()
+
 
 if __name__ == '__main__':
     pass
