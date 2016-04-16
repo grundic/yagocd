@@ -60,23 +60,23 @@ class Client(object):
         self._session = Session(auth, merged)
 
     @property
-    def agent(self):
+    def agents(self):
         return AgentManager(session=self._session)
 
     @property
-    def user(self):
+    def users(self):
         return UserManager(session=self._session)
 
     @property
-    def material(self):
+    def materials(self):
         return MaterialManager(session=self._session)
 
     @property
-    def pipeline(self):
+    def pipelines(self):
         return PipelineManager(session=self._session)
 
     @property
-    def stage(self):
+    def stages(self):
         return StageManager(session=self._session)
 
     @property
@@ -84,11 +84,11 @@ class Client(object):
         return PropertyManager(session=self._session)
 
     @property
-    def configuration(self):
+    def configurations(self):
         return ConfigurationManager(session=self._session)
 
     @property
-    def feed(self):
+    def feeds(self):
         return FeedManager(session=self._session)
 
 
