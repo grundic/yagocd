@@ -12,7 +12,6 @@
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# furnished to do so, subject to the following conditions:
 #
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
@@ -27,49 +26,34 @@
 #
 ###############################################################################
 
-import copy
-from yagocd.session import Session
-from yagocd.resources.stage import StageManager
-from yagocd.resources.pipeline import PipelineManager
-from yagocd.resources.property import PropertyManager
-from yagocd.resources.configuration import ConfigurationManager
 
+class ConfigurationManager(object):
+    def __init__(self, session):
+        """
+        :type session: yagocd.session.Session
+        """
+        self._session = session
+        self.base_api = self._session.base_api()
 
-class Client(object):
-    DEFAULT_OPTIONS = {
-        'context_path': 'go/',
-        'api_path': 'api/',
-        'verify': True,
-        'headers': {
-            'Accept': 'application/vnd.go.cd.v1+json',
-        }
-    }
+    def modifications(self):
+        response = self._session.get(
+            path='{base_api}/config/revisions'.format(base_api=self.base_api),
+            headers={'Accept': 'application/xhtml+xml'},
+        )
 
-    def __init__(self, server='http://localhost:8153', auth=None, options=None):
-        options = {} if options is None else options
+        return response.json()
 
-        options['server'] = server
+    def diff(self, start, end):
+        response = self._session.get(
+            path='{base_api}/config/diff/{start}/{end}'.format(
+                base_api=self.base_api,
+                start=start,
+                end=end
+            ),
+            headers={'Accept': 'application/xhtml+xml'},
+        )
 
-        defaults = copy.deepcopy(self.DEFAULT_OPTIONS)
-        options.update(defaults)
-
-        self._session = Session(auth, options)
-
-    @property
-    def pipeline(self):
-        return PipelineManager(session=self._session)
-
-    @property
-    def stage(self):
-        return StageManager(session=self._session)
-
-    @property
-    def properties(self):
-        return PropertyManager(session=self._session)
-
-    @property
-    def configuration(self):
-        return ConfigurationManager(session=self._session)
+        return response.text
 
 
 if __name__ == '__main__':
