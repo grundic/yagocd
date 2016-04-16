@@ -36,17 +36,37 @@ class JobInstance(Base):
         super(JobInstance, self).__init__(session, data)
         self._stage = stage
 
-    def _pipeline_name(self):
-        if self._stage.pipeline is not None:
+    @property
+    def pipeline_name(self):
+        if 'pipeline_name' in self.data:
+            return self.data.get('pipeline_name')
+        elif self.stage.pipeline is not None:
             return self.stage.pipeline.data.name
         else:
             return self.stage.data.pipeline_name
 
-    def _pipeline_counter(self):
-        if self._stage.pipeline is not None:
+    @property
+    def pipeline_counter(self):
+        if 'pipeline_counter' in self.data:
+            return self.data.get('pipeline_counter')
+        elif self.stage.pipeline is not None:
             return self.stage.pipeline.data.counter
         else:
             return self.stage.data.pipeline_counter
+
+    @property
+    def stage_name(self):
+        if 'stage_name' in self.data:
+            return self.data.get('stage_name')
+        else:
+            return self.stage.data.name
+
+    @property
+    def stage_counter(self):
+        if 'stage_counter' in self.data:
+            return self.data.get('stage_counter')
+        else:
+            return self.stage.data.counter
 
     @property
     def stage(self):
@@ -56,10 +76,10 @@ class JobInstance(Base):
     def artifact(self):
         return ArtifactManager(
             session=self._session,
-            pipeline_name=self._pipeline_name(),
-            pipeline_counter=self._pipeline_counter(),
-            stage_name=self.stage.data.name,
-            stage_counter=self.stage.data.counter,
+            pipeline_name=self.pipeline_name,
+            pipeline_counter=self.pipeline_counter,
+            stage_name=self.stage_name,
+            stage_counter=self.stage_counter,
             job_name=self.data.name
         )
 
@@ -67,10 +87,10 @@ class JobInstance(Base):
     def property(self):
         return PropertyManager(
             session=self._session,
-            pipeline_name=self._pipeline_name(),
-            pipeline_counter=self._pipeline_counter(),
-            stage_name=self.stage.data.name,
-            stage_counter=self.stage.data.counter,
+            pipeline_name=self.pipeline_name,
+            pipeline_counter=self.pipeline_counter,
+            stage_name=self.stage_name,
+            stage_counter=self.stage_counter,
             job_name=self.data.name
         )
 

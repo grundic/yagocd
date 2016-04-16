@@ -27,6 +27,7 @@
 ###############################################################################
 
 from yagocd.resources.base import Base
+from yagocd.resources.job import JobInstance
 
 
 class AgentManager(object):
@@ -109,6 +110,21 @@ class AgentManager(object):
         )
 
         return response.text
+
+    def job_history(self, uuid, offset=0):
+        response = self._session.get(
+            path='{base_api}/agents/{uuid}/job_run_history/{offset}'.format(
+                base_api=self.base_api,
+                uuid=uuid,
+                offset=offset
+            ),
+            headers={'Accept': self.ACCEPT_HEADER},
+        )
+
+        jobs = list()
+        for data in response.json()['jobs']:
+            jobs.append(JobInstance(session=self._session, data=data, stage=None))
+        return jobs
 
 
 class AgentEntity(Base):
