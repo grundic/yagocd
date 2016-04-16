@@ -33,6 +33,7 @@ from yagocd.resources.stage import StageManager
 from yagocd.resources.pipeline import PipelineManager
 from yagocd.resources.property import PropertyManager
 from yagocd.resources.configuration import ConfigurationManager
+from yagocd.resources.feed import FeedManager
 
 
 class Client(object):
@@ -70,6 +71,10 @@ class Client(object):
     @property
     def configuration(self):
         return ConfigurationManager(session=self._session)
+
+    @property
+    def feed(self):
+        return FeedManager(session=self._session)
 
 
 if __name__ == '__main__':
