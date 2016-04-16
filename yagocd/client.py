@@ -30,6 +30,7 @@
 import copy
 from yagocd.session import Session
 from yagocd.resources.agent import AgentManager
+from yagocd.resources.user import UserManager
 from yagocd.resources.stage import StageManager
 from yagocd.resources.pipeline import PipelineManager
 from yagocd.resources.property import PropertyManager
@@ -52,14 +53,18 @@ class Client(object):
 
         options['server'] = server
 
-        defaults = copy.deepcopy(self.DEFAULT_OPTIONS)
-        options.update(defaults)
+        merged = copy.deepcopy(self.DEFAULT_OPTIONS)
+        merged.update(options)
 
-        self._session = Session(auth, options)
+        self._session = Session(auth, merged)
 
     @property
     def agent(self):
         return AgentManager(session=self._session)
+
+    @property
+    def user(self):
+        return UserManager(session=self._session)
 
     @property
     def pipeline(self):
