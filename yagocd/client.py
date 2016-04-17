@@ -90,7 +90,7 @@ class Client(object):
         """
         Property for accessing ``UserManager`` instance, which is used to manage users.
 
-        :rtype: yagocd.resources.agent.UserManager
+        :rtype: yagocd.resources.user.UserManager
         """
         return UserManager(session=self._session)
 
@@ -99,7 +99,7 @@ class Client(object):
         """
         Property for accessing ``MaterialManager`` instance, which is used to manage materials.
 
-        :rtype: yagocd.resources.agent.MaterialManager
+        :rtype: yagocd.resources.material.MaterialManager
         """
         return MaterialManager(session=self._session)
 
@@ -108,7 +108,7 @@ class Client(object):
         """
         Property for accessing ``PipelineManager`` instance, which is used to manage pipelines.
 
-        :rtype: yagocd.resources.agent.PipelineManager
+        :rtype: yagocd.resources.pipeline.PipelineManager
         """
         return PipelineManager(session=self._session)
 
@@ -117,7 +117,7 @@ class Client(object):
         """
         Property for accessing ``StageManager`` instance, which is used to manage stages.
 
-        :rtype: yagocd.resources.agent.StageManager
+        :rtype: yagocd.resources.stage.StageManager
         """
         return StageManager(session=self._session)
 
@@ -126,7 +126,7 @@ class Client(object):
         """
         Property for accessing ``PropertyManager`` instance, which is used to manage properties of the jobs.
 
-        :rtype: yagocd.resources.agent.PropertyManager
+        :rtype: yagocd.resources.property.PropertyManager
         """
         return PropertyManager(session=self._session)
 
@@ -135,7 +135,7 @@ class Client(object):
         """
         Property for accessing ``ConfigurationManager`` instance, which is used to manage configurations.
 
-        :rtype: yagocd.resources.agent.ConfigurationManager
+        :rtype: yagocd.resources.configuration.ConfigurationManager
         """
         return ConfigurationManager(session=self._session)
 
@@ -144,7 +144,7 @@ class Client(object):
         """
         Property for accessing ``FeedManager`` instance, which is used to manage feeds.
 
-        :rtype: yagocd.resources.agent.FeedManager
+        :rtype: yagocd.resources.feed.FeedManager
         """
         return FeedManager(session=self._session)
 
