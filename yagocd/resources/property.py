@@ -33,6 +33,10 @@ from yagocd.resources import BaseManager
 
 
 class PropertyManager(BaseManager):
+    """
+    The properties API allows managing of job properties.
+    """
+
     def __init__(
         self,
         session,
@@ -43,7 +47,22 @@ class PropertyManager(BaseManager):
         job_name=None
     ):
         """
-        :type session: yagocd.session.Session
+        Constructs instance of ``PropertyManager``.
+        Parameters to the constructor and methods of the class could be duplicated. That is because of two use cases
+        of this class:
+            1. When the class being instantiated from :class:`yagocd.client.Client`, we don't know all the necessary
+             parameters yet, but we need an instance to work with. So we skip parameters instantiation in constructor,
+             but require them for each method.
+            2. When the class being used from :class:`yagocd.resources.job.JobInstance` - in this case we already
+            know all required parameters, so we can instantiate `PropertyManager` with them.
+
+        :param session: session object from client.
+        :type session: yagocd.session.Session.
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
         """
         super(PropertyManager, self).__init__(session)
 
@@ -63,6 +82,16 @@ class PropertyManager(BaseManager):
         stage_counter=None,
         job_name=None
     ):
+        """
+        Lists all job properties.
+
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
+        :return: dictionary of properties.
+        """
         assert self._pipeline_name or pipeline_name
         assert self._pipeline_counter or pipeline_counter
         assert self._stage_name or stage_name
@@ -95,6 +124,18 @@ class PropertyManager(BaseManager):
         stage_counter=None,
         job_name=None
     ):
+        """
+        Gets a property by its name.
+        :info: You can use keyword `latest` as a pipeline counter or a stage counter.
+
+        :param name: name of property to get.
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
+        :return: single property as a dictionary.
+        """
         assert self._pipeline_name or pipeline_name
         assert self._pipeline_counter or pipeline_counter
         assert self._stage_name or stage_name
@@ -120,6 +161,18 @@ class PropertyManager(BaseManager):
         return properties
 
     def historical(self, pipeline_name=None, stage_name=None, job_name=None, limit_pipeline=None, limit_count=None):
+        """
+        Get historical properties.
+        :info: `limitPipeline` and `limitCount` are optional parameters. The default value of
+        `limitPipeline` is latest pipeline instance’s counter. The default value of `limitCount` is `100`.
+
+        :param pipeline_name: name of the pipeline.
+        :param stage_name: name of the stage.
+        :param job_name: name of the job.
+        :param limit_pipeline: pipeline limit for returned properties.
+        :param limit_count: count limit for returned properties.
+        :return: list of dictionaries as historical values.
+        """
         assert self._pipeline_name or pipeline_name
         assert self._stage_name or stage_name
         assert self._job_name or job_name
@@ -155,6 +208,18 @@ class PropertyManager(BaseManager):
         stage_counter=None,
         job_name=None
     ):
+        """
+        Defines a property on a specific job instance.
+
+        :param name: name of property.
+        :param value: value of property.
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
+        :return: an acknowledgement that the property was created.
+        """
         assert self._pipeline_name or pipeline_name
         assert self._pipeline_counter or pipeline_counter
         assert self._stage_name or stage_name
