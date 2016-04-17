@@ -33,6 +33,12 @@ from yagocd.resources.job import JobInstance
 
 
 class AgentManager(BaseManager):
+    """
+    The agents API allows users with administrator role to manage agents.
+
+    :warning: Please note that this API requires using v2 of the API using `Accept: application/vnd.go.cd.v2+json`
+    """
+
     ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
 
     def list(self):
@@ -53,6 +59,7 @@ class AgentManager(BaseManager):
 
         :param uuid: uuid of the agent
         :return: Agent entity.
+        :rtype: yagocd.resources.agent.AgentEntity
         """
         response = self._session.get(
             path='{base_api}/agents/{uuid}'.format(
@@ -71,6 +78,7 @@ class AgentManager(BaseManager):
         :param uuid: uuid of the agent
         :param config: dictionary of parameters for update
         :return: Agent entity.
+        :rtype: yagocd.resources.agent.AgentEntity
         """
         response = self._session.patch(
             path='{base_api}/agents/{uuid}'.format(
@@ -91,6 +99,7 @@ class AgentManager(BaseManager):
         Deletes an agent.
 
         :param uuid: uuid of the agent.
+        :return: a message confirmation if the agent was deleted.
         """
         response = self._session.delete(
             path='{base_api}/agents/{uuid}'.format(
@@ -103,6 +112,14 @@ class AgentManager(BaseManager):
         return response.json().get('message')
 
     def job_history(self, uuid, offset=0):
+        """
+        Lists the jobs that have executed on an agent.
+
+        :param uuid: uuid of the agent.
+        :param offset: number of jobs to be skipped.
+        :return: an array of job objects along with the job transitions.
+        :rtype: list of  :class:`yagocd.resources.job.JobInstance`
+        """
         response = self._session.get(
             path='{base_api}/agents/{uuid}/job_run_history/{offset}'.format(
                 base_api=self.base_api,

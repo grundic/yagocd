@@ -54,6 +54,19 @@ class Client(object):
     }
 
     def __init__(self, server='http://localhost:8153', auth=None, options=None):
+        """
+        Construct a GOCD client instance.
+
+        :param server: url of the Go server
+        :param auth: authorization, that will be passed to requests.
+        Could tuple of (username, password) for basic authentication.
+        :param options: dictionary of additional options.
+            * context_path -- server context path to use (default is ``go/``)
+            * api_path -- api endpoint to use. By default ``api/`` will be used, but in some cases this will be
+            overwritten by some managers, because of API.
+            * verify -- verify SSL certs. Defaults to ``True``.
+            * headers -- default headers for requests (default is ``'Accept': 'application/vnd.go.cd.v1+json'``)
+        """
         options = {} if options is None else options
 
         options['server'] = server
@@ -65,34 +78,74 @@ class Client(object):
 
     @property
     def agents(self):
+        """
+        Property for accessing ``AgentManager`` instance, which is used to manage agents.
+
+        :rtype: yagocd.resources.agent.AgentManager
+        """
         return AgentManager(session=self._session)
 
     @property
     def users(self):
+        """
+        Property for accessing ``UserManager`` instance, which is used to manage users.
+
+        :rtype: yagocd.resources.agent.UserManager
+        """
         return UserManager(session=self._session)
 
     @property
     def materials(self):
+        """
+        Property for accessing ``MaterialManager`` instance, which is used to manage materials.
+
+        :rtype: yagocd.resources.agent.MaterialManager
+        """
         return MaterialManager(session=self._session)
 
     @property
     def pipelines(self):
+        """
+        Property for accessing ``PipelineManager`` instance, which is used to manage pipelines.
+
+        :rtype: yagocd.resources.agent.PipelineManager
+        """
         return PipelineManager(session=self._session)
 
     @property
     def stages(self):
+        """
+        Property for accessing ``StageManager`` instance, which is used to manage stages.
+
+        :rtype: yagocd.resources.agent.StageManager
+        """
         return StageManager(session=self._session)
 
     @property
     def properties(self):
+        """
+        Property for accessing ``PropertyManager`` instance, which is used to manage properties of the jobs.
+
+        :rtype: yagocd.resources.agent.PropertyManager
+        """
         return PropertyManager(session=self._session)
 
     @property
     def configurations(self):
+        """
+        Property for accessing ``ConfigurationManager`` instance, which is used to manage configurations.
+
+        :rtype: yagocd.resources.agent.ConfigurationManager
+        """
         return ConfigurationManager(session=self._session)
 
     @property
     def feeds(self):
+        """
+        Property for accessing ``FeedManager`` instance, which is used to manage feeds.
+
+        :rtype: yagocd.resources.agent.FeedManager
+        """
         return FeedManager(session=self._session)
 
 

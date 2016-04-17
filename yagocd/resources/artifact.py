@@ -30,6 +30,10 @@ from yagocd.resources import BaseManager, Base
 
 
 class ArtifactManager(BaseManager):
+    """
+    The artifacts API allows users to query and create artifacts of a job.
+    """
+
     def __init__(
         self,
         session,
@@ -40,7 +44,22 @@ class ArtifactManager(BaseManager):
         job_name=None
     ):
         """
+        Constructs instance of ``ArtifactManager``.
+        Parameters to the constructor and methods of the class could be duplicated. That is because of two use cases
+        of this class:
+            1. When the class being instantiated from :class:`yagocd.client.Client`, we don't know all the necessary
+             parameters yet, but we need an instance to work with. So we skip parameters instantiation in constructor,
+             but require them for each method.
+            2. When the class being used from :class:`yagocd.resources.job.JobInstance` - in this case we already
+            know all required parameters, so we can instantiate `ArtifactManager` with them.
+
+        :param session: session object from client.
         :type session: yagocd.session.Session
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter
+        :param job_name: name of the job
         """
         super(ArtifactManager, self).__init__(session)
 
@@ -60,6 +79,17 @@ class ArtifactManager(BaseManager):
         stage_counter=None,
         job_name=None
     ):
+        """
+        Lists all available artifacts in a job.
+
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter
+        :param job_name: name of the job
+        :return: An array of artifact objects.
+        :rtype: list of :class:`yagocd.resources.artifact.Artifact`
+        """
         assert self._pipeline_name or pipeline_name
         assert self._pipeline_counter or pipeline_counter
         assert self._stage_name or stage_name
