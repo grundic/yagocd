@@ -40,6 +40,10 @@ from yagocd.resources.feed import FeedManager
 
 
 class Client(object):
+    """
+    Main class of the package, that gives user access to Go REST API methods.
+    """
+
     DEFAULT_OPTIONS = {
         'context_path': 'go/',
         'api_path': 'api/',
