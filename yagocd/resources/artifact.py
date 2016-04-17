@@ -54,12 +54,12 @@ class ArtifactManager(BaseManager):
             know all required parameters, so we can instantiate `ArtifactManager` with them.
 
         :param session: session object from client.
-        :type session: yagocd.session.Session
+        :type session: yagocd.session.Session.
         :param pipeline_name: name of the pipeline.
         :param pipeline_counter: pipeline counter.
         :param stage_name: name of the stage.
-        :param stage_counter: stage counter
-        :param job_name: name of the job
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
         """
         super(ArtifactManager, self).__init__(session)
 
@@ -85,8 +85,8 @@ class ArtifactManager(BaseManager):
         :param pipeline_name: name of the pipeline.
         :param pipeline_counter: pipeline counter.
         :param stage_name: name of the stage.
-        :param stage_counter: stage counter
-        :param job_name: name of the job
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
         :return: An array of artifact objects.
         :rtype: list of :class:`yagocd.resources.artifact.Artifact`
         """
@@ -113,14 +113,45 @@ class ArtifactManager(BaseManager):
         return artifacts
 
     def directory(self, path):
+        """
+        Gets an artifact directory by its path.
+
+        :note: The `path` can be a nested directory for e.g. target/dist.zip
+
+        :warning: Since it may take an undetermined amount of time to compress
+        a directory, the server may return a `202 Accepted` code to indicate that
+        it is compressing the requested directory.
+        Users are expected to poll the url every few seconds to check if the
+        directory is available.
+
+        :param path: path to directory
+        :return:
+            * A status code `202 Accepted` to acknowledge your request to compress
+              the contents of the requested directory.
+            * The requested directory contents in the form of a zip file.
+        """
         # TODO: implement me!
         raise NotImplementedError
 
     def create(self, path, filename):
+        """
+        Uploads a local file as an artifact.
+
+        :param path: path to the file within job directory.
+        :param filename: the contents file to be uploaded.
+        :return: an acknowledgement that the file was created.
+        """
         # TODO: implement me!
         raise NotImplementedError
 
-    def append(self):
+    def append(self, path, filename):
+        """
+        Appends a local file to an existing artifact.
+
+        :param path: remote filename to append to.
+        :param filename: local filename that should be appended.
+        :return: an acknowledgement that the file was appended to.
+        """
         # TODO: implement me!
         raise NotImplementedError
 

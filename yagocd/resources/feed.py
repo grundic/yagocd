@@ -30,7 +30,16 @@ from yagocd.resources import BaseManager
 
 
 class FeedManager(BaseManager):
+    """
+    The feed API allows users to view feed information.
+    """
+
     def pipelines(self):
+        """
+        Lists all pipelines.
+
+        :return: an array of pipelines in XML format.
+        """
         response = self._session.get(
             path='{base_api}/pipelines.xml'.format(base_api=self.base_api),
             headers={'Accept': 'application/xml'},
@@ -39,6 +48,12 @@ class FeedManager(BaseManager):
         return response.text
 
     def pipeline_by_id(self, pipeline_id):
+        """
+        Gets XML representation of pipeline.
+
+        :param pipeline_id: id of pipeline. Note: this is *not* a counter.
+        :return: a pipeline object in XML format.
+        """
         response = self._session.get(
             path='{base_api}/pipelines/{pipeline_name}/{pipeline_id}.xml'.format(
                 base_api=self.base_api,
@@ -51,6 +66,12 @@ class FeedManager(BaseManager):
         return response.text
 
     def stages(self, pipeline_name):
+        """
+        Gets feed of all stages for the specified pipeline with links to the pipeline and stage details.
+
+        :param pipeline_name: name of pipeline, for which to list stages
+        :return: an array of feed of stages in XML format.
+        """
         response = self._session.get(
             path='{base_api}/pipelines/{pipeline_name}/stages.xml'.format(
                 base_api=self.base_api,
@@ -62,6 +83,12 @@ class FeedManager(BaseManager):
         return response.text
 
     def stage_by_id(self, stage_id):
+        """
+        Gets XML representation of stage.
+
+        :param stage_id: id of stage. Note: this is *not* a counter.
+        :return: a stage object in XML format.
+        """
         response = self._session.get(
             path='{base_api}/stages/{stage_id}.xml'.format(
                 base_api=self.base_api,
@@ -73,6 +100,15 @@ class FeedManager(BaseManager):
         return response.text
 
     def stage(self, pipeline_name, pipeline_counter, stage_name, stage_counter):
+        """
+        Gets XML representation of stage.
+
+        :param pipeline_name: name of pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of stage.
+        :param stage_counter: stage counter.
+        :return: a stage object in XML format.
+        """
         response = self._session.get(
             path='{base_api}/pipelines/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}.xml'.format(
                 base_api=self._session.base_api(api_path=''),  # WTF?!!
@@ -87,6 +123,12 @@ class FeedManager(BaseManager):
         return response.text
 
     def job_by_id(self, job_id):
+        """
+        Gets XML representation of job.
+
+        :param job_id: id of job. Note: this is *not* a counter.
+        :return: a job object in XML format.
+        """
         response = self._session.get(
             path='{base_api}/jobs/{job_id}.xml'.format(
                 base_api=self.base_api,

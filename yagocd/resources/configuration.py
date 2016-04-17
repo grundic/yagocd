@@ -30,7 +30,17 @@ from yagocd.resources import BaseManager
 
 
 class ConfigurationManager(BaseManager):
+    """
+    The configuration API allows users with administration role
+    to view and manage configuration.
+    """
+
     def modifications(self):
+        """
+        Lists the config repository modifications.
+
+        :return: An array of repository modifications.
+        """
         response = self._session.get(
             path='{base_api}/config/revisions'.format(base_api=self.base_api),
             headers={'Accept': 'application/json'},
@@ -39,6 +49,13 @@ class ConfigurationManager(BaseManager):
         return response.json()
 
     def diff(self, start, end):
+        """
+        Gets the diff between two config repository modifications.
+
+        :param start: starting SHA commit.
+        :param end: ending SHA commit.
+        :return: the diff between two config repo modifications.
+        """
         response = self._session.get(
             path='{base_api}/config/diff/{start}/{end}'.format(
                 base_api=self.base_api,
@@ -51,6 +68,12 @@ class ConfigurationManager(BaseManager):
         return response.text
 
     def config(self, md5=None):
+        """
+        Gets the current configuration file.
+
+        :param md5: md5 sum of config to get. If not given, current will be returned.
+        :return: the contents of the configuration file.
+        """
         response = self._session.get(
             path='{base_api}/admin/config/{version}'.format(
                 base_api=self.base_api,

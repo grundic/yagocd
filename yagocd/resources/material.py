@@ -30,7 +30,16 @@ from yagocd.resources import BaseManager, Base
 
 
 class MaterialManager(BaseManager):
+    """
+    The materials API allows users to query and notify materials in the Go configuration.
+    """
+
     def list(self):
+        """
+        Lists all available materials, these are materials that are present in the in ``cruise-config.xml``.
+        :return: An array of :class:`yagocd.resources.material.MaterialEntity`.
+        :rtype: list of yagocd.resources.material.MaterialEntity.
+        """
         response = self._session.get(
             path='{base_api}/config/materials'.format(base_api=self.base_api),
             headers={'Accept': 'application/json'},
@@ -43,6 +52,14 @@ class MaterialManager(BaseManager):
         return materials
 
     def modifications(self, fingerprint, offset=0):
+        """
+        Get modifications of specific material.
+
+        :param fingerprint: fingerprint of material.
+        :param offset: number of modifications to be skipped.
+        :return: A list of modification objects :class:`yagocd.resources.material.ModificationEntity`.
+        :rtype: list of yagocd.resources.material.ModificationEntity.
+        """
         response = self._session.get(
             path='{base_api}/materials/{fingerprint}/modifications/{offset}'.format(
                 base_api=self.base_api,
