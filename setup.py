@@ -7,6 +7,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
+from pip.req import parse_requirements
 
 with open('README.rst') as readme_file:
     readme = readme_file.read()
@@ -14,18 +15,14 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [
-    # TODO: put package requirements here
-]
+requirements = parse_requirements('requirements.txt', session=False)
 
-test_requirements = [
-    # TODO: put package test requirements here
-]
+test_requirements = parse_requirements('requirements_dev.txt', session=False)
 
 setup(
     name='yagocd',
     version='0.1.0',
-    description="Python client wrapper for GOCD REST API.",
+    description="Yet another Python client for ThoughtWorks GOCD REST API.",
     long_description=readme + '\n\n' + history,
     author="Grigory Chernyshev",
     author_email='systray@yandex.ru',
@@ -33,11 +30,10 @@ setup(
     packages=[
         'yagocd',
     ],
-    package_dir={'yagocd':
-                 'yagocd'},
+    package_dir={'yagocd': 'yagocd'},
     include_package_data=True,
     install_requires=requirements,
-    license="ISCL",
+    license="MIT",
     zip_safe=False,
     keywords='yagocd',
     classifiers=[
