@@ -38,7 +38,7 @@ class MaterialManager(BaseManager):
         """
         Lists all available materials, these are materials that are present in the in ``cruise-config.xml``.
         :return: An array of :class:`yagocd.resources.material.MaterialEntity`.
-        :rtype: list of yagocd.resources.material.MaterialEntity.
+        :rtype: list of yagocd.resources.material.MaterialEntity
         """
         response = self._session.get(
             path='{base_api}/config/materials'.format(base_api=self.base_api),
@@ -58,7 +58,7 @@ class MaterialManager(BaseManager):
         :param fingerprint: fingerprint of material.
         :param offset: number of modifications to be skipped.
         :return: A list of modification objects :class:`yagocd.resources.material.ModificationEntity`.
-        :rtype: list of yagocd.resources.material.ModificationEntity.
+        :rtype: list of yagocd.resources.material.ModificationEntity
         """
         response = self._session.get(
             path='{base_api}/materials/{fingerprint}/modifications/{offset}'.format(

@@ -62,7 +62,8 @@ class PipelineManager(BaseManager):
 
         This method uses ``pipeline_groups`` API method call to list available pipelines.
         It also links them together, so later it's possible to refer to pipeline's descendants.
-        :return:
+        :return: array of pipelines
+        :rtype: list of yagocd.resources.pipeline.PipelineEntity
         """
         response = self._session.get(
             path='{base_api}/config/pipeline_groups'.format(base_api=self.base_api),
@@ -89,7 +90,7 @@ class PipelineManager(BaseManager):
         Finds pipeline by it's name.
         :param name: name of required pipeline.
         :return: if found - pipeline :class:`yagocd.resources.PipelineEntity`, otherwise ``None``.
-        :rtype: yagocd.resources.PipelineEntity.
+        :rtype: yagocd.resources.PipelineEntity
         """
         for pipeline in self.list():
             if pipeline.data.name == name:
@@ -103,7 +104,7 @@ class PipelineManager(BaseManager):
         :param name: name of the pipeline.
         :param offset: number of pipeline instances to be skipped.
         :return: an array of pipeline instances :class:`yagocd.resources.pipeline.PipelineInstance`.
-        :rtype: list of yagocd.resources.pipeline.PipelineInstance.
+        :rtype: list of yagocd.resources.pipeline.PipelineInstance
         """
         response = self._session.get(
             path='{base_api}/pipelines/{name}/history/{offset}'.format(
@@ -127,7 +128,7 @@ class PipelineManager(BaseManager):
         :param name: name of the pipeline.
         :param counter pipeline counter:
         :return: A pipeline instance object :class:`yagocd.resources.pipeline.PipelineInstance`.
-        :rtype: yagocd.resources.pipeline.PipelineInstance.
+        :rtype: yagocd.resources.pipeline.PipelineInstance
         """
         response = self._session.get(
             path='{base_api}/pipelines/{name}/instance/{counter}'.format(
@@ -236,6 +237,7 @@ class PipelineEntity(Base):
         This property automatically populates from API call
 
         :return: list of :class:`yagocd.resources.pipeline.PipelineEntity`.
+        :rtype: list of yagocd.resources.pipeline.PipelineEntity
         """
         return [material for material in self.data.materials if material.type == 'Pipeline']
 
@@ -247,6 +249,7 @@ class PipelineEntity(Base):
         all pipelines.
 
         :return: list of :class:`yagocd.resources.pipeline.PipelineEntity`.
+        :rtype: list of yagocd.resources.pipeline.PipelineEntity
         """
         return self._descendants
 

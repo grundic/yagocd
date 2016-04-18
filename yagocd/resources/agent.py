@@ -117,8 +117,8 @@ class AgentManager(BaseManager):
 
         :param uuid: uuid of the agent.
         :param offset: number of jobs to be skipped.
-        :return: an array of job objects along with the job transitions.
-        :rtype: list of  :class:`yagocd.resources.job.JobInstance`
+        :return: an array of :class:`yagocd.resources.job.JobInstance` along with the job transitions.
+        :rtype: list of yagocd.resources.job.JobInstance
         """
         response = self._session.get(
             path='{base_api}/agents/{uuid}/job_run_history/{offset}'.format(

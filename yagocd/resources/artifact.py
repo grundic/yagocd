@@ -87,8 +87,8 @@ class ArtifactManager(BaseManager):
         :param stage_name: name of the stage.
         :param stage_counter: stage counter.
         :param job_name: name of the job.
-        :return: An array of artifact objects.
-        :rtype: list of :class:`yagocd.resources.artifact.Artifact`
+        :return: An array of :class:`yagocd.resources.artifact.Artifact`.
+        :rtype: list of yagocd.resources.artifact.Artifact
         """
         assert self._pipeline_name or pipeline_name
         assert self._pipeline_counter or pipeline_counter
