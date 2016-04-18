@@ -31,7 +31,18 @@ from yagocd.resources import BaseManager, Base
 
 
 class StageManager(BaseManager):
+    """
+    The stages API allows users to view stage information and operate on it.
+    """
+
     def cancel(self, pipeline, stage):
+        """
+        Cancel an active stage of a specified stage.
+
+        :param pipeline: pipeline name.
+        :param stage: stage name.
+        :return: a text confirmation.
+        """
         response = self._session.post(
             path='{base_api}/stages/{pipeline}/{stage}/cancel'.format(
                 base_api=self.base_api,
@@ -43,6 +54,16 @@ class StageManager(BaseManager):
         return response.text
 
     def get(self, pipeline, stage, pipeline_counter, stage_counter):
+        """
+        Gets stage instance object.
+
+        :param pipeline: pipeline name.
+        :param stage: stage name.
+        :param pipeline_counter: pipeline counter.
+        :param stage_counter: stage counter.
+        :return: a stage instance object :class:`yagocd.resources.stage.StageInstance`.
+        :rtype: yagocd.resources.stage.StageInstance
+        """
         response = self._session.get(
             path='{base_api}/stages/{pipeline}/{stage}/instance/{pipeline_counter}/{stage_counter}'.format(
                 base_api=self.base_api,
@@ -57,6 +78,16 @@ class StageManager(BaseManager):
         return StageInstance(session=self._session, data=response.json(), pipeline=None)
 
     def history(self, pipeline, stage, offset=0):
+        """
+        The stage history allows users to list stage instances of specified stage.
+        Supports pagination using offset which tells the API how many instances to skip.
+
+        :param pipeline: pipeline name.
+        :param stage: stage name.
+        :param offset: how many instances to skip.
+        :return: an array of stage instances :class:`yagocd.resources.stage.StageInstance`.
+        :rtype: list of yagocd.resources.stage.StageInstance
+        """
         response = self._session.get(
             path='{base_api}/stages/{pipeline}/{stage}/history/{offset}'.format(
                 base_api=self.base_api,
@@ -75,6 +106,10 @@ class StageManager(BaseManager):
 
 
 class StageInstance(Base):
+    """
+    Class representing instance of specific stage.
+    """
+
     def __init__(self, session, data, pipeline):
         super(StageInstance, self).__init__(session, data)
         self._pipeline = pipeline

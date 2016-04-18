@@ -31,7 +31,16 @@ from yagocd.resources import BaseManager, Base
 
 
 class UserManager(BaseManager):
+    """
+    The users API allows users with administrator role to manage users.
+    """
+
     def list(self):
+        """
+        Lists all available users.
+        :return: an array of user objects :class:`yagocd.resources.user.UserEntity`.
+        :rtype: yagocd.resources.user.UserEntity
+        """
         response = self._session.get(
             path='{base_api}/users'.format(base_api=self.base_api),
         )
@@ -43,6 +52,13 @@ class UserManager(BaseManager):
         return users
 
     def get(self, login):
+        """
+        Gets a user by its login name.
+
+        :param login: login name.
+        :return: a user object :class:`yagocd.resources.user.UserEntity`.
+        :rtype: yagocd.resources.user.UserEntity
+        """
         response = self._session.get(
             path='{base_api}/users/{login}'.format(
                 base_api=self.base_api,
@@ -58,8 +74,9 @@ class UserManager(BaseManager):
 
         Can't make this one work: returns 404 all the time.
 
-        :param options:
-        :return:
+        :param options: dictionary of parameters for creating a user.
+        :return: a user object :class:`yagocd.resources.user.UserEntity`.
+        :rtype: yagocd.resources.user.UserEntity
         """
         response = self._session.post(
             path='{base_api}/users'.format(
@@ -74,6 +91,14 @@ class UserManager(BaseManager):
         return response.text
 
     def update(self, login, options):
+        """
+        Update some attributes of a user.
+
+        :param login: login name.
+        :param options: dictionary of parameters for updating a user.
+        :return: the updated user object :class:`yagocd.resources.user.UserEntity`.
+        :rtype: yagocd.resources.user.UserEntity
+        """
         response = self._session.patch(
             path='{base_api}/users/{login}'.format(
                 base_api=self.base_api,
@@ -88,6 +113,11 @@ class UserManager(BaseManager):
         return UserEntity(session=self._session, data=response.json())
 
     def delete(self, login):
+        """
+        Deletes a user.
+        :param login: login name.
+        :return: a message confirmation if the user was deleted.
+        """
         response = self._session.delete(
             path='{base_api}/users/{login}'.format(
                 base_api=self.base_api,
@@ -99,6 +129,9 @@ class UserManager(BaseManager):
 
 
 class UserEntity(Base):
+    """
+    The user object.
+    """
     pass
 
 
