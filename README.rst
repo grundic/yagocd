@@ -19,16 +19,18 @@ Installation
 
 Examples
 --------
-##### Create instance of `yagocd.client.Client`
-```python
-go = Client(
-    server='https://example.com',
-    auth=('user', 'password'),
-    options={
-        'verify': False # skip verification for SSL certificates.
-    }
-)
-```
+Create instance of `yagocd.client.Client`
+*****************************************
+
+.. code:: python
+
+    go = Client(
+        server='https://example.com',
+        auth=('user', 'password'),
+        options={
+            'verify': False # skip verification for SSL certificates.
+        }
+    )
 
 List of available managers of the client, accessible as it's properties:
 * `agents`: manage build agents
@@ -40,11 +42,13 @@ List of available managers of the client, accessible as it's properties:
 * `stages`: work with stages
 * `users`: manage users
 
-##### Pipeline
-```python
-# list pipelines
-print(go.pipelines.list())
-```
+Pipeline
+********
+
+.. code:: python
+
+    # list pipelines
+    print(go.pipelines.list())
 
 Code Organisation
 -----------------
@@ -52,14 +56,14 @@ Code Organisation
 Development notes
 -----------------
 
-Original API is part of the open source [GOCD project](https://github.com/gocd/gocd).
+Original API is part of the open source `GOCD project <https://github.com/gocd/gocd>`_.
 But it's difficult to find appropriate implementation.
 * First, there are url rewrite rules in
-[/server/webapp/WEB-INF/urlrewrite.xml](https://github.com/gocd/gocd/blob/master/server/webapp/WEB-INF/urlrewrite.xml)
+`/server/webapp/WEB-INF/urlrewrite.xml <https://github.com/gocd/gocd/blob/master/server/webapp/WEB-INF/urlrewrite.xml>`_
 in <!-- RESTful URLS --> section.
-* Second, there is [/server/webapp/WEB-INF/rails.new/config/routes.rb](https://github.com/gocd/gocd/blob/master/server/webapp/WEB-INF/rails.new/config/routes.rb)
+* Second, there is `/server/webapp/WEB-INF/rails.new/config/routes.rb <https://github.com/gocd/gocd/blob/master/server/webapp/WEB-INF/rails.new/config/routes.rb>`_
 file, in which some routes are set as well.
-* Third, in [/server/src/com/thoughtworks/go/server/controller](https://github.com/gocd/gocd/tree/master/server/src/com/thoughtworks/go/server/controller)
+* Third, in `/server/src/com/thoughtworks/go/server/controller <https://github.com/gocd/gocd/tree/master/server/src/com/thoughtworks/go/server/controller>`_
 folder there is implementation of all API endpoints, but with different interfaces and URLs (which are handled
 by aforementioned configs).
 
@@ -68,7 +72,7 @@ Using this information could give better understanding of internals of Go server
 Running local server
 --------------------
 
-As described in [this post](https://www.go.cd/2015/08/05/Go-Sample-Virtualbox.html), there is ready to use
+As described in `this post <https://www.go.cd/2015/08/05/Go-Sample-Virtualbox.html>`_, there is ready to use
 Virtual Box image with pre-configured GoCD server and agent, which could easy development and debugging.
 To run, executing this command (ensure, that vagrant and Virtual Box are installed):
 ```
@@ -83,7 +87,8 @@ config.vm.network "forwarded_port", guest: 8154, host: 8154
 
 One for `http`, another for `https` -- this will make it possible to use it from https://localhost:8154/go/ url.
 After that run
-```
-vagrant up
-```
+.. code-block:: bash
+
+    vagrant up
+
 and wait some time for machine to load and service to be up.
