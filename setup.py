@@ -25,7 +25,7 @@ test_requirements = [
 ]
 setup(
     name='yagocd',
-    version='0.1.2',
+    version='0.1.3',
     description="Yet another Python client for ThoughtWorks GOCD REST API.",
     long_description=readme + '\n\n' + history,
     author="Grigory Chernyshev",
