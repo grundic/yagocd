@@ -7,17 +7,12 @@ try:
 except ImportError:
     from distutils.core import setup
 
-from pip.req import parse_requirements
-
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = [str(ir.req) for ir in parse_requirements('requirements.txt', session=False)]
-
-test_requirements = [str(ir.req) for ir in parse_requirements('requirements_dev.txt', session=False)]
 
 setup(
     name='yagocd',
@@ -32,7 +27,6 @@ setup(
     ],
     package_dir={'yagocd': 'yagocd'},
     include_package_data=True,
-    install_requires=requirements,
     license="MIT",
     zip_safe=False,
     keywords='yagocd',
@@ -50,5 +44,4 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     test_suite='tests',
-    tests_require=test_requirements
 )
