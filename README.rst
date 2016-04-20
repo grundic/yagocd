@@ -8,14 +8,14 @@ Go Continuous Delivery is continues integration/deployment server, which helps y
 and streamline the build-test-release cycle for worry-free.
 Using this library you can access to internals of the Pipelines, check their statuses, download Artifacts and more.
 
-Library has a `client`, which is a single entry point of whole project. Creating instance of it would give you
+Library has a `Client` class, which is a single entry point of whole project. Creating instance of it would give you
 possibilities to work with all functionality.
 
 Installation
 ------------
-```bash
-pip install yagocd
-```
+.. code-block:: bash
+
+    $ pip install requests
 
 Examples
 --------
