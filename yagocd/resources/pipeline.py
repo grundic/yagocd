@@ -89,8 +89,8 @@ class PipelineManager(BaseManager):
         """
         Finds pipeline by it's name.
         :param name: name of required pipeline.
-        :return: if found - pipeline :class:`yagocd.resources.PipelineEntity`, otherwise ``None``.
-        :rtype: yagocd.resources.PipelineEntity
+        :return: if found - pipeline :class:`yagocd.resources.pipeline.PipelineEntity`, otherwise ``None``.
+        :rtype: yagocd.resources.pipeline.PipelineEntity
         """
         for pipeline in self.list():
             if pipeline.data.name == name:

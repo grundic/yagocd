@@ -27,6 +27,6 @@
 #
 ###############################################################################
 
-from yagocd.client import Client
+from yagocd.client import Yagocd
 
 __version__ = '0.1.4'

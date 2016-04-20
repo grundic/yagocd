@@ -39,7 +39,7 @@ from yagocd.resources.configuration import ConfigurationManager
 from yagocd.resources.feed import FeedManager
 
 
-class Client(object):
+class Yagocd(object):
     """
     Main class of the package, that gives user access to Go REST API methods.
     """
