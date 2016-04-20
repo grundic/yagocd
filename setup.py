@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 
 try:
     from setuptools import setup
@@ -23,6 +24,11 @@ requirements = [
 test_requirements = [
     # TODO: put package test requirements here
 ]
+
+packages = ['yagocd']
+for dirpath, dirname, filenames in os.walk('yagocd'):
+    packages.append('.'.join(dirpath.split(os.sep)))
+
 setup(
     name='yagocd',
     version='0.1.3',
@@ -31,9 +37,7 @@ setup(
     author="Grigory Chernyshev",
     author_email='systray@yandex.ru',
     url='https://github.com/grundic/yagocd',
-    packages=[
-        'yagocd',
-    ],
+    packages=packages,
     package_dir={'yagocd': 'yagocd'},
     include_package_data=True,
     install_requires=requirements,
