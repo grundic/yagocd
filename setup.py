@@ -13,7 +13,16 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
+requirements = [
+    'six',
+    'requests',
+    'easydict'
 
+]
+
+test_requirements = [
+    # TODO: put package test requirements here
+]
 setup(
     name='yagocd',
     version='0.1.2',
@@ -27,6 +36,7 @@ setup(
     ],
     package_dir={'yagocd': 'yagocd'},
     include_package_data=True,
+    install_requires=requirements,
     license="MIT",
     zip_safe=False,
     keywords='yagocd',
@@ -44,4 +54,5 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     test_suite='tests',
+    tests_require=test_requirements
 )
