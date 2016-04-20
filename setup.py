@@ -16,7 +16,7 @@ with open('HISTORY.rst') as history_file:
 
 setup(
     name='yagocd',
-    version='0.1.1',
+    version='0.1.2',
     description="Yet another Python client for ThoughtWorks GOCD REST API.",
     long_description=readme + '\n\n' + history,
     author="Grigory Chernyshev",
