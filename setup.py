@@ -21,7 +21,7 @@ test_requirements = [str(ir.req) for ir in parse_requirements('requirements_dev.
 
 setup(
     name='yagocd',
-    version='0.1.0',
+    version='0.1.1',
     description="Yet another Python client for ThoughtWorks GOCD REST API.",
     long_description=readme + '\n\n' + history,
     author="Grigory Chernyshev",
