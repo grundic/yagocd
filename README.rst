@@ -49,23 +49,25 @@ Quick example
 
 Code Organisation
 -----------------
-The code in the library organized as follows: the main entry point, that user should use is `yagocd.client.Yagocd`
+The code in the library organized as follows: the main entry point, that user should use is :code:`yagocd.client.Yagocd`
 class. Creating instance of it gives you access to all properties and actions gocd server provides.
 This class contains list of managers, each of which is responsible for it's particular area. Each manager could be
-accessed as a property of `Yagocd` class. Here is list of them:
-* `agents`: manage build agents
-* `configurations`: manage configuration
-* `feeds`: work with feeds
-* `materials`: list,modify and notify materials
-* `pipelines`: work with pipelines
-* `properties`: work with job's properties
-* `stages`: work with stages
-* `users`: manage users
+accessed as a property of :code:`Yagocd` class. Here is list of them:
+
+- :code:`agents`: manage build agents
+- :code:`configurations`: manage configuration
+- :code:`feeds`: work with feeds
+- :code:`materials`: list,modify and notify materials
+- :code:`pipelines`: work with pipelines
+- :code:`properties`: work with job's properties
+- :code:`stages`: work with stages
+- :code:`users`: manage users
 
 Each of managers wraps REST API calls in functions. Depending on return value, it could be possible to get instance of
 another class, that will provide additional functionality.
-For example, `yagocd.resources.pipeline.PipelineManager` manager could return instance of `yagocd.resources.pipeline.PipelineEntity`,
-which represents itself entity of specific pipeline and has corresponding methods.
+For example, :code:`yagocd.resources.pipeline.PipelineManager` manager could return instance of
+:code:`yagocd.resources.pipeline.PipelineEntity`, which represents itself entity of specific pipeline and has
+corresponding methods.
 
 Development notes
 -----------------
@@ -94,7 +96,7 @@ To run, executing this command (ensure, that vagrant and Virtual Box are install
 
     $ vagrant init gocd/gocd-demo
 
-In the current directory will be created `Vagrantfile` with initial content. I recommend forward ports:
+In the current directory will be created :code:`Vagrantfile` with initial content. I recommend forward ports:
 
 .. code-block :: ruby
 
