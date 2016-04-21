@@ -74,14 +74,10 @@ Development notes
 
 Original API is part of the open source `GOCD project <https://github.com/gocd/gocd>`_.
 But it's difficult to find appropriate implementation.
-* First, there are url rewrite rules in
-`/server/webapp/WEB-INF/urlrewrite.xml <https://github.com/gocd/gocd/blob/master/server/webapp/WEB-INF/urlrewrite.xml>`_
-in <!-- RESTful URLS --> section.
-* Second, there is `/server/webapp/WEB-INF/rails.new/config/routes.rb <https://github.com/gocd/gocd/blob/master/server/webapp/WEB-INF/rails.new/config/routes.rb>`_
-file, in which some routes are set as well.
-* Third, in `/server/src/com/thoughtworks/go/server/controller <https://github.com/gocd/gocd/tree/master/server/src/com/thoughtworks/go/server/controller>`_
-folder there is implementation of all API endpoints, but with different interfaces and URLs (which are handled
-by aforementioned configs).
+
+- First, there are url rewrite rules in `/server/webapp/WEB-INF/urlrewrite.xml <https://github.com/gocd/gocd/blob/master/server/webapp/WEB-INF/urlrewrite.xml>`_ in <!-- RESTful URLS --> section.
+- Second, there is `/server/webapp/WEB-INF/rails.new/config/routes.rb <https://github.com/gocd/gocd/blob/master/server/webapp/WEB-INF/rails.new/config/routes.rb>`_ file, in which some routes are set as well.
+- Third, in `/server/src/com/thoughtworks/go/server/controller <https://github.com/gocd/gocd/tree/master/server/src/com/thoughtworks/go/server/controller>`_ folder there is implementation of all API endpoints, but with different interfaces and URLs (which are handled by aforementioned configs).
 
 Using this information could give better understanding of internals of Go server for future development and support.
 
