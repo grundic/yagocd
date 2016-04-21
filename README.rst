@@ -8,7 +8,7 @@ Go Continuous Delivery is continues integration/deployment server, which helps y
 and streamline the build-test-release cycle for worry-free.
 Using this library you can access to internals of the Pipelines, check their statuses, download Artifacts and more.
 
-Library has a `Client` class, which is a single entry point of whole project. Creating instance of it would give you
+Library has a `Yagocd` class, which is a single entry point of whole project. Creating instance of it would give you
 possibilities to work with all functionality.
 
 Installation
@@ -17,14 +17,14 @@ Installation
 
     $ pip install yagocd
 
-Examples
---------
-Create instance of `yagocd.client.Client`
-*****************************************
+Quick example
+-------------
 
 .. code:: python
 
-    go = Client(
+    from yagocd import Yagocd
+
+    go = Yagocd(
         server='https://example.com',
         auth=('user', 'password'),
         options={
@@ -32,7 +32,27 @@ Create instance of `yagocd.client.Client`
         }
     )
 
-List of available managers of the client, accessible as it's properties:
+    for pipeline in go.pipelines.list():
+        for instance in pipeline.history():
+            for stage in instance.stages():
+                for job in stage.jobs():
+                    # print artifact urls for each job
+                    for artifact in job.artifact.list():
+                        for file_obj in artifact.files():
+                            print(file_obj.data.url)
+
+                    # print property of each job
+                    for key, value in job.prop.list().items():
+                        print "{} => {}".format(key, value)
+
+
+
+Code Organisation
+-----------------
+The code in the library organized as follows: the main entry point, that user should use is `yagocd.client.Yagocd`
+class. Creating instance of it gives you access to all properties and actions gocd server provides.
+This class contains list of managers, each of which is responsible for it's particular area. Each manager could be
+accessed as a property of `Yagocd` class. Here is list of them:
 * `agents`: manage build agents
 * `configurations`: manage configuration
 * `feeds`: work with feeds
@@ -42,16 +62,10 @@ List of available managers of the client, accessible as it's properties:
 * `stages`: work with stages
 * `users`: manage users
 
-Pipeline
-********
-
-.. code:: python
-
-    # list pipelines
-    print(go.pipelines.list())
-
-Code Organisation
------------------
+Each of managers wraps REST API calls in functions. Depending on return value, it could be possible to get instance of
+another class, that will provide additional functionality.
+For example, `yagocd.resources.pipeline.PipelineManager` manager could return instance of `yagocd.resources.pipeline.PipelineEntity`,
+which represents itself entity of specific pipeline and has corresponding methods.
 
 Development notes
 -----------------
@@ -75,20 +89,23 @@ Running local server
 As described in `this post <https://www.go.cd/2015/08/05/Go-Sample-Virtualbox.html>`_, there is ready to use
 Virtual Box image with pre-configured GoCD server and agent, which could easy development and debugging.
 To run, executing this command (ensure, that vagrant and Virtual Box are installed):
-```
-vagrant init gocd/gocd-demo
-```
+
+.. code-block:: bash
+
+    $ vagrant init gocd/gocd-demo
 
 In the current directory will be created `Vagrantfile` with initial content. I recommend forward ports:
-```
-config.vm.network "forwarded_port", guest: 8153, host: 8153
-config.vm.network "forwarded_port", guest: 8154, host: 8154
-```
+
+.. code-block :: ruby
+
+    config.vm.network "forwarded_port", guest: 8153, host: 8153
+    config.vm.network "forwarded_port", guest: 8154, host: 8154
 
 One for `http`, another for `https` -- this will make it possible to use it from https://localhost:8154/go/ url.
 After that run
+
 .. code-block:: bash
 
-    vagrant up
+    $ vagrant up
 
 and wait some time for machine to load and service to be up.

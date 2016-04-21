@@ -91,6 +91,7 @@ class PropertyManager(BaseManager):
         :param stage_counter: stage counter.
         :param job_name: name of the job.
         :return: dictionary of properties.
+        :rtype: dict[str, str]
         """
         assert self._pipeline_name or pipeline_name
         assert self._pipeline_counter or pipeline_counter

@@ -258,18 +258,44 @@ class PipelineEntity(Base):
         self._descendants = value
 
     def history(self, offset=0):
+        """
+        The pipeline history allows users to list pipeline instances.
+
+        :param offset: number of pipeline instances to be skipped.
+        :return: an array of pipeline instances :class:`yagocd.resources.pipeline.PipelineInstance`.
+        :rtype: list of yagocd.resources.pipeline.PipelineInstance
+        """
         return self._pipeline.history(name=self.data.name, offset=offset)
 
     def status(self):
+        """
+        The pipeline status allows users to check if the pipeline is paused, locked and schedulable.
+
+        :return: JSON containing information about pipeline state, wrapped in EasyDict class.
+        """
         return self._pipeline.status(name=self.data.name)
 
     def pause(self, cause):
+        """
+        Pause the current pipeline.
+
+        :param cause: reason for pausing the pipeline.
+        """
         self._pipeline.pause(name=self.data.name, cause=cause)
 
     def unpause(self):
+        """
+        Unpause the specified pipeline.
+        """
         self._pipeline.unpause(name=self.data.name)
 
     def release_lock(self):
+        """
+        Release a lock on a pipeline so that you can start up a new instance
+        without having to wait for the earlier instance to finish.
+
+        :return: a text confirmation.
+        """
         return self._pipeline.release_lock(name=self.data.name)
 
 
@@ -279,6 +305,12 @@ class PipelineInstance(Base):
     """
 
     def stages(self):
+        """
+        Method for getting stages from pipeline instance.
+
+        :return: arrays of stages
+        :rtype: list of yagocd.resources.stage.StageInstance
+        """
         stages = list()
         for data in self.data.stages:
             stages.append(StageInstance(session=self._session, data=data, pipeline=self))

@@ -119,6 +119,12 @@ class StageInstance(Base):
         return self._pipeline
 
     def jobs(self):
+        """
+        Method for getting jobs from stage instance.
+
+        :return: arrays of jobs.
+        :rtype: list of yagocd.resources.job.JobInstance
+        """
         jobs = list()
         for data in self.data.jobs:
             jobs.append(JobInstance(session=self._session, data=data, stage=self))
