@@ -15,7 +15,7 @@ Installation
 ------------
 .. code-block:: bash
 
-    $ pip install requests
+    $ pip install yagocd
 
 Examples
 --------
