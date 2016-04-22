@@ -1,0 +1,47 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/api/config/pipeline_groups
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAO1W224bNxD9FUPooxqTHF6GerMdtC9pazR2+xAUwpAcSotoL9hdBTAM/3spWYks
+        24BVNC0SwG8rUpzLOWcO+eF20lUdr6qGh8nsw+1kGGmx+2yo5slsctHWdTVO7qZfVq6bapxf8XCw
+        eEnxYzk6uftr+nnp/ZJ6TvP33H+qYgk6ndQ0cl/R6j5B4iH2VTdWbbOJ+vu72clyHLthdnq6qMbl
+        OryJbX26aGP6MXHdng67QG/K7vTkvKcmLmcnNQ0laAmeq2bBfddXzVjCkfNBY8o5kscgpYDA2lnA
+        AM6aaB3EGMgrJRSwJO21ktpuvoWQTtgScLzpNm38vOm+dLWiwKvy+4fbi9+uf72623b/NfG6aJth
+        XXM//5PDUI38rwGLu4BHAeaAc1DKYIQAEZOV0mZhlJVO22QZKXuwLnsXNVvCnDhmDckQ5SRYPwJs
+        +rjcp2o4zM8gVGRXQsYkyQjhk5LILtkoKWVLgJk8AWSbhDA6SSscCaGEz4RS7PNf7hT9/7B2rs6/
+        GmFBhaO4EmhyBuc9YwyQOIBl5QV4JTn4JB17B46dMgod5GCNSzork7zXqB1/N1ztYX7Ln3jVdjU3
+        9wW/ZFtvuVu1N/OzrltVkTZ9DQ+J/IX6j/OzGLkbOR3m2Z67Prt6gc1D3g/xsQYLPhYle/TCoAZr
+        glYeE5VhooDRgJLBaMYyP9GTEppdSMDGZSnTc/g8IekZu3hkgYbQQOSQYmKvQBZRBFdssFQBxlgv
+        bfRFKQwuh+yLpIIUkaM1xQ9Z+6Oq+Gak8uxYv6CCn9ZN3CzSajvpw0MhnK3HdsN/2m29quF7UsOe
+        xz8KZ3lH/lHOcdVTLgfm76rF8sD8n4rp4e42z838/k/3NrUv4rJv03ortWOfQwc+dAiiZmWdQKnL
+        rSt00gXUjMoziVRcP0O5nwmdUZoohXIB+AxY9JVMeeuEwHQUk0/l/+gKkhKFgCJojxkjCiCL3qBV
+        SoJLhCpYKbwqijJB6aIyBJKmvMMIjEzPivr4uf6POfo8TK8cfbscFcd9peefmuEev7L6N+aOfgX9
+        DQAA
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 22 Apr 2016 09:07:29 GMT']
+      etag: ['"c446ae4f8e833328801ad38dbacb472e--gzip"']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1m06p26oiqfwyv63f6pt87tb8;Path=/go;Expires=Fri, 06-May-2016
+          09:07:29 GMT']
+      vary: ['Accept-Encoding, User-Agent']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [e0f0e372-6113-4f4c-a55f-074b20f7aea5]
+      x-runtime: ['0.023000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

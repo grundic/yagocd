@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/api/pipelines/pipeline_non_existing/history/0
+  response:
+    body: {string: !!python/unicode 'Not Found { Pipeline pipeline_non_existing not
+        found }
+
+'}
+    headers:
+      cache-control: [no-cache]
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 22 Apr 2016 09:07:29 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1hh32tnjj7p6ocq8uvt0wo5u3;Path=/go;Expires=Fri, 06-May-2016
+          09:07:29 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [a231aa10-041c-44d9-b256-aaa7206324a6]
+      x-runtime: ['0.030000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 404, message: Not Found}
+version: 1

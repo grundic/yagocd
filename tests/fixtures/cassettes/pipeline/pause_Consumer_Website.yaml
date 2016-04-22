@@ -1,0 +1,113 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: http://localhost:8153/go/api/pipelines/Consumer_Website/unpause
+  response:
+    body: {string: !!python/unicode ' '}
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 22 Apr 2016 09:09:33 GMT']
+      etag: ['"7215ee9c7d9dc229d2921a40e899ec5f"']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=du9j4hl0vqlb1rnl8i72vn4us;Path=/go;Expires=Fri, 06-May-2016
+          09:09:33 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [c63d89d3-2475-4757-b937-b95ee5f21593]
+      x-runtime: ['0.026000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: pauseCause=Test+pause+reason
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['28']
+      Content-Type: [application/x-www-form-urlencoded]
+      Cookie: [JSESSIONID=du9j4hl0vqlb1rnl8i72vn4us]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: http://localhost:8153/go/api/pipelines/Consumer_Website/pause
+  response:
+    body: {string: !!python/unicode ' '}
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 22 Apr 2016 09:09:33 GMT']
+      etag: ['"7215ee9c7d9dc229d2921a40e899ec5f"']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [4e3ffd37-244b-4f3b-a839-4e0e56b09892]
+      x-runtime: ['0.067000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=du9j4hl0vqlb1rnl8i72vn4us]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/api/pipelines/Consumer_Website/status
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKtWyslPzk5NUbJKS8wpTtVRKkgsLQZxS4pKgbzi5IzUlNKcxKScVKiKWgByC1jM
+        MgAAAA==
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 22 Apr 2016 09:09:33 GMT']
+      etag: ['"2fff8438df346bf8e497325c98bb47e4--gzip"']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      vary: ['Accept-Encoding, User-Agent']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [81cf0f98-6b91-4ce8-8b45-533fa6eaed2f]
+      x-runtime: ['0.056000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      Cookie: [JSESSIONID=du9j4hl0vqlb1rnl8i72vn4us]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: http://localhost:8153/go/api/pipelines/Consumer_Website/unpause
+  response:
+    body: {string: !!python/unicode ' '}
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 22 Apr 2016 09:09:33 GMT']
+      etag: ['"7215ee9c7d9dc229d2921a40e899ec5f"']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [734f7ba8-1561-46d7-84b0-9c06b23b0de6]
+      x-runtime: ['0.032000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

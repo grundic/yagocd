@@ -45,6 +45,7 @@ class Yagocd(object):
     """
 
     DEFAULT_OPTIONS = {
+        'server': 'http://localhost:8153',
         'context_path': 'go/',
         'api_path': 'api/',
         'verify': True,
@@ -53,7 +54,7 @@ class Yagocd(object):
         }
     }
 
-    def __init__(self, server='http://localhost:8153', auth=None, options=None):
+    def __init__(self, server=None, auth=None, options=None):
         """
         Construct a GOCD client instance.
 
@@ -69,7 +70,8 @@ class Yagocd(object):
         """
         options = {} if options is None else options
 
-        options['server'] = server
+        if server is not None:
+            options['server'] = server
 
         merged = copy.deepcopy(self.DEFAULT_OPTIONS)
         merged.update(options)

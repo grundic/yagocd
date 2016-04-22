@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: http://localhost:8153/go/api/pipelines/Consumer_Website/releaseLock
+  response:
+    body: {string: !!python/unicode 'no lock exists within the pipeline configuration
+        for Consumer_Website
+
+'}
+    headers:
+      cache-control: [no-cache]
+      content-type: [application/json; charset=utf-8]
+      date: ['Fri, 22 Apr 2016 14:08:48 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=188fj4gou9mww1sr5a8o095l98;Path=/go;Expires=Fri, 06-May-2016
+          14:08:48 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [97cd0aaa-dafa-4f30-b9af-6689e47d817e]
+      x-runtime: ['0.009000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 406, message: Not Acceptable}
+version: 1
