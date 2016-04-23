@@ -1,0 +1,101 @@
+{
+    "build_cause": {
+        "approver": "",
+        "material_revisions": [
+            {
+                "modifications": [
+                    {
+                        "email_address": null,
+                        "id": 2,
+                        "modified_time": 1438787660000,
+                        "user_name": "Ken Mugrage <kmugrage@users.noreply.github.com>",
+                        "comment": "Update Rakefile",
+                        "revision": "4f711462b07b63ba8d212aa21006c329e026fe70"
+                    }
+                ],
+                "material": {
+                    "description": "URL: https://github.com/gocd-demo/services.git, Branch: master",
+                    "fingerprint": "a79b48dffca98b1103be47638b3765c673ccba922023e1a494214623e1001706",
+                    "type": "Git",
+                    "id": 1
+                },
+                "changed": true
+            }
+        ],
+        "trigger_forced": false,
+        "trigger_message": "modified by Ken Mugrage <kmugrage@users.noreply.github.com>"
+    },
+    "name": "Shared_Services",
+    "natural_order": 2,
+    "can_run": true,
+    "comment": null,
+    "stages": [
+        {
+            "name": "Commit",
+            "approved_by": "changes",
+            "jobs": [
+                {
+                    "name": "build",
+                    "result": "Passed",
+                    "state": "Completed",
+                    "id": 2,
+                    "scheduled_date": 1438787689136
+                }
+            ],
+            "can_run": true,
+            "result": "Passed",
+            "approval_type": "success",
+            "counter": "1",
+            "id": 2,
+            "operate_permission": true,
+            "rerun_of_counter": null,
+            "scheduled": true
+        },
+        {
+            "name": "Unit_Test",
+            "approved_by": "changes",
+            "jobs": [
+                {
+                    "name": "unit_test",
+                    "result": "Passed",
+                    "state": "Completed",
+                    "id": 3,
+                    "scheduled_date": 1438787715532
+                }
+            ],
+            "can_run": true,
+            "result": "Passed",
+            "approval_type": "success",
+            "counter": "1",
+            "id": 3,
+            "operate_permission": true,
+            "rerun_of_counter": null,
+            "scheduled": true
+        },
+        {
+            "name": "Package",
+            "approved_by": "changes",
+            "jobs": [
+                {
+                    "name": "package",
+                    "result": "Passed",
+                    "state": "Completed",
+                    "id": 4,
+                    "scheduled_date": 1438787735440
+                }
+            ],
+            "can_run": true,
+            "result": "Passed",
+            "approval_type": "success",
+            "counter": "1",
+            "id": 4,
+            "operate_permission": true,
+            "rerun_of_counter": null,
+            "scheduled": true
+        }
+    ],
+    "counter": 2,
+    "id": 2,
+    "preparing_to_schedule": false,
+    "label": "2"
+}
