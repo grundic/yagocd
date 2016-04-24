@@ -39,7 +39,7 @@ class TestPipelineEntity(TestCase):
         self.patcher = mock.patch('yagocd.session.Session')
         self.mock_session = self.patcher.start()
 
-        data = json.load(open('fixtures/resources/pipeline_instance.json'))
+        data = json.load(open('tests/fixtures/resources/pipeline_instance.json'))
 
         self.instance = pipeline.PipelineInstance(session=self.mock_session, data=data)
 

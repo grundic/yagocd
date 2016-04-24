@@ -37,7 +37,7 @@ from vcr import VCR
 from requests import HTTPError
 
 my_vcr = VCR(
-    cassette_library_dir='fixtures/cassettes',
+    cassette_library_dir='tests/fixtures/cassettes',
     path_transformer=VCR.ensure_suffix('.yaml')
 )
 
