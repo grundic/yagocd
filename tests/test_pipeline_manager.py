@@ -161,6 +161,24 @@ class TestGet(BaseTestPipelineManager):
             with pytest.raises(HTTPError):
                 manager.get("pipeline_instance_non_existing", 1)
 
+    def test_get_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
+            name = "Consumer_Website"
+            manager.get(name, 2)
+            assert cass.requests[0].method == 'GET'
+
+    def test_get_request_accept_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
+            name = "Consumer_Website"
+            manager.get(name, 2)
+            assert cass.requests[0].headers['accept'] == 'application/json'
+
+    def test_get_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
+            name = "Consumer_Website"
+            manager.get(name, 2)
+            assert cass.responses[0]['status']['code'] == 200
+
     def test_get(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/get_Consumer_Website"):
             name = "Consumer_Website"
