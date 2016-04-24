@@ -57,7 +57,17 @@ class AgentManager(BaseManager):
         )
 
         agents = list()
-        for data in response.json():
+        # Depending on Go version, return value would be either list of dict.
+        # Support both cases here.
+        json_response = response.json()
+        if isinstance(json_response, list):
+            agents_json = json_response
+        elif isinstance(json_response, dict):
+            agents_json = json_response.get('_embedded', {}).get('agents', {})
+        else:
+            raise ValueError("Expected response to be in [list, dict], but '{}' found!".format(json_response))
+
+        for data in agents_json:
             agents.append(AgentEntity(session=self._session, data=data))
 
         return agents
@@ -91,6 +101,8 @@ class AgentManager(BaseManager):
                 uuid=uuid,
             ),
             # and again, WTF?!!
+            # This depends on Go version: v2 works for later version of Go (16), but doesn't for earlier (15).
+            # And because there is no good way to get version of the Go server (WTF?!), just use v1 header for now.
             # headers={'Accept': self.ACCEPT_HEADER},
         )
 

@@ -26,6 +26,7 @@
 #
 ###############################################################################
 
+import copy
 import json
 
 from yagocd.client import Yagocd
@@ -46,67 +47,112 @@ class BaseTestAgentManager(object):
         return agent.AgentManager(session=session)
 
 
-class TestList(BaseTestAgentManager):
+class TestListAsList(BaseTestAgentManager):
     def test_list_request_url(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list") as cass:
+        with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
             manager.list()
             assert cass.requests[0].path == '/go/api/agents'
 
     def test_list_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list") as cass:
+        with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
             manager.list()
             assert cass.requests[0].method == 'GET'
 
     def test_list_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list") as cass:
+        with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
             manager.list()
             assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v2+json'
 
     def test_list_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list") as cass:
+        with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
             manager.list()
             assert cass.responses[0]['status']['code'] == 200
 
     def test_list_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list"):
+        with my_vcr.use_cassette("agent/agent_list_as_list"):
             result = manager.list()
             assert isinstance(result, list)
 
     def test_list_is_not_empty(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list"):
+        with my_vcr.use_cassette("agent/agent_list_as_list"):
             result = manager.list()
             assert len(result) > 0
 
     def test_list_returns_agent_entities(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list"):
+        with my_vcr.use_cassette("agent/agent_list_as_list"):
             result = manager.list()
+            assert all(isinstance(i, agent.AgentEntity) for i in result)
+
+
+class TestListAsDict(BaseTestAgentManager):
+    @pytest.fixture()
+    def manager_build_go_cd(self):
+        options = copy.deepcopy(Yagocd.DEFAULT_OPTIONS)
+        options['server'] = 'https://build.go.cd/go'
+        return agent.AgentManager(
+            session=Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
+        )
+
+    def test_list_request_url(self, manager_build_go_cd, my_vcr):
+        with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
+            manager_build_go_cd.list()
+            assert cass.requests[0].path == '/go/api/agents'
+
+    def test_list_request_method(self, manager_build_go_cd, my_vcr):
+        with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
+            manager_build_go_cd.list()
+            assert cass.requests[0].method == 'GET'
+
+    def test_list_request_accept_headers(self, manager_build_go_cd, my_vcr):
+        with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
+            manager_build_go_cd.list()
+            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v2+json'
+
+    def test_list_response_code(self, manager_build_go_cd, my_vcr):
+        with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
+            manager_build_go_cd.list()
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_list_return_type(self, manager_build_go_cd, my_vcr):
+        with my_vcr.use_cassette("agent/agent_list_as_dict"):
+            result = manager_build_go_cd.list()
+            assert isinstance(result, list)
+
+    def test_list_is_not_empty(self, manager_build_go_cd, my_vcr):
+        with my_vcr.use_cassette("agent/agent_list_as_dict"):
+            result = manager_build_go_cd.list()
+            assert len(result) > 0
+
+    def test_list_returns_agent_entities(self, manager_build_go_cd, my_vcr):
+        with my_vcr.use_cassette("agent/agent_list_as_dict"):
+            result = manager_build_go_cd.list()
             assert all(isinstance(i, agent.AgentEntity) for i in result)
 
 
 class TestDict(BaseTestAgentManager):
     @mock.patch('yagocd.resources.agent.AgentManager.list')
     def test_dict_calls_list(self, mock_list, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list"):
+        with my_vcr.use_cassette("agent/agent_list_as_list"):
             manager.dict()
             mock_list.assert_called()
 
     def test_dict_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list"):
+        with my_vcr.use_cassette("agent/agent_list_as_list"):
             result = manager.dict()
             assert isinstance(result, dict)
 
     def test_dict_returns_str_as_keys(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list"):
+        with my_vcr.use_cassette("agent/agent_list_as_list"):
             result = manager.dict()
             assert all(isinstance(i, basestring) for i in result.keys())
 
     def test_dict_returns_agent_entities_as_values(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list"):
+        with my_vcr.use_cassette("agent/agent_list_as_list"):
             result = manager.dict()
             assert all(isinstance(i, agent.AgentEntity) for i in result.values())
 
     def test_dict_get_by_key(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list"):
+        with my_vcr.use_cassette("agent/agent_list_as_list"):
             uuid = '68e5d48c-753a-4395-a79c-1cb22d77a12f'
             result = manager.dict().get(uuid)
             fixture = json.load(open('tests/fixtures/resources/agent/{uuid}-from-list.json'.format(uuid=uuid)))
