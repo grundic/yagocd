@@ -64,22 +64,22 @@ class TestTieDescendants(BaseTestPipelineManager):
 
 
 class TestList(BaseTestPipelineManager):
-    def test_request_method(self, manager, my_vcr):
+    def test_list_request_method(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
             manager.list()
             assert cass.requests[0].method == 'GET'
 
-    def test_request_accept_headers(self, manager, my_vcr):
+    def test_list_request_accept_headers(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
             manager.list()
             assert cass.requests[0].headers['accept'] == 'application/json'
 
-    def test_response_code(self, manager, my_vcr):
+    def test_list_response_code(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
             manager.list()
             assert cass.responses[0]['status']['code'] == 200
 
-    def test_is_not_empty(self, manager, my_vcr):
+    def test_list_is_not_empty(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list"):
             result = manager.list()
             assert len(result) > 0
