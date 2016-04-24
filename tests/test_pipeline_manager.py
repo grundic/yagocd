@@ -64,6 +64,11 @@ class TestTieDescendants(BaseTestPipelineManager):
 
 
 class TestList(BaseTestPipelineManager):
+    def test_list_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
+            manager.list()
+            assert cass.requests[0].path == '/go/api/config/pipeline_groups'
+
     def test_list_request_method(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
             manager.list()
@@ -128,6 +133,14 @@ class TestHistory(BaseTestPipelineManager):
             with pytest.raises(HTTPError):
                 manager.history("pipeline_non_existing")
 
+    def test_history_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/history_Consumer_Website") as cass:
+            name = "Consumer_Website"
+            manager.history(name)
+            assert cass.requests[0].path == '/go/api/pipelines/{name}/history/{offset}'.format(
+                name=name, offset=0
+            )
+
     def test_history_request_method(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/history_Consumer_Website") as cass:
             name = "Consumer_Website"
@@ -160,6 +173,15 @@ class TestGet(BaseTestPipelineManager):
         with my_vcr.use_cassette("pipeline/get_non_existing"):
             with pytest.raises(HTTPError):
                 manager.get("pipeline_instance_non_existing", 1)
+
+    def test_get_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
+            name = "Consumer_Website"
+            counter = 2
+            manager.get(name, counter)
+            assert cass.requests[0].path == '/go/api/pipelines/{name}/instance/{counter}'.format(
+                name=name, counter=counter
+            )
 
     def test_get_request_method(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
