@@ -35,7 +35,7 @@ import pytest
 from requests import HTTPError
 
 
-class TestPipelineManager(object):
+class BaseTestPipelineManager(object):
     @pytest.fixture()
     def session(self):
         return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
@@ -44,6 +44,8 @@ class TestPipelineManager(object):
     def manager(self, session):
         return pipeline.PipelineManager(session=session)
 
+
+class TestTieDescendants(BaseTestPipelineManager):
     def test_tie_descendants(self, session, manager):
         child = pipeline.PipelineEntity(
             session=session,
@@ -60,22 +62,24 @@ class TestPipelineManager(object):
         manager.tie_descendants(pipelines)
         assert child.descendants == [parent]
 
-    def test_list_request_method(self, manager, my_vcr):
+
+class TestList(BaseTestPipelineManager):
+    def test_request_method(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
             manager.list()
             assert cass.requests[0].method == 'GET'
 
-    def test_list_request_accept_headers(self, manager, my_vcr):
+    def test_request_accept_headers(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
             manager.list()
             assert cass.requests[0].headers['accept'] == 'application/json'
 
-    def test_list_response_code(self, manager, my_vcr):
+    def test_response_code(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
             manager.list()
             assert cass.responses[0]['status']['code'] == 200
 
-    def test_list_is_not_empty(self, manager, my_vcr):
+    def test_is_not_empty(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list"):
             result = manager.list()
             assert len(result) > 0
@@ -86,13 +90,15 @@ class TestPipelineManager(object):
             assert all(isinstance(i, pipeline.PipelineEntity) for i in result)
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.tie_descendants')
-    def test_tie_descendants_is_called_for_list(self, mock_tie_descendants, manager, my_vcr):
+    def test_tie_descendants_is_called(self, mock_tie_descendants, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list"):
             manager.list()
             mock_tie_descendants.assert_called()
 
+
+class TestFind(BaseTestPipelineManager):
     @mock.patch('yagocd.resources.pipeline.PipelineManager.list')
-    def test_list_is_called_for_find(self, mock_list, manager, my_vcr):
+    def test_list_is_called(self, mock_list, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list"):
             name = 'Production_Services'
             manager.find(name)
@@ -103,14 +109,20 @@ class TestPipelineManager(object):
             result = manager.find('This_Pipeline_Doesnt_Exists')
             assert result is None
 
-    def test_find(self, manager, my_vcr):
+    def test_find_returns_pipeline_entity(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list"):
             name = 'Production_Services'
             result = manager.find(name)
-
-            assert isinstance(result, pipeline.PipelineEntity)
             assert result.data.name == name
 
+    def test_find_returns_entity_with_same_name(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pipeline_list"):
+            name = 'Production_Services'
+            result = manager.find(name)
+            assert result.data.name == name
+
+
+class TestHistory(BaseTestPipelineManager):
     def test_history_non_existing(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/history_non_existing"):
             with pytest.raises(HTTPError):
@@ -142,6 +154,8 @@ class TestPipelineManager(object):
             assert all(isinstance(i, pipeline.PipelineInstance) for i in result)
             assert all(i.data.name == name for i in result)
 
+
+class TestGet(BaseTestPipelineManager):
     def test_get_non_existing(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/get_non_existing"):
             with pytest.raises(HTTPError):
@@ -162,6 +176,8 @@ class TestPipelineManager(object):
 
             assert result == {'paused': False, 'schedulable': True, 'locked': False}
 
+
+class TestPause(BaseTestPipelineManager):
     def test_pause(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pause_Consumer_Website"):
             name = "Consumer_Website"
@@ -175,6 +191,8 @@ class TestPipelineManager(object):
 
             manager.unpause(name)
 
+
+class TestUnPause(BaseTestPipelineManager):
     def test_unpause(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/unpause_Consumer_Website"):
             name = "Consumer_Website"
@@ -184,14 +202,22 @@ class TestPipelineManager(object):
             assert result is None
 
             assert manager.status(name) == {'paused': False, 'schedulable': True, 'locked': False}
-            #
-            # def test_release_lock(self, manager, my_vcr):
-            #     with my_vcr.use_cassette("pipeline/release_lock_Consumer_Website"):
-            #         name = "Consumer_Website"
-            #         manager.release_lock(name)
-            #         # TODO: this fails, find a way to fix.
-            #
-            # # TODO: implement when schedule would be implemented
-            # def test_schedule(self, manager, my_vcr):
-            #     with my_vcr.use_cassette("pipeline/schedule_<name_of_pipeline>'"):
-            #         assert 0
+
+
+class TestReleaseLock(BaseTestPipelineManager):
+    #
+    # def test_release_lock(self, manager, my_vcr):
+    #     with my_vcr.use_cassette("pipeline/release_lock_Consumer_Website"):
+    #         name = "Consumer_Website"
+    #         manager.release_lock(name)
+    #         # TODO: this fails, find a way to fix.
+    #
+    pass
+
+
+class TestSchedule(BaseTestPipelineManager):
+    # # TODO: implement when schedule would be implemented
+    # def test_schedule(self, manager, my_vcr):
+    #     with my_vcr.use_cassette("pipeline/schedule_<name_of_pipeline>'"):
+    #         assert 0
+    pass
