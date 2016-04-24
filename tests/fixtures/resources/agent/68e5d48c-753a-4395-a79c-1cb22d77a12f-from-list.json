@@ -1,0 +1,12 @@
+{
+	"status": "Idle",
+	"agent_name": "vagrant-ubuntu-trusty-64",
+	"uuid": "68e5d48c-753a-4395-a79c-1cb22d77a12f",
+	"ip_address": "10.0.2.15",
+	"environments": [],
+	"free_space": "35.7 GB",
+	"sandbox": "/var/lib/go-agent",
+	"build_locator": "",
+	"os": "Linux",
+	"resources": []
+}
