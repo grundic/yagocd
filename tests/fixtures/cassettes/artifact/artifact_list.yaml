@@ -1,0 +1,30 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build.json
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAALWOsQrCMBCGXyVkVo8iomT1ETqWIjW5NoFrryQXQcR3N+0g1N3hhvuG7/8a9VJ6
+        6kbURmkbc0i45yxzFr3TOdKCvchsAIhtR56TmEt1OsLA0AfCBLXvIrpbjfERbPnPcOVxDAIV3HMg
+        B79aec7rXM/kMBawegppNjE8JSY8EA9/SoHtxDerqLR6q3a5DwuT8qEgAQAA
+    headers:
+      cache-control: ['max-age=1, no-cache']
+      content-encoding: [gzip]
+      content-language: [en-US]
+      content-length: ['159']
+      content-type: [application/json; charset=utf-8]
+      date: ['Sun, 24 Apr 2016 22:15:01 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1x1et8zkaurys1tggawg8b9qoo;Path=/go;Expires=Sun, 08-May-2016
+          22:15:01 GMT']
+      vary: ['Accept-Encoding, User-Agent']
+    status: {code: 200, message: OK}
+version: 1
