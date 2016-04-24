@@ -31,7 +31,7 @@ import json
 
 from yagocd.client import Yagocd
 from yagocd.session import Session
-from yagocd.resources import agent
+from yagocd.resources import agent, job
 
 import mock
 import pytest
@@ -255,3 +255,41 @@ class TestDelete(BaseTestAgentManager):
         with my_vcr.use_cassette("agent/agent_delete") as cass:
             manager.delete(self.UUID)
             assert 'Deleted 1 agent(s)' in cass.responses[0]['body']['string']
+
+
+class TestJobHistory(BaseTestAgentManager):
+    UUID = '68e5d48c-753a-4395-a79c-1cb22d77a12f'
+
+    def test_job_history_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_job_history") as cass:
+            manager.job_history(self.UUID)
+            assert cass.requests[0].path == '/go/api/agents/{uuid}/job_run_history/{offset}'.format(
+                uuid=self.UUID, offset=0
+            )
+
+    def test_job_history_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_job_history") as cass:
+            manager.job_history(self.UUID)
+            assert cass.requests[0].method == 'GET'
+
+    def test_job_history_request_accept_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_job_history") as cass:
+            manager.job_history(self.UUID)
+            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v2+json'
+
+    def test_job_history_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_job_history") as cass:
+            manager.job_history(self.UUID)
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_job_history_return_type(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_job_history"):
+            result = manager.job_history(self.UUID)
+            assert isinstance(result, list)
+
+    def test_job_history_returns_job_instances(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_job_history"):
+            result = manager.job_history(self.UUID)
+            assert all(isinstance(i, job.JobInstance) for i in result)
+
+
