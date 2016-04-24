@@ -43,6 +43,14 @@ class AgentManager(BaseManager):
     ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
 
     def list(self):
+        """
+        Lists all available agents, these are agents that are present in the
+        <agents/> tag inside cruise-config.xml and also agents that are in
+        Pending state awaiting registration.
+
+        :return: an array of agents.
+        :rtype: list of yagocd.resources.agent.AgentEntity
+        """
         response = self._session.get(
             path='{base_api}/agents'.format(base_api=self.base_api),
             headers={'Accept': self.ACCEPT_HEADER},
@@ -53,6 +61,21 @@ class AgentManager(BaseManager):
             agents.append(AgentEntity(session=self._session, data=data))
 
         return agents
+
+    def dict(self):
+        """
+        Wrapper for `list()` method, that transforms founded agents to
+        dictionary by `uuid` key.
+
+        :return: dictionary of agents with `uuid` as a key and agent as a value.
+        :rtype: dict[str, yagocd.resources.agent.AgentEntity]
+        """
+        agents = self.list()
+        result = dict()
+        for agent in agents:
+            result[agent.data.uuid] = agent
+
+        return result
 
     def get(self, uuid):
         """
