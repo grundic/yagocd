@@ -1,0 +1,39 @@
+interactions:
+- request:
+    body: '{"hostname": "foo-bar"}'
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['23']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.9.1]
+    method: PATCH
+    uri: http://localhost:8153/go/api/agents/68e5d48c-753a-4395-a79c-1cb22d77a12f
+  response:
+    body: {string: !!python/unicode "{\n  \"_links\": {\n    \"self\": {\n      \"href\":
+        \"http://localhost:8153/go/api/agents/68e5d48c-753a-4395-a79c-1cb22d77a12f\"\n
+        \   },\n    \"doc\": {\n      \"href\": \"http://api.go.cd/#agents\"\n    },\n
+        \   \"find\": {\n      \"href\": \"http://localhost:8153/go/api/agents/:uuid\"\n
+        \   }\n  },\n  \"uuid\": \"68e5d48c-753a-4395-a79c-1cb22d77a12f\",\n  \"hostname\":
+        \"foo-bar\",\n  \"ip_address\": \"10.0.2.15\",\n  \"enabled\": true,\n  \"sandbox\":
+        \"/var/lib/go-agent\",\n  \"status\": \"Idle\",\n  \"operating_system\": \"Linux\",\n
+        \ \"free_space\": 38311243776,\n  \"resources\": [\n\n  ],\n  \"environments\":
+        [\n\n  ]\n}\n"}
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      date: ['Sun, 24 Apr 2016 17:23:59 GMT']
+      etag: ['"78d1488fa070c20f9c7df29d51e7627b"']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=483nly6fkumogfj1kvq4uesw;Path=/go;Expires=Sun, 08-May-2016
+          17:23:59 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [82e431d5-e104-45ac-a5ca-bcd9924a4e3e]
+      x-runtime: ['0.131000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

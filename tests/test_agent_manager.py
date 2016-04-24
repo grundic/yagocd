@@ -140,3 +140,43 @@ class TestGet(BaseTestAgentManager):
         with my_vcr.use_cassette("agent/agent_get"):
             result = manager.get(self.UUID)
             assert isinstance(result, agent.AgentEntity)
+
+
+class TestUpdate(BaseTestAgentManager):
+    UUID = '68e5d48c-753a-4395-a79c-1cb22d77a12f'
+    UPD_CFG = {'hostname': 'foo-bar'}
+
+    def test_update_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_update") as cass:
+            manager.update(self.UUID, self.UPD_CFG)
+            assert cass.requests[0].path == '/go/api/agents/{uuid}'.format(uuid=self.UUID)
+
+    def test_update_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_update") as cass:
+            manager.update(self.UUID, self.UPD_CFG)
+            assert cass.requests[0].method == 'PATCH'
+
+    def test_update_request_accept_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_update") as cass:
+            manager.update(self.UUID, self.UPD_CFG)
+            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+
+    def test_update_request_content_type_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_update") as cass:
+            manager.update(self.UUID, self.UPD_CFG)
+            assert cass.requests[0].headers['content-type'] == 'application/json'
+
+    def test_update_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_update") as cass:
+            manager.update(self.UUID, self.UPD_CFG)
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_update_returns_instance_of_agent_entity(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_update"):
+            result = manager.update(self.UUID, self.UPD_CFG)
+            assert isinstance(result, agent.AgentEntity)
+
+    def test_update_returns_updated_agent(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_update"):
+            result = manager.update(self.UUID, self.UPD_CFG)
+            assert result.data.hostname == self.UPD_CFG['hostname']
