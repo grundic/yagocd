@@ -1,0 +1,30 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.9.1]
+    method: DELETE
+    uri: http://localhost:8153/go/api/agents/68e5d48c-753a-4395-a79c-1cb22d77a12f
+  response:
+    body: {string: !!python/unicode "{\n  \"message\": \"Deleted 1 agent(s).\"\n}\n"}
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      date: ['Sun, 24 Apr 2016 21:39:27 GMT']
+      etag: ['"94406fe185fd1456e2e48cc9f4ef4990"']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1gzpvonpyaxjdnpalobmmhaoi;Path=/go;Expires=Sun, 08-May-2016
+          21:39:27 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [18134189-dce6-4acb-bc72-37a664110087]
+      x-runtime: ['0.109000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

@@ -226,3 +226,32 @@ class TestUpdate(BaseTestAgentManager):
         with my_vcr.use_cassette("agent/agent_update"):
             result = manager.update(self.UUID, self.UPD_CFG)
             assert result.data.hostname == self.UPD_CFG['hostname']
+
+
+class TestDelete(BaseTestAgentManager):
+    UUID = '68e5d48c-753a-4395-a79c-1cb22d77a12f'
+
+    def test_delete_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_delete") as cass:
+            manager.delete(self.UUID)
+            assert cass.requests[0].path == '/go/api/agents/{uuid}'.format(uuid=self.UUID)
+
+    def test_delete_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_delete") as cass:
+            manager.delete(self.UUID)
+            assert cass.requests[0].method == 'DELETE'
+
+    def test_delete_request_accept_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_delete") as cass:
+            manager.delete(self.UUID)
+            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+
+    def test_delete_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_delete") as cass:
+            manager.delete(self.UUID)
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_delete_return_message(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_delete") as cass:
+            manager.delete(self.UUID)
+            assert 'Deleted 1 agent(s)' in cass.responses[0]['body']['string']
