@@ -1,0 +1,25 @@
+{
+    "_links": {
+        "self": {
+            "href": "https://localhost:8154/go/api/agents/68e5d48c-753a-4395-a79c-1cb22d77a12f"
+        },
+        "doc": {
+            "href": "http://api.go.cd/#agents"
+        },
+        "find": {
+            "href": "https://localhost:8154/go/api/agents/:uuid"
+        }
+    },
+    "uuid": "68e5d48c-753a-4395-a79c-1cb22d77a12f",
+    "hostname": "vagrant-ubuntu-trusty-64",
+    "ip_address": "10.0.2.15",
+    "enabled": true,
+    "sandbox": "/var/lib/go-agent",
+    "status": "Idle",
+    "operating_system": "Linux",
+    "free_space": 38374797312,
+    "resources": [
+    ],
+    "environments": [
+    ]
+}
