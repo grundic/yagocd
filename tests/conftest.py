@@ -25,31 +25,22 @@
 # THE SOFTWARE.
 #
 ###############################################################################
-import json
 
-from yagocd.resources import pipeline
-from yagocd.resources import stage
-from yagocd.resources import Base
+import mock
 import pytest
+from vcr import VCR
+
+vcr_obj = VCR(
+    cassette_library_dir='tests/fixtures/cassettes',
+    path_transformer=VCR.ensure_suffix('.yaml')
+)
 
 
-class TestPipelineEntity(object):
-    @pytest.fixture()
-    def pipeline_instance(self, mock_session):
-        data = json.load(open('tests/fixtures/resources/pipeline_instance.json'))
-        return pipeline.PipelineInstance(session=mock_session, data=data)
+@pytest.fixture()
+def mock_session():
+    return mock.patch('yagocd.session.Session').start()
 
-    def test_instance_is_not_none(self, pipeline_instance):
-        assert pipeline_instance is not None
 
-    def test_is_instance_of_base(self, pipeline_instance):
-        assert isinstance(pipeline_instance, Base)
-
-    def test_getting_name(self, pipeline_instance):
-        assert pipeline_instance.data.name == 'Shared_Services'
-
-    def test_stages_are_not_empty(self, pipeline_instance):
-        assert len(pipeline_instance.stages()) > 0
-
-    def test_stages_instances(self, pipeline_instance):
-        assert all(isinstance(i, stage.StageInstance) for i in pipeline_instance.stages())
+@pytest.fixture()
+def my_vcr():
+    return vcr_obj

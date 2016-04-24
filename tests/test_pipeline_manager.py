@@ -26,140 +26,132 @@
 #
 ###############################################################################
 
-from unittest import TestCase
-
 from yagocd.client import Yagocd
 from yagocd.session import Session
 from yagocd.resources import pipeline
 
 import mock
-from vcr import VCR
+import pytest
 from requests import HTTPError
 
-my_vcr = VCR(
-    cassette_library_dir='tests/fixtures/cassettes',
-    path_transformer=VCR.ensure_suffix('.yaml')
-)
 
+class TestPipelineManager(object):
+    @pytest.fixture()
+    def session(self):
+        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
 
-class TestPipelineManager(TestCase):
-    def setUp(self):
-        self.session = Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-        self.manager = pipeline.PipelineManager(session=self.session)
+    @pytest.fixture()
+    def manager(self, session):
+        return pipeline.PipelineManager(session=session)
 
-    def test_tie_descendants(self):
+    def test_tie_descendants(self, session, manager):
         child = pipeline.PipelineEntity(
-            session=self.session,
+            session=session,
             data={'name': 'child1', 'materials': {}}
         )
 
         parent = pipeline.PipelineEntity(
-            session=self.session,
+            session=session,
             data={'name': 'parent1', 'materials': [{'description': 'child1', 'type': 'Pipeline'}]}
         )
 
         pipelines = [child, parent]
 
-        self.manager.tie_descendants(pipelines)
-        self.assertEqual(child.descendants, [parent])
+        manager.tie_descendants(pipelines)
+        assert child.descendants == [parent]
 
-    @my_vcr.use_cassette("pipeline/pipeline_list")
-    def test_list_is_not_empty(self):
-        result = self.manager.list()
-        self.assertTrue(all(isinstance(i, pipeline.PipelineEntity) for i in result))
+    def test_list_is_not_empty(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pipeline_list"):
+            result = manager.list()
+            assert len(result) > 0
 
-    @my_vcr.use_cassette("pipeline/pipeline_list")
-    def test_elements_in_list_are_pipelines_entities(self):
-        result = self.manager.list()
-        self.assertTrue(all(isinstance(i, pipeline.PipelineEntity) for i in result))
+    def test_elements_in_list_are_pipelines_entities(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pipeline_list"):
+            result = manager.list()
+            assert all(isinstance(i, pipeline.PipelineEntity) for i in result)
 
-    @my_vcr.use_cassette("pipeline/pipeline_list")
     @mock.patch('yagocd.resources.pipeline.PipelineManager.tie_descendants')
-    def test_tie_descendants_is_called_for_list(self, mock_tie_descendants):
-        self.manager.list()
-        mock_tie_descendants.assert_called()
+    def test_tie_descendants_is_called_for_list(self, mock_tie_descendants, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pipeline_list"):
+            manager.list()
+            mock_tie_descendants.assert_called()
 
-    @my_vcr.use_cassette('pipeline/pipeline_list')
-    def test_find_non_existing(self):
-        result = self.manager.find('This_Pipeline_Doesnt_Exists')
-        self.assertIsNone(result)
+    def test_find_non_existing(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pipeline_list"):
+            result = manager.find('This_Pipeline_Doesnt_Exists')
+            assert result is None
 
-    @my_vcr.use_cassette('pipeline/pipeline_list')
-    def test_find(self):
-        name = 'Production_Services'
-        result = self.manager.find(name)
+    def test_find(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pipeline_list"):
+            name = 'Production_Services'
+            result = manager.find(name)
 
-        self.assertIsInstance(result, pipeline.PipelineEntity)
-        self.assertTrue(result.data.name, name)
+            assert isinstance(result, pipeline.PipelineEntity)
+            assert result.data.name == name
 
-    @my_vcr.use_cassette('pipeline/history_non_existing')
-    def test_history_non_existing(self):
-        self.assertRaises(HTTPError, self.manager.history, "pipeline_non_existing")
+    def test_history_non_existing(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/history_non_existing"):
+            with pytest.raises(HTTPError):
+                manager.history("pipeline_non_existing")
 
-    @my_vcr.use_cassette('pipeline/history_Consumer_Website')
-    def test_history(self):
-        name = "Consumer_Website"
-        result = self.manager.history(name)
+    def test_history(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/history_Consumer_Website"):
+            name = "Consumer_Website"
+            result = manager.history(name)
 
-        self.assertTrue(all(isinstance(i, pipeline.PipelineInstance) for i in result))
-        self.assertTrue(all(i.data.name == name for i in result))
+            assert all(isinstance(i, pipeline.PipelineInstance) for i in result)
+            assert all(i.data.name == name for i in result)
 
-    @my_vcr.use_cassette('pipeline/get_non_existing')
-    def test_get_non_existing(self):
-        self.assertRaises(HTTPError, self.manager.get, "pipeline_instance_non_existing", 1)
+    def test_get_non_existing(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/get_non_existing"):
+            with pytest.raises(HTTPError):
+                manager.get("pipeline_instance_non_existing", 1)
 
-    @my_vcr.use_cassette('pipeline/get_Consumer_Website')
-    def test_get(self):
-        name = "Consumer_Website"
-        result = self.manager.get(name, 2)
-        self.assertIsInstance(result, pipeline.PipelineInstance)
-        self.assertEqual(result.data.name, name)
+    def test_get(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/get_Consumer_Website"):
+            name = "Consumer_Website"
+            result = manager.get(name, 2)
 
-    @my_vcr.use_cassette('pipeline/status_Consumer_Website')
-    def test_status(self):
-        name = "Consumer_Website"
-        result = self.manager.status(name)
-        self.assertDictEqual(
-            result,
-            {'paused': False, 'schedulable': True, 'locked': False}
-        )
+            assert isinstance(result, pipeline.PipelineInstance)
+            assert result.data.name == name
 
-    @my_vcr.use_cassette('pipeline/pause_Consumer_Website')
-    def test_pause(self):
-        name = "Consumer_Website"
-        reason = 'Test pause reason'
-        self.manager.unpause(name)
+    def test_status(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/status_Consumer_Website"):
+            name = "Consumer_Website"
+            result = manager.status(name)
 
-        result = self.manager.pause(name, reason)
-        self.assertIsNone(result)
+            assert result == {'paused': False, 'schedulable': True, 'locked': False}
 
-        self.assertDictEqual(
-            self.manager.status(name),
-            {'paused': True, 'schedulable': False, 'locked': False}
-        )
+    def test_pause(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pause_Consumer_Website"):
+            name = "Consumer_Website"
+            reason = 'Test pause reason'
+            manager.unpause(name)
 
-        self.manager.unpause(name)
+            result = manager.pause(name, reason)
 
-    @my_vcr.use_cassette('pipeline/unpause_Consumer_Website')
-    def test_unpause(self):
-        name = "Consumer_Website"
-        self.manager.pause(name, '')
+            assert result is None
+            assert manager.status(name) == {'paused': True, 'schedulable': False, 'locked': False}
 
-        result = self.manager.unpause(name)
-        self.assertIsNone(result)
+            manager.unpause(name)
 
-        self.assertDictEqual(
-            self.manager.status(name),
-            {'paused': False, 'schedulable': True, 'locked': False}
-        )
+    def test_unpause(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website"):
+            name = "Consumer_Website"
+            manager.pause(name, '')
 
-        # @my_vcr.use_cassette('pipeline/release_lock_Consumer_Website')
-        # def test_release_lock(self):
-        #     name = "Consumer_Website"
-        #     self.manager.release_lock(name)
-        #     # TODO: this fails, find a way to fix.
+            result = manager.unpause(name)
+            assert result is None
 
-        # TODO: implement when schedule would be implemented
-        # @my_vcr.use_cassette('pipeline/schedule_<name_of_pipeline>')
-        # def test_schedule(self):
-        #     self.fail()
+            assert manager.status(name) == {'paused': False, 'schedulable': True, 'locked': False}
+    #
+    # def test_release_lock(self, manager, my_vcr):
+    #     with my_vcr.use_cassette("pipeline/release_lock_Consumer_Website"):
+    #         name = "Consumer_Website"
+    #         manager.release_lock(name)
+    #         # TODO: this fails, find a way to fix.
+    #
+    # # TODO: implement when schedule would be implemented
+    # def test_schedule(self, manager, my_vcr):
+    #     with my_vcr.use_cassette("pipeline/schedule_<name_of_pipeline>'"):
+    #         assert 0
