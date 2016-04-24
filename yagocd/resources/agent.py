@@ -39,6 +39,7 @@ class AgentManager(BaseManager):
     :warning: Please note that this API requires using v2 of the API using `Accept: application/vnd.go.cd.v2+json`
     """
 
+    # Using this header is actually impossible, as it doesn't work as documented in most cases...
     ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
 
     def list(self):
@@ -48,7 +49,7 @@ class AgentManager(BaseManager):
         )
 
         agents = list()
-        for data in response.json().get('_embedded', {}).get('agents', {}):
+        for data in response.json():
             agents.append(AgentEntity(session=self._session, data=data))
 
         return agents
@@ -66,7 +67,8 @@ class AgentManager(BaseManager):
                 base_api=self.base_api,
                 uuid=uuid,
             ),
-            headers={'Accept': self.ACCEPT_HEADER},
+            # and again, WTF?!!
+            # headers={'Accept': self.ACCEPT_HEADER},
         )
 
         return AgentEntity(session=self._session, data=response.json())
