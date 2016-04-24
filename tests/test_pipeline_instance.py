@@ -36,7 +36,7 @@ import pytest
 class TestPipelineEntity(object):
     @pytest.fixture()
     def pipeline_instance(self, mock_session):
-        data = json.load(open('tests/fixtures/resources/pipeline_instance.json'))
+        data = json.load(open('tests/fixtures/resources/pipeline/pipeline_instance.json'))
         return pipeline.PipelineInstance(session=mock_session, data=data)
 
     def test_instance_is_not_none(self, pipeline_instance):
