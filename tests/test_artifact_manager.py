@@ -100,3 +100,64 @@ class TestList(BaseTestArtifactManager):
         with my_vcr.use_cassette("artifact/artifact_list"):
             result = manager.list()
             assert all(isinstance(i, artifact.Artifact) for i in result)
+
+
+class TestDirectory(BaseTestArtifactManager):
+    pass
+
+
+class TestCreate(BaseTestArtifactManager):
+    PATH_TO_FILE = 'path/to/the/file.txt'
+    FILE_CONTENT = 'Sample test data.\nFoo and Bar.'
+
+    @pytest.fixture(scope='session')
+    def sample_artifact(self, tmpdir_factory):
+        fn = tmpdir_factory.mktemp("gocd").join("artifact.txt")
+        fn.write(self.FILE_CONTENT)
+        return fn
+
+    def test_create_request_url(self, sample_artifact, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_create") as cass:
+            manager.create(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
+            assert cass.requests[0].path == (
+                '/go'
+                '/files'
+                '/{pipeline_name}'
+                '/{pipeline_counter}'
+                '/{stage_name}'
+                '/{stage_counter}'
+                '/{job_name}'
+                '/{path_to_file}'
+            ).format(
+                pipeline_name=self.PIPELINE_NAME,
+                pipeline_counter=self.PIPELINE_COUNTER,
+                stage_name=self.STAGE_NAME,
+                stage_counter=self.STAGE_COUNTER,
+                job_name=self.JOB_NAME,
+                path_to_file=self.PATH_TO_FILE
+            )
+
+    def test_create_request_method(self, sample_artifact, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_create") as cass:
+            manager.create(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
+            assert cass.requests[0].method == 'POST'
+
+    def test_create_request_accept_headers(self, sample_artifact, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_create") as cass:
+            manager.create(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
+            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+
+    def test_create_response_code(self, sample_artifact, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_create") as cass:
+            manager.create(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
+            assert cass.responses[0]['status']['code'] == 201
+
+    def test_create_return_type(self, sample_artifact, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_create"):
+            result = manager.create(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
+            assert isinstance(result, basestring)
+
+    def test_create_return_value(self, sample_artifact, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_create"):
+            result = manager.create(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
+            assert result == 'File {} was created successfully'.format(self.PATH_TO_FILE)

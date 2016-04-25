@@ -30,6 +30,7 @@
 import copy
 from yagocd.session import Session
 from yagocd.resources.agent import AgentManager
+from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.user import UserManager
 from yagocd.resources.material import MaterialManager
 from yagocd.resources.stage import StageManager
@@ -86,6 +87,15 @@ class Yagocd(object):
         :rtype: yagocd.resources.agent.AgentManager
         """
         return AgentManager(session=self._session)
+
+    @property
+    def artifacts(self):
+        """
+        Property for accessing ``ArtifactManager`` instance, which is used to manage artifacts.
+
+        :rtype: yagocd.resources.artifact.ArtifactManager
+        """
+        return ArtifactManager(session=self._session)
 
     @property
     def users(self):

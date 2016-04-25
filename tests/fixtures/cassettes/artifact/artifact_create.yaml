@@ -1,0 +1,26 @@
+interactions:
+- request:
+    body: "--35c4f5abb0aa4669a53b3110259a9b65\r\nContent-Disposition: form-data; name=\"file\";
+      filename=\"hello.txt\"\r\n\r\nSample test data.\nFoo and Bar.\r\n--35c4f5abb0aa4669a53b3110259a9b65--\r\n"
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['175']
+      Content-Type: [multipart/form-data; boundary=35c4f5abb0aa4669a53b3110259a9b65]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file.txt
+  response:
+    body: {string: !!python/unicode File path/to/the/file.txt was created successfully}
+    headers:
+      content-language: [en-US]
+      content-length: ['50']
+      content-type: [text/plain; charset=UTF-8]
+      date: ['Mon, 25 Apr 2016 17:25:58 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=7n1c4oss0uva1ovgzfat7d9z0;Path=/go;Expires=Mon, 09-May-2016
+          17:25:58 GMT']
+    status: {code: 201, message: Created}
+version: 1
