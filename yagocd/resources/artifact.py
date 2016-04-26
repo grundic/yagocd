@@ -26,6 +26,8 @@
 #
 ###############################################################################
 
+import time
+
 from yagocd.resources import BaseManager, Base
 
 
@@ -97,7 +99,15 @@ class ArtifactManager(BaseManager):
         assert self._job_name or job_name
 
         response = self._session.get(
-            path='{base_api}/files/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}.json'.format(
+            path=(
+                '{base_api}'
+                '/files'
+                '/{pipeline_name}'
+                '/{pipeline_counter}'
+                '/{stage_name}'
+                '/{stage_counter}'
+                '/{job_name}.json'
+            ).format(
                 base_api=self.base_api,
                 pipeline_name=self._pipeline_name or pipeline_name,
                 pipeline_counter=self._pipeline_counter or pipeline_counter,
@@ -112,7 +122,15 @@ class ArtifactManager(BaseManager):
 
         return artifacts
 
-    def directory(self, path):
+    def directory(
+        self,
+        path,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+        job_name=None,
+    ):
         """
         Gets an artifact directory by its path.
 
@@ -124,14 +142,88 @@ class ArtifactManager(BaseManager):
         Users are expected to poll the url every few seconds to check if the
         directory is available.
 
-        :param path: path to directory
+        :param path: path to directory.
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
         :return:
             * A status code `202 Accepted` to acknowledge your request to compress
               the contents of the requested directory.
             * The requested directory contents in the form of a zip file.
         """
-        # TODO: implement me!
-        raise NotImplementedError
+        assert self._pipeline_name or pipeline_name
+        assert self._pipeline_counter or pipeline_counter
+        assert self._stage_name or stage_name
+        assert self._stage_counter or stage_counter
+        assert self._job_name or job_name
+
+        response = self._session.get(
+            path=(
+                '{base_api}'
+                '/files'
+                '/{pipeline_name}'
+                '/{pipeline_counter}'
+                '/{stage_name}'
+                '/{stage_counter}'
+                '/{job_name}'
+                '/{path_to_folder}').format(
+                base_api=self.base_api,
+                pipeline_name=self._pipeline_name or pipeline_name,
+                pipeline_counter=self._pipeline_counter or pipeline_counter,
+                stage_name=self._stage_name or stage_name,
+                stage_counter=self._stage_counter or stage_counter,
+                job_name=self._job_name or job_name,
+                path_to_folder=path
+            ),
+        )
+
+        return response.content
+
+    def directory_wait(
+        self,
+        path,
+        timeout=60,
+        backoff=0.4,
+        max_wait=4,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+        job_name=None,
+    ):
+        """
+        Gets an artifact directory by its path.
+        This method wraps original `directory` method, adding
+        timeout to wait  for directory to be available.
+
+        :param path: path to directory.
+        :param timeout: timeout in seconds to wait for directory.
+        :param backoff: backoff value.
+        :param max_wait: maximum wait amount.
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
+        :return: The requested directory contents in the form of a zip file.
+        """
+        start_time = time.time()
+        time_elapsed = 0
+        counter = 0
+        directory_zip = None
+
+        while time_elapsed < timeout:
+            directory_zip = self.directory(path, pipeline_name, pipeline_counter, stage_name, stage_counter, job_name)
+            if directory_zip:
+                break
+
+            time.sleep(min(backoff * (2 ** counter), max_wait))
+            counter += 1
+            time_elapsed = time.time() - start_time
+
+        return directory_zip
 
     def create(
         self,

@@ -26,11 +26,15 @@
 #
 ###############################################################################
 
+import zipfile
+import StringIO
+
 from yagocd.client import Yagocd
 from yagocd.session import Session
 from yagocd.resources import artifact
 
 import pytest
+import mock
 
 
 class BaseTestArtifactManager(object):
@@ -103,7 +107,85 @@ class TestList(BaseTestArtifactManager):
 
 
 class TestDirectory(BaseTestArtifactManager):
-    pass
+    DIRECTORY_PATH = '/path/to/the/.zip'
+
+    def test_directory_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_not_ready") as cass:
+            manager.directory(path=self.DIRECTORY_PATH)
+            assert cass.requests[0].path == (
+                '/go'
+                '/files'
+                '/{pipeline_name}'
+                '/{pipeline_counter}'
+                '/{stage_name}'
+                '/{stage_counter}'
+                '/{job_name}'
+                '/{dir_path}'
+            ).format(
+                pipeline_name=self.PIPELINE_NAME,
+                pipeline_counter=self.PIPELINE_COUNTER,
+                stage_name=self.STAGE_NAME,
+                stage_counter=self.STAGE_COUNTER,
+                job_name=self.JOB_NAME,
+                dir_path=self.DIRECTORY_PATH
+            )
+
+    def test_directory_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_not_ready") as cass:
+            manager.directory(path=self.DIRECTORY_PATH)
+            assert cass.requests[0].method == 'GET'
+
+    def test_directory_request_accept_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_not_ready") as cass:
+            manager.directory(path=self.DIRECTORY_PATH)
+            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+
+    def test_directory_response_code_not_ready(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_not_ready") as cass:
+            manager.directory(path=self.DIRECTORY_PATH)
+            assert cass.responses[0]['status']['code'] == 202
+
+    def test_directory_return_type_not_ready(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_not_ready"):
+            result = manager.directory(path=self.DIRECTORY_PATH)
+            assert isinstance(result, basestring)
+
+    def test_directory_response_code_ready(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_ready") as cass:
+            manager.directory(path=self.DIRECTORY_PATH)
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_directory_return_type_ready(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_ready"):
+            result = manager.directory(path=self.DIRECTORY_PATH)
+            assert isinstance(result, basestring)
+
+    def test_directory_return_is_zip_file(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_ready"):
+            result = manager.directory(path=self.DIRECTORY_PATH)
+
+            myzipfile = zipfile.ZipFile(StringIO.StringIO(result))
+            assert myzipfile.testzip() is None
+
+
+class TestDirectoryWait(BaseTestArtifactManager):
+    DIRECTORY_PATH = '/path/to/.zip'
+
+    @mock.patch('yagocd.resources.artifact.ArtifactManager.directory')
+    def test_tie_descendants_is_called(self, mock_directory, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/artifact_directory_wait"):
+            manager.directory_wait(path=self.DIRECTORY_PATH)
+            mock_directory.assert_called()
+
+    def test_directory_wait_response_code_first(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_wait") as cass:
+            manager.directory_wait(path=self.DIRECTORY_PATH)
+            assert cass.responses[0]['status']['code'] == 202
+
+    def test_directory_wait_response_code_last(self, manager, my_vcr):
+        with my_vcr.use_cassette("artifact/artifact_directory_wait") as cass:
+            manager.directory_wait(path=self.DIRECTORY_PATH)
+            assert cass.responses[-1]['status']['code'] == 200
 
 
 class TestCreate(BaseTestArtifactManager):

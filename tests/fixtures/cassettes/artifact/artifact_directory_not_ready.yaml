@@ -1,0 +1,22 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build//path/to/the/.zip
+  response:
+    body: {string: !!python/unicode ''}
+    headers:
+      content-language: [en-US]
+      content-length: ['0']
+      date: ['Tue, 26 Apr 2016 21:27:26 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=c8e4aw94509lzs8fur3kfp9;Path=/go;Expires=Tue, 10-May-2016
+          21:27:26 GMT']
+    status: {code: 202, message: Accepted}
+version: 1

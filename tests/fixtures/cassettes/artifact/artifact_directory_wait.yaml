@@ -1,0 +1,72 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build//path/to/.zip
+  response:
+    body: {string: !!python/unicode ''}
+    headers:
+      content-language: [en-US]
+      content-length: ['0']
+      date: ['Tue, 26 Apr 2016 22:10:54 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=6533c7j6ugcz19q9vxhvgotpj;Path=/go;Expires=Tue, 10-May-2016
+          22:10:54 GMT']
+    status: {code: 202, message: Accepted}
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=6533c7j6ugcz19q9vxhvgotpj]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build//path/to/.zip
+  response:
+    body:
+      string: !!binary |
+        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
+        AAAAugUAAAAA
+    headers:
+      content-language: [en-US]
+      content-type: [application/zip]
+      date: ['Tue, 26 Apr 2016 22:10:54 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+    status: {code: 200, message: OK}
+version: 1
