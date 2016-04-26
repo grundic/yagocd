@@ -79,6 +79,9 @@ class Session(object):
     def post(self, path, data=None, headers=None, files=None):
         return self.request(method='post', path=path, data=data, headers=headers, files=files)
 
+    def put(self, path, data=None, headers=None, files=None):
+        return self.request(method='put', path=path, data=data, headers=headers, files=files)
+
     def patch(self, path, data=None, headers=None):
         return self.request(method='patch', path=path, data=data, headers=headers)
 

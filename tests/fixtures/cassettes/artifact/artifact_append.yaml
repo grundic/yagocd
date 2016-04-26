@@ -1,0 +1,27 @@
+interactions:
+- request:
+    body: "--b735183308694cd88f297157dc48cc40\r\nContent-Disposition: form-data; name=\"file\";
+      filename=\"artifact-append.txt\"\r\n\r\nData to append.\r\n--b735183308694cd88f297157dc48cc40--\r\n"
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['170']
+      Content-Type: [multipart/form-data; boundary=b735183308694cd88f297157dc48cc40]
+      User-Agent: [python-requests/2.9.1]
+    method: PUT
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file-append.txt
+  response:
+    body: {string: !!python/unicode File path/to/the/file-append.txt was appended
+        successfully}
+    headers:
+      content-language: [en-US]
+      content-length: ['58']
+      content-type: [text/plain; charset=UTF-8]
+      date: ['Tue, 26 Apr 2016 20:28:19 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=9pm186tfkzlqslr9q9ftg92h;Path=/go;Expires=Tue, 10-May-2016
+          20:28:19 GMT']
+    status: {code: 200, message: OK}
+version: 1

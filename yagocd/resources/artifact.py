@@ -185,16 +185,57 @@ class ArtifactManager(BaseManager):
 
         return response.text
 
-    def append(self, path, filename):
+    def append(
+        self,
+        path,
+        filename,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+        job_name=None,
+    ):
         """
         Appends a local file to an existing artifact.
 
-        :param path: remote filename to append to.
-        :param filename: local filename that should be appended.
-        :return: an acknowledgement that the file was appended to.
+        :param path: path to the file within job directory.
+        :param filename: the contents file to be uploaded.
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
+        :return: an acknowledgement that the file was created.
         """
-        # TODO: implement me!
-        raise NotImplementedError
+        assert self._pipeline_name or pipeline_name
+        assert self._pipeline_counter or pipeline_counter
+        assert self._stage_name or stage_name
+        assert self._stage_counter or stage_counter
+        assert self._job_name or job_name
+
+        response = self._session.put(
+            path=(
+                '{base_api}'
+                '/files'
+                '/{pipeline_name}'
+                '/{pipeline_counter}'
+                '/{stage_name}'
+                '/{stage_counter}'
+                '/{job_name}'
+                '/{path_to_file}'
+            ).format(
+                base_api=self.base_api,
+                pipeline_name=self._pipeline_name or pipeline_name,
+                pipeline_counter=self._pipeline_counter or pipeline_counter,
+                stage_name=self._stage_name or stage_name,
+                stage_counter=self._stage_counter or stage_counter,
+                job_name=self._job_name or job_name,
+                path_to_file=path
+            ),
+            files={'file': open(filename, 'rb')}
+        )
+
+        return response.text
 
 
 class Artifact(Base):
