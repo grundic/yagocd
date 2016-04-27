@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/api/config/revisions
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAK2Wu64cNwyG32WrBDgxxJtIpkthwF0KA26CFCIlOafY3eBcisDwu5sbICm2nS2m
+        mBlSM5/+n6T++HY6Tzn9etptqPpiaW2Ee5r16GxTprEawenplNfz+fnt86ffKpyIOjef4IyCy9JQ
+        3VkRvC9tGYtTHXqlvb+ul8s4r8oal+vln/P1/bUef71+nM9vz9dLPf/973X5fH1/yVUv3p5vscBk
+        6o2QBfTp9Jp/rfP4sl5e/81QuS3w/+0J5AN+aD8hsv2SsL2NPgaB4/j59P3pP0bZE4SCc2SfMEJc
+        wBr7bBudie4Y0W15LcLcLBxVIHy7quna6rt1qs1aMw4zNlezBzGiQgtpS1JCPUrKrnONjgbdkfmO
+        UcFjtVsYa6uEnWzD2bO+wrK7jLanrX2UEb0DwoMYfYuv8BFdskHUf+ZKLY1Ecgf7HeMADSIsh0sP
+        24NkE5WmfTWvfSIqvjG6HmM0dxPTRzGComRdanNpdPTVV3eOzdTAIO8YgYG2JM5dMSJMMcNG+Tbb
+        cslsksCRdJixuzzMqy4jAcYAsLUa9yg1LKbFMMzBesdYFtoSA5CGblh7jr3UBkYLJhy5Vim9bB1m
+        lFZaPoiRKLAHRp+5BjtkmybMM6DnKsw7Rr6ZGjk5gzZi7Go5mwB5aDkiu0LXqI54mJFqqfYor6Ym
+        lXxMbtQ7y6yeQrC5T1TSex17DRfj7X3M6Zu03yS1DRUb02mbhexoxxkBwOlBjAy42bYu3BuFF6t0
+        Ht1q+E0duO7rcQiX7j0nFR30thsaYRpl9Ry9kbcwOthXi7EZ26N0VKtaQkwRqSrco8Va0Ksaopml
+        3jOm9441XUKS265ByFFHBcuakQWKrabn9GGHe04dRRT5GOOfPwCwXsvN6QgAAA==
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-encoding: [gzip]
+      content-type: [application/json; charset=utf-8]
+      date: ['Tue, 26 Apr 2016 22:29:55 GMT']
+      etag: ['"afd81d513eff9f6efabf88ca6bbe09ac--gzip"']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=29eaha7jmdme1f7eu5ugalw1m;Path=/go;Expires=Tue, 10-May-2016
+          22:29:55 GMT']
+      vary: ['Accept-Encoding, User-Agent']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [78974a75-8b4a-47b2-9f76-dcafcb7ada5a]
+      x-runtime: ['0.074000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
