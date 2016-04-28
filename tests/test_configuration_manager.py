@@ -64,3 +64,35 @@ class TestModifications(BaseTestConfigurationManager):
         with my_vcr.use_cassette("configuration/modifications") as cass:
             manager.modifications()
             assert cass.responses[0]['status']['code'] == 200
+
+
+class TestDiff(BaseTestConfigurationManager):
+    start = '3336409d194252e8c82799472196e70cbe4c7916'
+    end = '719be0bb99470b79fc48a949c24845f65a0fd8ef'
+
+    def test_diff_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/diff") as cass:
+            manager.diff(self.start, self.end)
+            assert cass.requests[0].path == '/go/api/config/diff/{}/{}'.format(
+                self.start, self.end
+            )
+
+    def test_diff_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/diff") as cass:
+            manager.diff(self.start, self.end)
+            assert cass.requests[0].method == 'GET'
+
+    def test_diff_request_accept_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/diff") as cass:
+            manager.diff(self.start, self.end)
+            assert cass.requests[0].headers['accept'] == 'text/plain'
+
+    def test_diff_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/diff") as cass:
+            manager.diff(self.start, self.end)
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_diff_return_type(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/diff"):
+            result = manager.diff(self.start, self.end)
+            assert isinstance(result, basestring)
