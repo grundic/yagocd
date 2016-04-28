@@ -26,8 +26,14 @@
 #
 ###############################################################################
 
+import os
+import sys
+import time
+import subprocess
+
 import mock
 import pytest
+import requests
 from vcr import VCR
 
 vcr_obj = VCR(
@@ -44,3 +50,67 @@ def mock_session():
 @pytest.fixture()
 def my_vcr():
     return vcr_obj
+
+
+CONTAINER_NAME = 'yagocd-server'
+CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
+
+
+def start_container():
+    output = subprocess.check_output([
+        "/usr/local/bin/docker",
+        "ps",
+        "--quiet",
+        "--filter=name={container_name}".format(
+            container_name=CONTAINER_NAME),
+    ])
+
+    if not output:
+        subprocess.check_call([
+            "/usr/local/bin/docker",
+            "run",
+            "--detach",
+            "--net=host",
+            "--volume={current_dir}/docker:/workspace".format(
+                current_dir=CURRENT_DIR
+            ),
+            "--workdir=/workspace",
+            "--name={container_name}".format(
+                container_name=CONTAINER_NAME
+            ),
+            "gocd/gocd-dev",
+            "/bin/bash",
+            "-c",
+            "'/workspace/bootstrap.sh'",
+        ])
+
+
+def wait_till_started():
+    while True:
+        try:
+            requests.get("http://local.docker:8153/go")
+        except requests.exceptions.ConnectionError:
+            sys.stdout.write('.')
+            time.sleep(5)
+        else:
+            break
+
+
+def stop_container():
+    subprocess.check_call([
+        "/usr/local/bin/docker",
+        "rm",
+        "-f",
+        CONTAINER_NAME
+    ])
+
+
+@pytest.fixture(scope="session")
+def gocd_docker(request):
+    start_container()
+    wait_till_started()
+
+    def fin():
+        stop_container()
+
+    request.addfinalizer(fin)
