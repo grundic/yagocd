@@ -1,0 +1,48 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/xml]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/api/admin/config/412f48f7e2ff254e47564a6852ed7a2e.xml
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAO1ZWW/bOBB+z68g9C7L8iHbgZ0ibbDAAmlRNOnuvhkUObK4kUSBRxz/+x1dsXwk
+        68ZJuoffRHKGM/Nx5uOh6YeHNCH3oLSQ2czxO12HQMYkF9li5lgTuWPnw8XZlCkrNBAUzvT5gxYz
+        JzYmP/e85XLZWfY7Ui28Xrfre398vr5hMaTUFZk2NGPgEJQ/z+QXmoLOKYNq/Foyakqj1dwuk1kk
+        Fp0HzR2iS5HfGrdGQ+fijJCpBoWuEqqMiCgzmgs1cx5bDmEyTWnGv0EutTBSrdZGOETUJganLuf4
+        laOiH/qTkA5cnwe+OwhZ3w37QejyCZ+MIQp7g2HgEK+0nIscEpGBJgslbT5zruAeEpmnkJnSt5YM
+        yTDSmXMTUwV8foP2BAP0zkCaJ9TAPmVUT3FICZropgf7FsIQq5IKbY1wY0dsww4G6i0k4y6HVHq6
+        NtHB0drhUtvbmnLqNS7u9/iTzLRNQc1/hxDxgzd0mdWmtlxu+9R8fNmPJibXoh77StkdNo4J/WPv
+        4ztEHfbCnxPwuqX3pzOWmohEVSxP5PMV5Ilczb9f3jpEaKysO8AiMsrC89A8Ed8G4s/G9vQcuwn7
+        womOBLugpkJhE6nLPE9qSLXT8uFPGbbwqTpqTV5pYp7Ml3VIbUmUNVTf6c0+7IUHYA37zRwvFJkH
+        LJbOtiCKUrW4uI2FxjUkyxgUkJW0ZCltwomyWdFSpPKjSHukYiVyo6deobht1ysMb3no7bg49TDC
+        5yNu+OB/Frau8q4h8P9g1GVzXSZeWSd7q+YzVXfzS8YgN8Db9ULzXMl7mhCzylEOw7Y02SzrZ0oq
+        Laalu9O+PsCUVK5V5EFMTA2hSSKXmuQg8wS7JNFikRWhFIMmhhWpXCu+CbNKFasQWpHw91mDv9sX
+        L62RBdnx+S3o4oh1Yv4T8784EU/Mf2L+utmuml9sxopaoUnNMoeVTLRW0xYzZ9713w7GNXKUlNaI
+        jMjaA7wzoOPELVFO6YrE9B7wrolXTRxEUeR3vD+LjOQUexJI9iKNFtGEiAoWMlbPnJxqjdtWm8ne
+        aE1+8MLwVUlu2TPXhbXAmlxfslu0rx0tbt48LRzC9DtbWWu2nQw8nPJvFY3w5jS/FovYHJi5ptZJ
+        tnRKsdfL2crN6sSh6/NIdbgoWEEB5aviSBJCTQTAi2b+uHA/hQx2t9Af20HpXsVXRvZfQKrljX41
+        v3r05kAY70u9d4WuMlkegdfg/TPOvy0Wa46cJxY7sdhuIp1Y7E1wPLHY8We35jm7eRneedfd88bd
+        XoNPCI04FPiyMA/DXdE7qAo5EgmqfsN28eUQg6CBaSbbPvy+Zn59z4QpyfLA8GwhbzbljwpxPeFb
+        htm8ZBwWZL4jfVSI+Z7nmKMD3E75jSSfolhmmnwvGySW2tTcQBeKZsa1oc2MdY2y2qzcYOAQkVPO
+        FWi8ePndTrfT6/hDh1grkBeCMQz5YMzc0bBP3UF/MnTpaMJcn4W9Hh+NqN+LHkN8JZuTYMBGQZe7
+        vXG37w44ZS6djMENwn7YC4NxL+rDa9uEwB91A+a7URfAHQwHfXdCh9wNOO9OxoPIH/Fh81fUa3Ce
+        etVP3Iuzs78ACdLab1IeAAA=
+    headers:
+      content-encoding: [gzip]
+      content-length: ['1214']
+      content-type: [text/xml]
+      date: ['Thu, 28 Apr 2016 21:19:35 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1tcwrlaoj3t941lu45jurufbe2;Path=/go;Expires=Thu, 12-May-2016
+          21:19:35 GMT']
+      vary: ['Accept-Encoding, User-Agent']
+      x-cruise-config-md5: [412f48f7e2ff254e47564a6852ed7a2e]
+    status: {code: 200, message: OK}
+version: 1

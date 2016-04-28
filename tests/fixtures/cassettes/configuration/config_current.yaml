@@ -1,0 +1,50 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/xml]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/api/admin/config/current.xml
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAO1aWW/bOBB+z68g9C7L8u3CTpGkXSBAmgZJ2t03gyJHNjeyKPCw43/f0RXLR7Nu
+        46S7W72Z5Nya+WYoefT+cR6RBSgtZDx2/EbTIRAzyUU8HTvWhO7AeX96MmLKCg0EiWP97lGLsTMz
+        JnnnecvlsrFsN6Saeq1m0/f++nR1x2Ywp66ItaExA4cg/btYXtM56IQyyM+vJKMmU5rLdpmMQzFt
+        PGruEJ2RfC3N6ned0xNCRhoUmkqoMiKkzGgu1Nh5WjmEyfmcxvwWEqmFkWq1VsIhpDYyKDqTccmR
+        0Q/8YUA7rs97vtsJWNsN2r3A5UM+HEAYtDrdnkO8THMiEohEDJpMlbTJ2PkAC4hkMofYZLZVaEiM
+        no6duxlVwCd3qE8wQOsMzJOIGtjHjOxzPFKCRrrcwb2pMMSqKI+2xnDjxswGDXTUm0rGXQ5z6elC
+        RQNPC4Mzbm9L5MgrTdxv8YWMtZ2DmvwJAcYPXtFkVqjaMrlqU/njen80MbmmxdkNZQ+4eInr563z
+        N/A6aAW/xuH1Su9PZyw1EYq8WL6Tzx8gieRq8uXs3iFCY2U9ABaRURaeD813/NuI+LO+fV/GbsL+
+        pKAXBjuFppRhM1JnSRIVIdVOxYa/ZVCJT75RcPKcE/NksixcqlIiraH6QW/u4S48AivRb+x4gYg9
+        YDPpbBMiKVXT0/uZ0PgMyXIGCshKWrKUNuJE2ThdKZLbkaY9QrESidEjL2Xc1uulircs9HZMHHno
+        4fMel3jwm7mt87wrAfx/6HW2XJeJl9XJ3qr5RNXD5IwxSAzwar3QJFFyQSNiVgnSoduWRptl/UxJ
+        zVOxdFfs8QNMSW5aDh7EzKghNIrkUpMEZBLhliRaTOPUlfTQzGBFctPS34RZpdKnEFgR8bd5Bv/U
+        F8+skSnY8ck96HTEqpG/Rv6fTsQa+WvkL5bVqvnDxiytFRoVKHNYyYRrNm0xcyZN//XCuI4cJZk2
+        IkOytgDvDGg4cbMoz+mKzOgC8K6JV008RFLEd7w/i5gkFHciiPZGGjWiChGmKGSsHjsJ1RrbVhXJ
+        XumZ/OCF4UZJbtkz14U1wRpcnxRDvBBKxmnmLSjCaRBBtXGUe2UTurm5urw4u7/8fL3xjJAusnB6
+        9/H26+XFx7uRl68r3paC1h4/p/lHmlj1NlRpGZtDzCENaKfDVqTtFMbhnehe0RAvdJMrMZ2ZAwvK
+        FDzRFk9GdrxSys3MByFdjEn5zJOClQLKV+mkFECBT8DTZfKUT78Eo3Y7+/FG1KIl0L2yjxz8/0A7
+        yN5FrCYfnqw5MH0XGd+bhi5XmQ3v6+D9Oyb3Cv6Ww3J1eg+x9uCVAPni8/Xdl08fb2tArgG5BuQa
+        kGtA3gLk89b5W2ExqqphuIbhGoZrGP4dYXj7PUb5abf8SrrzjXPP997qM7jA0IhDA5/V7mFxV/QB
+        8loPRYSst7hOfznEYNDAlMK2XwQdM7++xMJkeHqgezalN5v0L3JxLfA13Szf6h/mZLJD/SIXkz2f
+        Jl7s4HbKbyT5CMliU+Z7tiAzqU2BDXSqaGxcG9jYWNcoq83K7XVwPEko5wq0Hjt+s9FstBp+1yHW
+        CsSF3gC6vDNgbr/bpm6nPey6tD9krs+CVov3+9RvhU8uHknnsNdh/V6Tu61Bs+12OGUuHQ7A7QXt
+        oBX0Bq2wDcfWCT2/3+wx3w2bAG6n22m7Q9rlbo/z5nDQCf0+75b/EPLKOI+8/A9Npycn3wBCYMaW
+        XiUAAA==
+    headers:
+      content-encoding: [gzip]
+      content-length: ['1315']
+      content-type: [text/xml]
+      date: ['Thu, 28 Apr 2016 21:16:27 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1u04p91pk9d0gp6d1536t7c9p;Path=/go;Expires=Thu, 12-May-2016
+          21:16:27 GMT']
+      vary: ['Accept-Encoding, User-Agent']
+      x-cruise-config-md5: [f0a779e4500ab99c886b648d5d847831]
+    status: {code: 200, message: OK}
+version: 1

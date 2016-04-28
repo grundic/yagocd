@@ -96,3 +96,59 @@ class TestDiff(BaseTestConfigurationManager):
         with my_vcr.use_cassette("configuration/diff"):
             result = manager.diff(self.start, self.end)
             assert isinstance(result, basestring)
+
+
+class TestConfigCurrent(BaseTestConfigurationManager):
+    def test_config_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_current") as cass:
+            manager.config()
+            assert cass.requests[0].path == '/go/api/admin/config/current.xml'
+
+    def test_config_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_current") as cass:
+            manager.config()
+            assert cass.requests[0].method == 'GET'
+
+    def test_config_request_accept_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_current") as cass:
+            manager.config()
+            assert cass.requests[0].headers['accept'] == 'application/xml'
+
+    def test_config_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_current") as cass:
+            manager.config()
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_config_return_type(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_current"):
+            result = manager.config()
+            assert isinstance(result, basestring)
+
+
+class TestConfigMD5(BaseTestConfigurationManager):
+    md5 = '412f48f7e2ff254e47564a6852ed7a2e'
+
+    def test_config_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_md5") as cass:
+            manager.config(self.md5)
+            assert cass.requests[0].path == '/go/api/admin/config/{}.xml'.format(self.md5)
+
+    def test_config_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_md5") as cass:
+            manager.config(self.md5)
+            assert cass.requests[0].method == 'GET'
+
+    def test_config_request_accept_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_md5") as cass:
+            manager.config(self.md5)
+            assert cass.requests[0].headers['accept'] == 'application/xml'
+
+    def test_config_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_md5") as cass:
+            manager.config(self.md5)
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_config_return_type(self, manager, my_vcr):
+        with my_vcr.use_cassette("configuration/config_md5"):
+            result = manager.config(self.md5)
+            assert isinstance(result, basestring)
