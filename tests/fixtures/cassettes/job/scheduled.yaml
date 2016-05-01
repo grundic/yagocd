@@ -1,0 +1,33 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/xml]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/api/jobs/scheduled.xml
+  response:
+    body: {string: !!python/unicode '<?xml version="1.0" encoding="UTF-8"?>
+
+
+        <scheduledJobs/>
+
+'}
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-type: [application/xml; charset=utf-8]
+      date: ['Sun, 01 May 2016 14:33:47 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1om5fcegr6yre1nfjbhc4lsp6v;Path=/go;Expires=Sun, 15-May-2016
+          14:33:47 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [331ec093-b178-4563-974e-5612b48cdfdc]
+      x-runtime: ['0.009000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

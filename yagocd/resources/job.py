@@ -42,18 +42,36 @@ class JobManager(BaseManager):
 
         :return: an array of scheduled job instances in XML format.
         """
-        # TODO: implement me!
-        raise NotImplementedError
+        response = self._session.get(
+            path='{base_api}/jobs/scheduled.xml'.format(base_api=self.base_api),
+            headers={'Accept': 'application/xml'},
+        )
 
-    def history(self):
+        return response.text
+
+    def history(self, pipeline_name, stage_name, job_name, offset=0):
         """
         The job history allows users to list job instances of specified job.
         Supports pagination using offset which tells the API how many instances to skip.
 
         :return: an array of jobs instances.
         """
-        # TODO: implement me!
-        raise NotImplementedError
+        response = self._session.get(
+            path='{base_api}/jobs/{pipeline_name}/{stage_name}/{job_name}/history/{offset}'.format(
+                base_api=self.base_api,
+                pipeline_name=pipeline_name,
+                stage_name=stage_name,
+                job_name=job_name,
+                offset=offset
+            ),
+            headers={'Accept': 'application/xml'},
+        )
+
+        instances = list()
+        for instance in response.json().get('jobs'):
+            instances.append(JobInstance(session=self._session, data=instance, stage=None))
+
+        return instances
 
 
 class JobInstance(Base):
