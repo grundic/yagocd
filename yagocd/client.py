@@ -31,13 +31,14 @@ import copy
 from yagocd.session import Session
 from yagocd.resources.agent import AgentManager
 from yagocd.resources.artifact import ArtifactManager
-from yagocd.resources.user import UserManager
-from yagocd.resources.material import MaterialManager
-from yagocd.resources.stage import StageManager
-from yagocd.resources.pipeline import PipelineManager
-from yagocd.resources.property import PropertyManager
 from yagocd.resources.configuration import ConfigurationManager
 from yagocd.resources.feed import FeedManager
+from yagocd.resources.job import JobManager
+from yagocd.resources.material import MaterialManager
+from yagocd.resources.pipeline import PipelineManager
+from yagocd.resources.property import PropertyManager
+from yagocd.resources.stage import StageManager
+from yagocd.resources.user import UserManager
 
 
 class Yagocd(object):
@@ -98,13 +99,31 @@ class Yagocd(object):
         return ArtifactManager(session=self._session)
 
     @property
-    def users(self):
+    def configurations(self):
         """
-        Property for accessing ``UserManager`` instance, which is used to manage users.
+        Property for accessing ``ConfigurationManager`` instance, which is used to manage configurations.
 
-        :rtype: yagocd.resources.user.UserManager
+        :rtype: yagocd.resources.configuration.ConfigurationManager
         """
-        return UserManager(session=self._session)
+        return ConfigurationManager(session=self._session)
+
+    @property
+    def feeds(self):
+        """
+        Property for accessing ``FeedManager`` instance, which is used to manage feeds.
+
+        :rtype: yagocd.resources.feed.FeedManager
+        """
+        return FeedManager(session=self._session)
+
+    @property
+    def jobs(self):
+        """
+        Property for accessing ``JobManager`` instance, which is used to manage feeds.
+
+        :rtype: yagocd.resources.job.JobManager
+        """
+        return JobManager(session=self._session)
 
     @property
     def materials(self):
@@ -125,15 +144,6 @@ class Yagocd(object):
         return PipelineManager(session=self._session)
 
     @property
-    def stages(self):
-        """
-        Property for accessing ``StageManager`` instance, which is used to manage stages.
-
-        :rtype: yagocd.resources.stage.StageManager
-        """
-        return StageManager(session=self._session)
-
-    @property
     def properties(self):
         """
         Property for accessing ``PropertyManager`` instance, which is used to manage properties of the jobs.
@@ -143,22 +153,22 @@ class Yagocd(object):
         return PropertyManager(session=self._session)
 
     @property
-    def configurations(self):
+    def stages(self):
         """
-        Property for accessing ``ConfigurationManager`` instance, which is used to manage configurations.
+        Property for accessing ``StageManager`` instance, which is used to manage stages.
 
-        :rtype: yagocd.resources.configuration.ConfigurationManager
+        :rtype: yagocd.resources.stage.StageManager
         """
-        return ConfigurationManager(session=self._session)
+        return StageManager(session=self._session)
 
     @property
-    def feeds(self):
+    def users(self):
         """
-        Property for accessing ``FeedManager`` instance, which is used to manage feeds.
+        Property for accessing ``UserManager`` instance, which is used to manage users.
 
-        :rtype: yagocd.resources.feed.FeedManager
+        :rtype: yagocd.resources.user.UserManager
         """
-        return FeedManager(session=self._session)
+        return UserManager(session=self._session)
 
 
 if __name__ == '__main__':
