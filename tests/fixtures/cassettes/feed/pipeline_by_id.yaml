@@ -1,0 +1,42 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/xml]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/api/pipelines/THIS_PARAMETER_IS_USELESS/3.xml
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<pipeline
+        name=\"Consumer_Website\" counter=\"1\" label=\"1\">\n  <link rel=\"self\"
+        href=\"http://localhost:8153/go/api/pipelines/Consumer_Website/3.xml\"/>\n
+        \ <id><![CDATA[urn:x-go.studios.thoughtworks.com:job-id:Consumer_Website:1]]></id>\n
+        \ <scheduleTime>2015-08-05T15:18:19Z</scheduleTime>\n  <materials>\n    <material
+        materialUri=\"http://localhost:8153/go/api/materials/2.xml\" type=\"GitMaterial\"
+        url=\"https://github.com/gocd-demo/consumer.git\" branch=\"master\">\n      <modifications>\n
+        \       <changeset changesetUri=\"http://localhost:8153/go/api/materials/2/changeset/60b113e3765d3087071da971a3d04a68f4355d30.xml\">\n
+        \         <user><![CDATA[Vagrant User <none@example.com>]]></user>\n          <checkinTime>2014-06-30T22:38:04Z</checkinTime>\n
+        \         <revision><![CDATA[60b113e3765d3087071da971a3d04a68f4355d30]]></revision>\n
+        \         <message><![CDATA[updated hello message]]></message>\n          <file
+        name=\"site/index.php\" action=\"modified\"/>\n        </changeset>\n      </modifications>\n
+        \   </material>\n  </materials>\n  <stages>\n    <stage href=\"http://localhost:8153/go/api/stages/5.xml\"/>\n
+        \   <stage href=\"http://localhost:8153/go/api/stages/6.xml\"/>\n    <stage
+        href=\"http://localhost:8153/go/api/stages/8.xml\"/>\n  </stages>\n  <approvedBy><![CDATA[changes]]></approvedBy>\n</pipeline>\n"}
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-type: [application/xml; charset=utf-8]
+      date: ['Sun, 01 May 2016 13:48:18 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1vekmpm9ai1yqyou7yi0tyuj9;Path=/go;Expires=Sun, 15-May-2016
+          13:48:18 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [38340061-a769-4c53-b5a5-784db01b46ab]
+      x-runtime: ['0.056000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

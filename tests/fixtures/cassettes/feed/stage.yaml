@@ -1,0 +1,59 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/xml]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/pipelines/Shared_Services/6/Commit/1.xml
+  response:
+    body: {string: !!python/unicode '<html><body>You are being <a href="http://localhost:8153/go/api/stages/80.xml">redirected</a>.</body></html>'}
+    headers:
+      cache-control: [no-cache]
+      content-type: [application/xml; charset=utf-8]
+      date: ['Sun, 01 May 2016 13:58:29 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      location: ['http://localhost:8153/go/api/stages/80.xml']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=6993ebr4sqag1m20nvro9rieq;Path=/go;Expires=Sun, 15-May-2016
+          13:58:29 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [1cc454f3-00a6-4a4e-9e32-de45499d85b1]
+      x-runtime: ['0.022000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 302, message: Found}
+- request:
+    body: null
+    headers:
+      Accept: [application/xml]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=6993ebr4sqag1m20nvro9rieq]
+      User-Agent: [python-requests/2.9.1]
+    method: GET
+    uri: http://localhost:8153/go/api/stages/80.xml
+  response:
+    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<stage
+        name=\"Commit\" counter=\"1\">\n  <link rel=\"self\" href=\"http://localhost:8153/go/api/stages/80.xml\"/>\n
+        \ <id><![CDATA[urn:x-go.studios.thoughtworks.com:stage-id:Shared_Services:6:Commit:1]]></id>\n
+        \ <pipeline name=\"Shared_Services\" counter=\"6\" label=\"6\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/37.xml\"/>\n
+        \ <updated>2015-08-05T16:09:07Z</updated>\n  <result>Passed</result>\n  <state>Completed</state>\n
+        \ <approvedBy><![CDATA[changes]]></approvedBy>\n  <jobs>\n    <job href=\"http://localhost:8153/go/api/jobs/108.xml\"/>\n
+        \ </jobs>\n</stage>\n"}
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-type: [application/xml; charset=utf-8]
+      date: ['Sun, 01 May 2016 13:58:29 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [c601065d-973b-4cbb-9293-eb4781addba5]
+      x-runtime: ['0.025000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
