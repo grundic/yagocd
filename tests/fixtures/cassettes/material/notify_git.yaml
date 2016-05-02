@@ -1,0 +1,33 @@
+interactions:
+- request:
+    body: repository_url=https%3A%2F%2Fgithub.com%2Fgocd-demo%2Fservices.git
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['66']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: http://localhost:8153/go/api/material/notify/git
+  response:
+    body: {string: !!python/unicode 'The material is now scheduled for an update.
+        Please check relevant pipeline(s) for status.
+
+'}
+    headers:
+      cache-control: [no-cache]
+      content-type: [text/plain; charset=UTF-8]
+      date: ['Sun, 01 May 2016 15:03:13 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=11yg9ohs2mms4e3dbg1k4gqml;Path=/go;Expires=Sun, 15-May-2016
+          15:03:13 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [4bcd59a9-694b-43c7-a755-f918e7d1d0ad]
+      x-runtime: ['0.007000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 202, message: Accepted}
+version: 1
