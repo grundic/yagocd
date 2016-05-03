@@ -28,6 +28,7 @@
 
 import time
 import json
+from collections import deque
 
 from yagocd.resources import BaseManager, Base
 from yagocd.resources.stage import StageInstance
@@ -41,7 +42,7 @@ class PipelineManager(BaseManager):
     """
 
     @staticmethod
-    def tie_descendants(pipelines):
+    def tie_pipelines(pipelines):
         """
         Static method for tie-ing (linking) relevant pipelines.
 
@@ -50,14 +51,20 @@ class PipelineManager(BaseManager):
 
         :param pipelines: list of pipelines.
         """
-        for pipeline in pipelines:
-            descendants = list()
+        for child in pipelines:
+            parents = list()
 
-            for candidate in pipelines:
-                for material in candidate.predecessors:
-                    if material.description == pipeline.data.name:
-                        descendants.append(candidate)
-            pipeline.descendants = descendants
+            for parent in pipelines:
+                children = list()
+                candidates = [material for material in parent.data.materials if material.type == 'Pipeline']
+                for child_candidate in candidates:
+                    if child_candidate.description == child.data.name:
+                        parents.append(parent)
+                        children.append(child)
+
+                parent.predecessors.extend(children)
+
+            child.descendants = parents
 
     def list(self):
         """
@@ -84,7 +91,7 @@ class PipelineManager(BaseManager):
                 pipelines.append(pipeline)
 
         # link descendants of each pipeline entity
-        self.tie_descendants(pipelines)
+        self.tie_pipelines(pipelines)
 
         return pipelines
 
@@ -313,10 +320,12 @@ class PipelineEntity(Base):
     Executing ``history`` will return pipeline instances.
     """
 
-    def __init__(self, session, data, group=None, descendants=None):
+    def __init__(self, session, data, group=None):
         super(PipelineEntity, self).__init__(session, data)
         self._group = group
-        self._descendants = descendants
+        self._predecessors = list()
+        self._descendants = list()
+
         self._pipeline = PipelineManager(session=session)
 
     @property
@@ -327,8 +336,21 @@ class PipelineEntity(Base):
         """
         return self._group
 
-    @property
-    def predecessors(self):
+    @staticmethod
+    def graph_depth_walk(root_nodes, near_nodes):
+
+        visited = set()
+        to_crawl = deque(root_nodes)
+        while to_crawl:
+            current = to_crawl.popleft()
+            if current in visited:
+                continue
+            visited.add(current)
+            node_children = set(near_nodes(current))
+            to_crawl.extend(node_children - visited)
+        return list(visited)
+
+    def get_predecessors(self, transitive=False):
         """
         Property for getting predecessors (parents) of current pipeline.
         This property automatically populates from API call
@@ -336,10 +358,17 @@ class PipelineEntity(Base):
         :return: list of :class:`yagocd.resources.pipeline.PipelineEntity`.
         :rtype: list of yagocd.resources.pipeline.PipelineEntity
         """
-        return [material for material in self.data.materials if material.type == 'Pipeline']
+        result = self._predecessors
+        if transitive:
+            return self.graph_depth_walk(result, lambda v: v.predecessors)
+        return result
 
-    @property
-    def descendants(self):
+    def set_predecessors(self, value):
+        self._predecessors = value
+
+    predecessors = property(get_predecessors, set_predecessors)
+
+    def get_descendants(self, transitive=False):
         """
         Property for getting descendants (children) of current pipeline.
         It's calculated by :meth:`yagocd.resources.pipeline.PipelineManager#tie_descendants` method during listing of
@@ -348,11 +377,15 @@ class PipelineEntity(Base):
         :return: list of :class:`yagocd.resources.pipeline.PipelineEntity`.
         :rtype: list of yagocd.resources.pipeline.PipelineEntity
         """
-        return self._descendants
+        result = self._descendants
+        if transitive:
+            return self.graph_depth_walk(result, lambda v: v.descendants)
+        return result
 
-    @descendants.setter
-    def descendants(self, value):
+    def set_descendants(self, value):
         self._descendants = value
+
+    descendants = property(get_descendants, set_descendants)
 
     @staticmethod
     def get_url(server_url, pipeline_name):

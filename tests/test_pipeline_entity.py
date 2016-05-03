@@ -56,14 +56,11 @@ class TestPipelineEntity(object):
     def test_reading_group(self, pipeline_entity):
         assert pipeline_entity.group == 'baz'
 
-    def test_predecessors(self, pipeline_entity):
-        assert pipeline_entity.predecessors == [
-            {'description': 'child_name_1', 'type': 'Pipeline'},
-            {'description': 'child_name_2', 'type': 'Pipeline'}
-        ]
+    def test_predecessors_empty(self, pipeline_entity):
+        assert pipeline_entity.predecessors == list()
 
     def test_descendants_empty(self, pipeline_entity):
-        assert pipeline_entity.descendants is None
+        assert pipeline_entity.descendants == list()
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
     def test_history_call(self, history_mock, pipeline_entity):

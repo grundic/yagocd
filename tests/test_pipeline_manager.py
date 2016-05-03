@@ -59,7 +59,7 @@ class TestTieDescendants(BaseTestPipelineManager):
 
         pipelines = [child, parent]
 
-        manager.tie_descendants(pipelines)
+        manager.tie_pipelines(pipelines)
         assert child.descendants == [parent]
 
 
@@ -94,11 +94,11 @@ class TestList(BaseTestPipelineManager):
             result = manager.list()
             assert all(isinstance(i, pipeline.PipelineEntity) for i in result)
 
-    @mock.patch('yagocd.resources.pipeline.PipelineManager.tie_descendants')
-    def test_tie_descendants_is_called(self, mock_tie_descendants, manager, my_vcr):
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.tie_pipelines')
+    def test_tie_descendants_is_called(self, mock_tie_pipelines, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list"):
             manager.list()
-            mock_tie_descendants.assert_called()
+            mock_tie_pipelines.assert_called()
 
 
 class TestFind(BaseTestPipelineManager):
