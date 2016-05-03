@@ -1,0 +1,33 @@
+interactions:
+- request:
+    body: '{}'
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['2']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: http://localhost:8153/go/api/pipelines/Shared_Services/schedule
+  response:
+    body: {string: !!python/unicode 'Request to schedule pipeline Shared_Services
+        accepted
+
+'}
+    headers:
+      cache-control: [no-cache]
+      content-type: [application/json; charset=utf-8]
+      date: ['Tue, 03 May 2016 22:07:41 GMT']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1jn0nipai4fgw1b1yx7edjz8o0;Path=/go;Expires=Tue, 17-May-2016
+          22:07:41 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [cd490e32-1dbf-49dc-be3f-5d94bce7f9af]
+      x-runtime: ['0.027000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 202, message: Accepted}
+version: 1

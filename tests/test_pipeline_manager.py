@@ -26,6 +26,8 @@
 #
 ###############################################################################
 
+import hashlib
+
 from yagocd.client import Yagocd
 from yagocd.session import Session
 from yagocd.resources import pipeline
@@ -36,6 +38,13 @@ from requests import HTTPError
 
 
 class BaseTestPipelineManager(object):
+    @staticmethod
+    def get_suffix(*args):
+        m = hashlib.md5()
+        m.update('|'.join([str(x) for x in args]))
+        m.hexdigest()
+        return m.hexdigest()[:8]
+
     @pytest.fixture()
     def session(self):
         return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
@@ -300,16 +309,55 @@ class TestReleaseLock(BaseTestPipelineManager):
             assert cass.responses[0]['status']['code'] == 200
 
     def test_release_lock_return_value(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/release_lock") as cass:
+        with my_vcr.use_cassette("pipeline/release_lock"):
             name = "Deploy_UAT"
             result = manager.release_lock(name)
             assert result == 'pipeline lock released for {}\n'.format(name)
 
 
-
 class TestSchedule(BaseTestPipelineManager):
-    # # TODO: implement when schedule would be implemented
-    # def test_schedule(self, manager, my_vcr):
-    #     with my_vcr.use_cassette("pipeline/schedule_<name_of_pipeline>'"):
-    #         assert 0
-    pass
+    NAME = "Shared_Services"
+
+    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+    def test_schedule_request_url(self, manager, my_vcr, variables, secure_variables):
+        suffix = self.get_suffix(variables, secure_variables)
+        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)) as cass:
+            manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
+            assert cass.requests[0].path == '/go/api/pipelines/{name}/schedule'.format(
+                name=self.NAME
+            )
+
+    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+    def test_schedule_request_method(self, manager, my_vcr, variables, secure_variables):
+        suffix = self.get_suffix(variables, secure_variables)
+        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)) as cass:
+            manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
+            assert cass.requests[0].method == 'POST'
+
+    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+    def test_schedule_request_accept_headers(self, manager, my_vcr, variables, secure_variables):
+        suffix = self.get_suffix(variables, secure_variables)
+        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)) as cass:
+            manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
+            assert cass.requests[0].headers['accept'] == 'application/json'
+            assert cass.requests[0].headers['content-type'] == 'application/json'
+
+    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+    def test_schedule_response_code(self, manager, my_vcr, variables, secure_variables):
+        suffix = self.get_suffix(variables, secure_variables)
+        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)) as cass:
+            manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
+            assert cass.responses[0]['status']['code'] == 202
+
+    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+    def test_schedule_return_value(self, manager, my_vcr, variables, secure_variables):
+        suffix = self.get_suffix(variables, secure_variables)
+        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)):
+            result = manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
+            assert result == 'Request to schedule pipeline {} accepted\n'.format(self.NAME)
+
