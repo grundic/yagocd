@@ -133,7 +133,3 @@ class UserEntity(Base):
     The user object.
     """
     pass
-
-
-if __name__ == '__main__':
-    pass

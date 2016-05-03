@@ -143,7 +143,3 @@ class StageInstance(Base):
             jobs.append(JobInstance(session=self._session, data=data, stage=self))
 
         return jobs
-
-
-if __name__ == '__main__':
-    pass

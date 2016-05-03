@@ -206,7 +206,3 @@ class JobInstance(Base):
             stage_counter=self.stage_counter,
             job_name=self.data.name
         )
-
-
-if __name__ == '__main__':
-    pass

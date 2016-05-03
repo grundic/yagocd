@@ -540,7 +540,3 @@ class PipelineInstance(Base):
             stages.append(StageInstance(session=self._session, data=data, pipeline=self))
 
         return stages
-
-
-if __name__ == '__main__':
-    pass

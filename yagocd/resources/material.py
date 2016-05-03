@@ -154,7 +154,3 @@ class MaterialEntity(Base):
 
 class ModificationEntity(Base):
     pass
-
-
-if __name__ == '__main__':
-    pass

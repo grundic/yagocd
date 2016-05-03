@@ -241,7 +241,3 @@ class PropertyManager(BaseManager):
             headers={'Accept': 'application/json'},
         )
         return response.text
-
-
-if __name__ == '__main__':
-    pass

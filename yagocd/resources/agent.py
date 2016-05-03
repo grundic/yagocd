@@ -174,7 +174,3 @@ class AgentManager(BaseManager):
 
 class AgentEntity(Base):
     pass
-
-
-if __name__ == '__main__':
-    pass

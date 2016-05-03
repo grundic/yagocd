@@ -138,7 +138,3 @@ class FeedManager(BaseManager):
         )
 
         return response.text
-
-
-if __name__ == '__main__':
-    pass

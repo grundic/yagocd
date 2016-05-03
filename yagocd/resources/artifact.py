@@ -339,7 +339,3 @@ class ArtifactFile(Base):
     def fetch(self):
         response = self._session.get(self.data.url)
         return response.text
-
-
-if __name__ == '__main__':
-    pass
