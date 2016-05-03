@@ -124,6 +124,24 @@ class PipelineManager(BaseManager):
 
         return instances
 
+    def full_history(self, name):
+        """
+        Method for accessing full history of specific pipeline.
+
+        It yields each instance and after one chunk is over moves to the next one.
+        :param name: name of the pipeline.
+        :return: an array of pipeline instances :class:`yagocd.resources.pipeline.PipelineInstance`.
+        :rtype: list of yagocd.resources.pipeline.PipelineInstance
+        """
+        offset = 0
+        instances = self.history(name, offset)
+        while instances:
+            for instance in instances:
+                yield instance
+
+            offset += len(instances)
+            instances = self.history(name, offset)
+
     def last(self, name):
         """
         Get last pipeline instance
@@ -363,6 +381,16 @@ class PipelineEntity(Base):
         """
         return self._pipeline.history(name=self.data.name, offset=offset)
 
+    def full_history(self):
+        """
+        Method for accessing full history of specific pipeline.
+
+        It yields each instance and after one chunk is over moves to the next one.
+        :return: an array of pipeline instances :class:`yagocd.resources.pipeline.PipelineInstance`.
+        :rtype: list of yagocd.resources.pipeline.PipelineInstance
+        """
+        return self._pipeline.full_history(name=self.data.name)
+
     def status(self):
         """
         The pipeline status allows users to check if the pipeline is paused, locked and schedulable.
@@ -393,6 +421,55 @@ class PipelineEntity(Base):
         :return: a text confirmation.
         """
         return self._pipeline.release_lock(name=self.data.name)
+
+    def schedule(self, materials=None, variables=None, secure_variables=None):
+        """
+        Scheduling allows user to trigger a specific pipeline.
+
+        :param materials: material revisions to use.
+        :param variables: environment variables to set.
+        :param secure_variables: secure environment variables to set.
+        :return: a text confirmation.
+        """
+        return self._pipeline.schedule(
+            name=self.data.name,
+            materials=materials,
+            variables=variables,
+            secure_variables=secure_variables
+        )
+
+    def schedule_with_instance(
+        self,
+        materials=None,
+        variables=None,
+        secure_variables=None,
+        backoff=0.5,
+        max_tries=20
+    ):
+        """
+        Schedule pipeline and return instance.
+        Credits of implementation comes to `gaqzi`:
+        https://github.com/gaqzi/py-gocd/blob/master/gocd/api/pipeline.py#L122
+
+        :warning: Replace this with whatever is the official way as soon as gocd#990 is fixed.
+        https://github.com/gocd/gocd/issues/990
+
+        :param materials: material revisions to use.
+        :param variables: environment variables to set.
+        :param secure_variables: secure environment variables to set.
+        :param backoff: time to wait before checking for new instance.
+        :param max_tries: maximum tries to do.
+        :return: possible triggered instance of pipeline.
+        :rtype: yagocd.resources.pipeline.PipelineInstance
+        """
+        return self._pipeline.schedule_with_instance(
+            name=self.data.name,
+            materials=materials,
+            variables=variables,
+            secure_variables=secure_variables,
+            backoff=backoff,
+            max_tries=max_tries
+        )
 
 
 class PipelineInstance(Base):
