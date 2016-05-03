@@ -361,3 +361,25 @@ class TestSchedule(BaseTestPipelineManager):
             result = manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
             assert result == 'Request to schedule pipeline {} accepted\n'.format(self.NAME)
 
+
+class TestScheduleWithInstance(BaseTestPipelineManager):
+    NAME = "Shared_Services"
+
+    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.schedule')
+    def test_schedule_is_called(self, schedule_mock, manager, my_vcr, variables, secure_variables):
+        suffix = self.get_suffix(variables, secure_variables)
+        with my_vcr.use_cassette("pipeline/schedule_with_instance-{}".format(suffix)):
+            manager.schedule_with_instance(name=self.NAME, variables=variables, secure_variables=secure_variables,
+                                           backoff=0)
+            schedule_mock.assert_called()
+
+    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+    def test_return_value(self, manager, my_vcr, variables, secure_variables):
+        suffix = self.get_suffix(variables, secure_variables)
+        with my_vcr.use_cassette("pipeline/schedule_with_instance-{}".format(suffix)):
+            result = manager.schedule_with_instance(name=self.NAME, variables=variables,
+                                                    secure_variables=secure_variables, backoff=0)
+            assert isinstance(result, pipeline.PipelineInstance)
