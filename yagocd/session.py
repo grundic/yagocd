@@ -51,6 +51,14 @@ class Session(object):
         """
         return "/".join(map(lambda x: str(x).rstrip('/').rstrip('/'), args)).rstrip('/')
 
+    @property
+    def server_url(self):
+        """
+        Property for getting server url.
+        :return: server url for this instance.
+        """
+        return self._options['server'].rstrip('/')
+
     def request(self, method, path, params=None, data=None, headers=None, files=None):
         # this should work even if path is absolute (e.g. for files)
         url = urljoin(self._options['server'], path)
@@ -76,8 +84,8 @@ class Session(object):
     def get(self, path, params=None, headers=None):
         return self.request(method='get', path=path, params=params, headers=headers)
 
-    def post(self, path, data=None, headers=None, files=None):
-        return self.request(method='post', path=path, data=data, headers=headers, files=files)
+    def post(self, path, params=None, data=None, headers=None, files=None):
+        return self.request(method='post', path=path, params=params, data=data, headers=headers, files=files)
 
     def put(self, path, data=None, headers=None, files=None):
         return self.request(method='put', path=path, data=data, headers=headers, files=files)

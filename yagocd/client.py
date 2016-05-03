@@ -81,6 +81,14 @@ class Yagocd(object):
         self._session = Session(auth, merged)
 
     @property
+    def server_url(self):
+        """
+        Property for getting server url.
+        :return: server url for this instance.
+        """
+        return self._session.server_url
+
+    @property
     def agents(self):
         """
         Property for accessing ``AgentManager`` instance, which is used to manage agents.

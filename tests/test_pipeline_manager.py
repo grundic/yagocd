@@ -118,7 +118,7 @@ class TestFind(BaseTestPipelineManager):
         with my_vcr.use_cassette("pipeline/pipeline_list"):
             name = 'Production_Services'
             result = manager.find(name)
-            assert result.data.name == name
+            assert isinstance(result, pipeline.PipelineEntity)
 
     def test_find_returns_entity_with_same_name(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list"):

@@ -115,6 +115,19 @@ class StageInstance(Base):
         self._pipeline = pipeline
 
     @property
+    def url(self):
+        """
+        Returns url for accessing stage instance.
+        """
+        return "{server_url}/go/pipelines/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}".format(
+            server_url=self._session.server_url,
+            pipeline_name=self._pipeline.data.name,
+            pipeline_counter=self._pipeline.data.counter,
+            stage_name=self.data.name,
+            stage_counter=self.data.counter,
+        )
+
+    @property
     def pipeline(self):
         return self._pipeline
 

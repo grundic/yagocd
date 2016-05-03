@@ -154,6 +154,22 @@ class JobInstance(Base):
             return self.stage.data.counter
 
     @property
+    def url(self):
+        """
+        Returns url for accessing job instance.
+        """
+        return (
+            "{server_url}/go/tab/build/detail"
+            "/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}").format(
+            server_url=self._session.server_url,
+            pipeline_name=self.pipeline_name,
+            pipeline_counter=self.pipeline_counter,
+            stage_name=self.stage_name,
+            stage_counter=self.stage_counter,
+            job_name=self.data.name
+        )
+
+    @property
     def stage(self):
         return self._stage
 

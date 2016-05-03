@@ -26,6 +26,9 @@
 #
 ###############################################################################
 
+import time
+import json
+
 from yagocd.resources import BaseManager, Base
 from yagocd.resources.stage import StageInstance
 
@@ -121,6 +124,16 @@ class PipelineManager(BaseManager):
 
         return instances
 
+    def last(self, name):
+        """
+        Get last pipeline instance
+        :param name: name of the pipeline.
+        :rtype: yagocd.resources.pipeline.PipelineInstance
+        """
+        pipeline_history = self.history(name)
+        if pipeline_history:
+            return pipeline_history[0]
+
     def get(self, name, counter):
         """
         Gets pipeline instance object.
@@ -205,9 +218,75 @@ class PipelineManager(BaseManager):
         )
         return response.text
 
-    def schedule(self, name):
-        # TODO: implement me!
-        raise NotImplementedError
+    def schedule(self, name, materials=None, variables=None, secure_variables=None):
+        """
+        Scheduling allows user to trigger a specific pipeline.
+
+        :param name: name of the pipeline.
+        :param materials: material revisions to use.
+        :param variables: environment variables to set.
+        :param secure_variables: secure environment variables to set.
+        :return: a text confirmation.
+        """
+
+        data = {'materials': materials, 'variables': variables, 'secure_variables': secure_variables}
+        data = dict((k, v) for k, v in data.iteritems() if v is not None)
+
+        response = self._session.post(
+            path='{base_api}/pipelines/{name}/schedule'.format(
+                base_api=self.base_api,
+                name=name,
+            ),
+            data=json.dumps(data),
+            headers={
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+        )
+
+        return response.text
+
+    def schedule_with_instance(
+        self,
+        name,
+        materials=None,
+        variables=None,
+        secure_variables=None,
+        backoff=0.5,
+        max_tries=20
+    ):
+        """
+        Schedule pipeline and return instance.
+        Credits of implementation comes to `gaqzi`:
+        https://github.com/gaqzi/py-gocd/blob/master/gocd/api/pipeline.py#L122
+
+        :warning: Replace this with whatever is the official way as soon as gocd#990 is fixed.
+        https://github.com/gocd/gocd/issues/990
+
+        :param name: name of the pipeline.
+        :param materials: material revisions to use.
+        :param variables: environment variables to set.
+        :param secure_variables: secure environment variables to set.
+        :param backoff: time to wait before checking for new instance.
+        :param max_tries: maximum tries to do.
+        :return: possible triggered instance of pipeline.
+        :rtype: yagocd.resources.pipeline.PipelineInstance
+        """
+        last_instance = self.last(name)
+        if last_instance:
+            last_run_counter = last_instance.data.counter
+        else:
+            last_run_counter = -1
+
+        self.schedule(name=name, materials=materials, variables=variables, secure_variables=secure_variables)
+
+        while max_tries > 0:
+            candidate_instance = self.last(name)
+            if candidate_instance.data.counter > last_run_counter:
+                return candidate_instance
+
+            time.sleep(backoff)
+            max_tries -= 1
 
 
 class PipelineEntity(Base):
@@ -257,6 +336,16 @@ class PipelineEntity(Base):
     def descendants(self, value):
         self._descendants = value
 
+    @property
+    def url(self):
+        """
+        Returns url for accessing pipeline entity.
+        """
+        return "{server_url}/go/tab/pipeline/history/{pipeline_name}".format(
+            server_url=self._session.server_url,
+            pipeline_name=self.data.name
+        )
+
     def history(self, offset=0):
         """
         The pipeline history allows users to list pipeline instances.
@@ -303,6 +392,17 @@ class PipelineInstance(Base):
     """
     Pipeline instance represents concrete execution of specific pipeline.
     """
+
+    @property
+    def url(self):
+        """
+        Returns url for accessing pipeline instance.
+        """
+        return "{server_url}/go/pipelines/value_stream_map/{pipeline_name}/{pipeline_counter}".format(
+            server_url=self._session.server_url,
+            pipeline_name=self.data.name,
+            pipeline_counter=self.data.counter
+        )
 
     def stages(self):
         """
