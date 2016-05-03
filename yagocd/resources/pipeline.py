@@ -336,15 +336,22 @@ class PipelineEntity(Base):
     def descendants(self, value):
         self._descendants = value
 
+    @staticmethod
+    def get_url(server_url, pipeline_name):
+        """
+        Returns url for accessing pipeline entity.
+        """
+        return "{server_url}/go/tab/pipeline/history/{pipeline_name}".format(
+            server_url=server_url,
+            pipeline_name=pipeline_name
+        )
+
     @property
     def url(self):
         """
         Returns url for accessing pipeline entity.
         """
-        return "{server_url}/go/tab/pipeline/history/{pipeline_name}".format(
-            server_url=self._session.server_url,
-            pipeline_name=self.data.name
-        )
+        return self.get_url(server_url=self._session.server_url, pipeline_name=self.data.name)
 
     def history(self, offset=0):
         """
@@ -403,6 +410,13 @@ class PipelineInstance(Base):
             pipeline_name=self.data.name,
             pipeline_counter=self.data.counter
         )
+
+    @property
+    def pipeline_url(self):
+        """
+        Returns url for accessing pipeline entity.
+        """
+        return PipelineEntity.get_url(server_url=self._session.server_url, pipeline_name=self.data.name)
 
     def stages(self):
         """
