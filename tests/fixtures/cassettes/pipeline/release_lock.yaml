@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: http://localhost:8153/go/api/pipelines/Deploy_UAT/releaseLock
+  response:
+    body: {string: !!python/unicode 'pipeline lock released for Deploy_UAT
+
+'}
+    headers:
+      cache-control: ['max-age=0, private, must-revalidate']
+      content-type: [application/json; charset=utf-8]
+      date: ['Tue, 03 May 2016 21:31:04 GMT']
+      etag: ['"86115cc41905cb66dc5f9de524b9f19f"']
+      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      server: [Jetty(9.2.z-SNAPSHOT)]
+      set-cookie: ['JSESSIONID=1e29yc5hqjt0y1mgyuk85hrxx4;Path=/go;Expires=Tue, 17-May-2016
+          21:31:04 GMT']
+      x-content-type-options: [nosniff]
+      x-frame-options: [SAMEORIGIN]
+      x-request-id: [0f6f50c3-6d6c-4d90-af81-d78174ca361d]
+      x-runtime: ['0.007000']
+      x-ua-compatible: [chrome=1]
+      x-xss-protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

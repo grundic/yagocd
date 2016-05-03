@@ -168,6 +168,34 @@ class TestHistory(BaseTestPipelineManager):
             assert all(i.data.name == name for i in result)
 
 
+class TestFullHistory(BaseTestPipelineManager):
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
+    def test_history_is_called(self, history_mock, manager, my_vcr):
+        history_mock.side_effect = [['foo', 'bar', 'baz'], []]
+        with my_vcr.use_cassette("pipeline/history_Consumer_Website"):
+            name = "Consumer_Website"
+            list(manager.full_history(name))
+
+            calls = [mock.call(name, 0), mock.call(name, 3)]
+            history_mock.assert_has_calls(calls)
+
+
+class TestLast(BaseTestPipelineManager):
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
+    def test_history_is_called(self, history_mock, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/history_Consumer_Website"):
+            name = "Consumer_Website"
+            manager.last(name)
+            history_mock.assert_called_with(name)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
+    def test_last_return_last(self, history_mock, manager, my_vcr):
+        history_mock.return_value = ['foo', 'bar', 'baz']
+        with my_vcr.use_cassette("pipeline/history_Consumer_Website"):
+            name = "Consumer_Website"
+            assert manager.last(name) == 'foo'
+
+
 class TestGet(BaseTestPipelineManager):
     def test_get_non_existing(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/get_non_existing"):
@@ -245,14 +273,38 @@ class TestUnPause(BaseTestPipelineManager):
 
 
 class TestReleaseLock(BaseTestPipelineManager):
-    #
-    # def test_release_lock(self, manager, my_vcr):
-    #     with my_vcr.use_cassette("pipeline/release_lock_Consumer_Website"):
-    #         name = "Consumer_Website"
-    #         manager.release_lock(name)
-    #         # TODO: this fails, find a way to fix.
-    #
-    pass
+    def test_release_lock_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/release_lock") as cass:
+            name = "Deploy_UAT"
+            manager.release_lock(name)
+            assert cass.requests[0].path == '/go/api/pipelines/{name}/releaseLock'.format(
+                name=name
+            )
+
+    def test_release_lock_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/release_lock") as cass:
+            name = "Deploy_UAT"
+            manager.release_lock(name)
+            assert cass.requests[0].method == 'POST'
+
+    def test_release_lock_request_accept_headers(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/release_lock") as cass:
+            name = "Deploy_UAT"
+            manager.release_lock(name)
+            assert cass.requests[0].headers['accept'] == 'application/json'
+
+    def test_release_lock_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/release_lock") as cass:
+            name = "Deploy_UAT"
+            manager.release_lock(name)
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_release_lock_return_value(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/release_lock") as cass:
+            name = "Deploy_UAT"
+            result = manager.release_lock(name)
+            assert result == 'pipeline lock released for {}\n'.format(name)
+
 
 
 class TestSchedule(BaseTestPipelineManager):
