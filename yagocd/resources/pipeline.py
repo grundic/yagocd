@@ -307,7 +307,7 @@ class PipelineManager(BaseManager):
 
         while max_tries > 0:
             candidate_instance = self.last(name)
-            if candidate_instance.data.counter > last_run_counter:
+            if candidate_instance and candidate_instance.data.counter > last_run_counter:
                 return candidate_instance
 
             time.sleep(backoff)

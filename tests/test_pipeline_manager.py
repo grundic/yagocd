@@ -383,3 +383,14 @@ class TestScheduleWithInstance(BaseTestPipelineManager):
             result = manager.schedule_with_instance(name=self.NAME, variables=variables,
                                                     secure_variables=secure_variables, backoff=0)
             assert isinstance(result, pipeline.PipelineInstance)
+
+    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.last')
+    def test_empty_history(self, last_mock, session, manager, my_vcr, variables, secure_variables):
+        suffix = self.get_suffix(variables, secure_variables)
+        last_mock.side_effect = [None, [], pipeline.PipelineInstance(session, dict(counter=3))]
+        with my_vcr.use_cassette("pipeline/schedule_with_instance_custom_history-{}".format(suffix)) as cass:
+            result = manager.schedule_with_instance(name=self.NAME, variables=variables,
+                                                    secure_variables=secure_variables, backoff=0)
+            assert isinstance(result, pipeline.PipelineInstance)
