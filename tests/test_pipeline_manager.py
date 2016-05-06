@@ -195,7 +195,7 @@ class TestLast(BaseTestPipelineManager):
         with my_vcr.use_cassette("pipeline/history_Consumer_Website"):
             name = "Consumer_Website"
             manager.last(name)
-            history_mock.assert_called_with(name)
+            history_mock.assert_called_with(name=name)
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
     def test_last_return_last(self, history_mock, manager, my_vcr):

@@ -151,11 +151,12 @@ class PipelineManager(BaseManager):
 
     def last(self, name):
         """
-        Get last pipeline instance
+        Get last pipeline instance.
+
         :param name: name of the pipeline.
         :rtype: yagocd.resources.pipeline.PipelineInstance
         """
-        pipeline_history = self.history(name)
+        pipeline_history = self.history(name=name)
         if pipeline_history:
             return pipeline_history[0]
 
@@ -423,6 +424,24 @@ class PipelineEntity(Base):
         :rtype: list of yagocd.resources.pipeline.PipelineInstance
         """
         return self._pipeline.full_history(name=self.data.name)
+
+    def last(self):
+        """
+        Get last pipeline instance.
+
+        :rtype: yagocd.resources.pipeline.PipelineInstance
+        """
+        return self._pipeline.last(name=self.data.name)
+
+    def get(self, counter=0):
+        """
+        Gets pipeline instance object.
+
+        :param counter pipeline counter:
+        :return: A pipeline instance object :class:`yagocd.resources.pipeline.PipelineInstance`.
+        :rtype: yagocd.resources.pipeline.PipelineInstance
+        """
+        return self._pipeline.get(name=self.data.name, counter=counter)
 
     def status(self):
         """

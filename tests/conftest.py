@@ -44,7 +44,9 @@ vcr_obj = VCR(
 
 @pytest.fixture()
 def mock_session():
-    return mock.patch('yagocd.session.Session').start()
+    session = mock.patch('yagocd.session.Session').start()
+    session.server_url = 'http://example.com'
+    return session
 
 
 @pytest.fixture()

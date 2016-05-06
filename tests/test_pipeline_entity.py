@@ -33,6 +33,25 @@ import pytest
 
 
 class TestPipelineEntity(object):
+    def test_has_all_managers_methods(self):
+        excludes = {'tie_pipelines', 'list', 'find'}
+
+        def get_public_methods(klass):
+            methods = set()
+            for name in dir(klass):
+                if name.startswith('_'):
+                    continue
+
+                candidate = getattr(klass, name)
+                if hasattr(candidate, '__call__'):
+                    methods.add(name)
+            return methods
+
+        managers_methods = get_public_methods(pipeline.PipelineManager)
+        entity_methods = get_public_methods(pipeline.PipelineEntity)
+        result = managers_methods - entity_methods - excludes
+        assert len(result) == 0, "Some methods are missing in pipeline entity: {}".format(result)
+
     @pytest.fixture()
     def pipeline_entity(self, mock_session):
         return pipeline.PipelineEntity(
@@ -62,10 +81,41 @@ class TestPipelineEntity(object):
     def test_descendants_empty(self, pipeline_entity):
         assert pipeline_entity.descendants == list()
 
+    def test_get_url(self, pipeline_entity):
+        assert (
+            pipeline_entity.get_url('http://example.com', 'test_name') ==
+            'http://example.com/go/tab/pipeline/history/test_name'
+        )
+
+    def test_url(self, pipeline_entity):
+        assert pipeline_entity.url == 'http://example.com/go/tab/pipeline/history/pipeline_1'
+
     @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
     def test_history_call(self, history_mock, pipeline_entity):
         pipeline_entity.history()
         history_mock.assert_called_with(name=pipeline_entity.data.name, offset=0)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
+    def test_full_history_call(self, history_mock, pipeline_entity):
+        history_mock.side_effect = [['foo', 'bar', 'baz'], []]
+        list(pipeline_entity.full_history())
+        calls = [mock.call(pipeline_entity.data.name, 0), mock.call(pipeline_entity.data.name, 3)]
+        history_mock.assert_has_calls(calls)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
+    def test_last_call(self, history_mock, pipeline_entity):
+        pipeline_entity.last()
+        history_mock.assert_called_with(name=pipeline_entity.data.name)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
+    def test_last_returns_last(self, history_mock, pipeline_entity):
+        history_mock.return_value = ['50', '30', '10']
+        assert pipeline_entity.last() == '50'
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.get')
+    def test_get_call(self, get_mock, pipeline_entity):
+        pipeline_entity.get()
+        get_mock.assert_called_with(name=pipeline_entity.data.name, counter=0)
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.status')
     def test_status_call(self, status_mock, pipeline_entity):
@@ -86,3 +136,29 @@ class TestPipelineEntity(object):
     def test_release_lock_call(self, release_lock_mock, pipeline_entity):
         pipeline_entity.release_lock()
         release_lock_mock.assert_called_with(name=pipeline_entity.data.name)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.schedule')
+    def test_release_lock_call(self, schedule_mock, pipeline_entity):
+        pipeline_entity.schedule()
+        schedule_mock.assert_called_with(name=pipeline_entity.data.name, materials=None, variables=None,
+                                         secure_variables=None)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.schedule_with_instance')
+    def test_release_lock_call(self, schedule_with_instance_mock, pipeline_entity):
+        pipeline_entity.schedule_with_instance()
+        schedule_with_instance_mock.assert_called_with(name=pipeline_entity.data.name, materials=None, variables=None,
+                                                       secure_variables=None, backoff=0.5, max_tries=20)
+
+
+class TestGraphDepthWalk(object):
+    @pytest.mark.parametrize("root, expected", [
+        ('a', ['a', 'c']),
+        ('b', ['a', 'c', 'b']),
+        ('c', ['c']),
+        ('d', ['a', 'c', 'd']),
+        ('e', ['a', 'c', 'b', 'e']),
+    ])
+    def test_graph(self, root, expected):
+        graph = {'a': ['c'], 'b': ['a'], 'c': [], 'd': ['a'], 'e': ['b', 'a']}
+
+        assert pipeline.PipelineEntity.graph_depth_walk(root, lambda x: graph.get(x)) == expected
