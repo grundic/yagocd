@@ -27,7 +27,8 @@
 ###############################################################################
 
 import zipfile
-import StringIO
+from six import StringIO
+from six import string_types
 
 from yagocd.client import Yagocd
 from yagocd.session import Session
@@ -148,7 +149,7 @@ class TestDirectory(BaseTestArtifactManager):
     def test_directory_return_type_not_ready(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_directory_not_ready"):
             result = manager.directory(path=self.DIRECTORY_PATH)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
     def test_directory_response_code_ready(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_directory_ready") as cass:
@@ -158,13 +159,13 @@ class TestDirectory(BaseTestArtifactManager):
     def test_directory_return_type_ready(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_directory_ready"):
             result = manager.directory(path=self.DIRECTORY_PATH)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
     def test_directory_return_is_zip_file(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_directory_ready"):
             result = manager.directory(path=self.DIRECTORY_PATH)
 
-            myzipfile = zipfile.ZipFile(StringIO.StringIO(result))
+            myzipfile = zipfile.ZipFile(StringIO(result))
             assert myzipfile.testzip() is None
 
 
@@ -237,7 +238,7 @@ class TestCreate(BaseTestArtifactManager):
     def test_create_return_type(self, sample_artifact, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_create"):
             result = manager.create(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
     def test_create_return_value(self, sample_artifact, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_create"):
@@ -294,7 +295,7 @@ class TestAppend(BaseTestArtifactManager):
     def test_append_return_type(self, sample_artifact, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_append"):
             result = manager.append(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
     def test_append_return_value(self, sample_artifact, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_append"):

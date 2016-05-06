@@ -26,7 +26,7 @@
 #
 ###############################################################################
 
-import urllib
+from six.moves.urllib.parse import urlencode
 
 from yagocd.client import Yagocd
 from yagocd.session import Session
@@ -154,7 +154,7 @@ class TestNotifyGit(BaseTestConfigurationManager):
     def test_notify_git_request_data(self, manager, my_vcr):
         with my_vcr.use_cassette("material/notify_git") as cass:
             manager.notify_git(self.URL)
-            assert cass.requests[0].body == urllib.urlencode({'repository_url': self.URL})
+            assert cass.requests[0].body.decode('ascii') == urlencode({'repository_url': self.URL})
 
     def test_notify_git_request_accept_headers(self, manager, my_vcr):
         with my_vcr.use_cassette("material/notify_git") as cass:

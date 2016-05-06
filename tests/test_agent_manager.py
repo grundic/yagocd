@@ -29,6 +29,8 @@
 import copy
 import json
 
+from six import string_types
+
 from yagocd.client import Yagocd
 from yagocd.session import Session
 from yagocd.resources import agent, job
@@ -144,7 +146,7 @@ class TestDict(BaseTestAgentManager):
     def test_dict_returns_str_as_keys(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/agent_list_as_list"):
             result = manager.dict()
-            assert all(isinstance(i, basestring) for i in result.keys())
+            assert all(isinstance(i, string_types) for i in result.keys())
 
     def test_dict_returns_agent_entities_as_values(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/agent_list_as_list"):
@@ -254,7 +256,7 @@ class TestDelete(BaseTestAgentManager):
     def test_delete_return_message(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/agent_delete") as cass:
             manager.delete(self.UUID)
-            assert 'Deleted 1 agent(s)' in cass.responses[0]['body']['string']
+            assert b'Deleted 1 agent(s)' in cass.responses[0]['body']['string']
 
 
 class TestJobHistory(BaseTestAgentManager):

@@ -161,4 +161,5 @@ class TestGraphDepthWalk(object):
     def test_graph(self, root, expected):
         graph = {'a': ['c'], 'b': ['a'], 'c': [], 'd': ['a'], 'e': ['b', 'a']}
 
-        assert pipeline.PipelineEntity.graph_depth_walk(root, lambda x: graph.get(x)) == expected
+        assert len(pipeline.PipelineEntity.graph_depth_walk(root, lambda x: graph.get(x))) == len(expected)
+        assert sorted(pipeline.PipelineEntity.graph_depth_walk(root, lambda x: graph.get(x))) == sorted(expected)

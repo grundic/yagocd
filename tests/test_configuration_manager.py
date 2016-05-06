@@ -26,12 +26,12 @@
 #
 ###############################################################################
 
+import pytest
+from six import string_types
 
 from yagocd.client import Yagocd
 from yagocd.session import Session
 from yagocd.resources import configuration
-
-import pytest
 
 
 class BaseTestConfigurationManager(object):
@@ -95,7 +95,7 @@ class TestDiff(BaseTestConfigurationManager):
     def test_diff_return_type(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/diff"):
             result = manager.diff(self.start, self.end)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
 
 class TestConfigCurrent(BaseTestConfigurationManager):
@@ -122,7 +122,7 @@ class TestConfigCurrent(BaseTestConfigurationManager):
     def test_config_return_type(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/config_current"):
             result = manager.config()
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
 
 class TestConfigMD5(BaseTestConfigurationManager):
@@ -151,4 +151,4 @@ class TestConfigMD5(BaseTestConfigurationManager):
     def test_config_return_type(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/config_md5"):
             result = manager.config(self.md5)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)

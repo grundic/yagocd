@@ -41,7 +41,7 @@ class BaseTestPipelineManager(object):
     @staticmethod
     def get_suffix(*args):
         m = hashlib.md5()
-        m.update('|'.join([str(x) for x in args]))
+        m.update('|'.join([str(x) for x in args]).encode('utf-8'))
         m.hexdigest()
         return m.hexdigest()[:8]
 

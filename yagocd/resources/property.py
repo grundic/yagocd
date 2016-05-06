@@ -26,7 +26,7 @@
 #
 ###############################################################################
 
-from StringIO import StringIO
+from six import StringIO
 import csv
 
 from yagocd.resources import BaseManager

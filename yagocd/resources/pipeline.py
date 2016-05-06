@@ -256,7 +256,7 @@ class PipelineManager(BaseManager):
         """
 
         data = {'materials': materials, 'variables': variables, 'secure_variables': secure_variables}
-        data = dict((k, v) for k, v in data.iteritems() if v is not None)
+        data = dict((k, v) for k, v in data.items() if v is not None)
 
         response = self._session.post(
             path='{base_api}/pipelines/{name}/schedule'.format(

@@ -26,11 +26,12 @@
 #
 ###############################################################################
 
+import pytest
+from six import string_types
+
 from yagocd.client import Yagocd
 from yagocd.session import Session
 from yagocd.resources import feed
-
-import pytest
 
 
 class BaseTestConfigurationManager(object):
@@ -67,7 +68,7 @@ class TestPipelines(BaseTestConfigurationManager):
     def test_pipelines_return_type(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/pipelines"):
             result = manager.pipelines()
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
 
 class TestPipelineById(BaseTestConfigurationManager):
@@ -96,7 +97,7 @@ class TestPipelineById(BaseTestConfigurationManager):
     def test_pipeline_by_id_return_type(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/pipeline_by_id"):
             result = manager.pipeline_by_id(self.PIPELINE_ID)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
 
 class TestStages(BaseTestConfigurationManager):
@@ -125,7 +126,7 @@ class TestStages(BaseTestConfigurationManager):
     def test_stages_return_type(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/stages"):
             result = manager.stages(self.PIPELINE_NAME)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
 
 class TestStageById(BaseTestConfigurationManager):
@@ -154,7 +155,7 @@ class TestStageById(BaseTestConfigurationManager):
     def test_stage_by_id_return_type(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/stage_by_id"):
             result = manager.stage_by_id(self.STAGE_ID)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
 
 class TestStage(BaseTestConfigurationManager):
@@ -214,7 +215,7 @@ class TestStage(BaseTestConfigurationManager):
                 stage_name=self.STAGE_NAME,
                 stage_counter=self.STAGE_COUNTER
             )
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
 
 class TestJobStageById(BaseTestConfigurationManager):
@@ -243,4 +244,4 @@ class TestJobStageById(BaseTestConfigurationManager):
     def test_job_by_id_return_type(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/job_by_id"):
             result = manager.job_by_id(self.JOB_ID)
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)

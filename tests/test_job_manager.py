@@ -26,11 +26,12 @@
 #
 ###############################################################################
 
+import pytest
+from six import string_types
+
 from yagocd.client import Yagocd
 from yagocd.session import Session
 from yagocd.resources import job
-
-import pytest
 
 
 class BaseTestConfigurationManager(object):
@@ -67,7 +68,7 @@ class TestScheduled(BaseTestConfigurationManager):
     def test_scheduled_return_type(self, manager, my_vcr):
         with my_vcr.use_cassette("job/scheduled"):
             result = manager.scheduled()
-            assert isinstance(result, basestring)
+            assert isinstance(result, string_types)
 
 
 class TestHistory(BaseTestConfigurationManager):
