@@ -73,7 +73,7 @@ class TestDiff(BaseTestConfigurationManager):
     def test_diff_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/diff") as cass:
             manager.diff(self.start, self.end)
-            assert cass.requests[0].path == '/go/api/config/diff/{}/{}'.format(
+            assert cass.requests[0].path == '/go/api/config/diff/{0}/{1}'.format(
                 self.start, self.end
             )
 
@@ -131,7 +131,7 @@ class TestConfigMD5(BaseTestConfigurationManager):
     def test_config_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/config_md5") as cass:
             manager.config(self.md5)
-            assert cass.requests[0].path == '/go/api/admin/config/{}.xml'.format(self.md5)
+            assert cass.requests[0].path == '/go/api/admin/config/{0}.xml'.format(self.md5)
 
     def test_config_request_method(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/config_md5") as cass:

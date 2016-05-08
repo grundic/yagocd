@@ -78,7 +78,7 @@ class TestModifications(BaseTestConfigurationManager):
     def test_modifications_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("material/modifications") as cass:
             manager.modifications(self.FINGERPRINT)
-            assert cass.requests[0].path == '/go/api/materials/{}/modifications/{}'.format(
+            assert cass.requests[0].path == '/go/api/materials/{0}/modifications/{1}'.format(
                 self.FINGERPRINT, 0
             )
 

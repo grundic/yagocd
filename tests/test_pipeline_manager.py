@@ -312,7 +312,7 @@ class TestReleaseLock(BaseTestPipelineManager):
         with my_vcr.use_cassette("pipeline/release_lock"):
             name = "Deploy_UAT"
             result = manager.release_lock(name)
-            assert result == 'pipeline lock released for {}\n'.format(name)
+            assert result == 'pipeline lock released for {0}\n'.format(name)
 
 
 class TestSchedule(BaseTestPipelineManager):
@@ -322,7 +322,7 @@ class TestSchedule(BaseTestPipelineManager):
     @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
     def test_schedule_request_url(self, manager, my_vcr, variables, secure_variables):
         suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)) as cass:
+        with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)) as cass:
             manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
             assert cass.requests[0].path == '/go/api/pipelines/{name}/schedule'.format(
                 name=self.NAME
@@ -332,7 +332,7 @@ class TestSchedule(BaseTestPipelineManager):
     @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
     def test_schedule_request_method(self, manager, my_vcr, variables, secure_variables):
         suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)) as cass:
+        with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)) as cass:
             manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
             assert cass.requests[0].method == 'POST'
 
@@ -340,7 +340,7 @@ class TestSchedule(BaseTestPipelineManager):
     @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
     def test_schedule_request_accept_headers(self, manager, my_vcr, variables, secure_variables):
         suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)) as cass:
+        with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)) as cass:
             manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
             assert cass.requests[0].headers['accept'] == 'application/json'
             assert cass.requests[0].headers['content-type'] == 'application/json'
@@ -349,7 +349,7 @@ class TestSchedule(BaseTestPipelineManager):
     @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
     def test_schedule_response_code(self, manager, my_vcr, variables, secure_variables):
         suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)) as cass:
+        with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)) as cass:
             manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
             assert cass.responses[0]['status']['code'] == 202
 
@@ -357,9 +357,9 @@ class TestSchedule(BaseTestPipelineManager):
     @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
     def test_schedule_return_value(self, manager, my_vcr, variables, secure_variables):
         suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule-{}".format(suffix)):
+        with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)):
             result = manager.schedule(name=self.NAME, variables=variables, secure_variables=secure_variables)
-            assert result == 'Request to schedule pipeline {} accepted\n'.format(self.NAME)
+            assert result == 'Request to schedule pipeline {0} accepted\n'.format(self.NAME)
 
 
 class TestScheduleWithInstance(BaseTestPipelineManager):
@@ -370,7 +370,7 @@ class TestScheduleWithInstance(BaseTestPipelineManager):
     @mock.patch('yagocd.resources.pipeline.PipelineManager.schedule')
     def test_schedule_is_called(self, schedule_mock, manager, my_vcr, variables, secure_variables):
         suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule_with_instance-{}".format(suffix)):
+        with my_vcr.use_cassette("pipeline/schedule_with_instance-{0}".format(suffix)):
             manager.schedule_with_instance(name=self.NAME, variables=variables, secure_variables=secure_variables,
                                            backoff=0)
             schedule_mock.assert_called()
@@ -379,7 +379,7 @@ class TestScheduleWithInstance(BaseTestPipelineManager):
     @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
     def test_return_value(self, manager, my_vcr, variables, secure_variables):
         suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule_with_instance-{}".format(suffix)):
+        with my_vcr.use_cassette("pipeline/schedule_with_instance-{0}".format(suffix)):
             result = manager.schedule_with_instance(name=self.NAME, variables=variables,
                                                     secure_variables=secure_variables, backoff=0)
             assert isinstance(result, pipeline.PipelineInstance)
@@ -390,7 +390,7 @@ class TestScheduleWithInstance(BaseTestPipelineManager):
     def test_empty_history(self, last_mock, session, manager, my_vcr, variables, secure_variables):
         suffix = self.get_suffix(variables, secure_variables)
         last_mock.side_effect = [None, [], pipeline.PipelineInstance(session, dict(counter=3))]
-        with my_vcr.use_cassette("pipeline/schedule_with_instance_custom_history-{}".format(suffix)) as cass:
+        with my_vcr.use_cassette("pipeline/schedule_with_instance_custom_history-{0}".format(suffix)):
             result = manager.schedule_with_instance(name=self.NAME, variables=variables,
                                                     secure_variables=secure_variables, backoff=0)
             assert isinstance(result, pipeline.PipelineInstance)

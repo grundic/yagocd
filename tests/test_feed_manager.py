@@ -106,7 +106,7 @@ class TestStages(BaseTestConfigurationManager):
     def test_stages_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/stages") as cass:
             manager.stages(self.PIPELINE_NAME)
-            assert cass.requests[0].path == '/go/api/pipelines/{}/stages.xml'.format(self.PIPELINE_NAME)
+            assert cass.requests[0].path == '/go/api/pipelines/{0}/stages.xml'.format(self.PIPELINE_NAME)
 
     def test_stages_request_method(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/stages") as cass:
@@ -135,7 +135,7 @@ class TestStageById(BaseTestConfigurationManager):
     def test_stage_by_id_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/stage_by_id") as cass:
             manager.stage_by_id(self.STAGE_ID)
-            assert cass.requests[0].path == '/go/api/stages/{}.xml'.format(self.STAGE_ID)
+            assert cass.requests[0].path == '/go/api/stages/{0}.xml'.format(self.STAGE_ID)
 
     def test_stage_by_id_request_method(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/stage_by_id") as cass:
@@ -172,7 +172,7 @@ class TestStage(BaseTestConfigurationManager):
                 stage_name=self.STAGE_NAME,
                 stage_counter=self.STAGE_COUNTER
             )
-            assert cass.requests[0].path == '/go/pipelines/{}/{}/{}/{}.xml'.format(
+            assert cass.requests[0].path == '/go/pipelines/{0}/{1}/{2}/{3}.xml'.format(
                 self.PIPELINE_NAME, self.PIPELINE_COUNTER, self.STAGE_NAME, self.STAGE_COUNTER
             )
 
@@ -224,7 +224,7 @@ class TestJobStageById(BaseTestConfigurationManager):
     def test_job_by_id_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/job_by_id") as cass:
             manager.job_by_id(self.JOB_ID)
-            assert cass.requests[0].path == '/go/api/jobs/{}.xml'.format(self.JOB_ID)
+            assert cass.requests[0].path == '/go/api/jobs/{0}.xml'.format(self.JOB_ID)
 
     def test_job_by_id_request_method(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/job_by_id") as cass:

@@ -34,7 +34,7 @@ import pytest
 
 class TestPipelineEntity(object):
     def test_has_all_managers_methods(self):
-        excludes = {'tie_pipelines', 'list', 'find'}
+        excludes = set(['tie_pipelines', 'list', 'find'])
 
         def get_public_methods(klass):
             methods = set()

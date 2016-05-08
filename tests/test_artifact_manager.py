@@ -243,7 +243,7 @@ class TestCreate(BaseTestArtifactManager):
     def test_create_return_value(self, sample_artifact, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_create"):
             result = manager.create(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
-            assert result == 'File {} was created successfully'.format(self.PATH_TO_FILE)
+            assert result == 'File {0} was created successfully'.format(self.PATH_TO_FILE)
 
 
 class TestAppend(BaseTestArtifactManager):
@@ -300,4 +300,4 @@ class TestAppend(BaseTestArtifactManager):
     def test_append_return_value(self, sample_artifact, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_append"):
             result = manager.append(path=self.PATH_TO_FILE, filename=sample_artifact.strpath)
-            assert result == 'File {} was appended successfully'.format(self.PATH_TO_FILE)
+            assert result == 'File {0} was appended successfully'.format(self.PATH_TO_FILE)

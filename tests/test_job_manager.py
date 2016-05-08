@@ -83,7 +83,7 @@ class TestHistory(BaseTestConfigurationManager):
                 stage_name=self.STAGE_NAME,
                 job_name=self.JOB_NAME
             )
-            assert cass.requests[0].path == '/go/api/jobs/{}/{}/{}/history/{}'.format(
+            assert cass.requests[0].path == '/go/api/jobs/{0}/{1}/{2}/history/{3}'.format(
                 self.PIPELINE_NAME, self.STAGE_NAME, self.JOB_NAME, 0
             )
 
