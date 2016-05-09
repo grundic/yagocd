@@ -1,10 +1,10 @@
-Yet another gocd python client
-==============================
+.. image:: img/gocd_logo.png Yet another gocd python client
+===========================================================
 
-.. image:: https://travis-ci.org/grundic/yagocd.svg?branch=master 
+.. image:: https://travis-ci.org/grundic/yagocd.svg?branch=master
   :target: https://travis-ci.org/grundic/yagocd
 
-.. image:: https://coveralls.io/repos/github/grundic/yagocd/badge.svg?branch=master 
+.. image:: https://coveralls.io/repos/github/grundic/yagocd/badge.svg?branch=master
   :target: https://coveralls.io/github/grundic/yagocd?branch=master
 
 
