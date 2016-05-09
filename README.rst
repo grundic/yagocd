@@ -115,4 +115,4 @@ After that run
 
 and wait some time for machine to load and service to be up.
 
-.. |gocd_logo| image:: img/gocd_logo.png
+.. |gocd_logo| image:: https://raw.githubusercontent.com/grundic/yagocd/master/img/gocd_logo.png
