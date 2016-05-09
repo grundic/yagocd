@@ -34,7 +34,7 @@ import pytest
 
 class TestPipelineEntity(object):
     def test_has_all_managers_methods(self):
-        excludes = set(['tie_pipelines', 'list', 'find'])
+        excludes = ['tie_pipelines', 'list', 'find']
 
         def get_public_methods(klass):
             methods = set()
@@ -49,7 +49,7 @@ class TestPipelineEntity(object):
 
         managers_methods = get_public_methods(pipeline.PipelineManager)
         entity_methods = get_public_methods(pipeline.PipelineEntity)
-        result = managers_methods - entity_methods - excludes
+        result = managers_methods - entity_methods - set(excludes)
         assert len(result) == 0, "Some methods are missing in pipeline entity: {}".format(result)
 
     @pytest.fixture()
@@ -84,6 +84,35 @@ class TestPipelineEntity(object):
         assert pipeline_entity.predecessors == value
         assert pipeline_entity.predecessors != pipeline_entity.descendants
 
+    def test_get_predecessors(self, mock_session, pipeline_entity):
+        child_1 = pipeline.PipelineEntity(mock_session, data=dict(name='child_1'))
+        child_2 = pipeline.PipelineEntity(mock_session, data=dict(name='child_2'))
+        child_3 = pipeline.PipelineEntity(mock_session, data=dict(name='child_3'))
+        child_4 = pipeline.PipelineEntity(mock_session, data=dict(name='child_4'))
+
+        child_2.predecessors = [child_1]
+        child_3.predecessors = [child_1, child_2]
+        child_4.predecessors = [child_3]
+        pipeline_entity.predecessors = [child_4]
+
+        assert pipeline_entity.get_predecessors() == [child_4]
+        assert (sorted(pipeline_entity.get_predecessors(True), key=lambda x: x.data.name) ==
+                [child_1, child_2, child_3, child_4])
+
+        assert child_4.predecessors == [child_3]
+        assert (sorted(child_4.get_predecessors(True), key=lambda x: x.data.name) ==
+                [child_1, child_2, child_3])
+
+        assert child_3.predecessors == [child_1, child_2]
+        assert (sorted(child_3.get_predecessors(True), key=lambda x: x.data.name) ==
+                [child_1, child_2])
+
+        assert child_2.predecessors == [child_1]
+        assert (sorted(child_2.get_predecessors(True), key=lambda x: x.data.name) == [child_1])
+
+        assert child_1.predecessors == []
+        assert (sorted(child_1.get_predecessors(True), key=lambda x: x.data.name) == [])
+
     def test_descendants_empty(self, pipeline_entity):
         assert pipeline_entity.descendants == list()
 
@@ -92,6 +121,35 @@ class TestPipelineEntity(object):
         pipeline_entity.descendants = value
         assert pipeline_entity.descendants == value
         assert pipeline_entity.predecessors != pipeline_entity.descendants
+
+    def test_get_descendants(self, mock_session, pipeline_entity):
+        parent_1 = pipeline.PipelineEntity(mock_session, data=dict(name='parent_1'))
+        parent_2 = pipeline.PipelineEntity(mock_session, data=dict(name='parent_2'))
+        parent_3 = pipeline.PipelineEntity(mock_session, data=dict(name='parent_3'))
+        parent_4 = pipeline.PipelineEntity(mock_session, data=dict(name='parent_4'))
+
+        parent_3.descendants = [parent_4]
+        parent_2.descendants = [parent_4, parent_3]
+        parent_1.descendants = [parent_2]
+        pipeline_entity.descendants = [parent_1]
+
+        assert pipeline_entity.get_descendants() == [parent_1]
+        assert (sorted(pipeline_entity.get_descendants(True), key=lambda x: x.data.name) ==
+                [parent_1, parent_2, parent_3, parent_4])
+
+        assert parent_1.descendants == [parent_2]
+        assert (sorted(parent_1.get_descendants(True), key=lambda x: x.data.name) ==
+                [parent_2, parent_3, parent_4])
+
+        assert parent_2.descendants == [parent_4, parent_3]
+        assert (sorted(parent_2.get_descendants(True), key=lambda x: x.data.name) ==
+                [parent_3, parent_4])
+
+        assert parent_3.descendants == [parent_4]
+        assert (sorted(parent_3.get_descendants(True), key=lambda x: x.data.name) == [parent_4])
+
+        assert parent_4.descendants == []
+        assert (sorted(parent_4.get_descendants(True), key=lambda x: x.data.name) == [])
 
     def test_get_url(self, pipeline_entity):
         assert (
