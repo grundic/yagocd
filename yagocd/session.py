@@ -28,7 +28,6 @@
 
 import copy
 from six.moves.urllib.parse import urljoin
-# from urlparse import urljoin
 
 import requests
 
