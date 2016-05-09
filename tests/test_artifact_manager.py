@@ -27,8 +27,8 @@
 ###############################################################################
 
 import zipfile
-from six import StringIO
-from six import string_types
+from six import BytesIO
+from six import string_types, binary_type
 
 from yagocd.client import Yagocd
 from yagocd.session import Session
@@ -108,7 +108,7 @@ class TestList(BaseTestArtifactManager):
 
 
 class TestDirectory(BaseTestArtifactManager):
-    DIRECTORY_PATH = '/path/to/the/.zip'
+    DIRECTORY_PATH = 'path/to/the/.zip'
 
     def test_directory_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_directory_not_ready") as cass:
@@ -149,7 +149,7 @@ class TestDirectory(BaseTestArtifactManager):
     def test_directory_return_type_not_ready(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_directory_not_ready"):
             result = manager.directory(path=self.DIRECTORY_PATH)
-            assert isinstance(result, string_types)
+            assert isinstance(result, (string_types, binary_type))
 
     def test_directory_response_code_ready(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_directory_ready") as cass:
@@ -159,18 +159,18 @@ class TestDirectory(BaseTestArtifactManager):
     def test_directory_return_type_ready(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_directory_ready"):
             result = manager.directory(path=self.DIRECTORY_PATH)
-            assert isinstance(result, string_types)
+            assert isinstance(result, (string_types, binary_type))
 
     def test_directory_return_is_zip_file(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_directory_ready"):
             result = manager.directory(path=self.DIRECTORY_PATH)
 
-            myzipfile = zipfile.ZipFile(StringIO(result))
+            myzipfile = zipfile.ZipFile(BytesIO(result))
             assert myzipfile.testzip() is None
 
 
 class TestDirectoryWait(BaseTestArtifactManager):
-    DIRECTORY_PATH = '/path/to/.zip'
+    DIRECTORY_PATH = 'path/to/.zip'
 
     @mock.patch('yagocd.resources.artifact.ArtifactManager.directory')
     def test_tie_descendants_is_called(self, mock_directory, manager, my_vcr):
