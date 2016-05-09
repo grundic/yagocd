@@ -1,5 +1,5 @@
-.. image:: img/gocd_logo.png Yet another gocd python client
-===========================================================
+|gocd_logo| Yet another gocd python client
+==========================================
 
 .. image:: https://travis-ci.org/grundic/yagocd.svg?branch=master
   :target: https://travis-ci.org/grundic/yagocd
@@ -114,3 +114,5 @@ After that run
     $ vagrant up
 
 and wait some time for machine to load and service to be up.
+
+.. |gocd_logo| image:: img/gocd_logo.png
