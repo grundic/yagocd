@@ -78,8 +78,20 @@ class TestPipelineEntity(object):
     def test_predecessors_empty(self, pipeline_entity):
         assert pipeline_entity.predecessors == list()
 
+    def test_set_predecessors(self, pipeline_entity):
+        value = [1, 3, 5]
+        pipeline_entity.predecessors = value
+        assert pipeline_entity.predecessors == value
+        assert pipeline_entity.predecessors != pipeline_entity.descendants
+
     def test_descendants_empty(self, pipeline_entity):
         assert pipeline_entity.descendants == list()
+
+    def test_set_descendants(self, pipeline_entity):
+        value = [2, 4, 8]
+        pipeline_entity.descendants = value
+        assert pipeline_entity.descendants == value
+        assert pipeline_entity.predecessors != pipeline_entity.descendants
 
     def test_get_url(self, pipeline_entity):
         assert (
@@ -138,13 +150,13 @@ class TestPipelineEntity(object):
         release_lock_mock.assert_called_with(name=pipeline_entity.data.name)
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.schedule')
-    def test_release_lock_call(self, schedule_mock, pipeline_entity):
+    def test_schedule_call(self, schedule_mock, pipeline_entity):
         pipeline_entity.schedule()
         schedule_mock.assert_called_with(name=pipeline_entity.data.name, materials=None, variables=None,
                                          secure_variables=None)
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.schedule_with_instance')
-    def test_release_lock_call(self, schedule_with_instance_mock, pipeline_entity):
+    def test_schedule_with_instance_call(self, schedule_with_instance_mock, pipeline_entity):
         pipeline_entity.schedule_with_instance()
         schedule_with_instance_mock.assert_called_with(name=pipeline_entity.data.name, materials=None, variables=None,
                                                        secure_variables=None, backoff=0.5, max_tries=20)

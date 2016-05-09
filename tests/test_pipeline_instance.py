@@ -48,6 +48,12 @@ class TestPipelineEntity(object):
     def test_getting_name(self, pipeline_instance):
         assert pipeline_instance.data.name == 'Shared_Services'
 
+    def test_getting_url(self, pipeline_instance):
+        assert pipeline_instance.url == 'http://example.com/go/pipelines/value_stream_map/Shared_Services/2'
+
+    def test_getting_pipeline_url(self, pipeline_instance):
+        assert pipeline_instance.pipeline_url == 'http://example.com/go/tab/pipeline/history/Shared_Services'
+
     def test_stages_are_not_empty(self, pipeline_instance):
         assert len(pipeline_instance.stages()) > 0
 
