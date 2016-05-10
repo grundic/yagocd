@@ -1,0 +1,25 @@
+interactions:
+- request:
+    body: !!binary |
+      dmFsdWU9MTAwNTAw
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['12']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.10.0]
+    method: POST
+    uri: http://localhost:8153/go/properties/Shared_Services/7/Commit/1/build/foo_bar
+  response:
+    body: {string: Property 'foo_bar' created with value '100500'}
+    headers:
+      Content-Length: ['46']
+      Content-Type: [text/plain; charset=UTF-8]
+      Date: ['Tue, 10 May 2016 20:42:45 GMT']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Server: [Jetty(9.2.z-SNAPSHOT)]
+      Set-Cookie: ['JSESSIONID=zey5fy4bx537r63p90gk2get;Path=/go;Expires=Tue, 24-May-2016
+          20:42:45 GMT']
+    status: {code: 201, message: Created}
+version: 1

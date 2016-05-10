@@ -99,7 +99,7 @@ class PropertyManager(BaseManager):
         assert self._stage_counter or stage_counter
         assert self._job_name or job_name
 
-        response = self._session.post(
+        response = self._session.get(
             path='{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}'.format(
                 base_api=self.base_api,
                 pipeline_name=self._pipeline_name or pipeline_name,

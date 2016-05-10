@@ -1,0 +1,27 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/properties/Shared_Services/7/Commit/1/build/cruise_pipeline_counter
+  response:
+    body: {string: 'cruise_pipeline_counter
+
+        7
+
+'}
+    headers:
+      Content-Disposition: [Inline; filename=buildProperties.csv]
+      Content-Length: ['26']
+      Content-Type: [text/csv; charset=ISO-8859-1]
+      Date: ['Tue, 10 May 2016 20:29:43 GMT']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Server: [Jetty(9.2.z-SNAPSHOT)]
+      Set-Cookie: ['JSESSIONID=judhmr3kyylu6cv5ao60g425;Path=/go;Expires=Tue, 24-May-2016
+          20:29:43 GMT']
+    status: {code: 200, message: OK}
+version: 1
