@@ -36,10 +36,10 @@ import pytest
 import requests
 from vcr import VCR
 
-vcr_obj = VCR(
-    cassette_library_dir='tests/fixtures/cassettes',
-    path_transformer=VCR.ensure_suffix('.yaml')
-)
+
+@pytest.fixture(scope='session')
+def tests_dir():
+    return os.path.dirname(os.path.realpath(__file__))
 
 
 @pytest.fixture()
@@ -51,7 +51,10 @@ def mock_session():
 
 @pytest.fixture()
 def my_vcr():
-    return vcr_obj
+    return VCR(
+        path_transformer=VCR.ensure_suffix('.yaml'),
+        cassette_library_dir=os.path.join(tests_dir(), 'fixtures/cassettes'),
+    )
 
 
 CONTAINER_NAME = 'yagocd-server'
