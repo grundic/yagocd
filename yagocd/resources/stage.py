@@ -35,64 +35,96 @@ class StageManager(BaseManager):
     The stages API allows users to view stage information and operate on it.
     """
 
-    def cancel(self, pipeline, stage):
+    def __init__(
+        self,
+        session,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+    ):
+        super(StageManager, self).__init__(session)
+
+        self._pipeline_name = pipeline_name
+        self._pipeline_counter = pipeline_counter
+        self._stage_name = stage_name
+        self._stage_counter = stage_counter
+
+    def cancel(self, pipeline_name=None, stage_name=None):
         """
         Cancel an active stage of a specified stage.
 
-        :param pipeline: pipeline name.
-        :param stage: stage name.
+        :param pipeline_name: pipeline name.
+        :param stage_name: stage name.
         :return: a text confirmation.
         """
+        assert self._pipeline_name or pipeline_name
+        assert self._stage_name or stage_name
+
         response = self._session.post(
-            path='{base_api}/stages/{pipeline}/{stage}/cancel'.format(
+            path='{base_api}/stages/{pipeline_name}/{stage_name}/cancel'.format(
                 base_api=self.base_api,
-                pipeline=pipeline,
-                stage=stage
+                pipeline_name=self._pipeline_name or pipeline_name,
+                stage_name=self._stage_name or stage_name
             ),
             headers={'Accept': 'application/json'},
         )
         return response.text
 
-    def get(self, pipeline, stage, pipeline_counter, stage_counter):
+    def get(
+        self,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None
+    ):
         """
         Gets stage instance object.
 
-        :param pipeline: pipeline name.
-        :param stage: stage name.
+        :param pipeline_name: pipeline name.
+        :param stage_name: stage name.
         :param pipeline_counter: pipeline counter.
         :param stage_counter: stage counter.
         :return: a stage instance object :class:`yagocd.resources.stage.StageInstance`.
         :rtype: yagocd.resources.stage.StageInstance
         """
+        assert self._pipeline_name or pipeline_name
+        assert self._pipeline_counter or pipeline_counter
+        assert self._stage_name or stage_name
+        assert self._stage_counter or stage_counter
+
         response = self._session.get(
-            path='{base_api}/stages/{pipeline}/{stage}/instance/{pipeline_counter}/{stage_counter}'.format(
+            path='{base_api}/stages/{pipeline_name}/{stage_name}/instance/{pipeline_counter}/{stage_counter}'.format(
                 base_api=self.base_api,
-                pipeline=pipeline,
-                stage=stage,
-                pipeline_counter=pipeline_counter,
-                stage_counter=stage_counter
+                pipeline_name=self._pipeline_name or pipeline_name,
+                pipeline_counter=self._pipeline_counter or pipeline_counter,
+                stage_name=self._stage_name or stage_name,
+                stage_counter=self._stage_counter or stage_counter
             ),
             headers={'Accept': 'application/json'},
         )
 
         return StageInstance(session=self._session, data=response.json(), pipeline=None)
 
-    def history(self, pipeline, stage, offset=0):
+    def history(self, pipeline_name=None, stage_name=None, offset=0):
         """
         The stage history allows users to list stage instances of specified stage.
         Supports pagination using offset which tells the API how many instances to skip.
 
-        :param pipeline: pipeline name.
-        :param stage: stage name.
+        :param pipeline_name: pipeline name.
+        :param stage_name: stage name.
         :param offset: how many instances to skip.
         :return: an array of stage instances :class:`yagocd.resources.stage.StageInstance`.
         :rtype: list of yagocd.resources.stage.StageInstance
         """
+        assert self._pipeline_name or pipeline_name
+        assert self._stage_name or stage_name
+
         response = self._session.get(
-            path='{base_api}/stages/{pipeline}/{stage}/history/{offset}'.format(
+            path='{base_api}/stages/{pipeline_name}/{stage_name}/history/{offset}'.format(
                 base_api=self.base_api,
-                pipeline=pipeline,
-                stage=stage,
+                pipeline_name=self._pipeline_name or pipeline_name,
+                stage_name=self._stage_name or stage_name,
                 offset=offset,
             ),
             headers={'Accept': 'application/json'},
@@ -103,6 +135,10 @@ class StageManager(BaseManager):
             instances.append(StageInstance(session=self._session, data=instance, pipeline=None))
 
         return instances
+
+    def full_history(self):
+        # TODO: implement!
+        raise NotImplementedError
 
 
 class StageInstance(Base):

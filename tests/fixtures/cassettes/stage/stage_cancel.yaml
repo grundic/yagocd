@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.10.0]
+    method: POST
+    uri: http://localhost:8153/go/api/stages/Shared_Services/Commit/cancel
+  response:
+    body: {string: 'Stage cancelled successfully.
+
+'}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 10 May 2016 21:09:04 GMT']
+      ETag: ['"de0c605449f5726111a2283041354c34"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Server: [Jetty(9.2.z-SNAPSHOT)]
+      Set-Cookie: ['JSESSIONID=1luwfqza29vqu19xdvxd9hiokl;Path=/go;Expires=Tue, 24-May-2016
+          21:09:04 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [7a5998a8-8dc5-4fbe-842c-a24003bd8870]
+      X-Runtime: ['0.723000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
