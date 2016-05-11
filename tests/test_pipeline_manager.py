@@ -181,12 +181,12 @@ class TestFullHistory(BaseTestPipelineManager):
     @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
     def test_history_is_called(self, history_mock, manager, my_vcr):
         history_mock.side_effect = [['foo', 'bar', 'baz'], []]
-        with my_vcr.use_cassette("pipeline/history_Consumer_Website"):
-            name = "Consumer_Website"
-            list(manager.full_history(name))
 
-            calls = [mock.call(name, 0), mock.call(name, 3)]
-            history_mock.assert_has_calls(calls)
+        name = "Consumer_Website"
+        list(manager.full_history(name))
+
+        calls = [mock.call(name, 0), mock.call(name, 3)]
+        history_mock.assert_has_calls(calls)
 
 
 class TestLast(BaseTestPipelineManager):
