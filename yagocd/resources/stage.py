@@ -165,6 +165,8 @@ class StageInstance(Base):
         super(StageInstance, self).__init__(session, data)
         self._pipeline = pipeline
 
+        self._manager = StageManager(session=self._session)
+
     @property
     def url(self):
         """
@@ -172,15 +174,77 @@ class StageInstance(Base):
         """
         return "{server_url}/go/pipelines/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}".format(
             server_url=self._session.server_url,
-            pipeline_name=self._pipeline.data.name,
-            pipeline_counter=self._pipeline.data.counter,
+            pipeline_name=self.pipeline_name,
+            pipeline_counter=self.pipeline_counter,
             stage_name=self.data.name,
             stage_counter=self.data.counter,
         )
 
     @property
+    def pipeline_name(self):
+        """
+        Get pipeline name of current stage instance.
+
+        Because instantiating stage instance could be performed in different ways and those return different results,
+        we have to check where from to get name of the pipeline.
+
+        :return: pipeline name.
+        """
+        if 'pipeline_name' in self.data:
+            return self.data.get('pipeline_name')
+        elif self.pipeline is not None:
+            return self.pipeline.data.name
+
+    @property
+    def pipeline_counter(self):
+        """
+        Get pipeline counter of current stage instance.
+
+        Because instantiating stage instance could be performed in different ways and those return different results,
+        we have to check where from to get counter of the pipeline.
+
+        :return: pipeline counter.
+        """
+        if 'pipeline_counter' in self.data:
+            return self.data.get('pipeline_counter')
+        elif self.pipeline is not None:
+            return self.pipeline.data.counter
+
+    @property
+    def stage_name(self):
+        """
+        Get stage name of current instance.
+
+        This method is to be inline with others.
+
+        :return: stage name.
+        """
+        if 'name' in self.data:
+            return self.data.get('name')
+
+    @property
+    def stage_counter(self):
+        """
+        Get stage counter of current instance.
+
+        This method is to be inline with others.
+
+        :return: stage counter.
+        """
+        if 'counter' in self.data:
+            return self.data.get('counter')
+
+    @property
     def pipeline(self):
         return self._pipeline
+
+    def cancel(self):
+        """
+        Cancel an active stage of a specified stage.
+
+        :return: a text confirmation.
+        """
+        return self._manager.cancel(pipeline_name=self.pipeline_name, stage_name=self.stage_name)
 
     def jobs(self):
         """
