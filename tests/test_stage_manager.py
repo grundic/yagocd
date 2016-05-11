@@ -31,8 +31,8 @@ from yagocd.session import Session
 from yagocd.resources import stage
 
 import pytest
+import mock
 from six import string_types
-from six.moves.urllib.parse import urlencode
 
 
 class BaseTestStageManager(object):
@@ -161,3 +161,14 @@ class TestHistory(BaseTestStageManager):
         with my_vcr.use_cassette("stage/stage_history"):
             result = manager.history()
             assert all(isinstance(s, stage.StageInstance) for s in result)
+
+
+class TestFullHistory(BaseTestStageManager):
+    @mock.patch('yagocd.resources.stage.StageManager.history')
+    def test_history_is_called(self, history_mock, manager):
+        history_mock.side_effect = [['foo', 'bar', 'baz'], []]
+
+        list(manager.full_history(self.PIPELINE_NAME, self.STAGE_NAME))
+
+        calls = [mock.call(self.PIPELINE_NAME, self.STAGE_NAME, 0), mock.call(self.PIPELINE_NAME, self.STAGE_NAME, 3)]
+        history_mock.assert_has_calls(calls)

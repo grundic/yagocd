@@ -136,9 +136,24 @@ class StageManager(BaseManager):
 
         return instances
 
-    def full_history(self):
-        # TODO: implement!
-        raise NotImplementedError
+    def full_history(self, pipeline_name=None, stage_name=None):
+        """
+        The stage history allows users to list stage instances of specified stage.
+
+        This method uses generator to get full stage history.
+        :param pipeline_name: pipeline name.
+        :param stage_name: stage name.
+        :return: an array of stage instances :class:`yagocd.resources.stage.StageInstance`.
+        :rtype: list of yagocd.resources.stage.StageInstance
+        """
+        offset = 0
+        instances = self.history(pipeline_name, stage_name, offset)
+        while instances:
+            for instance in instances:
+                yield instance
+
+            offset += len(instances)
+            instances = self.history(pipeline_name, stage_name, offset)
 
 
 class StageInstance(Base):
