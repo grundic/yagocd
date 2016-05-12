@@ -99,7 +99,7 @@ class JobInstance(Base):
 
         :return: pipeline name.
         """
-        if 'pipeline_name' in self.data:
+        if 'pipeline_name' in self.data and self.data.pipeline_name:
             return self.data.get('pipeline_name')
         elif self.stage.pipeline is not None:
             return self.stage.pipeline.data.name
@@ -116,7 +116,7 @@ class JobInstance(Base):
 
         :return: pipeline counter.
         """
-        if 'pipeline_counter' in self.data:
+        if 'pipeline_counter' in self.data and self.data.pipeline_counter:
             return self.data.get('pipeline_counter')
         elif self.stage.pipeline is not None:
             return self.stage.pipeline.data.counter
@@ -133,7 +133,7 @@ class JobInstance(Base):
 
         :return: stage name.
         """
-        if 'stage_name' in self.data:
+        if 'stage_name' in self.data and self.data.stage_name:
             return self.data.get('stage_name')
         else:
             return self.stage.data.name
@@ -148,7 +148,7 @@ class JobInstance(Base):
 
         :return: stage counter.
         """
-        if 'stage_counter' in self.data:
+        if 'stage_counter' in self.data and self.data.stage_counter:
             return self.data.get('stage_counter')
         else:
             return self.stage.data.counter
