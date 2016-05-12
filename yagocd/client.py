@@ -177,7 +177,3 @@ class Yagocd(object):
         :rtype: yagocd.resources.user.UserManager
         """
         return UserManager(session=self._session)
-
-
-if __name__ == '__main__':
-    pass
