@@ -26,9 +26,6 @@
 #
 ###############################################################################
 
-import os
-import json
-
 from yagocd import Yagocd
 from yagocd.resources import pipeline, stage, job
 from yagocd.session import Session
