@@ -34,7 +34,7 @@ from yagocd.session import Session
 from yagocd.resources import job
 
 
-class BaseTestConfigurationManager(object):
+class BaseTestJobManager(object):
     @pytest.fixture()
     def session(self):
         return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
@@ -44,7 +44,7 @@ class BaseTestConfigurationManager(object):
         return job.JobManager(session=session)
 
 
-class TestScheduled(BaseTestConfigurationManager):
+class TestScheduled(BaseTestJobManager):
     def test_scheduled_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("job/scheduled") as cass:
             manager.scheduled()
@@ -71,7 +71,7 @@ class TestScheduled(BaseTestConfigurationManager):
             assert isinstance(result, string_types)
 
 
-class TestHistory(BaseTestConfigurationManager):
+class TestHistory(BaseTestJobManager):
     PIPELINE_NAME = 'Shared_Services'
     STAGE_NAME = 'Commit'
     JOB_NAME = 'build'
