@@ -1,0 +1,37 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/api/users/admin
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAJ2QzQrCMBCE73mKEq/SICJIX0WkrMmmCd0mpUkPUvrupk3xB8SDx5nZ+XbZiRUF
+        r8m6NvCqmJJKWnn5FEmaAXXS3MTYV0JAb8vGl1KJ3RhwCHydm/e5G5D0jzJ5CWR8iNX5cDqKxi84
+        sXIEqM66T5q2Tv1Jq8g31tUOOtyYbOPytySx8to1UDb0BPdvETq4ES7HxGHEbHVgKRluJHoZ9VrV
+        QCFPSYOyTeuALARcvnxhyb+ymT0AcAnZbn0BAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Thu, 12 May 2016 21:19:08 GMT']
+      ETag: ['"cf3142ff47ca6f0312a51795d5d5f4cb--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Server: [Jetty(9.2.z-SNAPSHOT)]
+      Set-Cookie: ['JSESSIONID=hrzi0y05rx881didx7xazc95v;Path=/go;Expires=Thu, 26-May-2016
+          21:19:08 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [45c004b3-abc9-4675-b9ac-282d80492a81]
+      X-Runtime: ['0.048000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

@@ -1,0 +1,38 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJlbWFpbCI6ICJmb29AYmFyLmJheiJ9
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['24']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.10.0]
+    method: PATCH
+    uri: http://localhost:8153/go/api/users/admin
+  response:
+    body: {string: "{\n  \"_links\": {\n    \"doc\": {\n      \"href\": \"http://api.go.cd/#users\"\n
+        \   },\n    \"self\": {\n      \"href\": \"http://localhost:8153/go/api/users/admin\"\n
+        \   },\n    \"find\": {\n      \"href\": \"http://localhost:8153/go/api/users/:login_name\"\n
+        \   }\n  },\n  \"login_name\": \"admin\",\n  \"display_name\": \"admin\",\n
+        \ \"enabled\": true,\n  \"email\": \"foo@bar.baz\",\n  \"email_me\": false,\n
+        \ \"checkin_aliases\": [\n\n  ]\n}\n"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Thu, 12 May 2016 21:30:14 GMT']
+      ETag: ['"e3e76db11a10e883dc2d5b94a2b0edd7"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Server: [Jetty(9.2.z-SNAPSHOT)]
+      Set-Cookie: ['JSESSIONID=ha27638y98up1elf961bvyx3k;Path=/go;Expires=Thu, 26-May-2016
+          21:30:14 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [8a8ca6dd-f20e-4d93-9894-097594e01456]
+      X-Runtime: ['0.085000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

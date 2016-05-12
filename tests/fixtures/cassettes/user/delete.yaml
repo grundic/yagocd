@@ -1,0 +1,31 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      User-Agent: [python-requests/2.10.0]
+    method: DELETE
+    uri: http://localhost:8153/go/api/users/user_02
+  response:
+    body: {string: "{\n  \"message\": \"User 'user_02' was deleted successfully.\"\n}\n"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Thu, 12 May 2016 21:34:27 GMT']
+      ETag: ['"cccb4bd4698bf845c2a059efe7e17c51"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Server: [Jetty(9.2.z-SNAPSHOT)]
+      Set-Cookie: ['JSESSIONID=qcbt7dhzycn71vapihciqbdg5;Path=/go;Expires=Thu, 26-May-2016
+          21:34:27 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [9d6835b7-f90e-4a0c-ae01-5e1089151d60]
+      X-Runtime: ['0.009000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
