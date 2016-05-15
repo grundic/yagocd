@@ -81,6 +81,7 @@ corresponding methods.
 Different implementations of GoCD API
 -------------------------------------
 Here is list of similar projects, that implements GoCD API:
+
 - `py-gocd <https://github.com/gaqzi/py-gocd/>`: A Python API for interacting with Go Continuous Delivery
 - `gocdapi <https://github.com/joaogbcravo/gocdapi>`: A Python API for accessing resources and configuring Go (thoughtworks) continuous-delivery servers
 - `gomatic <https://github.com/SpringerSBM/gomatic>`: A Python API for configuring GoCD
