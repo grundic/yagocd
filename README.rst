@@ -1,4 +1,4 @@
-|gocd_logo| Yet another gocd python client
+|gocd_logo| Yet another GoCD python client
 ==========================================
 
     .. image:: https://travis-ci.org/grundic/yagocd.svg?branch=master
@@ -12,7 +12,7 @@
 
 Introduction
 ------------
-This project represent itself high level wrapper upon ThoughtWorks gocd REST API.
+This project represent itself high level wrapper upon ThoughtWorks GoCD REST API.
 Go Continuous Delivery is continues integration/deployment server, which helps you automate
 and streamline the build-test-release cycle for worry-free.
 Using this library you can access to internals of the Pipelines, check their statuses, download Artifacts and more.
@@ -59,7 +59,7 @@ Quick example
 Code Organisation
 -----------------
 The code in the library organized as follows: the main entry point, that user should use is :code:`yagocd.client.Yagocd`
-class. Creating instance of it gives you access to all properties and actions gocd server provides.
+class. Creating instance of it gives you access to all properties and actions GoCD server provides.
 This class contains list of managers, each of which is responsible for it's particular area. Each manager could be
 accessed as a property of :code:`Yagocd` class. Here is list of them:
 
@@ -78,10 +78,19 @@ For example, :code:`yagocd.resources.pipeline.PipelineManager` manager could ret
 :code:`yagocd.resources.pipeline.PipelineEntity`, which represents itself entity of specific pipeline and has
 corresponding methods.
 
+Different implementations of GoCD API
+-------------------------------------
+Here is list of similar projects, that implements GoCD API:
+- `py-gocd <https://github.com/gaqzi/py-gocd/>`: A Python API for interacting with Go Continuous Delivery
+- `gocdapi <https://github.com/joaogbcravo/gocdapi>`: A Python API for accessing resources and configuring Go (thoughtworks) continuous-delivery servers
+- `gomatic <https://github.com/SpringerSBM/gomatic>`: A Python API for configuring GoCD
+- `goapi <https://github.com/ThoughtWorksStudios/goapi>`: Go (http://www.go.cd) API ruby client
+- `gocd-api <https://github.com/birgitta410/gocd-api>`: Access http://www.go.cd API via nodeJS
+
 Development notes
 -----------------
 
-Original API is part of the open source `GOCD project <https://github.com/gocd/gocd>`_.
+Original API is part of the open source `GoCD project <https://github.com/gocd/gocd>`_.
 But it's difficult to find appropriate implementation.
 
 - First, there are url rewrite rules in `/server/webapp/WEB-INF/urlrewrite.xml <https://github.com/gocd/gocd/blob/master/server/webapp/WEB-INF/urlrewrite.xml>`_ in <!-- RESTful URLS --> section.
