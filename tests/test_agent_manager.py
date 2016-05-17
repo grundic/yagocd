@@ -26,13 +26,11 @@
 #
 ###############################################################################
 
-import copy
+import os
 import json
 
 from six import string_types
 
-from yagocd.client import Yagocd
-from yagocd.session import Session
 from yagocd.resources import agent, job
 
 import mock
@@ -41,12 +39,8 @@ import pytest
 
 class BaseTestAgentManager(object):
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def manager(self, session):
-        return agent.AgentManager(session=session)
+    def manager(self, session_fixture):
+        return agent.AgentManager(session=session_fixture)
 
 
 class TestListAsList(BaseTestAgentManager):
@@ -86,49 +80,49 @@ class TestListAsList(BaseTestAgentManager):
             assert all(isinstance(i, agent.AgentEntity) for i in result)
 
 
-class TestListAsDict(BaseTestAgentManager):
-    @pytest.fixture()
-    def manager_build_go_cd(self):
-        options = copy.deepcopy(Yagocd.DEFAULT_OPTIONS)
-        options['server'] = 'https://build.go.cd/go'
-        return agent.AgentManager(
-            session=Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-        )
-
-    def test_list_request_url(self, manager_build_go_cd, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
-            manager_build_go_cd.list()
-            assert cass.requests[0].path == '/go/api/agents'
-
-    def test_list_request_method(self, manager_build_go_cd, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
-            manager_build_go_cd.list()
-            assert cass.requests[0].method == 'GET'
-
-    def test_list_request_accept_headers(self, manager_build_go_cd, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
-            manager_build_go_cd.list()
-            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v2+json'
-
-    def test_list_response_code(self, manager_build_go_cd, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
-            manager_build_go_cd.list()
-            assert cass.responses[0]['status']['code'] == 200
-
-    def test_list_return_type(self, manager_build_go_cd, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_dict"):
-            result = manager_build_go_cd.list()
-            assert isinstance(result, list)
-
-    def test_list_is_not_empty(self, manager_build_go_cd, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_dict"):
-            result = manager_build_go_cd.list()
-            assert len(result) > 0
-
-    def test_list_returns_agent_entities(self, manager_build_go_cd, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_dict"):
-            result = manager_build_go_cd.list()
-            assert all(isinstance(i, agent.AgentEntity) for i in result)
+# class TestListAsDict(BaseTestAgentManager):
+#     @pytest.fixture()
+#     def manager_build_go_cd(self):
+#         options = copy.deepcopy(Yagocd.DEFAULT_OPTIONS)
+#         options['server'] = 'https://build.go.cd/go'
+#         return agent.AgentManager(
+#             session=Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
+#         )
+#
+#     def test_list_request_url(self, manager_build_go_cd, my_vcr):
+#         with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
+#             manager_build_go_cd.list()
+#             assert cass.requests[0].path == '/go/api/agents'
+#
+#     def test_list_request_method(self, manager_build_go_cd, my_vcr):
+#         with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
+#             manager_build_go_cd.list()
+#             assert cass.requests[0].method == 'GET'
+#
+#     def test_list_request_accept_headers(self, manager_build_go_cd, my_vcr):
+#         with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
+#             manager_build_go_cd.list()
+#             assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v2+json'
+#
+#     def test_list_response_code(self, manager_build_go_cd, my_vcr):
+#         with my_vcr.use_cassette("agent/agent_list_as_dict") as cass:
+#             manager_build_go_cd.list()
+#             assert cass.responses[0]['status']['code'] == 200
+#
+#     def test_list_return_type(self, manager_build_go_cd, my_vcr):
+#         with my_vcr.use_cassette("agent/agent_list_as_dict"):
+#             result = manager_build_go_cd.list()
+#             assert isinstance(result, list)
+#
+#     def test_list_is_not_empty(self, manager_build_go_cd, my_vcr):
+#         with my_vcr.use_cassette("agent/agent_list_as_dict"):
+#             result = manager_build_go_cd.list()
+#             assert len(result) > 0
+#
+#     def test_list_returns_agent_entities(self, manager_build_go_cd, my_vcr):
+#         with my_vcr.use_cassette("agent/agent_list_as_dict"):
+#             result = manager_build_go_cd.list()
+#             assert all(isinstance(i, agent.AgentEntity) for i in result)
 
 
 class TestDict(BaseTestAgentManager):
@@ -153,11 +147,12 @@ class TestDict(BaseTestAgentManager):
             result = manager.dict()
             assert all(isinstance(i, agent.AgentEntity) for i in result.values())
 
-    def test_dict_get_by_key(self, manager, my_vcr):
+    def test_dict_get_by_key(self, manager, my_vcr, tests_dir):
         with my_vcr.use_cassette("agent/agent_list_as_list"):
             uuid = '68e5d48c-753a-4395-a79c-1cb22d77a12f'
             result = manager.dict().get(uuid)
-            fixture = json.load(open('tests/fixtures/resources/agent/{uuid}-from-list.json'.format(uuid=uuid)))
+            resource_path = os.path.join(tests_dir, 'fixtures/resources/agent/{uuid}-from-list.json'.format(uuid=uuid))
+            fixture = json.load(open(resource_path))
             assert dict(result.data) == fixture
 
 
@@ -231,7 +226,7 @@ class TestUpdate(BaseTestAgentManager):
 
 
 class TestDelete(BaseTestAgentManager):
-    UUID = '68e5d48c-753a-4395-a79c-1cb22d77a12f'
+    UUID = '964c760d-2803-4dac-a98e-6b3b2b682f3e'
 
     def test_delete_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/agent_delete") as cass:

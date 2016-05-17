@@ -28,8 +28,6 @@
 
 import hashlib
 
-from yagocd.client import Yagocd
-from yagocd.session import Session
 from yagocd.resources import pipeline
 
 import mock
@@ -46,23 +44,19 @@ class BaseTestPipelineManager(object):
         return m.hexdigest()[:8]
 
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def manager(self, session):
-        return pipeline.PipelineManager(session=session)
+    def manager(self, session_fixture):
+        return pipeline.PipelineManager(session=session_fixture)
 
 
 class TestTieDescendants(BaseTestPipelineManager):
-    def test_tie_descendants(self, session, manager):
+    def test_tie_descendants(self, session_fixture, manager):
         child = pipeline.PipelineEntity(
-            session=session,
+            session=session_fixture,
             data={'name': 'child1', 'materials': {}}
         )
 
         parent = pipeline.PipelineEntity(
-            session=session,
+            session=session_fixture,
             data={'name': 'parent1', 'materials': [{'description': 'child1', 'type': 'Pipeline'}]}
         )
 

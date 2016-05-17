@@ -29,19 +29,13 @@
 import pytest
 from six import string_types
 
-from yagocd.client import Yagocd
-from yagocd.session import Session
 from yagocd.resources import job
 
 
 class BaseTestJobManager(object):
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def manager(self, session):
-        return job.JobManager(session=session)
+    def manager(self, session_fixture):
+        return job.JobManager(session=session_fixture)
 
 
 class TestScheduled(BaseTestJobManager):

@@ -26,10 +26,9 @@
 #
 ###############################################################################
 
+# noinspection PyUnresolvedReferences
 from six.moves.urllib.parse import urlencode
 
-from yagocd.client import Yagocd
-from yagocd.session import Session
 from yagocd.resources import material
 
 import pytest
@@ -37,12 +36,8 @@ import pytest
 
 class BaseTestConfigurationManager(object):
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def manager(self, session):
-        return material.MaterialManager(session=session)
+    def manager(self, session_fixture):
+        return material.MaterialManager(session=session_fixture)
 
 
 class TestList(BaseTestConfigurationManager):

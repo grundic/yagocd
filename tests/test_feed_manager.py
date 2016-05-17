@@ -29,19 +29,13 @@
 import pytest
 from six import string_types
 
-from yagocd.client import Yagocd
-from yagocd.session import Session
 from yagocd.resources import feed
 
 
 class BaseTestConfigurationManager(object):
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def manager(self, session):
-        return feed.FeedManager(session=session)
+    def manager(self, session_fixture):
+        return feed.FeedManager(session=session_fixture)
 
 
 class TestPipelines(BaseTestConfigurationManager):

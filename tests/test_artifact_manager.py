@@ -30,8 +30,6 @@ import zipfile
 from six import BytesIO
 from six import string_types, binary_type
 
-from yagocd.client import Yagocd
-from yagocd.session import Session
 from yagocd.resources import artifact
 
 import pytest
@@ -46,13 +44,9 @@ class BaseTestArtifactManager(object):
     JOB_NAME = 'build'
 
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def manager(self, session):
+    def manager(self, session_fixture):
         return artifact.ArtifactManager(
-            session=session,
+            session=session_fixture,
             pipeline_name=self.PIPELINE_NAME,
             pipeline_counter=self.PIPELINE_COUNTER,
             stage_name=self.STAGE_NAME,

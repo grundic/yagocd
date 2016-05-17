@@ -42,13 +42,9 @@ class BaseTestStageManager(object):
     STAGE_COUNTER = '1'
 
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def manager(self, session):
+    def manager(self, session_fixture):
         return stage.StageManager(
-            session=session,
+            session=session_fixture,
             pipeline_name=self.PIPELINE_NAME,
             pipeline_counter=self.PIPELINE_COUNTER,
             stage_name=self.STAGE_NAME,

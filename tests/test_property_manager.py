@@ -26,12 +26,11 @@
 #
 ###############################################################################
 
-from yagocd.client import Yagocd
-from yagocd.session import Session
 from yagocd.resources import property
 
 import pytest
 from six import string_types
+# noinspection PyUnresolvedReferences
 from six.moves.urllib.parse import urlencode
 
 
@@ -43,13 +42,9 @@ class BaseTestPropertyManager(object):
     JOB_NAME = 'build'
 
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def manager(self, session):
+    def manager(self, session_fixture):
         return property.PropertyManager(
-            session=session,
+            session=session_fixture,
             pipeline_name=self.PIPELINE_NAME,
             pipeline_counter=self.PIPELINE_COUNTER,
             stage_name=self.STAGE_NAME,
@@ -170,7 +165,7 @@ class TestHistorical(BaseTestPropertyManager):
 
 
 class TestCreate(BaseTestPropertyManager):
-    PROPERTY_NAME = 'foo_bar'
+    PROPERTY_NAME = 'foo_bar_baz'
     PROPERTY_VALUE = 100500
 
     def test_create_request_url(self, manager, my_vcr):

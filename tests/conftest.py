@@ -35,6 +35,8 @@ import mock
 import pytest
 import requests
 from vcr import VCR
+from yagocd import Yagocd
+from yagocd.session import Session
 
 
 @pytest.fixture(scope='session')
@@ -47,6 +49,11 @@ def mock_session():
     session = mock.patch('yagocd.session.Session').start()
     session.server_url = 'http://example.com'
     return session
+
+
+@pytest.fixture()
+def session_fixture():
+    return Session(auth=('admin', '12345'), options=Yagocd.DEFAULT_OPTIONS)
 
 
 @pytest.fixture()

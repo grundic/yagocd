@@ -26,9 +26,7 @@
 #
 ###############################################################################
 
-from yagocd import Yagocd
 from yagocd.resources import pipeline, stage, job
-from yagocd.session import Session
 
 import mock
 import pytest
@@ -36,18 +34,14 @@ import pytest
 
 class TestStageInstance(object):
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def stage_instance_from_pipeline(self, my_vcr, session):
+    def stage_instance_from_pipeline(self, my_vcr, session_fixture):
         with my_vcr.use_cassette("stage/stage_instance_from_pipeline"):
-            return pipeline.PipelineManager(session).find('Consumer_Website').history()[0].stages()[0]
+            return pipeline.PipelineManager(session_fixture).find('Consumer_Website').history()[0].stages()[0]
 
     @pytest.fixture()
-    def stage_instance_from_stage_history(self, my_vcr, session):
+    def stage_instance_from_stage_history(self, my_vcr, session_fixture):
         with my_vcr.use_cassette("stage/stage_instance_from_stage_history"):
-            return stage.StageManager(session).history('Consumer_Website', 'Commit')[0]
+            return stage.StageManager(session_fixture).history('Consumer_Website', 'Commit')[0]
 
     def test_has_all_managers_methods(self):
         excludes = ['get', 'history', 'full_history']

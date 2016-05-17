@@ -26,11 +26,8 @@
 #
 ###############################################################################
 
-from yagocd import Yagocd
 from yagocd.resources import pipeline, stage, job, artifact, property as prop
-from yagocd.session import Session
 
-import mock
 import pytest
 
 
@@ -43,18 +40,14 @@ class TestJobInstance(object):
     URL = 'http://localhost:8153/go/tab/build/detail/Consumer_Website/29/Commit/1/build'
 
     @pytest.fixture()
-    def session(self):
-        return Session(auth=None, options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def job_instance_from_pipeline(self, my_vcr, session):
+    def job_instance_from_pipeline(self, my_vcr, session_fixture):
         with my_vcr.use_cassette("job/job_instance_from_pipeline"):
-            return pipeline.PipelineManager(session).find(self.PIPELINE_NAME).history()[0].stages()[0].jobs()[0]
+            return pipeline.PipelineManager(session_fixture).find(self.PIPELINE_NAME).history()[0].stages()[0].jobs()[0]
 
     @pytest.fixture()
-    def job_instance_from_stage(self, my_vcr, session):
+    def job_instance_from_stage(self, my_vcr, session_fixture):
         with my_vcr.use_cassette("job/job_instance_from_stage"):
-            return stage.StageManager(session).get(
+            return stage.StageManager(session_fixture).get(
                 self.PIPELINE_NAME,
                 self.PIPELINE_COUNTER,
                 self.STAGE_NAME,
@@ -62,9 +55,9 @@ class TestJobInstance(object):
             ).jobs()[0]
 
     @pytest.fixture()
-    def job_instance_from_job_manager(self, my_vcr, session):
+    def job_instance_from_job_manager(self, my_vcr, session_fixture):
         with my_vcr.use_cassette("job/job_instance_from_job_manager"):
-            return job.JobManager(session).history(self.PIPELINE_NAME, self.STAGE_NAME, self.JOB_NAME)[0]
+            return job.JobManager(session_fixture).history(self.PIPELINE_NAME, self.STAGE_NAME, self.JOB_NAME)[0]
 
     @pytest.mark.parametrize("job_fixture_name", [
         'job_instance_from_pipeline',

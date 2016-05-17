@@ -29,19 +29,13 @@
 import pytest
 from six import string_types
 
-from yagocd.client import Yagocd
-from yagocd.session import Session
 from yagocd.resources import user
 
 
 class BaseTestUserManager(object):
     @pytest.fixture()
-    def session(self):
-        return Session(auth=('admin', '12345'), options=Yagocd.DEFAULT_OPTIONS)
-
-    @pytest.fixture()
-    def manager(self, session):
-        return user.UserManager(session=session)
+    def manager(self, session_fixture):
+        return user.UserManager(session=session_fixture)
 
 
 class TestList(BaseTestUserManager):
@@ -98,6 +92,8 @@ class TestGet(BaseTestUserManager):
         with my_vcr.use_cassette("user/get"):
             result = manager.get(self.USERNAME)
             assert isinstance(result, user.UserEntity)
+
+
 #
 #
 # class TestCreate(BaseTestUserManager):
