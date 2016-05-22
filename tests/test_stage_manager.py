@@ -178,3 +178,13 @@ class TestFullHistory(BaseTestStageManager):
 
         calls = [mock.call(self.PIPELINE_NAME, self.STAGE_NAME, 0), mock.call(self.PIPELINE_NAME, self.STAGE_NAME, 3)]
         history_mock.assert_has_calls(calls)
+
+
+class TestLast(BaseTestStageManager):
+    @mock.patch('yagocd.resources.stage.StageManager.history')
+    def test_history_is_called(self, history_mock, manager):
+        history_mock.side_effect = [['foo', 'bar', 'baz'], []]
+
+        result = manager.last()
+        history_mock.assert_called()
+        assert result == 'foo'
