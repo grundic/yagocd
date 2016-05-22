@@ -4,10 +4,11 @@ interactions:
     headers:
       Accept: [application/xml]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      User-Agent: [python-requests/2.9.1]
+      User-Agent: [python-requests/2.10.0]
     method: GET
-    uri: http://localhost:8153/go/api/admin/config/412f48f7e2ff254e47564a6852ed7a2e.xml
+    uri: http://local.docker:8153/go/api/admin/config/412f48f7e2ff254e47564a6852ed7a2e.xml
   response:
     body:
       string: !!binary |
@@ -34,15 +35,14 @@ interactions:
         vXG37w44ZS6djMENwn7YC4NxL+rDa9uEwB91A+a7URfAHQwHfXdCh9wNOO9OxoPIH/Fh81fUa3Ce
         etVP3Iuzs78ACdLab1IeAAA=
     headers:
-      content-encoding: [gzip]
-      content-length: ['1214']
-      content-type: [text/xml]
-      date: ['Thu, 28 Apr 2016 21:19:35 GMT']
-      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      set-cookie: ['JSESSIONID=1tcwrlaoj3t941lu45jurufbe2;Path=/go;Expires=Thu, 12-May-2016
-          21:19:35 GMT']
-      vary: ['Accept-Encoding, User-Agent']
-      x-cruise-config-md5: [412f48f7e2ff254e47564a6852ed7a2e]
+      Content-Encoding: [gzip]
+      Content-Length: ['1214']
+      Content-Type: [text/xml]
+      Date: ['Sun, 22 May 2016 13:43:45 GMT']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=gt5ktoifxdz3lrmohd9k0qh3;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:45 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-CRUISE-CONFIG-MD5: [412f48f7e2ff254e47564a6852ed7a2e]
     status: {code: 200, message: OK}
 version: 1

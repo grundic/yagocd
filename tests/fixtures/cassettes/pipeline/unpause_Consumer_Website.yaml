@@ -1,87 +1,96 @@
 interactions:
 - request:
-    body: pauseCause=
+    body: !!binary |
+      cGF1c2VDYXVzZT0=
     headers:
       Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       Content-Length: ['11']
       Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-requests/2.9.1]
+      User-Agent: [python-requests/2.10.0]
     method: POST
-    uri: http://localhost:8153/go/api/pipelines/Consumer_Website/pause
-  response:
-    body: {string: !!python/unicode ' '}
-    headers:
-      cache-control: ['max-age=0, private, must-revalidate']
-      content-type: [application/json; charset=utf-8]
-      date: ['Fri, 22 Apr 2016 09:12:07 GMT']
-      etag: ['"7215ee9c7d9dc229d2921a40e899ec5f"']
-      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      set-cookie: ['JSESSIONID=1oxzu0ittra6udhuzbyfy1j11;Path=/go;Expires=Fri, 06-May-2016
-          09:12:07 GMT']
-      x-content-type-options: [nosniff]
-      x-frame-options: [SAMEORIGIN]
-      x-request-id: [a7b41236-576c-49e5-9413-a76e97c2ec21]
-      x-runtime: ['0.025000']
-      x-ua-compatible: [chrome=1]
-      x-xss-protection: [1; mode=block]
-    status: {code: 200, message: OK}
-- request:
-    body: null
-    headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Content-Length: ['0']
-      Cookie: [JSESSIONID=1oxzu0ittra6udhuzbyfy1j11]
-      User-Agent: [python-requests/2.9.1]
-    method: POST
-    uri: http://localhost:8153/go/api/pipelines/Consumer_Website/unpause
-  response:
-    body: {string: !!python/unicode ' '}
-    headers:
-      cache-control: ['max-age=0, private, must-revalidate']
-      content-type: [application/json; charset=utf-8]
-      date: ['Fri, 22 Apr 2016 09:12:07 GMT']
-      etag: ['"7215ee9c7d9dc229d2921a40e899ec5f"']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      x-content-type-options: [nosniff]
-      x-frame-options: [SAMEORIGIN]
-      x-request-id: [8091bc53-7ae4-4012-96ca-eef05401d1b4]
-      x-runtime: ['0.008000']
-      x-ua-compatible: [chrome=1]
-      x-xss-protection: [1; mode=block]
-    status: {code: 200, message: OK}
-- request:
-    body: null
-    headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=1oxzu0ittra6udhuzbyfy1j11]
-      User-Agent: [python-requests/2.9.1]
-    method: GET
-    uri: http://localhost:8153/go/api/pipelines/Consumer_Website/status
+    uri: http://local.docker:8153/go/api/pipelines/Consumer_Website/pause
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAAKtWyslPzk5NUbJKS8wpTtVRKkgsLUbiFidnpKaU5iQm5aQqWZUUlabWAgCO7IX6
-        MgAAAA==
+        H4sIAAAAAAAAAFMAAEXPbOkBAAAA
     headers:
-      cache-control: ['max-age=0, private, must-revalidate']
-      content-encoding: [gzip]
-      content-type: [application/json; charset=utf-8]
-      date: ['Fri, 22 Apr 2016 09:12:07 GMT']
-      etag: ['"c5c18e5148b576aec2e8fead30056540--gzip"']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      vary: ['Accept-Encoding, User-Agent']
-      x-content-type-options: [nosniff]
-      x-frame-options: [SAMEORIGIN]
-      x-request-id: [9e192aa1-810d-42ad-91fa-d43ab27a0fb0]
-      x-runtime: ['0.005000']
-      x-ua-compatible: [chrome=1]
-      x-xss-protection: [1; mode=block]
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 22 May 2016 13:43:52 GMT']
+      ETag: ['"7215ee9c7d9dc229d2921a40e899ec5f--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=l9eggf4maf1sigh46ddg1szy;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:52 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [b3a27f5e-a3b8-4c11-ab09-b5f4e51e11c5]
+      X-Runtime: ['0.010000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      Cookie: [JSESSIONID=l9eggf4maf1sigh46ddg1szy]
+      User-Agent: [python-requests/2.10.0]
+    method: POST
+    uri: http://local.docker:8153/go/api/pipelines/Consumer_Website/unpause
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAFMAAEXPbOkBAAAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 22 May 2016 13:43:52 GMT']
+      ETag: ['"7215ee9c7d9dc229d2921a40e899ec5f--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [acfb0170-5885-45aa-99ef-76319573a468]
+      X-Runtime: ['0.010000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=l9eggf4maf1sigh46ddg1szy]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://local.docker:8153/go/api/pipelines/Consumer_Website/status
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKtWKkgsLU5NUbJKS8wpTtVRKk7OSE0pzUlMyklVsiopKgUKQVQ4VSpZKSnBeM4g
+        EiKQk5+cDTegFgDjYEoAUQAAAA==
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 22 May 2016 13:43:52 GMT']
+      ETag: ['"c5e866f279ed30423c9733e7ca7bc274--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [925a2a26-2f7f-42d8-ad20-55bdd4cd68f6]
+      X-Runtime: ['0.050000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 version: 1

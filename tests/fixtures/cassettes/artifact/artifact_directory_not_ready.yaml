@@ -4,19 +4,19 @@ interactions:
     headers:
       Accept: [application/vnd.go.cd.v1+json]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       User-Agent: [python-requests/2.10.0]
     method: GET
-    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/.zip
+    uri: http://local.docker:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/.zip
   response:
     body: {string: ''}
     headers:
       Content-Language: [en-US]
       Content-Length: ['0']
-      Date: ['Sun, 08 May 2016 13:19:46 GMT']
+      Date: ['Sun, 22 May 2016 13:43:41 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Server: [Jetty(9.2.z-SNAPSHOT)]
-      Set-Cookie: ['JSESSIONID=12da2xoe8gf2gj2hkrzybc0w3;Path=/go;Expires=Sun, 22-May-2016
-          13:19:46 GMT']
+      Set-Cookie: ['JSESSIONID=1fe3w6c9ra0igfsuowiqwdtrz;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:41 GMT']
     status: {code: 202, message: Accepted}
 version: 1

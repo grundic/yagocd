@@ -8,29 +8,28 @@ interactions:
       Connection: [keep-alive]
       User-Agent: [python-requests/2.10.0]
     method: GET
-    uri: http://localhost:8153/go/api/users/admin
+    uri: http://local.docker:8153/go/api/users/admin
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAAJ2QzQrCMBCE73mKEq/SICJIX0WkrMmmCd0mpUkPUvrupk3xB8SDx5nZ+XbZiRUF
-        r8m6NvCqmJJKWnn5FEmaAXXS3MTYV0JAb8vGl1KJ3RhwCHydm/e5G5D0jzJ5CWR8iNX5cDqKxi84
-        sXIEqM66T5q2Tv1Jq8g31tUOOtyYbOPytySx8to1UDb0BPdvETq4ES7HxGHEbHVgKRluJHoZ9VrV
-        QCFPSYOyTeuALARcvnxhyb+ymT0AcAnZbn0BAAA=
+        H4sIAAAAAAAAAJ2QzQqDMBCE73kKSa/FUEqh5FVKkW2yanBNxOihiO/e1Uh/oPTQ48zsfBMyiSyT
+        BTnfRKmziRVrG8xTsKx7LFnLehg6rRR0Lq9CbqzajRH7KNe7eZ+6Ean8UaZggHIeaLDX58PpqKqw
+        ENWKUmBb5z+BpfP2f6CmUDlfeGhxw4oNLd8SxqXlNbAudgT3bxF6uBEu7xn6EZPVgiM2/Ej0Moq1
+        WgLFdGVqNA3PATmIuPz1RbB/FbN4AL8VIfWDAQAA
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Thu, 12 May 2016 21:19:08 GMT']
-      ETag: ['"cf3142ff47ca6f0312a51795d5d5f4cb--gzip"']
+      Date: ['Sun, 22 May 2016 13:48:57 GMT']
+      ETag: ['"c4756df19e639a4aaf5f3e5360a099c6--gzip"']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Server: [Jetty(9.2.z-SNAPSHOT)]
-      Set-Cookie: ['JSESSIONID=hrzi0y05rx881didx7xazc95v;Path=/go;Expires=Thu, 26-May-2016
-          21:19:08 GMT']
+      Set-Cookie: ['JSESSIONID=1j1ofw0qjo23z8a9nwf6d2wp3;Path=/go;Expires=Sun, 05-Jun-2016
+          13:48:57 GMT']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [45c004b3-abc9-4675-b9ac-282d80492a81]
-      X-Runtime: ['0.048000']
+      X-Request-Id: [6d9b6c91-3b3c-440a-b037-60f16b67c64d]
+      X-Runtime: ['0.040000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

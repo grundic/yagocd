@@ -1,33 +1,37 @@
 interactions:
 - request:
-    body: repository_url=https%3A%2F%2Fgithub.com%2Fgocd-demo%2Fservices.git
+    body: !!binary |
+      cmVwb3NpdG9yeV91cmw9aHR0cHMlM0ElMkYlMkZnaXRodWIuY29tJTJGZ3J1bmRpYyUyRnlhZ29j
+      ZC5naXQ=
     headers:
       Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Content-Length: ['66']
+      Content-Length: ['62']
       Content-Type: [application/x-www-form-urlencoded]
-      User-Agent: [python-requests/2.9.1]
+      User-Agent: [python-requests/2.10.0]
     method: POST
-    uri: http://localhost:8153/go/api/material/notify/git
+    uri: http://local.docker:8153/go/api/material/notify/git
   response:
-    body: {string: !!python/unicode 'The material is now scheduled for an update.
-        Please check relevant pipeline(s) for status.
-
-'}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAB3LMQ6AIBBE0d5TTKkNZ7HwAhsYA3EFwoJeX2L93z8icUtnS6JIhlxemI8MQxlw
+        lgbJGDVM4rArxYiZ/YVG5SO5o6ZKTZmrbf9gXfowt3xdtt6aWwAAAA==
     headers:
-      cache-control: [no-cache]
-      content-type: [text/plain; charset=UTF-8]
-      date: ['Sun, 01 May 2016 15:03:13 GMT']
-      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      set-cookie: ['JSESSIONID=11yg9ohs2mms4e3dbg1k4gqml;Path=/go;Expires=Sun, 15-May-2016
-          15:03:13 GMT']
-      x-content-type-options: [nosniff]
-      x-frame-options: [SAMEORIGIN]
-      x-request-id: [4bcd59a9-694b-43c7-a755-f918e7d1d0ad]
-      x-runtime: ['0.007000']
-      x-ua-compatible: [chrome=1]
-      x-xss-protection: [1; mode=block]
+      Cache-Control: [no-cache]
+      Content-Encoding: [gzip]
+      Content-Type: [text/plain; charset=UTF-8]
+      Date: ['Sun, 22 May 2016 13:43:50 GMT']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=1gk4q6au22uuu18y332hefe1jn;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:50 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [dc7a2086-038f-44d4-b0e5-3fbb532c6ef4]
+      X-Runtime: ['0.040000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
     status: {code: 202, message: Accepted}
 version: 1

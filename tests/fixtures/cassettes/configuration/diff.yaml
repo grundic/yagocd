@@ -4,10 +4,11 @@ interactions:
     headers:
       Accept: [text/plain]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      User-Agent: [python-requests/2.9.1]
+      User-Agent: [python-requests/2.10.0]
     method: GET
-    uri: http://localhost:8153/go/api/config/diff/3336409d194252e8c82799472196e70cbe4c7916/719be0bb99470b79fc48a949c24845f65a0fd8ef
+    uri: http://local.docker:8153/go/api/config/diff/3336409d194252e8c82799472196e70cbe4c7916/719be0bb99470b79fc48a949c24845f65a0fd8ef
   response:
     body:
       string: !!binary |
@@ -15,21 +16,20 @@ interactions:
         S2pBTn5lvGNBQU5mcmJJZn6ekh2XNtykxIKCovyyxByFksoCoOrcxLzSxBwlBX07JNtQLIOJQI1P
         gRifiGK8AjKwKUkszgbqB/nIyMgI5CMjI+Ph4CMAxOfHR6UBAAA=
     headers:
-      cache-control: ['max-age=0, private, must-revalidate']
-      content-encoding: [gzip]
-      content-type: [text/plain; charset=UTF-8]
-      date: ['Thu, 28 Apr 2016 21:07:38 GMT']
-      etag: ['"0cc51796189e5c7d55befca46d1f6c8d--gzip"']
-      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      set-cookie: ['JSESSIONID=6lm3wb57siocqwwzo78hrdxh;Path=/go;Expires=Thu, 12-May-2016
-          21:07:38 GMT']
-      vary: ['Accept-Encoding, User-Agent']
-      x-content-type-options: [nosniff]
-      x-frame-options: [SAMEORIGIN]
-      x-request-id: [17c7bf3e-6465-445b-a9da-56e7bc94639e]
-      x-runtime: ['0.013000']
-      x-ua-compatible: [chrome=1]
-      x-xss-protection: [1; mode=block]
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [text/plain; charset=UTF-8]
+      Date: ['Sun, 22 May 2016 13:43:44 GMT']
+      ETag: ['"0cc51796189e5c7d55befca46d1f6c8d--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=1n68lr19ksqcnarcx92ye735g;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:44 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [67635f89-9886-4d8f-a094-2a9eebcb4625]
+      X-Runtime: ['0.380000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 version: 1

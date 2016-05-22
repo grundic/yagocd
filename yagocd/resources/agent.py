@@ -163,7 +163,7 @@ class AgentManager(BaseManager):
                 uuid=uuid,
                 offset=offset
             ),
-            headers={'Accept': self.ACCEPT_HEADER},
+            headers={'Accept': 'application/json'},
         )
 
         jobs = list()

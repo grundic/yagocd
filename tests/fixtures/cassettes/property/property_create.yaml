@@ -5,21 +5,21 @@ interactions:
     headers:
       Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       Content-Length: ['12']
       Content-Type: [application/x-www-form-urlencoded]
       User-Agent: [python-requests/2.10.0]
     method: POST
-    uri: http://localhost:8153/go/properties/Shared_Services/7/Commit/1/build/foo_bar
+    uri: http://local.docker:8153/go/properties/Shared_Services/7/Commit/1/build/foo_bar_baz
   response:
-    body: {string: Property 'foo_bar' created with value '100500'}
+    body: {string: Property 'foo_bar_baz' created with value '100500'}
     headers:
-      Content-Length: ['46']
+      Content-Length: ['50']
       Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Tue, 10 May 2016 20:42:45 GMT']
+      Date: ['Sun, 22 May 2016 13:48:55 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Server: [Jetty(9.2.z-SNAPSHOT)]
-      Set-Cookie: ['JSESSIONID=zey5fy4bx537r63p90gk2get;Path=/go;Expires=Tue, 24-May-2016
-          20:42:45 GMT']
+      Set-Cookie: ['JSESSIONID=1kam1skir1an4104fb7d28o7cd;Path=/go;Expires=Sun, 05-Jun-2016
+          13:48:55 GMT']
     status: {code: 201, message: Created}
 version: 1

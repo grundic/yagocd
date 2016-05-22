@@ -44,7 +44,7 @@ class TestStageInstance(object):
             return stage.StageManager(session_fixture).history('Consumer_Website', 'Commit')[0]
 
     def test_has_all_managers_methods(self):
-        excludes = ['get', 'history', 'full_history']
+        excludes = ['get', 'history', 'full_history', 'last']
 
         def get_public_methods(klass):
             methods = set()
@@ -63,10 +63,14 @@ class TestStageInstance(object):
         assert len(result) == 0, "Some methods are missing in pipeline entity: {}".format(result)
 
     def test_url_from_pipeline(self, stage_instance_from_pipeline):
-        assert stage_instance_from_pipeline.url == 'http://localhost:8153/go/pipelines/Consumer_Website/29/Commit/1'
+        assert stage_instance_from_pipeline.url == '{server}go/pipelines/Consumer_Website/31/Commit/1'.format(
+            server=stage_instance_from_pipeline._session._options['server']
+        )
 
     def test_url_from_history(self, stage_instance_from_stage_history):
-        assert stage_instance_from_stage_history.url == 'http://localhost:8153/go/pipelines/Consumer_Website/29/Commit/1'
+        assert stage_instance_from_stage_history.url == '{server}go/pipelines/Consumer_Website/31/Commit/1'.format(
+            server=stage_instance_from_stage_history._session._options['server']
+        )
 
     def test_pipeline_is_not_none(self, stage_instance_from_pipeline):
         assert stage_instance_from_pipeline.pipeline is not None

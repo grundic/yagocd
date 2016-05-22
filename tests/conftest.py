@@ -29,6 +29,8 @@
 import os
 import sys
 import time
+import copy
+import shutil
 import subprocess
 
 import mock
@@ -53,22 +55,62 @@ def mock_session():
 
 @pytest.fixture()
 def session_fixture():
-    return Session(auth=('admin', '12345'), options=Yagocd.DEFAULT_OPTIONS)
+    options = copy.deepcopy(Yagocd.DEFAULT_OPTIONS)
+    options['server'] = 'http://local.docker:8153/'
+    return Session(
+        auth=('admin', '12345'),
+        options=options
+    )
+
+
+my_vcr_object = VCR(
+    path_transformer=VCR.ensure_suffix('.yaml'),
+    cassette_library_dir=os.path.join(tests_dir(), 'fixtures/cassettes'),
+)
 
 
 @pytest.fixture()
 def my_vcr():
-    return VCR(
-        path_transformer=VCR.ensure_suffix('.yaml'),
-        cassette_library_dir=os.path.join(tests_dir(), 'fixtures/cassettes'),
-    )
+    return my_vcr_object
 
 
 CONTAINER_NAME = 'yagocd-server'
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--fresh-run", action="store_true", default=False,
+        help=(
+            "Execute fresh run of tests: all cassettes will be deleted, instance of GoCD will be "
+            "started in Docker container and test would be executed upon it."
+        )
+    )
+
+
+@pytest.fixture(scope='session')
+def fresh_run(request):
+    return request.config.getoption("--fresh-run")
+
+
+@pytest.fixture(scope="session", autouse=True)
+def gocd_docker(request, fresh_run):
+    if fresh_run:
+        if os.path.exists(my_vcr_object.cassette_library_dir):
+            print("Removing existing cassettes...")
+            shutil.rmtree(my_vcr_object.cassette_library_dir)
+
+        start_container()
+        wait_till_started()
+
+        def fin():
+            stop_container()
+
+        request.addfinalizer(fin)
+
+
 def start_container():
+    sys.stdout.write('Starting Docker container...')
     output = subprocess.check_output([
         "/usr/local/bin/docker",
         "ps",
@@ -98,6 +140,7 @@ def start_container():
 
 
 def wait_till_started():
+    sys.stdout.write('Waiting for availability of GoCD in Docker.')
     while True:
         try:
             requests.get("http://local.docker:8153/go")
@@ -115,14 +158,3 @@ def stop_container():
         "-f",
         CONTAINER_NAME
     ])
-
-
-@pytest.fixture(scope="session")
-def gocd_docker(request):
-    start_container()
-    wait_till_started()
-
-    def fin():
-        stop_container()
-
-    request.addfinalizer(fin)

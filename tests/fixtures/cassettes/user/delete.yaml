@@ -9,22 +9,26 @@ interactions:
       Content-Length: ['0']
       User-Agent: [python-requests/2.10.0]
     method: DELETE
-    uri: http://localhost:8153/go/api/users/user_02
+    uri: http://local.docker:8153/go/api/users/user_02
   response:
-    body: {string: "{\n  \"message\": \"User 'user_02' was deleted successfully.\"\n}\n"}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKvmUlBQyk0tLk5MT1WyUlAKLU4tUlAvBZLxBkbqCuWJxQopqTmpJakpCsWlyclA
+        hWmlOTmVekpctVwAF7ivBDwAAAA=
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
       Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Thu, 12 May 2016 21:34:27 GMT']
-      ETag: ['"cccb4bd4698bf845c2a059efe7e17c51"']
+      Date: ['Sun, 22 May 2016 13:48:57 GMT']
+      ETag: ['"cccb4bd4698bf845c2a059efe7e17c51--gzip"']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Server: [Jetty(9.2.z-SNAPSHOT)]
-      Set-Cookie: ['JSESSIONID=qcbt7dhzycn71vapihciqbdg5;Path=/go;Expires=Thu, 26-May-2016
-          21:34:27 GMT']
+      Set-Cookie: ['JSESSIONID=16o9d83yh6vb0k3gjv3wc12pe;Path=/go;Expires=Sun, 05-Jun-2016
+          13:48:57 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [9d6835b7-f90e-4a0c-ae01-5e1089151d60]
-      X-Runtime: ['0.009000']
+      X-Request-Id: [090ee009-3e92-47f0-872e-8779475b4004]
+      X-Runtime: ['0.010000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

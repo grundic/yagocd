@@ -1,27 +1,28 @@
 interactions:
 - request:
-    body: "--b735183308694cd88f297157dc48cc40\r\nContent-Disposition: form-data; name=\"file\";
-      filename=\"artifact-append.txt\"\r\n\r\nData to append.\r\n--b735183308694cd88f297157dc48cc40--\r\n"
+    body: !!binary |
+      LS03M2EyYjBmY2VhZTk0ZmNmYTIzM2U3YjkxMWE0NTVjYw0KQ29udGVudC1EaXNwb3NpdGlvbjog
+      Zm9ybS1kYXRhOyBuYW1lPSJmaWxlIjsgZmlsZW5hbWU9ImFydGlmYWN0LWFwcGVuZC50eHQiDQoN
+      CkRhdGEgdG8gYXBwZW5kLg0KLS03M2EyYjBmY2VhZTk0ZmNmYTIzM2U3YjkxMWE0NTVjYy0tDQo=
     headers:
       Accept: [application/vnd.go.cd.v1+json]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       Content-Length: ['170']
-      Content-Type: [multipart/form-data; boundary=b735183308694cd88f297157dc48cc40]
-      User-Agent: [python-requests/2.9.1]
+      Content-Type: [multipart/form-data; boundary=73a2b0fceae94fcfa233e7b911a455cc]
+      User-Agent: [python-requests/2.10.0]
     method: PUT
-    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file-append.txt
+    uri: http://local.docker:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file-append.txt
   response:
-    body: {string: !!python/unicode File path/to/the/file-append.txt was appended
-        successfully}
+    body: {string: File path/to/the/file-append.txt was appended successfully}
     headers:
-      content-language: [en-US]
-      content-length: ['58']
-      content-type: [text/plain; charset=UTF-8]
-      date: ['Tue, 26 Apr 2016 20:28:19 GMT']
-      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      set-cookie: ['JSESSIONID=9pm186tfkzlqslr9q9ftg92h;Path=/go;Expires=Tue, 10-May-2016
-          20:28:19 GMT']
+      Content-Language: [en-US]
+      Content-Length: ['58']
+      Content-Type: [text/plain; charset=UTF-8]
+      Date: ['Sun, 22 May 2016 13:43:44 GMT']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=19s8lk3mhdhu51tynqqlgcxpb0;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:44 GMT']
     status: {code: 200, message: OK}
 version: 1

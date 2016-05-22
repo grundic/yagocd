@@ -33,11 +33,11 @@ import pytest
 
 class TestJobInstance(object):
     PIPELINE_NAME = 'Consumer_Website'
-    PIPELINE_COUNTER = 29
+    PIPELINE_COUNTER = 31
     STAGE_NAME = 'Commit'
     STAGE_COUNTER = '1'
     JOB_NAME = 'build'
-    URL = 'http://localhost:8153/go/tab/build/detail/Consumer_Website/29/Commit/1/build'
+    URL = '{server}go/tab/build/detail/Consumer_Website/31/Commit/1/build'
 
     @pytest.fixture()
     def job_instance_from_pipeline(self, my_vcr, session_fixture):
@@ -102,7 +102,7 @@ class TestJobInstance(object):
     ])
     def test_url(self, job_fixture_name, request):
         job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert job_fixture.url == self.URL, "Fixture: {}".format(job_fixture_name)
+        assert job_fixture.url == self.URL.format(server=job_fixture._session._options['server']), "Fixture: {}".format(job_fixture_name)
 
     @pytest.mark.parametrize("job_fixture_name", [
         'job_instance_from_pipeline',

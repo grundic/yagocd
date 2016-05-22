@@ -4,25 +4,23 @@ interactions:
     headers:
       Accept: [application/vnd.go.cd.v1+json]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       User-Agent: [python-requests/2.10.0]
     method: GET
-    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/.zip
+    uri: http://local.docker:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/.zip
   response:
     body:
       string: !!binary |
-        UEsDBBQACAgIAHdqqEgAAAAAAAAAAAAAAAAEAAAAdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAwQU
-        AAgICAB4aahIAAAAAAAAAAAAAAAADwAAAHRoZS91cGxvYWRfdGVzdGNgGAWjYBQMdwAAUEsHCIAX
-        CwYLAAAA6AMAAFBLAQIUABQACAgIAHdqqEgAAAAAAgAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAB0
-        aGUvUEsBAhQAFAAICAgAeGmoSIAXCwYLAAAA6AMAAA8AAAAAAAAAAAAAAAAANAAAAHRoZS91cGxv
-        YWRfdGVzdFBLBQYAAAAAAgACAG8AAAB8AAAAAAA=
+        UEsDBBQACAgIAHRttkgAAAAAAAAAAAAAAAAEAAAAdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIU
+        ABQACAgIAHRttkgAAAAAAgAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAB0aGUvUEsFBgAAAAABAAEA
+        MgAAADQAAAAAAA==
     headers:
       Content-Language: [en-US]
       Content-Type: [application/zip]
-      Date: ['Sun, 08 May 2016 13:19:47 GMT']
+      Date: ['Sun, 22 May 2016 13:43:42 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Server: [Jetty(9.2.z-SNAPSHOT)]
-      Set-Cookie: ['JSESSIONID=vpr83rrd147n1vj19ry825oti;Path=/go;Expires=Sun, 22-May-2016
-          13:19:47 GMT']
+      Set-Cookie: ['JSESSIONID=o0ucysv2u46n1vedqhinybfv0;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:42 GMT']
     status: {code: 200, message: OK}
 version: 1

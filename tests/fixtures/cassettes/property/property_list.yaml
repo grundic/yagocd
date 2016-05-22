@@ -4,24 +4,24 @@ interactions:
     headers:
       Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       User-Agent: [python-requests/2.10.0]
     method: GET
-    uri: http://localhost:8153/go/properties/Shared_Services/7/Commit/1/build
+    uri: http://local.docker:8153/go/properties/Shared_Services/7/Commit/1/build
   response:
-    body: {string: 'cruise_agent,cruise_job_duration,cruise_job_id,cruise_job_result,cruise_pipeline_counter,cruise_pipeline_label,cruise_stage_counter,cruise_timestamp_01_scheduled,cruise_timestamp_02_assigned,cruise_timestamp_03_preparing,cruise_timestamp_04_building,cruise_timestamp_05_completing,cruise_timestamp_06_completed
+    body: {string: 'cruise_agent,cruise_job_duration,cruise_job_id,cruise_job_result,cruise_pipeline_counter,cruise_pipeline_label,cruise_stage_counter,cruise_timestamp_01_scheduled,cruise_timestamp_02_assigned,cruise_timestamp_03_preparing,cruise_timestamp_04_building,cruise_timestamp_05_completing,cruise_timestamp_06_completed,foo_bar
 
-        vagrant-ubuntu-trusty-64,0,148,Passed,7,7,1,2016-05-02T15:14:43Z,2016-05-02T15:15:09Z,2016-05-02T15:15:18Z,2016-05-02T15:15:20Z,2016-05-02T15:15:21Z,2016-05-02T15:15:21Z
+        vagrant-ubuntu-trusty-64,0,148,Passed,7,7,1,2016-05-02T15:14:43Z,2016-05-02T15:15:09Z,2016-05-02T15:15:18Z,2016-05-02T15:15:20Z,2016-05-02T15:15:21Z,2016-05-02T15:15:21Z,100500
 
 '}
     headers:
       Content-Disposition: [Inline; filename=buildProperties.csv]
-      Content-Length: ['481']
+      Content-Length: ['496']
       Content-Type: [text/csv; charset=ISO-8859-1]
-      Date: ['Tue, 10 May 2016 20:29:43 GMT']
+      Date: ['Sun, 22 May 2016 13:48:55 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Server: [Jetty(9.2.z-SNAPSHOT)]
-      Set-Cookie: ['JSESSIONID=xmttsqes7tbbt0044de42gdz;Path=/go;Expires=Tue, 24-May-2016
-          20:29:43 GMT']
+      Set-Cookie: ['JSESSIONID=1cg6qhhtwii7d1842b0oly9t76;Path=/go;Expires=Sun, 05-Jun-2016
+          13:48:55 GMT']
     status: {code: 200, message: OK}
 version: 1

@@ -4,29 +4,32 @@ interactions:
     headers:
       Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       Content-Length: ['0']
-      User-Agent: [python-requests/2.9.1]
+      User-Agent: [python-requests/2.10.0]
     method: POST
-    uri: http://localhost:8153/go/api/pipelines/Deploy_UAT/releaseLock
+    uri: http://local.docker:8153/go/api/pipelines/Deploy_UAT/releaseLock
   response:
-    body: {string: !!python/unicode 'pipeline lock released for Deploy_UAT
-
-'}
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAACvILEjNycxLVcjJT85WKErNSU0sTk1RSMsvUnBJLcjJr4wPdQzhAgBznQaiJgAA
+        AA==
     headers:
-      cache-control: ['max-age=0, private, must-revalidate']
-      content-type: [application/json; charset=utf-8]
-      date: ['Tue, 03 May 2016 21:31:04 GMT']
-      etag: ['"86115cc41905cb66dc5f9de524b9f19f"']
-      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      set-cookie: ['JSESSIONID=1e29yc5hqjt0y1mgyuk85hrxx4;Path=/go;Expires=Tue, 17-May-2016
-          21:31:04 GMT']
-      x-content-type-options: [nosniff]
-      x-frame-options: [SAMEORIGIN]
-      x-request-id: [0f6f50c3-6d6c-4d90-af81-d78174ca361d]
-      x-runtime: ['0.007000']
-      x-ua-compatible: [chrome=1]
-      x-xss-protection: [1; mode=block]
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 22 May 2016 13:43:52 GMT']
+      ETag: ['"86115cc41905cb66dc5f9de524b9f19f--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=okkkd9stnw451cfxm6aa2qppt;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:52 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [abbd12ab-1a9c-4da3-9637-06086a99e995]
+      X-Runtime: ['0.030000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 version: 1

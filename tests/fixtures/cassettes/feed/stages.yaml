@@ -4,360 +4,421 @@ interactions:
     headers:
       Accept: [application/xml]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      User-Agent: [python-requests/2.9.1]
+      User-Agent: [python-requests/2.10.0]
     method: GET
-    uri: http://localhost:8153/go/api/pipelines/Shared_Services/stages.xml
+    uri: http://local.docker:8153/go/api/pipelines/Shared_Services/stages.xml
   response:
-    body: {string: !!python/unicode "<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:go=\"http://www.thoughtworks-studios.com/ns/go\">\n
-        \   <title><![CDATA[Shared_Services]]></title>\n    <id>http://localhost:8153/go/api/pipelines/Shared_Services/stages.xml</id>\n
-        \   <author>\n        <name>Go</name>\n    </author>\n    <updated>2016-04-27T21:45:44+00:00</updated>\n
-        \   <link rel=\"self\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/stages.xml\"/>\n\n
-        \       <link rel=\"next\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/stages.xml?before=6\"/>\n\n
-        \       <entry>\n            <title><![CDATA[Shared_Services(8) stage Package(1)
-        Passed]]></title>\n            <updated>2016-04-27T21:45:44+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/8/Package/1</id>\n\n\n
+    body: {string: "<feed xmlns=\"http://www.w3.org/2005/Atom\" xmlns:go=\"http://www.thoughtworks-studios.com/ns/go\">\n
+        \   <title><![CDATA[Shared_Services]]></title>\n    <id>http://local.docker:8153/go/api/pipelines/Shared_Services/stages.xml</id>\n
+        \   <author>\n        <name>Go</name>\n    </author>\n    <updated>2016-05-18T21:26:42+00:00</updated>\n
+        \   <link rel=\"self\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/stages.xml\"/>\n\n
+        \       <link rel=\"next\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/stages.xml?before=2561\"/>\n\n
+        \       <entry>\n            <title><![CDATA[Shared_Services(33) stage Package(1)
+        Passed]]></title>\n            <updated>2016-05-18T21:26:42+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/33/Package/1</id>\n\n\n
         \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
         \           </author>\n\n            <link title=\"Package Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/150.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Package Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/8/Package/1\"
+        href=\"http://local.docker:8153/go/api/stages/482.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Package Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/33/Package/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/80.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/250.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/8/Package/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/33/Package/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(8)
-        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-04-27T21:45:24+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/8/Unit_Test/1</id>\n\n\n
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(33)
+        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-05-18T21:26:22+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/33/Unit_Test/1</id>\n\n\n
         \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
         \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/149.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Unit_Test Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/8/Unit_Test/1\"
+        href=\"http://local.docker:8153/go/api/stages/481.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Unit_Test Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/33/Unit_Test/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/80.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/250.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/8/Unit_Test/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/33/Unit_Test/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(8)
-        stage Commit(1) Passed]]></title>\n            <updated>2016-04-27T21:45:04+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/8/Commit/1</id>\n\n\n
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(33)
+        stage Commit(1) Passed]]></title>\n            <updated>2016-05-18T21:26:03+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/33/Commit/1</id>\n\n\n
         \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://localhost:8153/go/api/stages/148.xml\"
+        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://local.docker:8153/go/api/stages/480.xml\"
         rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
-        Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/8/Commit/1\"
+        Stage Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/33/Commit/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/80.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/250.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/8/Commit/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/33/Commit/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(7)
-        stage Package(1) Passed]]></title>\n            <updated>2016-04-27T06:21:19+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/7/Package/1</id>\n\n\n
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(32)
+        stage Package(1) Failed]]></title>\n            <updated>2016-05-18T21:25:50+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/32/Package/1</id>\n\n\n
         \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
         \           </author>\n\n            <link title=\"Package Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/118.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Package Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/7/Package/1\"
+        href=\"http://local.docker:8153/go/api/stages/479.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Package Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/32/Package/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/48.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/249.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/7/Package/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/32/Package/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(7)
-        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-04-27T06:20:59+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/7/Unit_Test/1</id>\n\n\n
+        term=\"failed\" label=\"Failed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(32)
+        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-05-18T21:23:24+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/32/Unit_Test/1</id>\n\n\n
         \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
         \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/117.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Unit_Test Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/7/Unit_Test/1\"
+        href=\"http://local.docker:8153/go/api/stages/478.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Unit_Test Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/32/Unit_Test/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/48.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/249.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/7/Unit_Test/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/32/Unit_Test/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(7)
-        stage Commit(1) Passed]]></title>\n            <updated>2016-04-27T06:20:40+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/7/Commit/1</id>\n\n\n
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(32)
+        stage Commit(1) Passed]]></title>\n            <updated>2016-05-18T21:23:05+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/32/Commit/1</id>\n\n\n
         \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://localhost:8153/go/api/stages/116.xml\"
+        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://local.docker:8153/go/api/stages/477.xml\"
         rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
-        Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/7/Commit/1\"
+        Stage Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/32/Commit/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/48.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/249.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/7/Commit/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/32/Commit/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(6)
-        stage Package(1) Passed]]></title>\n            <updated>2015-08-05T16:09:45+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/6/Package/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Package Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/82.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Package Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/6/Package/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/37.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/6/Package/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(6)
-        stage Unit_Test(1) Passed]]></title>\n            <updated>2015-08-05T16:09:25+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/6/Unit_Test/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/81.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Unit_Test Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/6/Unit_Test/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/37.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/6/Unit_Test/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(6)
-        stage Commit(1) Passed]]></title>\n            <updated>2015-08-05T16:09:07+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/6/Commit/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://localhost:8153/go/api/stages/80.xml\"
-        rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
-        Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/6/Commit/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/37.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/6/Commit/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(5)
-        stage Package(1) Passed]]></title>\n            <updated>2015-08-05T16:00:45+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/5/Package/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Package Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/65.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Package Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/5/Package/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/28.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/5/Package/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(5)
-        stage Unit_Test(1) Passed]]></title>\n            <updated>2015-08-05T16:00:25+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/5/Unit_Test/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/64.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Unit_Test Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/5/Unit_Test/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/28.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/5/Unit_Test/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(5)
-        stage Commit(1) Passed]]></title>\n            <updated>2015-08-05T16:00:05+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/5/Commit/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://localhost:8153/go/api/stages/63.xml\"
-        rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
-        Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/5/Commit/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/28.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/5/Commit/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(4)
-        stage Package(1) Passed]]></title>\n            <updated>2015-08-05T15:50:25+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/4/Package/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Package Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/42.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Package Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/4/Package/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/20.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/4/Package/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(4)
-        stage Unit_Test(1) Passed]]></title>\n            <updated>2015-08-05T15:50:05+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/4/Unit_Test/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/41.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Unit_Test Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/4/Unit_Test/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/20.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/4/Unit_Test/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(4)
-        stage Commit(1) Passed]]></title>\n            <updated>2015-08-05T15:49:47+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/4/Commit/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://localhost:8153/go/api/stages/39.xml\"
-        rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
-        Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/4/Commit/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/20.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/4/Commit/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(3)
-        stage Package(1) Passed]]></title>\n            <updated>2015-08-05T15:24:55+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/3/Package/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Package Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/13.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Package Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/3/Package/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/5.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/3/Package/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(3)
-        stage Unit_Test(1) Passed]]></title>\n            <updated>2015-08-05T15:24:35+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/3/Unit_Test/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/12.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Unit_Test Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/3/Unit_Test/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/5.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/3/Unit_Test/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(3)
-        stage Commit(1) Passed]]></title>\n            <updated>2015-08-05T15:24:15+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/3/Commit/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@thoughtworks.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://localhost:8153/go/api/stages/11.xml\"
-        rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
-        Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/3/Commit/1\"
-        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/5.xml\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/3/Commit/1/pipeline\"
-        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
-        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(2)
-        stage Package(1) Passed]]></title>\n            <updated>2015-08-05T15:15:55+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/2/Package/1</id>\n\n\n
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(31)
+        stage Package(1) Passed]]></title>\n            <updated>2016-05-18T20:42:04+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/31/Package/1</id>\n\n\n
         \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
         \           </author>\n\n            <link title=\"Package Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/4.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Package Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/2/Package/1\"
+        href=\"http://local.docker:8153/go/api/stages/438.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Package Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/31/Package/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/2.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/208.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/2/Package/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/31/Package/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(2)
-        stage Unit_Test(1) Passed]]></title>\n            <updated>2015-08-05T15:15:35+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/2/Unit_Test/1</id>\n\n\n
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(31)
+        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-05-18T20:41:44+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/31/Unit_Test/1</id>\n\n\n
         \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
         \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
-        href=\"http://localhost:8153/go/api/stages/3.xml\" rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Unit_Test Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/2/Unit_Test/1\"
+        href=\"http://local.docker:8153/go/api/stages/437.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Unit_Test Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/31/Unit_Test/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/2.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/208.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/2/Unit_Test/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/31/Unit_Test/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(2)
-        stage Commit(1) Passed]]></title>\n            <updated>2015-08-05T15:15:15+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/2/Commit/1</id>\n\n\n
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(31)
+        stage Commit(1) Passed]]></title>\n            <updated>2016-05-18T20:41:24+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/31/Commit/1</id>\n\n\n
         \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://localhost:8153/go/api/stages/2.xml\"
+        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://local.docker:8153/go/api/stages/436.xml\"
         rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
-        Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/2/Commit/1\"
+        Stage Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/31/Commit/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/2.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/208.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/2/Commit/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/31/Commit/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
-        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(1)
-        stage Commit(1) Passed]]></title>\n            <updated>2015-08-05T15:13:35+00:00</updated>\n
-        \           <id>http://localhost:8153/go/pipelines/Shared_Services/1/Commit/1</id>\n\n\n
-        \           <author>\n                <name><![CDATA[Vagrant User <none@example.com>]]></name>\n
-        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://localhost:8153/go/api/stages/1.xml\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(30)
+        stage Commit(1) Cancelled]]></title>\n            <updated>2016-05-10T21:09:04+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/30/Commit/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://local.docker:8153/go/api/stages/404.xml\"
         rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
-        Stage Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/1/Commit/1\"
+        Stage Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/30/Commit/1\"
         rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
-        Pipeline Detail\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/1.xml\"
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/176.xml\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
-        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://localhost:8153/go/pipelines/Shared_Services/1/Commit/1/pipeline\"
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/30/Commit/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"cancelled\" label=\"Cancelled\" />\n        </entry>\n        <entry>\n
+        \           <title><![CDATA[Shared_Services(29) stage Package(1) Passed]]></title>\n
+        \           <updated>2016-05-06T22:10:33+00:00</updated>\n            <id>http://local.docker:8153/go/pipelines/Shared_Services/29/Package/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Package Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/388.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Package Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/29/Package/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/156.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/29/Package/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(29)
+        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-05-06T22:10:13+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/29/Unit_Test/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/387.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Unit_Test Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/29/Unit_Test/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/156.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/29/Unit_Test/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(29)
+        stage Commit(1) Passed]]></title>\n            <updated>2016-05-06T22:09:53+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/29/Commit/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://local.docker:8153/go/api/stages/386.xml\"
+        rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
+        Stage Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/29/Commit/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/156.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/29/Commit/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(28)
+        stage Package(1) Passed]]></title>\n            <updated>2016-05-05T20:03:01+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/28/Package/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Package Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/366.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Package Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/28/Package/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/146.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/28/Package/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(28)
+        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-05-05T20:02:04+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/28/Unit_Test/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/363.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Unit_Test Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/28/Unit_Test/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/146.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/28/Unit_Test/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(27)
+        stage Package(1) Passed]]></title>\n            <updated>2016-05-05T14:11:25+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/27/Package/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Package Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/361.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Package Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/27/Package/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/143.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/27/Package/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(28)
+        stage Commit(1) Passed]]></title>\n            <updated>2016-05-05T14:09:45+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/28/Commit/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://local.docker:8153/go/api/stages/358.xml\"
+        rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
+        Stage Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/28/Commit/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/146.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/28/Commit/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(27)
+        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-05-05T14:09:05+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/27/Unit_Test/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/356.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Unit_Test Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/27/Unit_Test/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/143.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/27/Unit_Test/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(27)
+        stage Commit(1) Passed]]></title>\n            <updated>2016-05-05T14:07:05+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/27/Commit/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://local.docker:8153/go/api/stages/350.xml\"
+        rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
+        Stage Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/27/Commit/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/143.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/27/Commit/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(26)
+        stage Package(1) Passed]]></title>\n            <updated>2016-05-05T14:04:24+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/26/Package/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Package Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/344.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Package Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/26/Package/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/139.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/26/Package/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(26)
+        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-05-05T14:04:05+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/26/Unit_Test/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/343.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Unit_Test Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/26/Unit_Test/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/139.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/26/Unit_Test/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(26)
+        stage Commit(1) Passed]]></title>\n            <updated>2016-05-05T14:03:44+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/26/Commit/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://local.docker:8153/go/api/stages/342.xml\"
+        rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
+        Stage Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/26/Commit/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/139.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/26/Commit/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(25)
+        stage Package(1) Passed]]></title>\n            <updated>2016-05-05T14:03:24+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/25/Package/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Package Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/341.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Package Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/25/Package/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/137.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/25/Package/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(25)
+        stage Unit_Test(1) Passed]]></title>\n            <updated>2016-05-05T14:02:44+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/25/Unit_Test/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Unit_Test Stage Detail\"
+        href=\"http://local.docker:8153/go/api/stages/339.xml\" rel=\"alternate\"
+        type=\"application/vnd.go+xml\"/>\n            <link title=\"Unit_Test Stage
+        Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/25/Unit_Test/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/137.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/25/Unit_Test/1/pipeline\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
+        \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
+        term=\"passed\" label=\"Passed\" />\n        </entry>\n        <entry>\n            <title><![CDATA[Shared_Services(25)
+        stage Commit(1) Passed]]></title>\n            <updated>2016-05-05T14:01:24+00:00</updated>\n
+        \           <id>http://local.docker:8153/go/pipelines/Shared_Services/25/Commit/1</id>\n\n\n
+        \           <author>\n                <name><![CDATA[Ken Mugrage <kmugrage@users.noreply.github.com>]]></name>\n
+        \           </author>\n\n            <link title=\"Commit Stage Detail\" href=\"http://local.docker:8153/go/api/stages/337.xml\"
+        rel=\"alternate\" type=\"application/vnd.go+xml\"/>\n            <link title=\"Commit
+        Stage Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/25/Commit/1\"
+        rel=\"alternate\" type=\"text/html\"/>\n            <link title=\"Shared_Services
+        Pipeline Detail\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/137.xml\"
+        rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"application/vnd.go+xml\"/>\n
+        \           <link title=\"Shared_Services Pipeline Detail\" href=\"http://local.docker:8153/go/pipelines/Shared_Services/25/Commit/1/pipeline\"
         rel=\"http://www.thoughtworks-studios.com/ns/relations/go/pipeline\" type=\"text/html\"/>\n\n\n\n
         \           <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"stage\" label=\"Stage\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"completed\" label=\"Completed\" />\n            <category scheme=\"http://www.thoughtworks-studios.com/ns/categories/go\"
         term=\"passed\" label=\"Passed\" />\n        </entry>\n</feed>"}
     headers:
-      cache-control: ['max-age=0, private, must-revalidate']
-      content-type: [application/atom+xml; charset=utf-8]
-      date: ['Sun, 01 May 2016 13:51:40 GMT']
-      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      set-cookie: ['JSESSIONID=1vwa6axcujjqgfpehz8hltd5n;Path=/go;Expires=Sun, 15-May-2016
-          13:51:40 GMT']
-      x-content-type-options: [nosniff]
-      x-frame-options: [SAMEORIGIN]
-      x-request-id: [71bc7a15-6b4e-47dc-a472-17bcfb24c7cd]
-      x-runtime: ['0.484000']
-      x-ua-compatible: [chrome=1]
-      x-xss-protection: [1; mode=block]
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/atom+xml; charset=utf-8]
+      Date: ['Sun, 22 May 2016 13:43:46 GMT']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=66hlz9voa0kn1tgxlsuns42ke;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:46 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [c15a0a8f-0f05-4970-b6bd-3690408f6e83]
+      X-Runtime: ['1.240000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 version: 1

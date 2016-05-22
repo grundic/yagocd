@@ -4,31 +4,31 @@ interactions:
     headers:
       Accept: [application/xml]
       Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      User-Agent: [python-requests/2.9.1]
+      User-Agent: [python-requests/2.10.0]
     method: GET
-    uri: http://localhost:8153/go/api/stages/11.xml
+    uri: http://local.docker:8153/go/api/stages/11.xml
   response:
-    body: {string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<stage
-        name=\"Commit\" counter=\"1\">\n  <link rel=\"self\" href=\"http://localhost:8153/go/api/stages/11.xml\"/>\n
+    body: {string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<stage name=\"Commit\"
+        counter=\"1\">\n  <link rel=\"self\" href=\"http://local.docker:8153/go/api/stages/11.xml\"/>\n
         \ <id><![CDATA[urn:x-go.studios.thoughtworks.com:stage-id:Shared_Services:3:Commit:1]]></id>\n
-        \ <pipeline name=\"Shared_Services\" counter=\"3\" label=\"3\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/5.xml\"/>\n
+        \ <pipeline name=\"Shared_Services\" counter=\"3\" label=\"3\" href=\"http://local.docker:8153/go/api/pipelines/Shared_Services/5.xml\"/>\n
         \ <updated>2015-08-05T15:24:15Z</updated>\n  <result>Passed</result>\n  <state>Completed</state>\n
-        \ <approvedBy><![CDATA[changes]]></approvedBy>\n  <jobs>\n    <job href=\"http://localhost:8153/go/api/jobs/11.xml\"/>\n
+        \ <approvedBy><![CDATA[changes]]></approvedBy>\n  <jobs>\n    <job href=\"http://local.docker:8153/go/api/jobs/11.xml\"/>\n
         \ </jobs>\n</stage>\n"}
     headers:
-      cache-control: ['max-age=0, private, must-revalidate']
-      content-type: [application/xml; charset=utf-8]
-      date: ['Sun, 01 May 2016 13:54:40 GMT']
-      expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      server: [Jetty(9.2.z-SNAPSHOT)]
-      set-cookie: ['JSESSIONID=18lxjfxumwv151vz23j2urbste;Path=/go;Expires=Sun, 15-May-2016
-          13:54:40 GMT']
-      x-content-type-options: [nosniff]
-      x-frame-options: [SAMEORIGIN]
-      x-request-id: [9402cfe1-507f-4f9b-961c-cb669eea5720]
-      x-runtime: ['0.068000']
-      x-ua-compatible: [chrome=1]
-      x-xss-protection: [1; mode=block]
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/xml; charset=utf-8]
+      Date: ['Sun, 22 May 2016 13:43:48 GMT']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=1ayj5c6j7lx731gpbqog1cjx5u;Path=/go;Expires=Sun, 05-Jun-2016
+          13:43:48 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [0321b5b6-013a-4cb3-a43f-e707961c9892]
+      X-Runtime: ['0.140000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
 version: 1

@@ -134,7 +134,7 @@ class TestModifications(BaseTestConfigurationManager):
 
 
 class TestNotifyGit(BaseTestConfigurationManager):
-    URL = 'https://github.com/gocd-demo/services.git'
+    URL = 'https://github.com/grundic/yagocd.git'
 
     def test_notify_git_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("material/notify_git") as cass:

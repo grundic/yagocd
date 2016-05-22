@@ -26,9 +26,9 @@
 #
 ###############################################################################
 
-from yagocd.client import Yagocd
-from yagocd.session import Session
-from yagocd.resources import stage
+import time
+
+from yagocd.resources import stage, pipeline
 
 import pytest
 import mock
@@ -36,9 +36,9 @@ from six import string_types
 
 
 class BaseTestStageManager(object):
-    PIPELINE_NAME = 'Shared_Services'
-    PIPELINE_COUNTER = 7
-    STAGE_NAME = 'Commit'
+    PIPELINE_NAME = 'CancelledPipeline'
+    PIPELINE_COUNTER = 2
+    STAGE_NAME = 'defaultStage'
     STAGE_COUNTER = '1'
 
     @pytest.fixture()
@@ -53,37 +53,47 @@ class BaseTestStageManager(object):
 
 
 class TestCancel(BaseTestStageManager):
-    def test_cancel_request_url(self, manager, my_vcr):
+
+    def do_cancel(self, manager, cass, session_fixture):
+        if not len(cass.requests):
+            # trigger pipeline, so it could be cancelled
+            pipeline.PipelineManager(session_fixture).schedule_with_instance(self.PIPELINE_NAME)
+            while manager.last(self.PIPELINE_NAME, self.STAGE_NAME).data.result != 'Unknown':
+                time.sleep(1)
+
+        return manager.cancel()
+
+    def test_cancel_request_url(self, manager, my_vcr, session_fixture):
         with my_vcr.use_cassette("stage/stage_cancel") as cass:
-            manager.cancel()
-            assert cass.requests[0].path == '/go/api/stages/{pipeline_name}/{stage_name}/cancel'.format(
+            self.do_cancel(manager, cass, session_fixture)
+            assert cass.requests[-1].path == '/go/api/stages/{pipeline_name}/{stage_name}/cancel'.format(
                 pipeline_name=self.PIPELINE_NAME,
                 stage_name=self.STAGE_NAME
             )
 
-    def test_cancel_request_method(self, manager, my_vcr):
+    def test_cancel_request_method(self, manager, my_vcr, session_fixture):
         with my_vcr.use_cassette("stage/stage_cancel") as cass:
-            manager.cancel()
-            assert cass.requests[0].method == 'POST'
+            self.do_cancel(manager, cass, session_fixture)
+            assert cass.requests[-1].method == 'POST'
 
-    def test_cancel_request_accept_headers(self, manager, my_vcr):
+    def test_cancel_request_accept_headers(self, manager, my_vcr, session_fixture):
         with my_vcr.use_cassette("stage/stage_cancel") as cass:
-            manager.cancel()
-            assert cass.requests[0].headers['accept'] == 'application/json'
+            self.do_cancel(manager, cass, session_fixture)
+            assert cass.requests[-1].headers['accept'] == 'application/json'
 
-    def test_cancel_response_code(self, manager, my_vcr):
+    def test_cancel_response_code(self, manager, my_vcr, session_fixture):
         with my_vcr.use_cassette("stage/stage_cancel") as cass:
-            manager.cancel()
-            assert cass.responses[0]['status']['code'] == 200
+            self.do_cancel(manager, cass, session_fixture)
+            assert cass.responses[-1]['status']['code'] == 200
 
-    def test_cancel_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("stage/stage_cancel"):
-            result = manager.cancel()
+    def test_cancel_return_type(self, manager, my_vcr, session_fixture):
+        with my_vcr.use_cassette("stage/stage_cancel") as cass:
+            result = self.do_cancel(manager, cass, session_fixture)
             assert isinstance(result, string_types)
 
-    def test_cancel_return_value(self, manager, my_vcr):
-        with my_vcr.use_cassette("stage/stage_cancel"):
-            result = manager.cancel()
+    def test_cancel_return_value(self, manager, my_vcr, session_fixture):
+        with my_vcr.use_cassette("stage/stage_cancel") as cass:
+            result = self.do_cancel(manager, cass, session_fixture)
             assert result == 'Stage cancelled successfully.\n'
 
 

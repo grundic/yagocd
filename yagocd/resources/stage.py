@@ -155,6 +155,18 @@ class StageManager(BaseManager):
             offset += len(instances)
             instances = self.history(pipeline_name, stage_name, offset)
 
+    def last(self, pipeline_name=None, stage_name=None):
+        """
+        Get last stage instance.
+
+        :param pipeline_name: name of the pipeline.
+        :param stage_name: name of the stage.
+        :rtype: yagocd.resources.pipeline.PipelineInstance
+        """
+        stage_history = self.history(pipeline_name=pipeline_name, stage_name=stage_name)
+        if stage_history:
+            return stage_history[0]
+
 
 class StageInstance(Base):
     """
