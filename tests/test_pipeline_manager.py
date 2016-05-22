@@ -252,34 +252,86 @@ class TestGet(BaseTestPipelineManager):
 
 
 class TestPause(BaseTestPipelineManager):
-    def test_pause(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pause_Consumer_Website"):
-            name = "Consumer_Website"
-            reason = 'Test pause reason'
-            manager.unpause(name)
+    NAME = 'Consumer_Website'
+    REASON = 'Test pause reason'
 
-            result = manager.pause(name, reason)
+    def test_pause_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
+            manager.pause(self.NAME, self.REASON)
+            assert cass.requests[0].path == '/go/api/pipelines/{name}/pause'.format(name=self.NAME)
+
+    def test_pause_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
+            manager.pause(self.NAME, self.REASON)
+            assert cass.requests[0].method == 'POST'
+
+    def test_pause_request_accept_header(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
+            manager.pause(self.NAME, self.REASON)
+            assert cass.requests[0].headers['accept'] == 'application/json'
+
+    def test_pause_request_confirm_header(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
+            manager.pause(self.NAME, self.REASON)
+            assert cass.requests[0].headers['Confirm'] == 'true'
+
+    def test_pause_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
+            manager.pause(self.NAME, self.REASON)
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_pause(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/pause_Consumer_Website_complex"):
+            manager.unpause(self.NAME)
+
+            result = manager.pause(self.NAME, self.REASON)
 
             assert result is None
             expected_items = {'paused': True, 'schedulable': False, 'locked': False}
-            status = manager.status(name)
+            status = manager.status(self.NAME)
             for item_name, value in expected_items.items():
                 assert status[item_name] == value
 
-            manager.unpause(name)
+            manager.unpause(self.NAME)
 
 
 class TestUnPause(BaseTestPipelineManager):
-    def test_unpause(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website"):
-            name = "Consumer_Website"
-            manager.pause(name, '')
+    NAME = "Consumer_Website"
 
-            result = manager.unpause(name)
+    def test_unpause_request_url(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
+            manager.unpause(self.NAME)
+            assert cass.requests[0].path == '/go/api/pipelines/{name}/unpause'.format(name=self.NAME)
+
+    def test_unpause_request_method(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
+            manager.unpause(self.NAME)
+            assert cass.requests[0].method == 'POST'
+
+    def test_unpause_request_accept_header(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
+            manager.unpause(self.NAME)
+            assert cass.requests[0].headers['accept'] == 'application/json'
+
+    def test_unpause_request_confirm_header(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
+            manager.unpause(self.NAME)
+            assert cass.requests[0].headers['Confirm'] == 'true'
+
+    def test_unpause_response_code(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
+            manager.unpause(self.NAME)
+            assert cass.responses[0]['status']['code'] == 200
+
+    def test_unpause(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website_complex"):
+            manager.pause(self.NAME, '')
+
+            result = manager.unpause(self.NAME)
             assert result is None
 
             expected_items = {'paused': False, 'schedulable': True, 'locked': False}
-            status = manager.status(name)
+            status = manager.status(self.NAME)
             for name, value in expected_items.items():
                 assert status[name] == value
 
@@ -299,11 +351,17 @@ class TestReleaseLock(BaseTestPipelineManager):
             manager.release_lock(name)
             assert cass.requests[0].method == 'POST'
 
-    def test_release_lock_request_accept_headers(self, manager, my_vcr):
+    def test_release_lock_request_accept_header(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/release_lock") as cass:
             name = "Deploy_UAT"
             manager.release_lock(name)
             assert cass.requests[0].headers['accept'] == 'application/json'
+
+    def test_release_lock_request_confirm_header(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/release_lock") as cass:
+            name = "Deploy_UAT"
+            manager.release_lock(name)
+            assert cass.requests[0].headers['Confirm'] == 'true'
 
     def test_release_lock_response_code(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/release_lock") as cass:
@@ -349,7 +407,7 @@ class TestSchedule(BaseTestPipelineManager):
 
     @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
     @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
-    def test_schedule_request_accept_headers(self, manager, my_vcr, variables, secure_variables):
+    def test_schedule_request_headers(self, manager, my_vcr, variables, secure_variables):
         suffix = self.get_suffix(variables, secure_variables)
         with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)) as cass:
             manager.schedule(
@@ -359,6 +417,7 @@ class TestSchedule(BaseTestPipelineManager):
             )
             assert cass.requests[0].headers['accept'] == 'application/json'
             assert cass.requests[0].headers['content-type'] == 'application/json'
+            assert cass.requests[0].headers['Confirm'] == 'true'
 
     @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
     @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])

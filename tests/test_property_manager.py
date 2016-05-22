@@ -199,10 +199,15 @@ class TestCreate(BaseTestPropertyManager):
             manager.create(self.PROPERTY_NAME, self.PROPERTY_VALUE)
             assert cass.requests[0].method == 'POST'
 
-    def test_create_request_accept_headers(self, manager, my_vcr):
+    def test_create_request_accept_header(self, manager, my_vcr):
         with my_vcr.use_cassette("property/property_create") as cass:
             manager.create(self.PROPERTY_NAME, self.PROPERTY_VALUE)
             assert cass.requests[0].headers['accept'] == 'application/json'
+
+    def test_create_request_confirm_header(self, manager, my_vcr):
+        with my_vcr.use_cassette("property/property_create") as cass:
+            manager.create(self.PROPERTY_NAME, self.PROPERTY_VALUE)
+            assert cass.requests[0].headers['Confirm'] == 'true'
 
     def test_create_response_code(self, manager, my_vcr):
         with my_vcr.use_cassette("property/property_create") as cass:

@@ -36,16 +36,16 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:48:55 GMT']
+      Date: ['Sun, 22 May 2016 14:55:41 GMT']
       ETag: ['"3717d5e807e909ec1a38adc6bf079afa--gzip"']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=13gwn6hgtkj7m17l7xvmzrsbk7;Path=/go;Expires=Sun, 05-Jun-2016
-          13:48:55 GMT']
+      Set-Cookie: ['JSESSIONID=1cobxq6e44nsilck0xap9m79w;Path=/go;Expires=Sun, 05-Jun-2016
+          14:55:41 GMT']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [eea0118e-68bf-4093-a2e3-7957ce4a95f5]
-      X-Runtime: ['0.060000']
+      X-Request-Id: [1e2eb30f-f295-43f3-869f-4a291b78c36e]
+      X-Runtime: ['0.030000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
@@ -56,7 +56,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=13gwn6hgtkj7m17l7xvmzrsbk7]
+      Cookie: [JSESSIONID=1cobxq6e44nsilck0xap9m79w]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://local.docker:8153/go/api/pipelines/Consumer_Website/history/0
@@ -96,13 +96,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:48:55 GMT']
+      Date: ['Sun, 22 May 2016 14:55:41 GMT']
       ETag: ['"4ceee07200186432b5f5e0e9f1d37583--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [323ba914-4718-4132-8fa1-0c713d525765]
-      X-Runtime: ['0.140000']
+      X-Request-Id: [e755365b-6906-4150-8447-2f7745b8a282]
+      X-Runtime: ['0.120000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

@@ -17,14 +17,14 @@ interactions:
     headers:
       Cache-Control: [no-cache]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:51 GMT']
+      Date: ['Sun, 22 May 2016 14:51:22 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=1184kjvd0118v1qptjfsg4uvbw;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:51 GMT']
+      Set-Cookie: ['JSESSIONID=1760tq3burgkt1skf14rpezy7o;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:22 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [b9b80331-17f1-4e55-bbcd-077f4b35ccbc]
-      X-Runtime: ['0.040000']
+      X-Request-Id: [c03fc537-e0fc-4369-8b3b-006b95c2fb24]
+      X-Runtime: ['0.050000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 404, message: Not Found}

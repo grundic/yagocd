@@ -14,9 +14,9 @@ interactions:
     headers:
       Content-Language: [en-US]
       Content-Length: ['0']
-      Date: ['Sun, 22 May 2016 13:43:41 GMT']
+      Date: ['Sun, 22 May 2016 14:51:11 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=1fe3w6c9ra0igfsuowiqwdtrz;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:41 GMT']
+      Set-Cookie: ['JSESSIONID=1aqxqy8drw5rrfx7s8ola66ii;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:11 GMT']
     status: {code: 202, message: Accepted}
 version: 1

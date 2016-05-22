@@ -12,15 +12,15 @@ interactions:
   response:
     body:
       string: !!binary |
-        UEsDBBQACAgIAHRttkgAAAAAAAAAAAAAAAAEAAAAdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIU
-        ABQACAgIAHRttkgAAAAAAgAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAB0aGUvUEsFBgAAAAABAAEA
+        UEsDBBQACAgIAGV2tkgAAAAAAAAAAAAAAAAEAAAAdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIU
+        ABQACAgIAGV2tkgAAAAAAgAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAB0aGUvUEsFBgAAAAABAAEA
         MgAAADQAAAAAAA==
     headers:
       Content-Language: [en-US]
       Content-Type: [application/zip]
-      Date: ['Sun, 22 May 2016 13:43:42 GMT']
+      Date: ['Sun, 22 May 2016 14:51:12 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=o0ucysv2u46n1vedqhinybfv0;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:42 GMT']
+      Set-Cookie: ['JSESSIONID=tzwik3xp65wd12lgpt85tg1j8;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:12 GMT']
     status: {code: 200, message: OK}
 version: 1

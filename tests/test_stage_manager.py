@@ -76,10 +76,15 @@ class TestCancel(BaseTestStageManager):
             self.do_cancel(manager, cass, session_fixture)
             assert cass.requests[-1].method == 'POST'
 
-    def test_cancel_request_accept_headers(self, manager, my_vcr, session_fixture):
+    def test_cancel_request_accept_header(self, manager, my_vcr, session_fixture):
         with my_vcr.use_cassette("stage/stage_cancel") as cass:
             self.do_cancel(manager, cass, session_fixture)
             assert cass.requests[-1].headers['accept'] == 'application/json'
+
+    def test_cancel_request_confirm_header(self, manager, my_vcr, session_fixture):
+        with my_vcr.use_cassette("stage/stage_cancel") as cass:
+            self.do_cancel(manager, cass, session_fixture)
+            assert cass.requests[-1].headers['Confirm'] == 'true'
 
     def test_cancel_response_code(self, manager, my_vcr, session_fixture):
         with my_vcr.use_cassette("stage/stage_cancel") as cass:

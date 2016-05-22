@@ -238,6 +238,9 @@ class PropertyManager(BaseManager):
                 name=name
             ),
             data={'value': value},
-            headers={'Accept': 'application/json'},
+            headers={
+                'Accept': 'application/json',
+                'Confirm': 'true'
+            },
         )
         return response.text

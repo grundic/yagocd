@@ -7,6 +7,7 @@ interactions:
       Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
+      Confirm: ['true']
       Connection: [keep-alive]
       Content-Length: ['63']
       Content-Type: [application/json]
@@ -22,15 +23,15 @@ interactions:
       Cache-Control: [no-cache]
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:52 GMT']
+      Date: ['Sun, 22 May 2016 14:51:24 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=khh993i82hdh14y7kdcni5x3n;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:52 GMT']
+      Set-Cookie: ['JSESSIONID=8ad8gznijk1w1hguqq6w7dv0s;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:24 GMT']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [8a2b5734-e3b4-49de-88a3-c9f4b44fd84c]
-      X-Runtime: ['0.020000']
+      X-Request-Id: [77e1dd89-e9c3-4db4-b120-d4b5d900d4d6]
+      X-Runtime: ['0.040000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 202, message: Accepted}

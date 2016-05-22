@@ -93,7 +93,8 @@ class MaterialManager(BaseManager):
             path='{base_api}/material/notify/svn'.format(base_api=self.base_api),
             data={'uuid': uuid},
             headers={
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Confirm': 'true'
             },
         )
 
@@ -117,7 +118,8 @@ class MaterialManager(BaseManager):
             path='{base_api}/material/notify/git'.format(base_api=self.base_api),
             data={'repository_url': url},
             headers={
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Confirm': 'true'
             },
         )
 
@@ -141,7 +143,8 @@ class MaterialManager(BaseManager):
             path='{base_api}/material/notify/hg'.format(base_api=self.base_api),
             data={'repository_url': url},
             headers={
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Confirm': 'true'
             },
         )
 

@@ -14,10 +14,10 @@ interactions:
     headers:
       Content-Language: [en-US]
       Content-Length: ['0']
-      Date: ['Sun, 22 May 2016 13:43:42 GMT']
+      Date: ['Sun, 22 May 2016 14:51:12 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=1kkbcxwafu03v15vgmpg61wdgo;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:42 GMT']
+      Set-Cookie: ['JSESSIONID=16aeptadbvh7gv2tlt9dp3loh;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:12 GMT']
     status: {code: 202, message: Accepted}
 - request:
     body: null
@@ -26,21 +26,21 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=1kkbcxwafu03v15vgmpg61wdgo]
+      Cookie: [JSESSIONID=16aeptadbvh7gv2tlt9dp3loh]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://local.docker:8153/go/files/Shared_Services/7/Commit/1/build/path/to/.zip
   response:
     body:
       string: !!binary |
-        UEsDBBQACAgIAHVttkgAAAAAAAAAAAAAAAADAAAAdG8vAwBQSwcIAAAAAAIAAAAAAAAAUEsDBBQA
-        CAgIAHVttkgAAAAAAAAAAAAAAAAHAAAAdG8vdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIUABQA
-        CAgIAHVttkgAAAAAAgAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAB0by9QSwECFAAUAAgICAB1bbZI
+        UEsDBBQACAgIAGZ2tkgAAAAAAAAAAAAAAAADAAAAdG8vAwBQSwcIAAAAAAIAAAAAAAAAUEsDBBQA
+        CAgIAGZ2tkgAAAAAAAAAAAAAAAAHAAAAdG8vdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIUABQA
+        CAgIAGZ2tkgAAAAAAgAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAB0by9QSwECFAAUAAgICABmdrZI
         AAAAAAIAAAAAAAAABwAAAAAAAAAAAAAAAAAzAAAAdG8vdGhlL1BLBQYAAAAAAgACAGYAAABqAAAA
         AAA=
     headers:
       Content-Language: [en-US]
       Content-Type: [application/zip]
-      Date: ['Sun, 22 May 2016 13:43:43 GMT']
+      Date: ['Sun, 22 May 2016 14:51:12 GMT']
     status: {code: 200, message: OK}
 version: 1

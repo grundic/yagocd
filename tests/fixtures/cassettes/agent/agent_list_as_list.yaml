@@ -46,14 +46,14 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:37 GMT']
+      Date: ['Sun, 22 May 2016 14:51:07 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=f1ukllel20yx1bgi4mqcnd5g9;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:37 GMT']
+      Set-Cookie: ['JSESSIONID=ofpn4rh5y88m1finkbkixvzo0;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:07 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [d782a2e2-6485-4795-8f12-06c3d8c20e08]
-      X-Runtime: ['1.030000']
+      X-Request-Id: [3b82800a-852b-4a0c-b957-288fa5f91f94]
+      X-Runtime: ['0.930000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

@@ -151,10 +151,15 @@ class TestNotifyGit(BaseTestConfigurationManager):
             manager.notify_git(self.URL)
             assert cass.requests[0].body.decode('ascii') == urlencode({'repository_url': self.URL})
 
-    def test_notify_git_request_accept_headers(self, manager, my_vcr):
+    def test_notify_git_request_accept_header(self, manager, my_vcr):
         with my_vcr.use_cassette("material/notify_git") as cass:
             manager.notify_git(self.URL)
             assert cass.requests[0].headers['accept'] == 'application/json'
+
+    def test_notify_git_request_confirm_header(self, manager, my_vcr):
+        with my_vcr.use_cassette("material/notify_git") as cass:
+            manager.notify_git(self.URL)
+            assert cass.requests[0].headers['Confirm'] == 'true'
 
     def test_notify_git_response_code(self, manager, my_vcr):
         with my_vcr.use_cassette("material/notify_git") as cass:

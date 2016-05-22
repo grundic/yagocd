@@ -83,9 +83,9 @@ interactions:
       Content-Disposition: [Inline; filename=buildProperties.csv]
       Content-Length: ['5891']
       Content-Type: [text/csv; charset=ISO-8859-1]
-      Date: ['Sun, 22 May 2016 13:48:55 GMT']
+      Date: ['Sun, 22 May 2016 14:55:40 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=1r88at02ifzisgpn8smd9fgkr;Path=/go;Expires=Sun, 05-Jun-2016
-          13:48:55 GMT']
+      Set-Cookie: ['JSESSIONID=1mwk0ruwpevtav3rcjmfp6dxz;Path=/go;Expires=Sun, 05-Jun-2016
+          14:55:40 GMT']
     status: {code: 200, message: OK}
 version: 1

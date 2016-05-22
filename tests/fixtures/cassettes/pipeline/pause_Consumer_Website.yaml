@@ -1,47 +1,15 @@
 interactions:
 - request:
-    body: null
-    headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['0']
-      User-Agent: [python-requests/2.10.0]
-    method: POST
-    uri: http://local.docker:8153/go/api/pipelines/Consumer_Website/unpause
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAAFMAAEXPbOkBAAAA
-    headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:51 GMT']
-      ETag: ['"7215ee9c7d9dc229d2921a40e899ec5f--gzip"']
-      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=calvpfkmqian124nc7e02jih;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:51 GMT']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [179f3ff8-5f0d-4796-ac95-7f5d1a13cad6]
-      X-Runtime: ['0.060000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
-- request:
     body: !!binary |
       cGF1c2VDYXVzZT1UZXN0K3BhdXNlK3JlYXNvbg==
     headers:
       Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
+      Confirm: ['true']
       Connection: [keep-alive]
       Content-Length: ['28']
       Content-Type: [application/x-www-form-urlencoded]
-      Cookie: [JSESSIONID=calvpfkmqian124nc7e02jih]
       User-Agent: [python-requests/2.10.0]
     method: POST
     uri: http://local.docker:8153/go/api/pipelines/Consumer_Website/pause
@@ -53,73 +21,16 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:52 GMT']
+      Date: ['Sun, 22 May 2016 14:51:23 GMT']
       ETag: ['"7215ee9c7d9dc229d2921a40e899ec5f--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=koomeuc6xth6kfksz4i0vek4;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:23 GMT']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [3b41a879-29c7-4ae2-87e6-0d587132658c]
-      X-Runtime: ['0.040000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
-- request:
-    body: null
-    headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=calvpfkmqian124nc7e02jih]
-      User-Agent: [python-requests/2.10.0]
-    method: GET
-    uri: http://local.docker:8153/go/api/pipelines/Consumer_Website/status
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAAKtWKkgsLU5NUbIqKSpN1VEqTs5ITSnNSUzKSVWySkvMKQaKQVQ4VSpZKSWm5Gbm
-        KcGEnEEkUDQktbhEASykUJSaWJwPUpGTn5wNMhZsRi0ANXhAnWcAAAA=
-    headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:52 GMT']
-      ETag: ['"832171ab4936ff1543dc15f1e3b4a78a--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [5622c739-8d2e-4035-872a-75eb124683b7]
-      X-Runtime: ['0.000000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
-- request:
-    body: null
-    headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['0']
-      Cookie: [JSESSIONID=calvpfkmqian124nc7e02jih]
-      User-Agent: [python-requests/2.10.0]
-    method: POST
-    uri: http://local.docker:8153/go/api/pipelines/Consumer_Website/unpause
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAAFMAAEXPbOkBAAAA
-    headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:52 GMT']
-      ETag: ['"7215ee9c7d9dc229d2921a40e899ec5f--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [baf5285b-1ffb-41d6-91c6-7bb1eb3473bb]
-      X-Runtime: ['0.010000']
+      X-Request-Id: [6bf8ef29-df73-4b97-806b-ae24c8bb9022]
+      X-Runtime: ['0.020000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

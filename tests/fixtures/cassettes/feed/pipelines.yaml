@@ -37,14 +37,14 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/xml; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:45 GMT']
+      Date: ['Sun, 22 May 2016 14:51:15 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=1osxx91is30omno7i3q3ckrk9;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:45 GMT']
+      Set-Cookie: ['JSESSIONID=1mpv9pktslanqhgmbr0v48tmt;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:15 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [5052727a-51b6-4582-a59c-9ffd872c5759]
-      X-Runtime: ['0.800000']
+      X-Request-Id: [d6d0bfdb-cccb-41bd-8fcc-5255555d28a8]
+      X-Runtime: ['0.840000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

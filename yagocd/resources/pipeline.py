@@ -210,7 +210,10 @@ class PipelineManager(BaseManager):
                 name=name,
             ),
             data={'pauseCause': cause},
-            headers={'Accept': 'application/json'},
+            headers={
+                'Accept': 'application/json',
+                'Confirm': 'true'
+            },
         )
 
     def unpause(self, name):
@@ -224,7 +227,10 @@ class PipelineManager(BaseManager):
                 base_api=self.base_api,
                 name=name,
             ),
-            headers={'Accept': 'application/json'},
+            headers={
+                'Accept': 'application/json',
+                'Confirm': 'true'
+            },
         )
 
     def release_lock(self, name):
@@ -240,7 +246,10 @@ class PipelineManager(BaseManager):
                 base_api=self.base_api,
                 name=name,
             ),
-            headers={'Accept': 'application/json'},
+            headers={
+                'Accept': 'application/json',
+                'Confirm': 'true'
+            },
         )
         return response.text
 
@@ -266,7 +275,8 @@ class PipelineManager(BaseManager):
             data=json.dumps(data),
             headers={
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Confirm': 'true'
             },
         )
 

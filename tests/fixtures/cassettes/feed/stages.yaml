@@ -410,14 +410,14 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/atom+xml; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:46 GMT']
+      Date: ['Sun, 22 May 2016 14:51:16 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=66hlz9voa0kn1tgxlsuns42ke;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:46 GMT']
+      Set-Cookie: ['JSESSIONID=12x79asepe05f2e3lq7nzs071;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:16 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [c15a0a8f-0f05-4970-b6bd-3690408f6e83]
-      X-Runtime: ['1.240000']
+      X-Request-Id: [780fb3e2-bc80-444e-9f5e-fd9030e80f93]
+      X-Runtime: ['1.270000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

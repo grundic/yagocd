@@ -38,10 +38,10 @@ interactions:
       Content-Encoding: [gzip]
       Content-Length: ['1214']
       Content-Type: [text/xml]
-      Date: ['Sun, 22 May 2016 13:43:45 GMT']
+      Date: ['Sun, 22 May 2016 14:51:15 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=gt5ktoifxdz3lrmohd9k0qh3;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:45 GMT']
+      Set-Cookie: ['JSESSIONID=76o8hcgz1owikv1ms8gglkgc;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:15 GMT']
       Vary: ['Accept-Encoding, User-Agent']
       X-CRUISE-CONFIG-MD5: [412f48f7e2ff254e47564a6852ed7a2e]
     status: {code: 200, message: OK}

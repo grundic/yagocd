@@ -67,7 +67,10 @@ class StageManager(BaseManager):
                 pipeline_name=self._pipeline_name or pipeline_name,
                 stage_name=self._stage_name or stage_name
             ),
-            headers={'Accept': 'application/json'},
+            headers={
+                'Accept': 'application/json',
+                'Confirm': 'true'
+            },
         )
         return response.text
 

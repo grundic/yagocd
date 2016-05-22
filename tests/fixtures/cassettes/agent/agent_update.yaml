@@ -25,16 +25,16 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:39 GMT']
+      Date: ['Sun, 22 May 2016 14:51:09 GMT']
       ETag: ['"91b8d509ee645bdd2ab078c9fdd1114b--gzip"']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=8ycir7vf3ckz1eliw4lo6717p;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:39 GMT']
+      Set-Cookie: ['JSESSIONID=75e9ia7oulv81gsphosmqdo8t;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:09 GMT']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [6ff56944-500b-4902-be96-526ce090a059]
-      X-Runtime: ['0.780000']
+      X-Request-Id: [f58120fa-883e-4140-9a7b-9fec1420a658]
+      X-Runtime: ['0.690000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

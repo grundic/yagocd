@@ -27,14 +27,14 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/xml; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:46 GMT']
+      Date: ['Sun, 22 May 2016 14:51:16 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=1tbalser6ythf1ue2vr2hpo3ho;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:46 GMT']
+      Set-Cookie: ['JSESSIONID=c0ka1n0j5lyp1l57i1lqj7csy;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:16 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [2496dabe-7c3b-4d24-a0cd-d09829741241]
-      X-Runtime: ['0.200000']
+      X-Request-Id: [84c3135e-8166-4b24-8be8-715f61518c1d]
+      X-Runtime: ['0.320000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

@@ -20,14 +20,14 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/xml; charset=utf-8]
-      Date: ['Sun, 22 May 2016 13:43:48 GMT']
+      Date: ['Sun, 22 May 2016 14:51:18 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=1ayj5c6j7lx731gpbqog1cjx5u;Path=/go;Expires=Sun, 05-Jun-2016
-          13:43:48 GMT']
+      Set-Cookie: ['JSESSIONID=9o0g17emldrc1vn7nym7uuu3x;Path=/go;Expires=Sun, 05-Jun-2016
+          14:51:18 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [0321b5b6-013a-4cb3-a43f-e707961c9892]
-      X-Runtime: ['0.140000']
+      X-Request-Id: [60d847e2-bab7-481b-9467-de96e6ea976f]
+      X-Runtime: ['0.090000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

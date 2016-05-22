@@ -6,6 +6,7 @@ interactions:
       Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
+      Confirm: ['true']
       Connection: [keep-alive]
       Content-Length: ['12']
       Content-Type: [application/x-www-form-urlencoded]
@@ -17,9 +18,9 @@ interactions:
     headers:
       Content-Length: ['50']
       Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Sun, 22 May 2016 13:48:55 GMT']
+      Date: ['Sun, 22 May 2016 14:55:41 GMT']
       Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=1kam1skir1an4104fb7d28o7cd;Path=/go;Expires=Sun, 05-Jun-2016
-          13:48:55 GMT']
+      Set-Cookie: ['JSESSIONID=kz7l5udwz8088a2vew1thsqk;Path=/go;Expires=Sun, 05-Jun-2016
+          14:55:41 GMT']
     status: {code: 201, message: Created}
 version: 1
