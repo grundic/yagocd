@@ -34,6 +34,7 @@ from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.configuration import ConfigurationManager
 from yagocd.resources.feed import FeedManager
 from yagocd.resources.job import JobManager
+from yagocd.resources.info import InfoManager
 from yagocd.resources.material import MaterialManager
 from yagocd.resources.pipeline import PipelineManager
 from yagocd.resources.property import PropertyManager
@@ -132,6 +133,15 @@ class Yagocd(object):
         :rtype: yagocd.resources.job.JobManager
         """
         return JobManager(session=self._session)
+
+    @property
+    def info(self):
+        """
+        Property for accessing ``InfoManager`` instance, which is used to general server info.
+
+        :rtype: yagocd.resources.info.InfoManager
+        """
+        return InfoManager(session=self._session)
 
     @property
     def materials(self):

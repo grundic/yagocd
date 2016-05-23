@@ -29,7 +29,8 @@
 import pytest
 
 from yagocd import Yagocd
-from yagocd.resources import agent, artifact, configuration, feed, job, material, pipeline, property as prop, stage, user
+from yagocd.resources import agent, artifact, configuration, feed, job, info, material, pipeline, property as prop, \
+    stage, user
 
 
 class TestInit(object):
@@ -80,6 +81,9 @@ class TestManagers(object):
 
     def test_jobs(self, go_fixture):
         assert isinstance(go_fixture.jobs, job.JobManager)
+
+    def test_info(self, go_fixture):
+        assert isinstance(go_fixture.info, info.InfoManager)
 
     def test_materials(self, go_fixture):
         assert isinstance(go_fixture.materials, material.MaterialManager)
