@@ -43,25 +43,6 @@ class TestStageInstance(object):
         with my_vcr.use_cassette("stage/stage_instance_from_stage_history"):
             return stage.StageManager(session_fixture).history('Consumer_Website', 'Commit')[0]
 
-    def test_has_all_managers_methods(self):
-        excludes = ['get', 'history', 'full_history', 'last']
-
-        def get_public_methods(klass):
-            methods = set()
-            for name in dir(klass):
-                if name.startswith('_'):
-                    continue
-
-                candidate = getattr(klass, name)
-                if hasattr(candidate, '__call__'):
-                    methods.add(name)
-            return methods
-
-        managers_methods = get_public_methods(stage.StageManager)
-        entity_methods = get_public_methods(stage.StageInstance)
-        result = managers_methods - entity_methods - set(excludes)
-        assert len(result) == 0, "Some methods are missing in pipeline entity: {}".format(result)
-
     def test_url_from_pipeline(self, stage_instance_from_pipeline):
         assert stage_instance_from_pipeline.url == '{server}go/pipelines/Consumer_Website/31/Commit/1'.format(
             server=stage_instance_from_pipeline._session._options['server']

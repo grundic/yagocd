@@ -50,6 +50,31 @@ class StageManager(BaseManager):
         self._stage_name = stage_name
         self._stage_counter = stage_counter
 
+    def run(self, pipeline_name=None, pipeline_counter=None, stage_name=None):
+        """
+        Run stage, configured for manual trigger.
+
+        :param pipeline_name: pipeline name.
+        :param stage_name: stage name.
+        :param pipeline_counter: pipeline counter.
+        :return: Nothing.
+        """
+        assert self._pipeline_name or pipeline_name
+        assert self._pipeline_counter or pipeline_counter
+        assert self._stage_name or stage_name
+
+        self._session.post(
+            path='{base_api}/run/{pipeline_name}/{pipeline_counter}/{stage_name}'.format(
+                base_api=self._session.base_api(api_path=''),
+                pipeline_name=self._pipeline_name or pipeline_name,
+                pipeline_counter=self._pipeline_counter or pipeline_counter,
+                stage_name=self._stage_name or stage_name
+            ),
+            headers={
+                'Confirm': 'true'
+            },
+        )
+
     def cancel(self, pipeline_name=None, stage_name=None):
         """
         Cancel an active stage of a specified stage.
