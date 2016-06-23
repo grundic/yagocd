@@ -29,4 +29,4 @@
 
 from yagocd.client import Yagocd
 
-__version__ = '0.3.0'
+__version__ = '0.3.1'

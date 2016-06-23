@@ -338,4 +338,4 @@ class Artifact(Base):
 class ArtifactFile(Base):
     def fetch(self):
         response = self._session.get(self.data.url)
-        return response.text
+        return response.content
