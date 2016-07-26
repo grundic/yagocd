@@ -49,24 +49,6 @@ class BaseTestPipelineManager(object):
         return pipeline.PipelineManager(session=session_fixture)
 
 
-class TestTieDescendants(BaseTestPipelineManager):
-    def test_tie_descendants(self, session_fixture, manager):
-        child = pipeline.PipelineEntity(
-            session=session_fixture,
-            data={'name': 'child1', 'materials': {}}
-        )
-
-        parent = pipeline.PipelineEntity(
-            session=session_fixture,
-            data={'name': 'parent1', 'materials': [{'description': 'child1', 'type': 'Pipeline'}]}
-        )
-
-        pipelines = [child, parent]
-
-        manager.tie_pipelines(pipelines)
-        assert child.descendants == [parent]
-
-
 class TestList(BaseTestPipelineManager):
     def test_list_request_url(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
@@ -98,11 +80,11 @@ class TestList(BaseTestPipelineManager):
             result = manager.list()
             assert all(isinstance(i, pipeline.PipelineEntity) for i in result)
 
-    @mock.patch('yagocd.resources.pipeline.PipelineManager.tie_pipelines')
-    def test_tie_descendants_is_called(self, mock_tie_pipelines, manager, my_vcr):
+    @mock.patch('yagocd.util.YagocdUtil.build_graph')
+    def build_graph_is_called(self, mock_build_graph, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list"):
             manager.list()
-            mock_tie_pipelines.assert_called()
+            mock_build_graph.assert_called()
 
 
 class TestFind(BaseTestPipelineManager):

@@ -28,6 +28,7 @@
 ###############################################################################
 
 from easydict import EasyDict
+from yagocd.util import YagocdUtil
 
 
 class BaseManager(object):
@@ -55,3 +56,48 @@ class Base(object):
 
     def __repr__(self):
         return self.data.__repr__()
+
+
+class BaseNode(Base):
+    def __init__(self, session, data):
+        super(BaseNode, self).__init__(session, data)
+
+        self._predecessors = list()
+        self._descendants = list()
+
+    def get_predecessors(self, transitive=False):
+        """
+        Property for getting predecessors (parents) of current pipeline.
+        This property automatically populates from API call
+
+        :return: list of :class:`yagocd.resources.pipeline.PipelineEntity`.
+        :rtype: list of yagocd.resources.pipeline.PipelineEntity
+        """
+        result = self._predecessors
+        if transitive:
+            return YagocdUtil.graph_depth_walk(result, lambda v: v.predecessors)
+        return result
+
+    def set_predecessors(self, value):
+        self._predecessors = value
+
+    predecessors = property(get_predecessors, set_predecessors)
+
+    def get_descendants(self, transitive=False):
+        """
+        Property for getting descendants (children) of current pipeline.
+        It's calculated by :meth:`yagocd.resources.pipeline.PipelineManager#tie_descendants` method during listing of
+        all pipelines.
+
+        :return: list of :class:`yagocd.resources.pipeline.PipelineEntity`.
+        :rtype: list of yagocd.resources.pipeline.PipelineEntity
+        """
+        result = self._descendants
+        if transitive:
+            return YagocdUtil.graph_depth_walk(result, lambda v: v.descendants)
+        return result
+
+    def set_descendants(self, value):
+        self._descendants = value
+
+    descendants = property(get_descendants, set_descendants)
