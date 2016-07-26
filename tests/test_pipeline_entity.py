@@ -34,7 +34,7 @@ import pytest
 
 class TestPipelineEntity(object):
     def test_has_all_managers_methods(self):
-        excludes = ['tie_pipelines', 'list', 'find']
+        excludes = ['list', 'find']
 
         def get_public_methods(klass):
             methods = set()
@@ -184,7 +184,7 @@ class TestPipelineEntity(object):
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.get')
     def test_get_call(self, get_mock, pipeline_entity):
-        pipeline_entity.get()
+        pipeline_entity.get(0)
         get_mock.assert_called_with(name=pipeline_entity.data.name, counter=0)
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.status')
@@ -218,18 +218,3 @@ class TestPipelineEntity(object):
         pipeline_entity.schedule_with_instance()
         schedule_with_instance_mock.assert_called_with(name=pipeline_entity.data.name, materials=None, variables=None,
                                                        secure_variables=None, backoff=0.5, max_tries=20)
-
-
-class TestGraphDepthWalk(object):
-    @pytest.mark.parametrize("root, expected", [
-        ('a', ['a', 'c']),
-        ('b', ['a', 'c', 'b']),
-        ('c', ['c']),
-        ('d', ['a', 'c', 'd']),
-        ('e', ['a', 'c', 'b', 'e']),
-    ])
-    def test_graph(self, root, expected):
-        graph = {'a': ['c'], 'b': ['a'], 'c': [], 'd': ['a'], 'e': ['b', 'a']}
-
-        assert len(pipeline.PipelineEntity.graph_depth_walk(root, lambda x: graph.get(x))) == len(expected)
-        assert sorted(pipeline.PipelineEntity.graph_depth_walk(root, lambda x: graph.get(x))) == sorted(expected)

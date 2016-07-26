@@ -26,7 +26,7 @@
 #
 ###############################################################################
 
-from yagocd.resources import BaseManager, Base
+from yagocd.resources import BaseManager, Base, BaseNode
 
 
 class MaterialManager(BaseManager):
@@ -155,5 +155,5 @@ class MaterialEntity(Base):
     pass
 
 
-class ModificationEntity(Base):
+class ModificationEntity(BaseNode):
     pass

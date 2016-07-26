@@ -28,10 +28,11 @@
 
 import time
 import json
-from collections import deque
 
-from yagocd.resources import BaseManager, Base
+from yagocd.resources import BaseManager, BaseNode
 from yagocd.resources.stage import StageInstance
+from yagocd.resources.material import ModificationEntity
+from yagocd.util import YagocdUtil
 
 from easydict import EasyDict
 
@@ -40,31 +41,6 @@ class PipelineManager(BaseManager):
     """
     The pipelines API allows users to view pipeline information and operate on it.
     """
-
-    @staticmethod
-    def tie_pipelines(pipelines):
-        """
-        Static method for tie-ing (linking) relevant pipelines.
-
-        By default each pipeline object gives information about its dependencies, that are listed in materials. But
-        you can't get its descendants, though it's possible. This method solves this problem.
-
-        :param pipelines: list of pipelines.
-        """
-        for child in pipelines:
-            parents = list()
-
-            for parent in pipelines:
-                children = list()
-                candidates = [material for material in parent.data.materials if material.type == 'Pipeline']
-                for child_candidate in candidates:
-                    if child_candidate.description == child.data.name:
-                        parents.append(parent)
-                        children.append(child)
-
-                parent.predecessors.extend(children)
-
-            child.descendants = parents
 
     def list(self):
         """
@@ -90,10 +66,12 @@ class PipelineManager(BaseManager):
                 )
                 pipelines.append(pipeline)
 
-        # link descendants of each pipeline entity
-        self.tie_pipelines(pipelines)
-
-        return pipelines
+        # build pipeline graph to link related nodes
+        return YagocdUtil.build_graph(
+            nodes=pipelines,
+            dependencies=lambda parent: [material for material in parent.data.materials],
+            compare=lambda candidate, child: candidate.description == child.data.name
+        )
 
     def find(self, name):
         """
@@ -165,7 +143,7 @@ class PipelineManager(BaseManager):
         Gets pipeline instance object.
 
         :param name: name of the pipeline.
-        :param counter pipeline counter:
+        :param counter: pipeline counter.
         :return: A pipeline instance object :class:`yagocd.resources.pipeline.PipelineInstance`.
         :rtype: yagocd.resources.pipeline.PipelineInstance
         """
@@ -324,8 +302,72 @@ class PipelineManager(BaseManager):
             time.sleep(backoff)
             max_tries -= 1
 
+    def value_stream_map(self, name, counter):
+        """
+        Method builds pipeline instance dependency graph.
 
-class PipelineEntity(Base):
+        :param name: name of the pipeline.
+        :param counter: pipeline counter.
+        """
+        response = self._session.get(
+            path='{base_api}/pipelines/value_stream_map/{name}/{counter}.json'.format(
+                base_api=self._session.base_api(api_path=''),
+                name=name,
+                counter=counter
+            ),
+            headers={'Accept': 'application/json'},
+        )
+
+        data = EasyDict(response.json())
+
+        nodes = list()
+        dependencies = dict()
+
+        for level in data.levels:
+            for node_item in level.nodes:
+                dependencies[node_item.id] = node_item.parents
+
+                if node_item.node_type == 'PIPELINE':
+                    for instance in node_item.instances:
+                        pipeline_data = EasyDict({
+                            'id': node_item.id,
+                            'name': node_item.name,
+                            'counter': instance.counter,
+                            'label': instance.label,
+                            'type': node_item.node_type.capitalize(),
+                            'stages': []
+                        })
+
+                        for stage in instance.stages:
+                            stage_data = EasyDict({
+                                'pipeline_name': node_item.name,
+                                'pipeline_counter': instance.counter,
+                                'name': stage.name,
+                                'status': stage.status,
+                            })
+                            pipeline_data.stages.append(
+                                StageInstance(session=self._session, data=stage_data, pipeline=None)
+                            )
+
+                        nodes.append(PipelineInstance(session=self._session, data=pipeline_data))
+                elif node_item.node_type in ['GIT', 'MERCURIAL', 'SUBVERSION']:
+                    for instance in node_item.instances:
+                        instance['id'] = node_item.id
+                        instance['type'] = node_item.node_type.capitalize()
+                        nodes.append(ModificationEntity(session=self._session, data=instance))
+                elif node_item.node_type == 'DUMMY':  # WTF?!
+                    continue
+                else:
+                    raise RuntimeError('Unknown node type "{}"!'.format(node_item))
+
+        return YagocdUtil.build_graph(
+            nodes=nodes,
+            dependencies=lambda parent: dependencies[parent.data.id],
+            compare=lambda candidate, child: candidate == child.data.id
+        )
+
+
+class PipelineEntity(BaseNode):
     """
     Class for the pipeline entity, which describes pipeline itself.
     Executing ``history`` will return pipeline instances.
@@ -334,9 +376,6 @@ class PipelineEntity(Base):
     def __init__(self, session, data, group=None):
         super(PipelineEntity, self).__init__(session, data)
         self._group = group
-        self._predecessors = list()
-        self._descendants = list()
-
         self._pipeline = PipelineManager(session=session)
 
     @property
@@ -346,57 +385,6 @@ class PipelineEntity(Base):
         :return: group name.
         """
         return self._group
-
-    @staticmethod
-    def graph_depth_walk(root_nodes, near_nodes):
-
-        visited = set()
-        to_crawl = deque(root_nodes)
-        while to_crawl:
-            current = to_crawl.popleft()
-            if current in visited:
-                continue
-            visited.add(current)
-            node_children = set(near_nodes(current))
-            to_crawl.extend(node_children - visited)
-        return list(visited)
-
-    def get_predecessors(self, transitive=False):
-        """
-        Property for getting predecessors (parents) of current pipeline.
-        This property automatically populates from API call
-
-        :return: list of :class:`yagocd.resources.pipeline.PipelineEntity`.
-        :rtype: list of yagocd.resources.pipeline.PipelineEntity
-        """
-        result = self._predecessors
-        if transitive:
-            return self.graph_depth_walk(result, lambda v: v.predecessors)
-        return result
-
-    def set_predecessors(self, value):
-        self._predecessors = value
-
-    predecessors = property(get_predecessors, set_predecessors)
-
-    def get_descendants(self, transitive=False):
-        """
-        Property for getting descendants (children) of current pipeline.
-        It's calculated by :meth:`yagocd.resources.pipeline.PipelineManager#tie_descendants` method during listing of
-        all pipelines.
-
-        :return: list of :class:`yagocd.resources.pipeline.PipelineEntity`.
-        :rtype: list of yagocd.resources.pipeline.PipelineEntity
-        """
-        result = self._descendants
-        if transitive:
-            return self.graph_depth_walk(result, lambda v: v.descendants)
-        return result
-
-    def set_descendants(self, value):
-        self._descendants = value
-
-    descendants = property(get_descendants, set_descendants)
 
     @staticmethod
     def get_url(server_url, pipeline_name):
@@ -443,7 +431,7 @@ class PipelineEntity(Base):
         """
         return self._pipeline.last(name=self.data.name)
 
-    def get(self, counter=0):
+    def get(self, counter):
         """
         Gets pipeline instance object.
 
@@ -533,11 +521,18 @@ class PipelineEntity(Base):
             max_tries=max_tries
         )
 
+    def value_stream_map(self, counter):
+        return self._pipeline.value_stream_map(name=self.data.name, counter=counter)
 
-class PipelineInstance(Base):
+
+class PipelineInstance(BaseNode):
     """
     Pipeline instance represents concrete execution of specific pipeline.
     """
+
+    def __init__(self, session, data):
+        super(PipelineInstance, self).__init__(session, data)
+        self._manager = PipelineManager(session=session)
 
     @property
     def url(self):
@@ -569,3 +564,6 @@ class PipelineInstance(Base):
             stages.append(StageInstance(session=self._session, data=data, pipeline=self))
 
         return stages
+
+    def value_stream_map(self):
+        return self._manager.value_stream_map(name=self.data.name, counter=self.data.counter)
