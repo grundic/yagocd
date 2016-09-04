@@ -3,7 +3,7 @@ interactions:
     body: !!binary |
       eyJob3N0bmFtZSI6ICJmb28tYmFyIn0=
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
+      Accept: [application/vnd.go.cd.v2+json]
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]

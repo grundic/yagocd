@@ -63,7 +63,7 @@ def mock_session():
     return session
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="class")
 def session_fixture():
     options = copy.deepcopy(Yagocd.DEFAULT_OPTIONS)
     options['server'] = 'http://localhost:8153/'

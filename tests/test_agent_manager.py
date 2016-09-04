@@ -51,13 +51,11 @@ class BaseTestAgentManager(object):
     def _expected_accept_header(manager):
         if LooseVersion(manager._session.server_version) <= '16.1.0':
             return 'application/vnd.go.cd.v1+json'
-        elif LooseVersion(manager._session.server_version) <= '16.3.0':
+        elif LooseVersion(manager._session.server_version) <= '16.7.0':
             return 'application/vnd.go.cd.v2+json'
         else:
             return 'application/vnd.go.cd.v3+json'
 
-
-class TestCacheServerVersion(BaseTestAgentManager):
     def test_cache_server_version(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/server_version_cache"):
             assert manager._session.server_version

@@ -26,18 +26,63 @@
 # THE SOFTWARE.
 #
 ###############################################################################
+from collections import OrderedDict
 
 from easydict import EasyDict
+
 from yagocd.util import YagocdUtil
 
 
 class BaseManager(object):
+    # Default accept header to be used in client.
+    # This variable is used a default for all requests, but
+    # at the same time individual managers could overwrite it.
+    ACCEPT_HEADER = 'application/vnd.go.cd.v1+json'
+
+    # This map configures pessimistic acceptance header resolve:
+    # by default the `ACCEPT_HEADER` would be used, but in case
+    # server version is less or equal one of these, then it would
+    # be overwritten from mapping.
+    # It can be read as `up to given version use next header`.
+    # This variable should be ordered, so please use `OrderedDict`
+    # to define it.
+    VERSION_TO_ACCEPT_HEADER = None
+
     def __init__(self, session):
         """
         :type session: yagocd.session.Session
         """
         self._session = session
         self.base_api = self._session.base_api()
+
+    def _accept_header(self):
+        """
+        Method for determining correct `Accept` header.
+
+        Different resources and different GoCD version servers prefer
+        a diverse headers. In order to manage all of them, this method
+        tries to help: if `VERSION_TO_ACCEPT_HEADER` is not provided,
+        if would simply return default `ACCEPT_HEADER`.
+        Though if some manager specifies `VERSION_TO_ACCEPT_HEADER`
+        class variable, then it should be a dictionary: keys should be
+        a versions and values should be desired accept headers.
+        Choosing is pessimistic: if version of a server is less or
+        equal to one of the dictionary, the value of that key would be
+        used.
+
+        :return: accept header to use in request.
+        """
+        if not self.VERSION_TO_ACCEPT_HEADER:
+            return self.ACCEPT_HEADER
+
+        assert isinstance(self.VERSION_TO_ACCEPT_HEADER, OrderedDict), (
+            "`VERSION_TO_ACCEPT_HEADER` in class '{}' is not ordered!".format(self.__class__.__name__))
+
+        return YagocdUtil.choose_option(
+            version_to_options=self.VERSION_TO_ACCEPT_HEADER,
+            default=self.ACCEPT_HEADER,
+            server_version=self._session.server_version
+        )
 
 
 class Base(object):

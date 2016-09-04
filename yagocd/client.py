@@ -28,18 +28,21 @@
 ###############################################################################
 
 import copy
-from yagocd.session import Session
+
+from yagocd.resources import BaseManager
 from yagocd.resources.agent import AgentManager
 from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.configuration import ConfigurationManager
 from yagocd.resources.feed import FeedManager
-from yagocd.resources.job import JobManager
 from yagocd.resources.info import InfoManager
+from yagocd.resources.job import JobManager
 from yagocd.resources.material import MaterialManager
 from yagocd.resources.pipeline import PipelineManager
+from yagocd.resources.pipeline_config import PipelineConfigManager
 from yagocd.resources.property import PropertyManager
 from yagocd.resources.stage import StageManager
 from yagocd.resources.user import UserManager
+from yagocd.session import Session
 
 
 class Yagocd(object):
@@ -53,7 +56,7 @@ class Yagocd(object):
         'api_path': 'api/',
         'verify': True,
         'headers': {
-            'Accept': 'application/vnd.go.cd.v1+json',
+            'Accept': BaseManager.ACCEPT_HEADER,
         }
     }
 
@@ -160,6 +163,15 @@ class Yagocd(object):
         :rtype: yagocd.resources.pipeline.PipelineManager
         """
         return PipelineManager(session=self._session)
+
+    @property
+    def pipeline_configs(self):
+        """
+        Property for accessing ``PipelineConfigManager`` instance, which is used to manage pipeline configurations.
+
+        :rtype: yagocd.resources.pipeline_config.PipelineConfigManager
+        """
+        return PipelineConfigManager(session=self._session)
 
     @property
     def properties(self):

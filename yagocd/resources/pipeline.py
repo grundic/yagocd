@@ -32,6 +32,7 @@ import json
 from yagocd.resources import BaseManager, BaseNode
 from yagocd.resources.stage import StageInstance
 from yagocd.resources.material import ModificationEntity
+from yagocd.resources.pipeline_config import PipelineConfigManager
 from yagocd.util import YagocdUtil
 
 from easydict import EasyDict
@@ -403,6 +404,15 @@ class PipelineEntity(BaseNode):
         """
         return self.get_url(server_url=self._session.server_url, pipeline_name=self.data.name)
 
+    @property
+    def config(self):
+        """
+        Property for accessing pipeline configuration.
+
+        :rtype: yagocd.resources.pipeline_config.PipelineConfigManager
+        """
+        return PipelineConfigManager(session=self._session, pipeline_name=self.data.name)
+
     def history(self, offset=0):
         """
         The pipeline history allows users to list pipeline instances.
@@ -567,3 +577,12 @@ class PipelineInstance(BaseNode):
 
     def value_stream_map(self):
         return self._manager.value_stream_map(name=self.data.name, counter=self.data.counter)
+
+    @property
+    def config(self):
+        """
+        Property for accessing pipeline configuration.
+
+        :rtype: yagocd.resources.pipeline_config.PipelineConfigManager
+        """
+        return PipelineConfigManager(session=self._session, pipeline_name=self.data.name)
