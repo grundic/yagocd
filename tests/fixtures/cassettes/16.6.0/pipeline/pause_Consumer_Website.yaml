@@ -1,0 +1,35 @@
+interactions:
+- request:
+    body: !!binary |
+      cGF1c2VDYXVzZT1UZXN0K3BhdXNlK3JlYXNvbg==
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Confirm: ['true']
+      Connection: [keep-alive]
+      Content-Length: ['28']
+      Content-Type: [application/x-www-form-urlencoded]
+      Cookie: [JSESSIONID=1tthwfogg4jteh31hhkr2l98d]
+      User-Agent: [python-requests/2.10.0]
+    method: POST
+    uri: http://localhost:8153/go/api/pipelines/Consumer_Website/pause
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAFMAAEXPbOkBAAAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Fri, 02 Sep 2016 22:14:23 GMT']
+      ETag: ['"7215ee9c7d9dc229d2921a40e899ec5f--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [273b8a39-a57e-4d60-b2c1-586e31f35daf]
+      X-Runtime: ['0.019000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

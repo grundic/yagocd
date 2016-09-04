@@ -1,0 +1,32 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/xml]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1vca22i02j0fylisq4lm7gq4m]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/api/stages/11.xml
+  response:
+    body: {string: "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<stage name=\"Commit\"
+        counter=\"1\">\n  <link rel=\"self\" href=\"http://localhost:8153/go/api/stages/11.xml\"/>\n
+        \ <id><![CDATA[urn:x-go.studios.thoughtworks.com:stage-id:Shared_Services:3:Commit:1]]></id>\n
+        \ <pipeline name=\"Shared_Services\" counter=\"3\" label=\"3\" href=\"http://localhost:8153/go/api/pipelines/Shared_Services/5.xml\"/>\n
+        \ <updated>2015-08-05T15:24:15Z</updated>\n  <result>Passed</result>\n  <state>Completed</state>\n
+        \ <approvedBy><![CDATA[changes]]></approvedBy>\n  <jobs>\n    <job href=\"http://localhost:8153/go/api/jobs/11.xml\"/>\n
+        \ </jobs>\n</stage>\n"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/xml; charset=utf-8]
+      Date: ['Sat, 03 Sep 2016 08:21:42 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [6292baf4-270f-4d25-ab57-523b762ca46b]
+      X-Runtime: ['0.267000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

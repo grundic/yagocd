@@ -59,83 +59,83 @@ class TestJobInstance(object):
         with my_vcr.use_cassette("job/job_instance_from_job_manager"):
             return job.JobManager(session_fixture).history(self.PIPELINE_NAME, self.STAGE_NAME, self.JOB_NAME)[0]
 
-    @pytest.mark.parametrize("job_fixture_name", [
-        'job_instance_from_pipeline',
-        'job_instance_from_stage',
-        'job_instance_from_job_manager',
+    @pytest.mark.parametrize("job_fixture_func", [
+        job_instance_from_pipeline,
+        job_instance_from_stage,
+        job_instance_from_job_manager,
     ])
-    def test_pipeline_name(self, job_fixture_name, request):
-        job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert job_fixture.pipeline_name == self.PIPELINE_NAME, "Fixture: {}".format(job_fixture_name)
+    def test_pipeline_name(self, job_fixture_func, my_vcr, session_fixture):
+        job_fixture = job_fixture_func(self, my_vcr, session_fixture)
+        assert job_fixture.pipeline_name == self.PIPELINE_NAME, "Fixture: {}".format(job_fixture_func.__name__)
 
-    @pytest.mark.parametrize("job_fixture_name", [
-        'job_instance_from_pipeline',
-        'job_instance_from_stage',
-        'job_instance_from_job_manager',
+    @pytest.mark.parametrize("job_fixture_func", [
+        job_instance_from_pipeline,
+        job_instance_from_stage,
+        job_instance_from_job_manager,
     ])
-    def test_pipeline_counter(self, job_fixture_name, request):
-        job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert job_fixture.pipeline_counter == self.PIPELINE_COUNTER, "Fixture: {}".format(job_fixture_name)
+    def test_pipeline_counter(self, job_fixture_func, my_vcr, session_fixture):
+        job_fixture = job_fixture_func(self, my_vcr, session_fixture)
+        assert job_fixture.pipeline_counter == self.PIPELINE_COUNTER, "Fixture: {}".format(job_fixture_func.__name__)
 
-    @pytest.mark.parametrize("job_fixture_name", [
-        'job_instance_from_pipeline',
-        'job_instance_from_stage',
-        'job_instance_from_job_manager',
+    @pytest.mark.parametrize("job_fixture_func", [
+        job_instance_from_pipeline,
+        job_instance_from_stage,
+        job_instance_from_job_manager,
     ])
-    def test_stage_name(self, job_fixture_name, request):
-        job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert job_fixture.stage_name == self.STAGE_NAME, "Fixture: {}".format(job_fixture_name)
+    def test_stage_name(self, job_fixture_func, my_vcr, session_fixture):
+        job_fixture = job_fixture_func(self, my_vcr, session_fixture)
+        assert job_fixture.stage_name == self.STAGE_NAME, "Fixture: {}".format(job_fixture_func.__name__)
 
-    @pytest.mark.parametrize("job_fixture_name", [
-        'job_instance_from_pipeline',
-        'job_instance_from_stage',
-        'job_instance_from_job_manager',
+    @pytest.mark.parametrize("job_fixture_func", [
+        job_instance_from_pipeline,
+        job_instance_from_stage,
+        job_instance_from_job_manager,
     ])
-    def test_stage_counter(self, job_fixture_name, request):
-        job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert str(job_fixture.stage_counter) == self.STAGE_COUNTER, "Fixture: {}".format(job_fixture_name)
+    def test_stage_counter(self, job_fixture_func, my_vcr, session_fixture):
+        job_fixture = job_fixture_func(self, my_vcr, session_fixture)
+        assert str(job_fixture.stage_counter) == self.STAGE_COUNTER, "Fixture: {}".format(job_fixture_func.__name__)
 
-    @pytest.mark.parametrize("job_fixture_name", [
-        'job_instance_from_pipeline',
-        'job_instance_from_stage',
-        'job_instance_from_job_manager',
+    @pytest.mark.parametrize("job_fixture_func", [
+        job_instance_from_pipeline,
+        job_instance_from_stage,
+        job_instance_from_job_manager,
     ])
-    def test_url(self, job_fixture_name, request):
-        job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert job_fixture.url == self.URL.format(server=job_fixture._session._options['server']), "Fixture: {}".format(job_fixture_name)
+    def test_url(self, job_fixture_func, my_vcr, session_fixture):
+        job_fixture = job_fixture_func(self, my_vcr, session_fixture)
+        assert job_fixture.url == self.URL.format(server=job_fixture._session._options['server']), "Fixture: {}".format(job_fixture_func.__name__)
 
-    @pytest.mark.parametrize("job_fixture_name", [
-        'job_instance_from_pipeline',
-        'job_instance_from_stage',
+    @pytest.mark.parametrize("job_fixture_func", [
+        job_instance_from_pipeline,
+        job_instance_from_stage,
     ])
-    def test_stage_provided(self, job_fixture_name, request):
-        job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert job_fixture.stage is not None, "Fixture: {}".format(job_fixture_name)
-        assert isinstance(job_fixture.stage, stage.StageInstance), "Fixture: {}".format(job_fixture_name)
+    def test_stage_provided(self, job_fixture_func, my_vcr, session_fixture):
+        job_fixture = job_fixture_func(self, my_vcr, session_fixture)
+        assert job_fixture.stage is not None, "Fixture: {}".format(job_fixture_func.__name__)
+        assert isinstance(job_fixture.stage, stage.StageInstance), "Fixture: {}".format(job_fixture_func.__name__)
 
-    @pytest.mark.parametrize("job_fixture_name", [
-        'job_instance_from_job_manager',
+    @pytest.mark.parametrize("job_fixture_func", [
+        job_instance_from_job_manager,
     ])
-    def test_stage_is_empty(self, job_fixture_name, request):
-        job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert job_fixture.stage is None, "Fixture: {}".format(job_fixture_name)
+    def test_stage_is_empty(self, job_fixture_func, my_vcr, session_fixture):
+        job_fixture = job_fixture_func(self, my_vcr, session_fixture)
+        assert job_fixture.stage is None, "Fixture: {}".format(job_fixture_func.__name__)
 
-    @pytest.mark.parametrize("job_fixture_name", [
-        'job_instance_from_pipeline',
-        'job_instance_from_stage',
-        'job_instance_from_job_manager',
+    @pytest.mark.parametrize("job_fixture_func", [
+        job_instance_from_pipeline,
+        job_instance_from_stage,
+        job_instance_from_job_manager,
     ])
-    def test_artifact(self, job_fixture_name, request):
-        job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert job_fixture.artifact is not None, "Fixture: {}".format(job_fixture_name)
-        assert isinstance(job_fixture.artifact, artifact.ArtifactManager), "Fixture: {}".format(job_fixture_name)
+    def test_artifact(self, job_fixture_func, my_vcr, session_fixture):
+        job_fixture = job_fixture_func(self, my_vcr, session_fixture)
+        assert job_fixture.artifact is not None, "Fixture: {}".format(job_fixture_func.__name__)
+        assert isinstance(job_fixture.artifact, artifact.ArtifactManager), "Fixture: {}".format(job_fixture_func.__name__)
 
-    @pytest.mark.parametrize("job_fixture_name", [
-        'job_instance_from_pipeline',
-        'job_instance_from_stage',
-        'job_instance_from_job_manager',
+    @pytest.mark.parametrize("job_fixture_func", [
+        job_instance_from_pipeline,
+        job_instance_from_stage,
+        job_instance_from_job_manager,
     ])
-    def test_property(self, job_fixture_name, request):
-        job_fixture = request.getfuncargvalue(job_fixture_name)
-        assert job_fixture.prop is not None, "Fixture: {}".format(job_fixture_name)
-        assert isinstance(job_fixture.prop, prop.PropertyManager), "Fixture: {}".format(job_fixture_name)
+    def test_property(self, job_fixture_func, my_vcr, session_fixture):
+        job_fixture = job_fixture_func(self, my_vcr, session_fixture)
+        assert job_fixture.prop is not None, "Fixture: {}".format(job_fixture_func.__name__)
+        assert isinstance(job_fixture.prop, prop.PropertyManager), "Fixture: {}".format(job_fixture_func.__name__)

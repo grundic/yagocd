@@ -27,6 +27,7 @@
 ###############################################################################
 
 import copy
+# noinspection PyUnresolvedReferences
 from six.moves.urllib.parse import urljoin
 
 import requests
@@ -42,6 +43,7 @@ class Session(object):
         self._auth = auth
         self._options = options
         self._session = requests.Session()
+        self.__server_version = None
 
     @staticmethod
     def urljoin(*args):
@@ -58,6 +60,24 @@ class Session(object):
         :return: server url for this instance.
         """
         return self._options['server'].rstrip('/')
+
+    @property
+    def server_version(self):
+        """
+        Special method for getting server version.
+
+        Because of different behaviour on different versions of
+        server, we have to pass different headers to the endpoints.
+        This method requests the version from server and caches it
+        in internal variable, so other resources could use it.
+
+        :return: server version parsed from `about` page.
+        """
+        if self.__server_version is None:
+            from yagocd.resources.info import InfoManager
+            self.__server_version = InfoManager(self).version
+
+        return self.__server_version
 
     def request(self, method, path, params=None, data=None, headers=None, files=None):
         # this should work even if path is absolute (e.g. for files)

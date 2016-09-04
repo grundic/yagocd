@@ -1,0 +1,33 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      Cookie: [JSESSIONID=j9sfkgn58wiy14hjbrv7tefjb]
+      User-Agent: [python-requests/2.10.0]
+    method: DELETE
+    uri: http://localhost:8153/go/api/users/user_02
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKvmUlBQyk0tLk5MT1WyUlAKLU4tUlAvBZLxBkbqCuWJxQopqTmpJakpCsWlyclA
+        hWmlOTmVekpctVwAF7ivBDwAAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Sat, 03 Sep 2016 08:26:01 GMT']
+      ETag: ['"cccb4bd4698bf845c2a059efe7e17c51--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [d7c1248c-944c-48ae-9538-0b2d840631f7]
+      X-Runtime: ['0.014000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

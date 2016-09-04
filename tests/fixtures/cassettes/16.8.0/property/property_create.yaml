@@ -1,0 +1,24 @@
+interactions:
+- request:
+    body: !!binary |
+      dmFsdWU9MTAwNTAw
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Confirm: ['true']
+      Connection: [keep-alive]
+      Content-Length: ['12']
+      Content-Type: [application/x-www-form-urlencoded]
+      Cookie: [JSESSIONID=147aa000yu2v81390ptsz9940p]
+      User-Agent: [python-requests/2.10.0]
+    method: POST
+    uri: http://localhost:8153/go/properties/Shared_Services/7/Commit/1/build/foo_bar_baz
+  response:
+    body: {string: Property 'foo_bar_baz' created with value '100500'}
+    headers:
+      Content-Length: ['50']
+      Content-Type: [text/plain; charset=UTF-8]
+      Date: ['Fri, 02 Sep 2016 22:36:51 GMT']
+    status: {code: 201, message: Created}
+version: 1

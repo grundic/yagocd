@@ -27,6 +27,7 @@
 ###############################################################################
 
 from collections import deque
+from distutils.version import LooseVersion
 
 
 class YagocdUtil(object):
@@ -59,3 +60,12 @@ class YagocdUtil(object):
             node_children = set(near_nodes(current))
             to_crawl.extend(node_children - visited)
         return list(visited)
+
+    @classmethod
+    def choose_option(cls, version_to_options, default, server_version):
+        option = default
+        for version, candidate in version_to_options.items():
+            if LooseVersion(server_version) <= LooseVersion(version):
+                option = candidate
+
+        return option

@@ -1,0 +1,52 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/api/config/pipeline_groups
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAO1Y308cNxD+V6JTHyH4tz28AVGrSkmKCjQPUXUa22NYZW93tbsXlUb875mDS8gd
+        VFwbUiXA2553PeP5vm/GM/f2w6SrOqqrhobJ7tsPk2HE0+VjgzOa7E4O2tmsGicXW59XTppqnB7T
+        sLJ4iOkdb51c/Ln1aenoDHvK0yPq31eJjW5NZjhSX2F95SDTkPqqG6u2WVj9/eXus7Nx7IbdnZ3T
+        ajybx+epne2ctilvZ5q1O8PS0HN+u/Vsv8cmne0+m+HARtl4qZpT6ru+akY2hx6iCbmUhBCilEJH
+        Mt7pELV3NjmvU4oISgmlSaIBo6Rxi2chpBeODY7n3SKMXxbRc1Q1Rqr5908fDn47eX18cRn9feJ1
+        0DbDfEb99A3FoRrpqwFLS4MbAeY1laiUDUlHnUJ2UroirHLSG5cdBSygnS/gkyGHoWRKxehsEUsW
+        ZNYA21o/7k01rPonLVQizyZTlmiFgKxkIJ9dkpiLQx0KAmpdXBbCmiyd8CiEElAwSHHt/3Cp6P+H
+        tX21f2+ERRU34koEW4r2ABRS1JmidqRAaFCSImTpCbz25JVVwesSnfXZFGUzgAnG0w/D1TXML+g9
+        1W03o+bqwHeVrRfU1e35dK/r6irhIq7hSyJfYf9uupcSdSPlVT+X+072ju9gc5X3VXycDYyPC5Ig
+        gLDBaGejURAycjJhDMlqJaM1FDh/EqAShnzMmqwvUubb8LlB0i3lYq0EWgxWJ4o5ZQKlJYsiei6D
+        fAptrQPpErBSSPsSC7CkohSJkrNcD8nARqf4bqRya1rfoYKf501aLGJ9menDl0LYm4/tgv+8fPWk
+        hh9JDdc8/sGclSX5G1WO4x4Lb5i+rE7PVor/TTF9+fbSz/n06qOrMnV9iMO+zfNLqW3aDq3UoVUQ
+        DSnnRZCGb11hsmFQS1BAKDJX/aL5fsbgrTKIOfIFAEUH1le23OvESLgRkzflv3YFSRmE0CxoCCWk
+        IDS6ADY4paT2GYOKTgpQrCgblWGVBY3Sch+G2sp8q6g3z+tvzNGnZHri6PvliCvuEz3/thhe47dR
+        KcxUcF6PR+P6ZFfNupo+e30cg90/gXGI84HyExjLqele4GjaZpv+qoaRo93J89nsfDM4bPAxyIzS
+        BwBunSDKmFywDgXPQCojimSLY1BM4EHIIXoVtEuFkIcp9Q200fPD2Fd/Pylkuf66Hbm+s7FXSxD+
+        Kx79vMlV2jnHBTKb/cWhIhhnSgBvgNtNHSEwKkaAQ0kmgNGBv0kSICgbRTYMHrfLEamESOnesVjc
+        C0fpjPK8pm0NyO24vlMfNzNsbdzwBa2xFp3k8Z8NagUiIBlFrIIMKWstSzFWGBs9OQYloYlZCmkA
+        wHzdrb9RqI4PgDK7RxBqLBEgGfUIQpW2kGCPDz/UN1yGfm14b5MeU96uhP14cngl7MeTzythP+zc
+        PljEWNcPuUdb5Zjdb38e/rZP+3be8ScfAaLj4kwOHAAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 03 Sep 2016 12:38:10 GMT']
+      ETag: ['"3717d5e807e909ec1a38adc6bf079afa--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=1uasn40hrre2xz0zf5o1srfhq;Path=/go;Expires=Sat, 17-Sep-2016
+          12:38:10 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [6ba6b17b-ba5d-454b-9aba-73dc96ec0ff7]
+      X-Runtime: ['0.052000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

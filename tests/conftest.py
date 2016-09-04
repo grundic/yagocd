@@ -40,6 +40,16 @@ from vcr import VCR
 from yagocd import Yagocd
 from yagocd.session import Session
 
+TESTING_VERSIONS = [
+    '16.1.0',
+    '16.2.1',
+    '16.3.0',
+    '16.6.0',
+    '16.7.0',
+    '16.8.0',
+    '16.9.0',
+]
+
 
 @pytest.fixture(scope='session')
 def tests_dir():
@@ -53,25 +63,25 @@ def mock_session():
     return session
 
 
-@pytest.fixture()
+@pytest.fixture(scope="module")
 def session_fixture():
     options = copy.deepcopy(Yagocd.DEFAULT_OPTIONS)
-    options['server'] = 'http://local.docker:8153/'
+    options['server'] = 'http://localhost:8153/'
     return Session(
         auth=('admin', '12345'),
         options=options
     )
 
 
-my_vcr_object = VCR(
-    path_transformer=VCR.ensure_suffix('.yaml'),
-    cassette_library_dir=os.path.join(tests_dir(), 'fixtures/cassettes'),
-)
+root_cassette_library_dir = os.path.join(tests_dir(), 'fixtures/cassettes')
 
 
 @pytest.fixture()
-def my_vcr():
-    return my_vcr_object
+def my_vcr(gocd_docker):
+    return VCR(
+        path_transformer=VCR.ensure_suffix('.yaml'),
+        cassette_library_dir=os.path.join(root_cassette_library_dir, gocd_docker),
+    )
 
 
 CONTAINER_NAME = 'yagocd-server'
@@ -93,24 +103,26 @@ def fresh_run(request):
     return request.config.getoption("--fresh-run")
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest.fixture(scope="session", params=TESTING_VERSIONS)
 def gocd_docker(request, fresh_run):
     if fresh_run:
-        if os.path.exists(my_vcr_object.cassette_library_dir):
+        cassette_library_dir = os.path.join(root_cassette_library_dir, request.param)
+        if os.path.exists(cassette_library_dir):
             print("Removing existing cassettes...")
-            shutil.rmtree(my_vcr_object.cassette_library_dir)
+            shutil.rmtree(cassette_library_dir)
 
-        start_container()
+        start_container(version_tag=request.param)
         wait_till_started()
 
         def fin():
             stop_container()
 
         request.addfinalizer(fin)
+    return request.param
 
 
-def start_container():
-    sys.stdout.write('Starting Docker container...')
+def start_container(version_tag):
+    sys.stdout.write('Starting Docker container [{} version]...'.format(version_tag))
     output = subprocess.check_output([
         "/usr/local/bin/docker",
         "ps",
@@ -123,8 +135,9 @@ def start_container():
         subprocess.check_call([
             "/usr/local/bin/docker",
             "run",
+            "-p=8153:8153",
+            "-p=8154:8154",
             "--detach",
-            "--net=host",
             "--volume={current_dir}/docker:/workspace".format(
                 current_dir=CURRENT_DIR
             ),
@@ -132,7 +145,7 @@ def start_container():
             "--name={container_name}".format(
                 container_name=CONTAINER_NAME
             ),
-            "gocd/gocd-dev",
+            "gocd/gocd-dev:{tag}".format(tag=version_tag),
             "/bin/bash",
             "-c",
             "'/workspace/bootstrap.sh'",
@@ -143,7 +156,7 @@ def wait_till_started():
     sys.stdout.write('Waiting for availability of GoCD in Docker.')
     while True:
         try:
-            requests.get("http://local.docker:8153/go")
+            requests.get("http://localhost:8153/go")
         except requests.exceptions.ConnectionError:
             sys.stdout.write('.')
             time.sleep(5)

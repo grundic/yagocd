@@ -26,8 +26,9 @@
 #
 ###############################################################################
 
-import zlib
+from distutils.version import LooseVersion
 
+import zlib
 from six import string_types
 
 from yagocd.resources import agent, job
@@ -40,6 +41,26 @@ class BaseTestAgentManager(object):
     @pytest.fixture()
     def manager(self, session_fixture):
         return agent.AgentManager(session=session_fixture)
+
+    @pytest.fixture()
+    def first_agent_uuid(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/first_agent_uuid"):
+            return manager.list()[0].data.uuid
+
+    @staticmethod
+    def _expected_accept_header(manager):
+        if LooseVersion(manager._session.server_version) <= '16.1.0':
+            return 'application/vnd.go.cd.v1+json'
+        elif LooseVersion(manager._session.server_version) <= '16.3.0':
+            return 'application/vnd.go.cd.v2+json'
+        else:
+            return 'application/vnd.go.cd.v3+json'
+
+
+class TestCacheServerVersion(BaseTestAgentManager):
+    def test_cache_server_version(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/server_version_cache"):
+            assert manager._session.server_version
 
 
 class TestListAsList(BaseTestAgentManager):
@@ -56,7 +77,7 @@ class TestListAsList(BaseTestAgentManager):
     def test_list_request_accept_headers(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
             manager.list()
-            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v2+json'
+            assert cass.requests[0].headers['accept'] == self._expected_accept_header(manager)
 
     def test_list_response_code(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
@@ -101,79 +122,75 @@ class TestDict(BaseTestAgentManager):
             result = manager.dict()
             assert all(isinstance(i, agent.AgentEntity) for i in result.values())
 
-    def test_dict_get_by_key(self, manager, my_vcr):
+    def test_dict_get_by_key(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_list_as_list"):
-            uuid = '68e5d48c-753a-4395-a79c-1cb22d77a12f'
-            result = manager.dict().get(uuid)
-            assert result.data.uuid == '68e5d48c-753a-4395-a79c-1cb22d77a12f'
+            result = manager.dict().get(first_agent_uuid)
+            assert result.data.uuid == first_agent_uuid
 
 
 class TestGet(BaseTestAgentManager):
-    UUID = '68e5d48c-753a-4395-a79c-1cb22d77a12f'
-
-    def test_get_request_url(self, manager, my_vcr):
+    def test_get_request_url(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_get") as cass:
-            manager.get(self.UUID)
-            assert cass.requests[0].path == '/go/api/agents/{uuid}'.format(uuid=self.UUID)
+            manager.get(first_agent_uuid)
+            assert cass.requests[0].path == '/go/api/agents/{uuid}'.format(uuid=first_agent_uuid)
 
-    def test_get_request_method(self, manager, my_vcr):
+    def test_get_request_method(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_get") as cass:
-            manager.get(self.UUID)
+            manager.get(first_agent_uuid)
             assert cass.requests[0].method == 'GET'
 
-    def test_get_request_accept_headers(self, manager, my_vcr):
+    def test_get_request_accept_headers(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_get") as cass:
-            manager.get(self.UUID)
-            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+            manager.get(first_agent_uuid)
+            assert cass.requests[0].headers['accept'] == self._expected_accept_header(manager)
 
-    def test_get_response_code(self, manager, my_vcr):
+    def test_get_response_code(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_get") as cass:
-            manager.get(self.UUID)
+            manager.get(first_agent_uuid)
             assert cass.responses[0]['status']['code'] == 200
 
-    def test_get_returns_instance_of_agent_entity(self, manager, my_vcr):
+    def test_get_returns_instance_of_agent_entity(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_get"):
-            result = manager.get(self.UUID)
+            result = manager.get(first_agent_uuid)
             assert isinstance(result, agent.AgentEntity)
 
 
 class TestUpdate(BaseTestAgentManager):
-    UUID = '68e5d48c-753a-4395-a79c-1cb22d77a12f'
     UPD_CFG = {'hostname': 'foo-bar'}
 
-    def test_update_request_url(self, manager, my_vcr):
+    def test_update_request_url(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(self.UUID, self.UPD_CFG)
-            assert cass.requests[0].path == '/go/api/agents/{uuid}'.format(uuid=self.UUID)
+            manager.update(first_agent_uuid, self.UPD_CFG)
+            assert cass.requests[0].path == '/go/api/agents/{uuid}'.format(uuid=first_agent_uuid)
 
-    def test_update_request_method(self, manager, my_vcr):
+    def test_update_request_method(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(self.UUID, self.UPD_CFG)
+            manager.update(first_agent_uuid, self.UPD_CFG)
             assert cass.requests[0].method == 'PATCH'
 
-    def test_update_request_accept_headers(self, manager, my_vcr):
+    def test_update_request_accept_headers(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(self.UUID, self.UPD_CFG)
-            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+            manager.update(first_agent_uuid, self.UPD_CFG)
+            assert cass.requests[0].headers['accept'] == self._expected_accept_header(manager)
 
-    def test_update_request_content_type_headers(self, manager, my_vcr):
+    def test_update_request_content_type_headers(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(self.UUID, self.UPD_CFG)
+            manager.update(first_agent_uuid, self.UPD_CFG)
             assert cass.requests[0].headers['content-type'] == 'application/json'
 
-    def test_update_response_code(self, manager, my_vcr):
+    def test_update_response_code(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(self.UUID, self.UPD_CFG)
+            manager.update(first_agent_uuid, self.UPD_CFG)
             assert cass.responses[0]['status']['code'] == 200
 
-    def test_update_returns_instance_of_agent_entity(self, manager, my_vcr):
+    def test_update_returns_instance_of_agent_entity(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_update"):
-            result = manager.update(self.UUID, self.UPD_CFG)
+            result = manager.update(first_agent_uuid, self.UPD_CFG)
             assert isinstance(result, agent.AgentEntity)
 
-    def test_update_returns_updated_agent(self, manager, my_vcr):
+    def test_update_returns_updated_agent(self, manager, first_agent_uuid, my_vcr):
         with my_vcr.use_cassette("agent/agent_update"):
-            result = manager.update(self.UUID, self.UPD_CFG)
+            result = manager.update(first_agent_uuid, self.UPD_CFG)
             assert result.data.hostname == self.UPD_CFG['hostname']
 
 
@@ -193,7 +210,7 @@ class TestDelete(BaseTestAgentManager):
     def test_delete_request_accept_headers(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/agent_delete") as cass:
             manager.delete(self.UUID)
-            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+            assert cass.requests[0].headers['accept'] == self._expected_accept_header(manager)
 
     def test_delete_response_code(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/agent_delete") as cass:
@@ -204,7 +221,11 @@ class TestDelete(BaseTestAgentManager):
         with my_vcr.use_cassette("agent/agent_delete") as cass:
             manager.delete(self.UUID)
             message = cass.responses[0]['body']['string']
-            assert b'Deleted 1 agent(s)' in zlib.decompress(message, 16 + zlib.MAX_WBITS)
+            try:
+                message = zlib.decompress(message, 16 + zlib.MAX_WBITS)
+            except zlib.error:
+                pass
+            assert b'Deleted 1 agent(s)' in message
 
 
 class TestJobHistory(BaseTestAgentManager):
@@ -241,5 +262,3 @@ class TestJobHistory(BaseTestAgentManager):
         with my_vcr.use_cassette("agent/agent_job_history"):
             result = manager.job_history(self.UUID)
             assert all(isinstance(i, job.JobInstance) for i in result)
-
-

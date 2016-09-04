@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJob3N0bmFtZSI6ICJmb28tYmFyIn0=
+    headers:
+      Accept: [application/vnd.go.cd.v3+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['23']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=u2w0vg5rrdb6ordhoany26ig]
+      User-Agent: [python-requests/2.10.0]
+    method: PATCH
+    uri: http://localhost:8153/go/api/agents/68e5d48c-753a-4395-a79c-1cb22d77a12f
+  response:
+    body: {string: "{\n  \"_links\": {\n    \"self\": {\n      \"href\": \"http://localhost:8153/go/api/agents/68e5d48c-753a-4395-a79c-1cb22d77a12f\"\n
+        \   },\n    \"doc\": {\n      \"href\": \"https://api.go.cd/#agents\"\n    },\n
+        \   \"find\": {\n      \"href\": \"http://localhost:8153/go/api/agents/:uuid\"\n
+        \   }\n  },\n  \"uuid\": \"68e5d48c-753a-4395-a79c-1cb22d77a12f\",\n  \"hostname\":
+        \"foo-bar\",\n  \"ip_address\": \"10.0.2.15\",\n  \"sandbox\": \"\",\n  \"operating_system\":
+        \"\",\n  \"free_space\": \"unknown\",\n  \"agent_config_state\": \"Enabled\",\n
+        \ \"agent_state\": \"Missing\",\n  \"build_state\": \"Unknown\",\n  \"resources\":
+        [\n\n  ],\n  \"environments\": [\n\n  ]\n}\n"}
+    headers:
+      Cache-Control: ['private, must-revalidate']
+      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
+      Date: ['Fri, 02 Sep 2016 22:31:56 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [dc01f842-4b2a-45a0-b348-55b4e82a2c46]
+      X-Runtime: ['0.312000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

@@ -27,9 +27,11 @@
 ###############################################################################
 
 import json
+from collections import OrderedDict
 
 from yagocd.resources import BaseManager, Base
 from yagocd.resources.job import JobInstance
+from yagocd.util import YagocdUtil
 
 
 class AgentManager(BaseManager):
@@ -39,8 +41,24 @@ class AgentManager(BaseManager):
     :warning: Please note that this API requires using v2 of the API using `Accept: application/vnd.go.cd.v2+json`
     """
 
-    # Using this header is actually impossible, as it doesn't work as documented in most cases...
-    ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
+    # This header is dependent of the version of the GoCD Server.
+    ACCEPT_HEADER = 'application/vnd.go.cd.v3+json'
+
+    # This map configures pessimistic acceptance header resolve:
+    # by default the `ACCEPT_HEADER` would be used, but in case
+    # server version is less or equal one of these, then it would
+    # be overwritten from mapping.
+    VERSION_TO_ACCEPT_HEADER = OrderedDict({
+        '16.1.0': 'application/vnd.go.cd.v1+json',
+        '16.3.0': 'application/vnd.go.cd.v2+json',
+    })
+
+    def __accept_header(self):
+        return YagocdUtil.choose_option(
+            version_to_options=self.VERSION_TO_ACCEPT_HEADER,
+            default=self.ACCEPT_HEADER,
+            server_version=self._session.server_version
+        )
 
     def list(self):
         """
@@ -53,7 +71,7 @@ class AgentManager(BaseManager):
         """
         response = self._session.get(
             path='{base_api}/agents'.format(base_api=self.base_api),
-            headers={'Accept': self.ACCEPT_HEADER},
+            headers={'Accept': self.__accept_header()},
         )
 
         agents = list()
@@ -100,10 +118,7 @@ class AgentManager(BaseManager):
                 base_api=self.base_api,
                 uuid=uuid,
             ),
-            # and again, WTF?!!
-            # This depends on Go version: v2 works for later version of Go (16), but doesn't for earlier (15).
-            # And because there is no good way to get version of the Go server (WTF?!), just use v1 header for now.
-            # headers={'Accept': self.ACCEPT_HEADER},
+            headers={'Accept': self.__accept_header()},
         )
 
         return AgentEntity(session=self._session, data=response.json())
@@ -124,7 +139,7 @@ class AgentManager(BaseManager):
             ),
             data=json.dumps(config),
             headers={
-                # 'Accept': self.ACCEPT_HEADER,  # WTF?!!
+                'Accept':  self.__accept_header(),
                 'Content-Type': 'application/json'
             },
         )
@@ -143,7 +158,7 @@ class AgentManager(BaseManager):
                 base_api=self.base_api,
                 uuid=uuid,
             ),
-            # headers={'Accept': self.ACCEPT_HEADER},  # WTF?!!
+            headers={'Accept':  self.__accept_header()},
         )
 
         return response.json().get('message')

@@ -272,7 +272,10 @@ class ArtifactManager(BaseManager):
                 job_name=self._job_name or job_name,
                 path_to_file=path
             ),
-            files={'file': open(filename, 'rb')}
+            files={'file': open(filename, 'rb')},
+            headers={
+                'Confirm': 'true'
+            },
         )
 
         return response.text
