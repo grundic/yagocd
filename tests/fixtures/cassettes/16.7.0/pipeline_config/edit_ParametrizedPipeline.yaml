@@ -1,0 +1,148 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v2+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1wq41wxgw6sed9niflkluwfxl]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline
+  response:
+    body: {string: "{\n  \"_links\": {\n    \"self\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline\"\n
+        \   },\n    \"doc\": {\n      \"href\": \"http://api.go.cd/#pipeline-config\"\n
+        \   },\n    \"find\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/:pipeline_name\"\n
+        \   }\n  },\n  \"label_template\": \"${COUNT}\",\n  \"enable_pipeline_locking\":
+        false,\n  \"name\": \"ParametrizedPipeline\",\n  \"template\": null,\n  \"parameters\":
+        [\n\n  ],\n  \"environment_variables\": [\n    {\n      \"secure\": false,\n
+        \     \"name\": \"MY_VARIABLE\",\n      \"value\": \"MY value 123\"\n    },\n
+        \   {\n      \"secure\": false,\n      \"name\": \"EMPTY_VARIABLE\",\n      \"value\":
+        \"\"\n    },\n    {\n      \"secure\": true,\n      \"name\": \"MY_SECRET_VARIABLE\",\n
+        \     \"encrypted_value\": \"vOXzCT5G7As=\"\n    },\n    {\n      \"secure\":
+        true,\n      \"name\": \"EMPTY_SECRET_VARIABLE\",\n      \"encrypted_value\":
+        \"vOXzCT5G7As=\"\n    }\n  ],\n  \"materials\": [\n    {\n      \"type\":
+        \"git\",\n      \"attributes\": {\n        \"url\": \"https://github.com/gocd-demo/services.git\",\n
+        \       \"destination\": null,\n        \"filter\": null,\n        \"invert_filter\":
+        false,\n        \"name\": null,\n        \"auto_update\": true,\n        \"branch\":
+        \"master\",\n        \"submodule_folder\": null,\n        \"shallow_clone\":
+        false\n      }\n    }\n  ],\n  \"stages\": [\n    {\n      \"name\": \"defaultStage\",\n
+        \     \"fetch_materials\": true,\n      \"clean_working_directory\": false,\n
+        \     \"never_cleanup_artifacts\": false,\n      \"approval\": {\n        \"type\":
+        \"success\",\n        \"authorization\": {\n          \"roles\": [\n\n          ],\n
+        \         \"users\": [\n\n          ]\n        }\n      },\n      \"environment_variables\":
+        [\n\n      ],\n      \"jobs\": [\n        {\n          \"name\": \"defaultJob\",\n
+        \         \"run_instance_count\": null,\n          \"timeout\": null,\n          \"environment_variables\":
+        [\n            {\n              \"secure\": false,\n              \"name\":
+        \"ENV_VAR_1\",\n              \"value\": \"\"\n            }\n          ],\n
+        \         \"resources\": [\n\n          ],\n          \"tasks\": [\n            {\n
+        \             \"type\": \"exec\",\n              \"attributes\": {\n                \"run_if\":
+        [\n                  \"passed\"\n                ],\n                \"on_cancel\":
+        null,\n                \"command\": \"printenv\",\n                \"working_directory\":
+        null\n              }\n            }\n          ],\n          \"tabs\": [\n\n
+        \         ],\n          \"artifacts\": [\n\n          ],\n          \"properties\":
+        null\n        }\n      ]\n    }\n  ],\n  \"tracking_tool\": null,\n  \"timer\":
+        null\n}\n"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
+      Date: ['Mon, 05 Sep 2016 22:04:22 GMT']
+      ETag: ['"414e511f7081c07012f3cd9eedec237a"']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [24a296d0-da7b-44a3-8ce8-93f4914b0f28]
+      X-Runtime: ['0.335000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: !!binary |
+      eyJlbmFibGVfcGlwZWxpbmVfbG9ja2luZyI6IGZhbHNlLCAibmFtZSI6ICJQYXJhbWV0cml6ZWRQ
+      aXBlbGluZSIsICJfbGlua3MiOiB7ImRvYyI6IHsiaHJlZiI6ICJodHRwOi8vYXBpLmdvLmNkLyNw
+      aXBlbGluZS1jb25maWcifSwgInNlbGYiOiB7ImhyZWYiOiAiaHR0cDovL2xvY2FsaG9zdDo4MTUz
+      L2dvL2FwaS9hZG1pbi9waXBlbGluZXMvUGFyYW1ldHJpemVkUGlwZWxpbmUifSwgImZpbmQiOiB7
+      ImhyZWYiOiAiaHR0cDovL2xvY2FsaG9zdDo4MTUzL2dvL2FwaS9hZG1pbi9waXBlbGluZXMvOnBp
+      cGVsaW5lX25hbWUifX0sICJ0ZW1wbGF0ZSI6IG51bGwsICJsYWJlbF90ZW1wbGF0ZSI6ICIke0NP
+      VU5UfS1zb21lLW5ldy12YWx1ZSIsICJ0cmFja2luZ190b29sIjogbnVsbCwgInN0YWdlcyI6IFt7
+      Im5hbWUiOiAiZGVmYXVsdFN0YWdlIiwgImFwcHJvdmFsIjogeyJ0eXBlIjogInN1Y2Nlc3MiLCAi
+      YXV0aG9yaXphdGlvbiI6IHsidXNlcnMiOiBbXSwgInJvbGVzIjogW119fSwgImZldGNoX21hdGVy
+      aWFscyI6IHRydWUsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXSwgIm5ldmVyX2NsZWFudXBf
+      YXJ0aWZhY3RzIjogZmFsc2UsICJqb2JzIjogW3siYXJ0aWZhY3RzIjogW10sICJuYW1lIjogImRl
+      ZmF1bHRKb2IiLCAicnVuX2luc3RhbmNlX2NvdW50IjogbnVsbCwgInRhc2tzIjogW3sidHlwZSI6
+      ICJleGVjIiwgImF0dHJpYnV0ZXMiOiB7IndvcmtpbmdfZGlyZWN0b3J5IjogbnVsbCwgIm9uX2Nh
+      bmNlbCI6IG51bGwsICJjb21tYW5kIjogInByaW50ZW52IiwgInJ1bl9pZiI6IFsicGFzc2VkIl19
+      fV0sICJyZXNvdXJjZXMiOiBbXSwgImVudmlyb25tZW50X3ZhcmlhYmxlcyI6IFt7Im5hbWUiOiAi
+      RU5WX1ZBUl8xIiwgInZhbHVlIjogIiIsICJzZWN1cmUiOiBmYWxzZX1dLCAidGltZW91dCI6IG51
+      bGwsICJ0YWJzIjogW10sICJwcm9wZXJ0aWVzIjogbnVsbH1dLCAiY2xlYW5fd29ya2luZ19kaXJl
+      Y3RvcnkiOiBmYWxzZX1dLCAidGltZXIiOiBudWxsLCAiZW52aXJvbm1lbnRfdmFyaWFibGVzIjog
+      W3sibmFtZSI6ICJNWV9WQVJJQUJMRSIsICJ2YWx1ZSI6ICJNWSB2YWx1ZSAxMjMiLCAic2VjdXJl
+      IjogZmFsc2V9LCB7Im5hbWUiOiAiRU1QVFlfVkFSSUFCTEUiLCAidmFsdWUiOiAiIiwgInNlY3Vy
+      ZSI6IGZhbHNlfSwgeyJlbmNyeXB0ZWRfdmFsdWUiOiAidk9YekNUNUc3QXM9IiwgIm5hbWUiOiAi
+      TVlfU0VDUkVUX1ZBUklBQkxFIiwgInNlY3VyZSI6IHRydWV9LCB7ImVuY3J5cHRlZF92YWx1ZSI6
+      ICJ2T1h6Q1Q1RzdBcz0iLCAibmFtZSI6ICJFTVBUWV9TRUNSRVRfVkFSSUFCTEUiLCAic2VjdXJl
+      IjogdHJ1ZX1dLCAicGFyYW1ldGVycyI6IFtdLCAibWF0ZXJpYWxzIjogW3sidHlwZSI6ICJnaXQi
+      LCAiYXR0cmlidXRlcyI6IHsiYnJhbmNoIjogIm1hc3RlciIsICJuYW1lIjogbnVsbCwgInVybCI6
+      ICJodHRwczovL2dpdGh1Yi5jb20vZ29jZC1kZW1vL3NlcnZpY2VzLmdpdCIsICJkZXN0aW5hdGlv
+      biI6IG51bGwsICJpbnZlcnRfZmlsdGVyIjogZmFsc2UsICJzaGFsbG93X2Nsb25lIjogZmFsc2Us
+      ICJmaWx0ZXIiOiBudWxsLCAic3VibW9kdWxlX2ZvbGRlciI6IG51bGwsICJhdXRvX3VwZGF0ZSI6
+      IHRydWV9fV19
+    headers:
+      Accept: [application/vnd.go.cd.v2+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['1605']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=1wq41wxgw6sed9niflkluwfxl]
+      If-Match: ['"414e511f7081c07012f3cd9eedec237a"']
+      User-Agent: [python-requests/2.10.0]
+    method: PUT
+    uri: http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline
+  response:
+    body: {string: "{\n  \"_links\": {\n    \"self\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline\"\n
+        \   },\n    \"doc\": {\n      \"href\": \"http://api.go.cd/#pipeline-config\"\n
+        \   },\n    \"find\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/:pipeline_name\"\n
+        \   }\n  },\n  \"label_template\": \"${COUNT}-some-new-value\",\n  \"enable_pipeline_locking\":
+        false,\n  \"name\": \"ParametrizedPipeline\",\n  \"template\": null,\n  \"parameters\":
+        [\n\n  ],\n  \"environment_variables\": [\n    {\n      \"secure\": false,\n
+        \     \"name\": \"MY_VARIABLE\",\n      \"value\": \"MY value 123\"\n    },\n
+        \   {\n      \"secure\": false,\n      \"name\": \"EMPTY_VARIABLE\",\n      \"value\":
+        \"\"\n    },\n    {\n      \"secure\": true,\n      \"name\": \"MY_SECRET_VARIABLE\",\n
+        \     \"encrypted_value\": \"vOXzCT5G7As=\"\n    },\n    {\n      \"secure\":
+        true,\n      \"name\": \"EMPTY_SECRET_VARIABLE\",\n      \"encrypted_value\":
+        \"vOXzCT5G7As=\"\n    }\n  ],\n  \"materials\": [\n    {\n      \"type\":
+        \"git\",\n      \"attributes\": {\n        \"url\": \"https://github.com/gocd-demo/services.git\",\n
+        \       \"destination\": null,\n        \"filter\": null,\n        \"invert_filter\":
+        false,\n        \"name\": null,\n        \"auto_update\": true,\n        \"branch\":
+        \"master\",\n        \"submodule_folder\": null,\n        \"shallow_clone\":
+        false\n      }\n    }\n  ],\n  \"stages\": [\n    {\n      \"name\": \"defaultStage\",\n
+        \     \"fetch_materials\": true,\n      \"clean_working_directory\": false,\n
+        \     \"never_cleanup_artifacts\": false,\n      \"approval\": {\n        \"type\":
+        \"success\",\n        \"authorization\": {\n          \"roles\": [\n\n          ],\n
+        \         \"users\": [\n\n          ]\n        }\n      },\n      \"environment_variables\":
+        [\n\n      ],\n      \"jobs\": [\n        {\n          \"name\": \"defaultJob\",\n
+        \         \"run_instance_count\": null,\n          \"timeout\": null,\n          \"environment_variables\":
+        [\n            {\n              \"secure\": false,\n              \"name\":
+        \"ENV_VAR_1\",\n              \"value\": \"\"\n            }\n          ],\n
+        \         \"resources\": [\n\n          ],\n          \"tasks\": [\n            {\n
+        \             \"type\": \"exec\",\n              \"attributes\": {\n                \"run_if\":
+        [\n                  \"passed\"\n                ],\n                \"on_cancel\":
+        null,\n                \"command\": \"printenv\",\n                \"working_directory\":
+        null\n              }\n            }\n          ],\n          \"tabs\": [\n\n
+        \         ],\n          \"artifacts\": [\n\n          ],\n          \"properties\":
+        null\n        }\n      ]\n    }\n  ],\n  \"tracking_tool\": null,\n  \"timer\":
+        null\n}\n"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
+      Date: ['Mon, 05 Sep 2016 22:04:23 GMT']
+      ETag: ['"fc389e5b939e18219f9ef980649e02ba"']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [349e18c0-92f2-418d-80da-3beda041ae3a]
+      X-Runtime: ['0.911000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

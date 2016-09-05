@@ -1,0 +1,27 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v2+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      Cookie: [JSESSIONID=bdewkgj197t01uhwaifpkxae5]
+      User-Agent: [python-requests/2.10.0]
+    method: DELETE
+    uri: http://localhost:8153/go/api/admin/pipelines/Spam_foo_bar
+  response:
+    body: {string: "{\n  \"message\": \"Pipeline 'Spam_foo_bar' was deleted successfully.\"\n}\n"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
+      Date: ['Mon, 05 Sep 2016 21:48:24 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [4e2b529f-a025-403e-969d-ee0d233ebf28]
+      X-Runtime: ['0.148000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

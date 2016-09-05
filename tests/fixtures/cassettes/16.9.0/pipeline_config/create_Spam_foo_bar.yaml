@@ -1,0 +1,70 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJncm91cCI6ICJmaXJzdCIsICJwaXBlbGluZSI6IHsidGVtcGxhdGUiOiBudWxsLCAiZW5hYmxl
+      X3BpcGVsaW5lX2xvY2tpbmciOiB0cnVlLCAic3RhZ2VzIjogW3siYXBwcm92YWwiOiB7ImF1dGhv
+      cml6YXRpb24iOiB7InVzZXJzIjogW10sICJyb2xlcyI6IFtdfSwgInR5cGUiOiAic3VjY2VzcyJ9
+      LCAibmV2ZXJfY2xlYW51cF9hcnRpZmFjdHMiOiBmYWxzZSwgImZldGNoX21hdGVyaWFscyI6IHRy
+      dWUsICJjbGVhbl93b3JraW5nX2RpcmVjdG9yeSI6IGZhbHNlLCAibmFtZSI6ICJkZWZhdWx0U3Rh
+      Z2UiLCAiam9icyI6IFt7InJlc291cmNlcyI6IFtdLCAicnVuX2luc3RhbmNlX2NvdW50IjogbnVs
+      bCwgIm5hbWUiOiAiZGVmYXVsdEpvYiIsICJ0aW1lb3V0IjogMCwgImVudmlyb25tZW50X3Zhcmlh
+      YmxlcyI6IFtdLCAidGFza3MiOiBbeyJhdHRyaWJ1dGVzIjogeyJ3b3JraW5nX2RpcmVjdG9yeSI6
+      IG51bGwsICJjb21tYW5kIjogImxzIiwgInJ1bl9pZiI6IFsicGFzc2VkIl19LCAidHlwZSI6ICJl
+      eGVjIn1dfV0sICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXX1dLCAibmFtZSI6ICJTcGFtX2Zv
+      b19iYXIiLCAibGFiZWxfdGVtcGxhdGUiOiAiJHtDT1VOVH0iLCAibWF0ZXJpYWxzIjogW3siYXR0
+      cmlidXRlcyI6IHsiYXV0b191cGRhdGUiOiB0cnVlLCAic2hhbGxvd19jbG9uZSI6IHRydWUsICJk
+      ZXN0aW5hdGlvbiI6ICJkZXN0IiwgImludmVydF9maWx0ZXIiOiBmYWxzZSwgIm5hbWUiOiBudWxs
+      LCAiZmlsdGVyIjogbnVsbCwgInVybCI6ICJnaXRAZ2l0aHViLmNvbTpzYW1wbGVfcmVwby9leGFt
+      cGxlLmdpdCIsICJicmFuY2giOiAibWFzdGVyIiwgInN1Ym1vZHVsZV9mb2xkZXIiOiBudWxsfSwg
+      InR5cGUiOiAiZ2l0In1dfX0=
+    headers:
+      Accept: [application/vnd.go.cd.v2+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['872']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=bdewkgj197t01uhwaifpkxae5]
+      User-Agent: [python-requests/2.10.0]
+    method: POST
+    uri: http://localhost:8153/go/api/admin/pipelines
+  response:
+    body: {string: "{\n  \"_links\": {\n    \"self\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/Spam_foo_bar\"\n
+        \   },\n    \"doc\": {\n      \"href\": \"https://api.go.cd/#pipeline-config\"\n
+        \   },\n    \"find\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/:pipeline_name\"\n
+        \   }\n  },\n  \"label_template\": \"${COUNT}\",\n  \"enable_pipeline_locking\":
+        true,\n  \"name\": \"Spam_foo_bar\",\n  \"template\": null,\n  \"parameters\":
+        [\n\n  ],\n  \"environment_variables\": [\n\n  ],\n  \"materials\": [\n    {\n
+        \     \"type\": \"git\",\n      \"attributes\": {\n        \"url\": \"git@github.com:sample_repo/example.git\",\n
+        \       \"destination\": \"dest\",\n        \"filter\": null,\n        \"invert_filter\":
+        false,\n        \"name\": null,\n        \"auto_update\": true,\n        \"branch\":
+        \"master\",\n        \"submodule_folder\": null,\n        \"shallow_clone\":
+        true\n      }\n    }\n  ],\n  \"stages\": [\n    {\n      \"name\": \"defaultStage\",\n
+        \     \"fetch_materials\": true,\n      \"clean_working_directory\": false,\n
+        \     \"never_cleanup_artifacts\": false,\n      \"approval\": {\n        \"type\":
+        \"success\",\n        \"authorization\": {\n          \"roles\": [\n\n          ],\n
+        \         \"users\": [\n\n          ]\n        }\n      },\n      \"environment_variables\":
+        [\n\n      ],\n      \"jobs\": [\n        {\n          \"name\": \"defaultJob\",\n
+        \         \"run_instance_count\": null,\n          \"timeout\": \"never\",\n
+        \         \"environment_variables\": [\n\n          ],\n          \"resources\":
+        [\n\n          ],\n          \"tasks\": [\n            {\n              \"type\":
+        \"exec\",\n              \"attributes\": {\n                \"run_if\": [\n
+        \                 \"passed\"\n                ],\n                \"on_cancel\":
+        null,\n                \"command\": \"ls\",\n                \"working_directory\":
+        null\n              }\n            }\n          ],\n          \"tabs\": [\n\n
+        \         ],\n          \"artifacts\": [\n\n          ],\n          \"properties\":
+        null\n        }\n      ]\n    }\n  ],\n  \"tracking_tool\": null,\n  \"timer\":
+        null\n}\n"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
+      Date: ['Mon, 05 Sep 2016 21:48:23 GMT']
+      ETag: ['"4a1d664d69f0b3aee0660419d173e901"']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [357c75b1-3a8a-4821-9588-741c3df77edf]
+      X-Runtime: ['0.441000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

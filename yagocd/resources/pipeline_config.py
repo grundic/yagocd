@@ -31,6 +31,7 @@ from collections import OrderedDict
 from easydict import EasyDict
 
 from yagocd.resources import BaseManager
+from yagocd.util import since
 
 
 class PipelineConfigManager(BaseManager):
@@ -117,6 +118,7 @@ class PipelineConfigManager(BaseManager):
         etag = response.headers['ETag']
         return EasyDict(response.json()), etag
 
+    @since('16.6.0')
     def delete(self, pipeline_name=None):
         """
         Deletes a pipeline.

@@ -41,12 +41,12 @@ from yagocd import Yagocd
 from yagocd.session import Session
 
 TESTING_VERSIONS = [
-    '16.1.0',
-    '16.2.1',
-    '16.3.0',
-    '16.6.0',
-    '16.7.0',
-    '16.8.0',
+    # '16.1.0',
+    # '16.2.1',
+    # '16.3.0',
+    # '16.6.0',
+    # '16.7.0',
+    # '16.8.0',
     '16.9.0',
 ]
 
@@ -90,12 +90,25 @@ CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--fresh-run", action="store_true", default=False,
+        "--use-docker", action="store_true", default=False,
         help=(
-            "Execute fresh run of tests: all cassettes will be deleted, instance of GoCD will be "
-            "started in Docker container and test would be executed upon it."
+            "This flag controls execution of the GoCD server in Docker container. "
+            "It's possible to remove some cassettes and use this flag to generate new ones."
         )
     )
+
+    parser.addoption(
+        "--fresh-run", action="store_true", default=False,
+        help=(
+            "Execute fresh run of tests: all cassettes will be deleted."
+            "You have to explicitly set `--use-docker` flag if you would like to use docker."
+        )
+    )
+
+
+@pytest.fixture(scope='session')
+def use_docker(request):
+    return request.config.getoption("--use-docker")
 
 
 @pytest.fixture(scope='session')
@@ -104,13 +117,8 @@ def fresh_run(request):
 
 
 @pytest.fixture(scope="session", params=TESTING_VERSIONS)
-def gocd_docker(request, fresh_run):
-    if fresh_run:
-        cassette_library_dir = os.path.join(root_cassette_library_dir, request.param)
-        if os.path.exists(cassette_library_dir):
-            print("Removing existing cassettes...")
-            shutil.rmtree(cassette_library_dir)
-
+def gocd_docker(request, use_docker, fresh_run):
+    if use_docker:
         start_container(version_tag=request.param)
         wait_till_started()
 
@@ -118,11 +126,18 @@ def gocd_docker(request, fresh_run):
             stop_container()
 
         request.addfinalizer(fin)
+
+    if fresh_run:
+        cassette_library_dir = os.path.join(root_cassette_library_dir, request.param)
+        if os.path.exists(cassette_library_dir):
+            print("Removing existing cassettes...")
+            shutil.rmtree(cassette_library_dir)
+
     return request.param
 
 
 def start_container(version_tag):
-    sys.stdout.write('Starting Docker container [{} version]...'.format(version_tag))
+    print('Starting Docker container [{} version]...'.format(version_tag))
     output = subprocess.check_output([
         "/usr/local/bin/docker",
         "ps",

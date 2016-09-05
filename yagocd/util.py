@@ -25,7 +25,7 @@
 # THE SOFTWARE.
 #
 ###############################################################################
-
+import functools
 from collections import deque
 from distutils.version import LooseVersion
 
@@ -69,3 +69,33 @@ class YagocdUtil(object):
                 option = candidate
 
         return option
+
+
+class Since(object):
+    def __init__(self, since_version):
+        self._since_version = LooseVersion(since_version)
+
+    def __call__(self, fn):
+        @functools.wraps(fn)
+        def decorated(*args, **kwargs):
+            if args:
+                this = args[0]
+                server_version = this._session.server_version
+                if LooseVersion(server_version) < self._since_version:
+                    name = "{}.{}".format(this.__class__.__name__, fn.__name__)
+                    raise RuntimeError(
+                        "Method `{name}` is not supported on '{server_version}' "
+                        "version of GoCD, it has been added only in '{since_version}' version!".format(
+                            name=name,
+                            server_version=server_version,
+                            since_version=self._since_version
+                        )
+                    )
+
+            return fn(*args, **kwargs)
+
+        decorated.since_version = self._since_version  # used to skip tests on unsupported versions
+        return decorated
+
+
+since = Since

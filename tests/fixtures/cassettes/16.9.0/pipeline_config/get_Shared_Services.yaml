@@ -1,0 +1,41 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v2+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=bdewkgj197t01uhwaifpkxae5]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/api/admin/pipelines/Shared_Services
+  response:
+    body: {string: "{\n  \"_links\": {\n    \"self\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/Shared_Services\"\n
+        \   },\n    \"doc\": {\n      \"href\": \"https://api.go.cd/#pipeline-config\"\n
+        \   },\n    \"find\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/:pipeline_name\"\n
+        \   }\n  },\n  \"label_template\": \"${COUNT}\",\n  \"enable_pipeline_locking\":
+        false,\n  \"name\": \"Shared_Services\",\n  \"template\": \"Development\",\n
+        \ \"parameters\": [\n\n  ],\n  \"environment_variables\": [\n    {\n      \"secure\":
+        false,\n      \"name\": \"MY_VARIABLE\",\n      \"value\": \"\"\n    },\n
+        \   {\n      \"secure\": true,\n      \"name\": \"MY_SECRET_VARIABLE\",\n
+        \     \"encrypted_value\": \"vOXzCT5G7As=\"\n    }\n  ],\n  \"materials\":
+        [\n    {\n      \"type\": \"git\",\n      \"attributes\": {\n        \"url\":
+        \"https://github.com/gocd-demo/services.git\",\n        \"destination\": null,\n
+        \       \"filter\": null,\n        \"invert_filter\": false,\n        \"name\":
+        null,\n        \"auto_update\": true,\n        \"branch\": \"master\",\n        \"submodule_folder\":
+        null,\n        \"shallow_clone\": false\n      }\n    }\n  ],\n  \"stages\":
+        null,\n  \"tracking_tool\": null,\n  \"timer\": null\n}\n"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
+      Date: ['Mon, 05 Sep 2016 21:48:21 GMT']
+      ETag: ['"0d34bb1cf9509338989bcc37fd6fe4c6"']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [aa426ae2-f015-4cad-af89-aab4c167162b]
+      X-Runtime: ['0.239000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
