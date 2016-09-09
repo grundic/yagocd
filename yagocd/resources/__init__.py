@@ -75,9 +75,6 @@ class BaseManager(object):
         if not self.VERSION_TO_ACCEPT_HEADER:
             return self.ACCEPT_HEADER
 
-        assert isinstance(self.VERSION_TO_ACCEPT_HEADER, OrderedDict), (
-            "`VERSION_TO_ACCEPT_HEADER` in class '{}' is not ordered!".format(self.__class__.__name__))
-
         return YagocdUtil.choose_option(
             version_to_options=self.VERSION_TO_ACCEPT_HEADER,
             default=self.ACCEPT_HEADER,

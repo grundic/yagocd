@@ -29,213 +29,133 @@
 import pytest
 from six import string_types
 
+from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import feed
 
 
-class BaseTestConfigurationManager(object):
+class BaseTestConfigurationManager(AbstractTestManager, ReturnValueMixin):
+    def expected_request_url(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def expected_request_method(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def _execute_test_action(self, *args, **kwargs):
+        raise NotImplementedError()
+
     @pytest.fixture()
     def manager(self, session_fixture):
         return feed.FeedManager(session=session_fixture)
 
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
+
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/xml'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        pytest.skip()
+
 
 class TestPipelines(BaseTestConfigurationManager):
-    def test_pipelines_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/pipelines") as cass:
-            manager.pipelines()
-            assert cass.requests[0].path == '/go/api/pipelines.xml'
+            return cass, manager.pipelines()
 
-    def test_pipelines_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/pipelines") as cass:
-            manager.pipelines()
-            assert cass.requests[0].method == 'GET'
-
-    def test_pipelines_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/pipelines") as cass:
-            manager.pipelines()
-            assert cass.requests[0].headers['accept'] == 'application/xml'
-
-    def test_pipelines_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/pipelines") as cass:
-            manager.pipelines()
-            assert cass.responses[0]['status']['code'] == 200
-
-    def test_pipelines_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/pipelines"):
-            result = manager.pipelines()
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/pipelines.xml'
 
 
 class TestPipelineById(BaseTestConfigurationManager):
     PIPELINE_ID = 3
 
-    def test_pipeline_by_id_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/pipeline_by_id") as cass:
-            manager.pipeline_by_id(self.PIPELINE_ID)
-            assert cass.requests[0].path == '/go/api/pipelines/THIS_PARAMETER_IS_USELESS/3.xml'
+            return cass, manager.pipeline_by_id(self.PIPELINE_ID)
 
-    def test_pipeline_by_id_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/pipeline_by_id") as cass:
-            manager.pipeline_by_id(self.PIPELINE_ID)
-            assert cass.requests[0].method == 'GET'
-
-    def test_pipeline_by_id_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/pipeline_by_id") as cass:
-            manager.pipeline_by_id(self.PIPELINE_ID)
-            assert cass.requests[0].headers['accept'] == 'application/xml'
-
-    def test_pipeline_by_id_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/pipeline_by_id") as cass:
-            manager.pipeline_by_id(self.PIPELINE_ID)
-            assert cass.responses[0]['status']['code'] == 200
-
-    def test_pipeline_by_id_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/pipeline_by_id"):
-            result = manager.pipeline_by_id(self.PIPELINE_ID)
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/pipelines/THIS_PARAMETER_IS_USELESS/3.xml'
 
 
 class TestStages(BaseTestConfigurationManager):
     PIPELINE_NAME = 'Shared_Services'
 
-    def test_stages_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/stages") as cass:
-            manager.stages(self.PIPELINE_NAME)
-            assert cass.requests[0].path == '/go/api/pipelines/{0}/stages.xml'.format(self.PIPELINE_NAME)
+            return cass, manager.stages(self.PIPELINE_NAME)
 
-    def test_stages_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stages") as cass:
-            manager.stages(self.PIPELINE_NAME)
-            assert cass.requests[0].method == 'GET'
-
-    def test_stages_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stages") as cass:
-            manager.stages(self.PIPELINE_NAME)
-            assert cass.requests[0].headers['accept'] == 'application/xml'
-
-    def test_stages_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stages") as cass:
-            manager.stages(self.PIPELINE_NAME)
-            assert cass.responses[0]['status']['code'] == 200
-
-    def test_stages_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stages"):
-            result = manager.stages(self.PIPELINE_NAME)
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/pipelines/{0}/stages.xml'.format(self.PIPELINE_NAME)
 
 
 class TestStageById(BaseTestConfigurationManager):
     STAGE_ID = 11
 
-    def test_stage_by_id_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/stage_by_id") as cass:
-            manager.stage_by_id(self.STAGE_ID)
-            assert cass.requests[0].path == '/go/api/stages/{0}.xml'.format(self.STAGE_ID)
+            return cass, manager.stage_by_id(self.STAGE_ID)
 
-    def test_stage_by_id_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stage_by_id") as cass:
-            manager.stage_by_id(self.STAGE_ID)
-            assert cass.requests[0].method == 'GET'
-
-    def test_stage_by_id_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stage_by_id") as cass:
-            manager.stage_by_id(self.STAGE_ID)
-            assert cass.requests[0].headers['accept'] == 'application/xml'
-
-    def test_stage_by_id_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stage_by_id") as cass:
-            manager.stage_by_id(self.STAGE_ID)
-            assert cass.responses[0]['status']['code'] == 200
-
-    def test_stage_by_id_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stage_by_id"):
-            result = manager.stage_by_id(self.STAGE_ID)
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/stages/{0}.xml'.format(self.STAGE_ID)
 
 
 class TestStage(BaseTestConfigurationManager):
+    EXPECTED_CASSETTE_COUNT = 2  # because of redirect
+
     PIPELINE_NAME = 'Shared_Services'
     PIPELINE_COUNTER = '6'
     STAGE_NAME = 'Commit'
     STAGE_COUNTER = 1
 
-    def test_stage_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/stage") as cass:
-            manager.stage(
+            return cass, manager.stage(
                 pipeline_name=self.PIPELINE_NAME,
                 pipeline_counter=self.PIPELINE_COUNTER,
                 stage_name=self.STAGE_NAME,
                 stage_counter=self.STAGE_COUNTER
-            )
-            assert cass.requests[0].path == '/go/pipelines/{0}/{1}/{2}/{3}.xml'.format(
-                self.PIPELINE_NAME, self.PIPELINE_COUNTER, self.STAGE_NAME, self.STAGE_COUNTER
             )
 
-    def test_stage_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stage") as cass:
-            manager.stage(
-                pipeline_name=self.PIPELINE_NAME,
-                pipeline_counter=self.PIPELINE_COUNTER,
-                stage_name=self.STAGE_NAME,
-                stage_counter=self.STAGE_COUNTER
-            )
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/pipelines/{0}/{1}/{2}/{3}.xml'.format(
+            self.PIPELINE_NAME, self.PIPELINE_COUNTER, self.STAGE_NAME, self.STAGE_COUNTER
+        )
 
-    def test_stage_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stage") as cass:
-            manager.stage(
-                pipeline_name=self.PIPELINE_NAME,
-                pipeline_counter=self.PIPELINE_COUNTER,
-                stage_name=self.STAGE_NAME,
-                stage_counter=self.STAGE_COUNTER
-            )
-            assert cass.requests[0].headers['accept'] == 'application/xml'
+    @pytest.fixture()
+    def expected_response_code(self, *args, **kwargs):
+        return 302  # we've been redirected to stage-id url
 
-    def test_stage_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stage") as cass:
-            manager.stage(
-                pipeline_name=self.PIPELINE_NAME,
-                pipeline_counter=self.PIPELINE_COUNTER,
-                stage_name=self.STAGE_NAME,
-                stage_counter=self.STAGE_COUNTER
-            )
-            # we've been redirected to stage-id url
-            assert cass.responses[0]['status']['code'] == 302
-
-    def test_stage_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/stage"):
-            result = manager.stage(
-                pipeline_name=self.PIPELINE_NAME,
-                pipeline_counter=self.PIPELINE_COUNTER,
-                stage_name=self.STAGE_NAME,
-                stage_counter=self.STAGE_COUNTER
-            )
-            assert isinstance(result, string_types)
+    def test_real_response_code(self, _execute_test_action, expected_response_code):
+        cass, result = _execute_test_action
+        assert cass.responses[1]['status']['code'] == 200
 
 
 class TestJobStageById(BaseTestConfigurationManager):
+    TEST_METHOD_NAME = 'job_by_id'
     JOB_ID = 1
 
-    def test_job_by_id_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("feed/job_by_id") as cass:
-            manager.job_by_id(self.JOB_ID)
-            assert cass.requests[0].path == '/go/api/jobs/{0}.xml'.format(self.JOB_ID)
+            return cass, manager.job_by_id(self.JOB_ID)
 
-    def test_job_by_id_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/job_by_id") as cass:
-            manager.job_by_id(self.JOB_ID)
-            assert cass.requests[0].method == 'GET'
-
-    def test_job_by_id_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/job_by_id") as cass:
-            manager.job_by_id(self.JOB_ID)
-            assert cass.requests[0].headers['accept'] == 'application/xml'
-
-    def test_job_by_id_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/job_by_id") as cass:
-            manager.job_by_id(self.JOB_ID)
-            assert cass.responses[0]['status']['code'] == 200
-
-    def test_job_by_id_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("feed/job_by_id"):
-            result = manager.job_by_id(self.JOB_ID)
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/jobs/{0}.xml'.format(self.JOB_ID)

@@ -29,121 +29,137 @@
 import pytest
 from six import string_types
 
+from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import configuration
 
 
-class BaseTestConfigurationManager(object):
+class BaseTestConfigurationManager(AbstractTestManager):
+    def expected_request_url(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def expected_request_method(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def _execute_test_action(self, *args, **kwargs):
+        raise NotImplementedError()
 
     @pytest.fixture()
     def manager(self, session_fixture):
         return configuration.ConfigurationManager(session=session_fixture)
 
 
-class TestModifications(BaseTestConfigurationManager):
-    def test_modifications_request_url(self, manager, my_vcr):
+class TestModifications(BaseTestConfigurationManager, ReturnValueMixin):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/modifications") as cass:
-            manager.modifications()
-            assert cass.requests[0].path == '/go/api/config/revisions'
+            return cass, manager.modifications()
 
-    def test_modifications_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/modifications") as cass:
-            manager.modifications()
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/config/revisions'
 
-    def test_modifications_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/modifications") as cass:
-            manager.modifications()
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_modifications_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/modifications") as cass:
-            manager.modifications()
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        pytest.skip()
 
 
-class TestDiff(BaseTestConfigurationManager):
+class TestDiff(BaseTestConfigurationManager, ReturnValueMixin):
     start = '3336409d194252e8c82799472196e70cbe4c7916'
     end = '719be0bb99470b79fc48a949c24845f65a0fd8ef'
 
-    def test_diff_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/diff") as cass:
-            manager.diff(self.start, self.end)
-            assert cass.requests[0].path == '/go/api/config/diff/{0}/{1}'.format(
-                self.start, self.end
-            )
+            return cass, manager.diff(self.start, self.end)
 
-    def test_diff_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/diff") as cass:
-            manager.diff(self.start, self.end)
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/config/diff/{0}/{1}'.format(self.start, self.end)
 
-    def test_diff_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/diff") as cass:
-            manager.diff(self.start, self.end)
-            assert cass.requests[0].headers['accept'] == 'text/plain'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_diff_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/diff") as cass:
-            manager.diff(self.start, self.end)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'text/plain'
 
-    def test_diff_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/diff"):
-            result = manager.diff(self.start, self.end)
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        pytest.skip()
 
 
-class TestConfigCurrent(BaseTestConfigurationManager):
-    def test_config_request_url(self, manager, my_vcr):
+class TestConfigCurrent(BaseTestConfigurationManager, ReturnValueMixin):
+    TEST_METHOD_NAME = 'config'
+
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/config_current") as cass:
-            manager.config()
-            assert cass.requests[0].path == '/go/api/admin/config/current.xml'
+            return cass, manager.config()
 
-    def test_config_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/config_current") as cass:
-            manager.config()
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/admin/config/current.xml'
 
-    def test_config_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/config_current") as cass:
-            manager.config()
-            assert cass.requests[0].headers['accept'] == 'application/xml'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_config_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/config_current") as cass:
-            manager.config()
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/xml'
 
-    def test_config_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/config_current"):
-            result = manager.config()
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        pytest.skip()
 
 
-class TestConfigMD5(BaseTestConfigurationManager):
+class TestConfigMD5(BaseTestConfigurationManager, ReturnValueMixin):
+    TEST_METHOD_NAME = 'config'
+
     md5 = '412f48f7e2ff254e47564a6852ed7a2e'
 
-    def test_config_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("configuration/config_md5") as cass:
-            manager.config(self.md5)
-            assert cass.requests[0].path == '/go/api/admin/config/{0}.xml'.format(self.md5)
+            return cass, manager.config(self.md5)
 
-    def test_config_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/config_md5") as cass:
-            manager.config(self.md5)
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/admin/config/{0}.xml'.format(self.md5)
 
-    def test_config_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/config_md5") as cass:
-            manager.config(self.md5)
-            assert cass.requests[0].headers['accept'] == 'application/xml'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_config_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/config_md5") as cass:
-            manager.config(self.md5)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/xml'
 
-    def test_config_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("configuration/config_md5"):
-            result = manager.config(self.md5)
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        pytest.skip()

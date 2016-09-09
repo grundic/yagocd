@@ -29,69 +29,74 @@
 import pytest
 from six import string_types
 
+from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import user
 
 
-class BaseTestUserManager(object):
+class BaseTestUserManager(AbstractTestManager):
+    def expected_request_url(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def expected_request_method(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def _execute_test_action(self, *args, **kwargs):
+        raise NotImplementedError()
+
     @pytest.fixture()
     def manager(self, session_fixture):
         return user.UserManager(session=session_fixture)
 
 
-class TestList(BaseTestUserManager):
-    def test_list_request_url(self, manager, my_vcr):
+class TestList(BaseTestUserManager, ReturnValueMixin):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("user/list") as cass:
-            manager.list()
-            assert cass.requests[0].path == '/go/api/users'
+            return cass, manager.list()
 
-    def test_list_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/list") as cass:
-            manager.list()
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/users'
 
-    def test_list_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/list") as cass:
-            manager.list()
-            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_list_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/list") as cass:
-            manager.list()
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
 
-    def test_list_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/list"):
-            result = manager.list()
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
             assert all(isinstance(u, user.UserEntity) for u in result)
 
+        return check_value
 
-class TestGet(BaseTestUserManager):
+
+class TestGet(BaseTestUserManager, ReturnValueMixin):
     USERNAME = 'admin'
 
-    def test_get_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("user/get") as cass:
-            manager.get(self.USERNAME)
-            assert cass.requests[0].path == '/go/api/users/{0}'.format(self.USERNAME)
+            return cass, manager.get(self.USERNAME)
 
-    def test_get_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/get") as cass:
-            manager.get(self.USERNAME)
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/users/{0}'.format(self.USERNAME)
 
-    def test_get_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/get") as cass:
-            manager.get(self.USERNAME)
-            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_get_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/get") as cass:
-            manager.get(self.USERNAME)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_return_type(self):
+        return user.UserEntity
 
-    def test_get_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/get"):
-            result = manager.get(self.USERNAME)
-            assert isinstance(result, user.UserEntity)
+    @pytest.fixture()
+    def expected_return_value(self):
+        pytest.skip()
 
 
 #
@@ -131,72 +136,57 @@ class TestGet(BaseTestUserManager):
 #             assert isinstance(result, user.UserEntity)
 
 
-class TestUpdate(BaseTestUserManager):
+class TestUpdate(BaseTestUserManager, ReturnValueMixin):
     USERNAME = 'admin'
     OPTIONS = {
         'email': 'foo@bar.baz'
     }
 
-    def test_update_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("user/update") as cass:
-            manager.update(self.USERNAME, self.OPTIONS)
-            assert cass.requests[0].path == '/go/api/users/{0}'.format(self.USERNAME)
+            return cass, manager.update(self.USERNAME, self.OPTIONS)
 
-    def test_update_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/update") as cass:
-            manager.update(self.USERNAME, self.OPTIONS)
-            assert cass.requests[0].method == 'PATCH'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/users/{0}'.format(self.USERNAME)
 
-    def test_update_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/update") as cass:
-            manager.update(self.USERNAME, self.OPTIONS)
-            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'PATCH'
 
-    def test_update_request_content_type_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/update") as cass:
-            manager.update(self.USERNAME, self.OPTIONS)
-            assert cass.requests[0].headers['Content-Type'] == 'application/json'
+    @pytest.fixture()
+    def expected_return_type(self):
+        return user.UserEntity
 
-    def test_update_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/update") as cass:
-            manager.update(self.USERNAME, self.OPTIONS)
-            assert cass.responses[0]['status']['code'] == 200
-
-    def test_update_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/update"):
-            result = manager.update(self.USERNAME, self.OPTIONS)
-            assert isinstance(result, user.UserEntity)
-
-    def test_update_return_value(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/update"):
-            result = manager.update(self.USERNAME, self.OPTIONS)
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
             assert result.data.email == self.OPTIONS['email']
 
+        return check_value
 
-class TestDelete(BaseTestUserManager):
+
+class TestDelete(BaseTestUserManager, ReturnValueMixin):
     USERNAME = 'user_02'
 
-    def test_delete_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("user/delete") as cass:
-            manager.delete(self.USERNAME)
-            assert cass.requests[0].path == '/go/api/users/{0}'.format(self.USERNAME)
+            return cass, manager.delete(self.USERNAME)
 
-    def test_delete_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/delete") as cass:
-            manager.delete(self.USERNAME)
-            assert cass.requests[0].method == 'DELETE'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/users/{0}'.format(self.USERNAME)
 
-    def test_delete_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/delete") as cass:
-            manager.delete(self.USERNAME)
-            assert cass.requests[0].headers['accept'] == 'application/vnd.go.cd.v1+json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'DELETE'
 
-    def test_delete_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/delete") as cass:
-            manager.delete(self.USERNAME)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
 
-    def test_delete_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("user/delete"):
-            result = manager.delete(self.USERNAME)
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_return_value(self):
+        return "User '{}' was deleted successfully.".format(self.USERNAME)

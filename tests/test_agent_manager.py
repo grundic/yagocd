@@ -28,16 +28,27 @@
 
 from distutils.version import LooseVersion
 
-import zlib
-from six import string_types
-
-from yagocd.resources import agent, job
-
 import mock
 import pytest
+from six import string_types
+
+from tests import AbstractTestManager, ReturnValueMixin, RequestContentTypeHeadersMixin
+from yagocd.resources import agent, job
 
 
-class BaseTestAgentManager(object):
+class BaseTestAgentManager(AbstractTestManager):
+    @pytest.fixture()
+    def expected_request_url(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    @pytest.fixture()
+    def expected_request_method(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    @pytest.fixture()
+    def _execute_test_action(self, *args, **kwargs):
+        raise NotImplementedError()
+
     @pytest.fixture()
     def manager(self, session_fixture):
         return agent.AgentManager(session=session_fixture)
@@ -47,216 +58,200 @@ class BaseTestAgentManager(object):
         with my_vcr.use_cassette("agent/first_agent_uuid"):
             return manager.list()[0].data.uuid
 
-    @staticmethod
-    def _expected_accept_header(manager):
-        if LooseVersion(manager._session.server_version) <= '16.1.0':
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        if LooseVersion(server_version) <= LooseVersion('16.1.0'):
             return 'application/vnd.go.cd.v1+json'
-        elif LooseVersion(manager._session.server_version) <= '16.7.0':
+        elif LooseVersion(server_version) <= LooseVersion('16.7.0'):
             return 'application/vnd.go.cd.v2+json'
         else:
             return 'application/vnd.go.cd.v3+json'
 
-    def test_cache_server_version(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/server_version_cache"):
-            assert manager._session.server_version
 
+class TestListAsList(BaseTestAgentManager, ReturnValueMixin):
+    TEST_METHOD_NAME = 'list'
 
-class TestListAsList(BaseTestAgentManager):
-    def test_list_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
-            manager.list()
-            assert cass.requests[0].path == '/go/api/agents'
+            return cass, manager.list()
 
-    def test_list_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
-            manager.list()
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/agents'
 
-    def test_list_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
-            manager.list()
-            assert cass.requests[0].headers['accept'] == self._expected_accept_header(manager)
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_list_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
-            manager.list()
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
 
-    def test_list_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list"):
-            result = manager.list()
-            assert isinstance(result, list)
-
-    def test_list_is_not_empty(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list"):
-            result = manager.list()
-            assert len(result) > 0
-
-    def test_list_returns_agent_entities(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list"):
-            result = manager.list()
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
+            len(result) > 0
             assert all(isinstance(i, agent.AgentEntity) for i in result)
 
+        return check_value
 
-class TestDict(BaseTestAgentManager):
-    @mock.patch('yagocd.resources.agent.AgentManager.list')
-    def test_dict_calls_list(self, mock_list, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list"):
-            manager.dict()
-            mock_list.assert_called()
 
-    def test_dict_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list"):
-            result = manager.dict()
-            assert isinstance(result, dict)
+class TestDict(TestListAsList):
+    TEST_METHOD_NAME = 'dict'
 
-    def test_dict_returns_str_as_keys(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list"):
-            result = manager.dict()
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
+        with my_vcr.use_cassette("agent/agent_list_as_list") as cass:
+            return cass, manager.dict()
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/agents'
+
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return dict
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
+            assert len(result) > 0
             assert all(isinstance(i, string_types) for i in result.keys())
-
-    def test_dict_returns_agent_entities_as_values(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list"):
-            result = manager.dict()
             assert all(isinstance(i, agent.AgentEntity) for i in result.values())
 
-    def test_dict_get_by_key(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_list_as_list"):
-            result = manager.dict().get(first_agent_uuid)
+        return check_value
+
+    @mock.patch('yagocd.resources.agent.AgentManager.list')
+    def test_list_method_is_called(self, mock_list, manager, my_vcr):
+        self._execute_test_action(manager, my_vcr)
+        mock_list.assert_called()
+
+    def test_dict_get_by_key(self, _execute_test_action, first_agent_uuid):
+        cass, result = _execute_test_action
+        first_agent = result.get(first_agent_uuid)
+        assert first_agent.data.uuid == first_agent_uuid
+
+
+class TestGet(BaseTestAgentManager, ReturnValueMixin):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr, first_agent_uuid):
+        with my_vcr.use_cassette("agent/agent_get") as cass:
+            return cass, manager.get(first_agent_uuid)
+
+    @pytest.fixture()
+    def expected_request_url(self, first_agent_uuid):
+        return '/go/api/agents/{uuid}'.format(uuid=first_agent_uuid)
+
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return agent.AgentEntity
+
+    @pytest.fixture()
+    def expected_return_value(self, first_agent_uuid):
+        def check_value(result):
             assert result.data.uuid == first_agent_uuid
 
-
-class TestGet(BaseTestAgentManager):
-    def test_get_request_url(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_get") as cass:
-            manager.get(first_agent_uuid)
-            assert cass.requests[0].path == '/go/api/agents/{uuid}'.format(uuid=first_agent_uuid)
-
-    def test_get_request_method(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_get") as cass:
-            manager.get(first_agent_uuid)
-            assert cass.requests[0].method == 'GET'
-
-    def test_get_request_accept_headers(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_get") as cass:
-            manager.get(first_agent_uuid)
-            assert cass.requests[0].headers['accept'] == self._expected_accept_header(manager)
-
-    def test_get_response_code(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_get") as cass:
-            manager.get(first_agent_uuid)
-            assert cass.responses[0]['status']['code'] == 200
-
-    def test_get_returns_instance_of_agent_entity(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_get"):
-            result = manager.get(first_agent_uuid)
-            assert isinstance(result, agent.AgentEntity)
+        return check_value
 
 
-class TestUpdate(BaseTestAgentManager):
+class TestUpdate(BaseTestAgentManager, RequestContentTypeHeadersMixin, ReturnValueMixin):
     UPD_CFG = {'hostname': 'foo-bar'}
 
-    def test_update_request_url(self, manager, first_agent_uuid, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr, first_agent_uuid):
         with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(first_agent_uuid, self.UPD_CFG)
-            assert cass.requests[0].path == '/go/api/agents/{uuid}'.format(uuid=first_agent_uuid)
+            return cass, manager.update(first_agent_uuid, self.UPD_CFG)
 
-    def test_update_request_method(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(first_agent_uuid, self.UPD_CFG)
-            assert cass.requests[0].method == 'PATCH'
+    @pytest.fixture()
+    def expected_request_url(self, first_agent_uuid):
+        return '/go/api/agents/{uuid}'.format(uuid=first_agent_uuid)
 
-    def test_update_request_accept_headers(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(first_agent_uuid, self.UPD_CFG)
-            assert cass.requests[0].headers['accept'] == self._expected_accept_header(manager)
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'PATCH'
 
-    def test_update_request_content_type_headers(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(first_agent_uuid, self.UPD_CFG)
-            assert cass.requests[0].headers['content-type'] == 'application/json'
+    @pytest.fixture()
+    def expected_content_type_headers(self, *args, **kwargs):
+        return 'application/json'
 
-    def test_update_response_code(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_update") as cass:
-            manager.update(first_agent_uuid, self.UPD_CFG)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_return_type(self):
+        return agent.AgentEntity
 
-    def test_update_returns_instance_of_agent_entity(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_update"):
-            result = manager.update(first_agent_uuid, self.UPD_CFG)
-            assert isinstance(result, agent.AgentEntity)
-
-    def test_update_returns_updated_agent(self, manager, first_agent_uuid, my_vcr):
-        with my_vcr.use_cassette("agent/agent_update"):
-            result = manager.update(first_agent_uuid, self.UPD_CFG)
+    @pytest.fixture()
+    def expected_return_value(self, first_agent_uuid):
+        def check_value(result):
             assert result.data.hostname == self.UPD_CFG['hostname']
 
+        return check_value
 
-class TestDelete(BaseTestAgentManager):
+
+class TestDelete(BaseTestAgentManager, ReturnValueMixin):
     UUID = '964c760d-2803-4dac-a98e-6b3b2b682f3e'
 
-    def test_delete_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr, first_agent_uuid):
         with my_vcr.use_cassette("agent/agent_delete") as cass:
-            manager.delete(self.UUID)
-            assert cass.requests[0].path == '/go/api/agents/{uuid}'.format(uuid=self.UUID)
+            return cass, manager.delete(self.UUID)
 
-    def test_delete_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_delete") as cass:
-            manager.delete(self.UUID)
-            assert cass.requests[0].method == 'DELETE'
+    @pytest.fixture()
+    def expected_request_url(self, first_agent_uuid):
+        return '/go/api/agents/{uuid}'.format(uuid=self.UUID)
 
-    def test_delete_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_delete") as cass:
-            manager.delete(self.UUID)
-            assert cass.requests[0].headers['accept'] == self._expected_accept_header(manager)
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'DELETE'
 
-    def test_delete_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_delete") as cass:
-            manager.delete(self.UUID)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
 
-    def test_delete_return_message(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_delete") as cass:
-            manager.delete(self.UUID)
-            message = cass.responses[0]['body']['string']
-            try:
-                message = zlib.decompress(message, 16 + zlib.MAX_WBITS)
-            except zlib.error:
-                pass
-            assert b'Deleted 1 agent(s)' in message
+    @pytest.fixture()
+    def expected_return_value(self, first_agent_uuid):
+        def check_value(result):
+            assert 'Deleted 1 agent(s)' in result
+
+        return check_value
 
 
-class TestJobHistory(BaseTestAgentManager):
+class TestJobHistory(BaseTestAgentManager, ReturnValueMixin):
     UUID = '6dae05c5-dc56-4bf4-95bc-af8badbe7be4'
 
-    def test_job_history_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr, first_agent_uuid):
         with my_vcr.use_cassette("agent/agent_job_history") as cass:
-            manager.job_history(self.UUID)
-            assert cass.requests[0].path == '/go/api/agents/{uuid}/job_run_history/{offset}'.format(
-                uuid=self.UUID, offset=0
-            )
+            return cass, manager.job_history(self.UUID)
 
-    def test_job_history_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_job_history") as cass:
-            manager.job_history(self.UUID)
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self, first_agent_uuid):
+        return '/go/api/agents/{uuid}/job_run_history/{offset}'.format(
+            uuid=self.UUID, offset=0
+        )
 
-    def test_job_history_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_job_history") as cass:
-            manager.job_history(self.UUID)
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_job_history_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_job_history") as cass:
-            manager.job_history(self.UUID)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
-    def test_job_history_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_job_history"):
-            result = manager.job_history(self.UUID)
-            assert isinstance(result, list)
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
 
-    def test_job_history_returns_job_instances(self, manager, my_vcr):
-        with my_vcr.use_cassette("agent/agent_job_history"):
-            result = manager.job_history(self.UUID)
+    @pytest.fixture()
+    def expected_return_value(self, first_agent_uuid):
+        def check_value(result):
             assert all(isinstance(i, job.JobInstance) for i in result)
+
+        return check_value

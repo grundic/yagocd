@@ -41,12 +41,12 @@ from yagocd import Yagocd
 from yagocd.session import Session
 
 TESTING_VERSIONS = [
-    # '16.1.0',
-    # '16.2.1',
-    # '16.3.0',
-    # '16.6.0',
-    # '16.7.0',
-    # '16.8.0',
+    '16.1.0',
+    '16.2.1',
+    '16.3.0',
+    '16.6.0',
+    '16.7.0',
+    '16.8.0',
     '16.9.0',
 ]
 
@@ -60,6 +60,7 @@ def tests_dir():
 def mock_session():
     session = mock.patch('yagocd.session.Session').start()
     session.server_url = 'http://example.com'
+    session.server_version = '999.999.999'
     return session
 
 
@@ -132,6 +133,11 @@ def gocd_docker(request, use_docker, fresh_run):
         if os.path.exists(cassette_library_dir):
             print("Removing existing cassettes...")
             shutil.rmtree(cassette_library_dir)
+
+    print('')
+    print('*' * 47)
+    print('********** Using GoCD version {} **********'.format(request.param))
+    print('*' * 47)
 
     return request.param
 

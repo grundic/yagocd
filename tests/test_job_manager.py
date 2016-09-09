@@ -29,90 +29,87 @@
 import pytest
 from six import string_types
 
+from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import job
 
 
-class BaseTestJobManager(object):
+class BaseTestJobManager(AbstractTestManager):
+    def expected_request_url(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def expected_request_method(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def _execute_test_action(self, *args, **kwargs):
+        raise NotImplementedError()
+
     @pytest.fixture()
     def manager(self, session_fixture):
         return job.JobManager(session=session_fixture)
 
 
-class TestScheduled(BaseTestJobManager):
-    def test_scheduled_request_url(self, manager, my_vcr):
+class TestScheduled(BaseTestJobManager, ReturnValueMixin):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("job/scheduled") as cass:
-            manager.scheduled()
-            assert cass.requests[0].path == '/go/api/jobs/scheduled.xml'
+            return cass, manager.scheduled()
 
-    def test_scheduled_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("job/scheduled") as cass:
-            manager.scheduled()
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/jobs/scheduled.xml'
 
-    def test_scheduled_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("job/scheduled") as cass:
-            manager.scheduled()
-            assert cass.requests[0].headers['accept'] == 'application/xml'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_scheduled_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("job/scheduled") as cass:
-            manager.scheduled()
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/xml'
 
-    def test_scheduled_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("job/scheduled"):
-            result = manager.scheduled()
-            assert isinstance(result, string_types)
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        pytest.skip()
 
 
-class TestHistory(BaseTestJobManager):
+class TestHistory(BaseTestJobManager, ReturnValueMixin):
     PIPELINE_NAME = 'Shared_Services'
     STAGE_NAME = 'Commit'
     JOB_NAME = 'build'
 
-    def test_history_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("job/history") as cass:
-            manager.history(
+            return cass, manager.history(
                 pipeline_name=self.PIPELINE_NAME,
                 stage_name=self.STAGE_NAME,
                 job_name=self.JOB_NAME
-            )
-            assert cass.requests[0].path == '/go/api/jobs/{0}/{1}/{2}/history/{3}'.format(
-                self.PIPELINE_NAME, self.STAGE_NAME, self.JOB_NAME, 0
             )
 
-    def test_history_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("job/history") as cass:
-            manager.history(
-                pipeline_name=self.PIPELINE_NAME,
-                stage_name=self.STAGE_NAME,
-                job_name=self.JOB_NAME
-            )
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/jobs/{0}/{1}/{2}/history/{3}'.format(
+            self.PIPELINE_NAME, self.STAGE_NAME, self.JOB_NAME, 0
+        )
 
-    def test_history_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("job/history") as cass:
-            manager.history(
-                pipeline_name=self.PIPELINE_NAME,
-                stage_name=self.STAGE_NAME,
-                job_name=self.JOB_NAME
-            )
-            assert cass.requests[0].headers['accept'] == 'application/xml'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_history_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("job/history") as cass:
-            manager.history(
-                pipeline_name=self.PIPELINE_NAME,
-                stage_name=self.STAGE_NAME,
-                job_name=self.JOB_NAME
-            )
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/xml'
 
-    def test_history_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("job/history"):
-            result = manager.history(
-                pipeline_name=self.PIPELINE_NAME,
-                stage_name=self.STAGE_NAME,
-                job_name=self.JOB_NAME
-            )
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
             assert all(isinstance(i, job.JobInstance) for i in result)
+
+        return check_value

@@ -27,31 +27,34 @@
 ###############################################################################
 
 import json
-from collections import OrderedDict
 
 from yagocd.resources import BaseManager, Base
 from yagocd.resources.job import JobInstance
+from yagocd.util import since
 
 
+@since('15.2.0')
 class AgentManager(BaseManager):
     """
     The agents API allows users with administrator role to manage agents.
+    @since: 15.2.0.
 
-    :warning: Please note that this API requires using v2 of the API using `Accept: application/vnd.go.cd.v2+json`
+    :warning: Please note that this API requires using v3 of the API using `Accept: application/vnd.go.cd.v3+json`
     """
 
     ACCEPT_HEADER = 'application/vnd.go.cd.v3+json'
 
-    VERSION_TO_ACCEPT_HEADER = OrderedDict({
+    VERSION_TO_ACCEPT_HEADER = {
         '16.1.0': 'application/vnd.go.cd.v1+json',
         '16.7.0': 'application/vnd.go.cd.v2+json',
-    })
+    }
 
     def list(self):
         """
         Lists all available agents, these are agents that are present in the
         <agents/> tag inside cruise-config.xml and also agents that are in
         Pending state awaiting registration.
+        @since: 15.2.0.
 
         :return: an array of agents.
         :rtype: list of yagocd.resources.agent.AgentEntity
@@ -95,6 +98,7 @@ class AgentManager(BaseManager):
     def get(self, uuid):
         """
         Gets an agent by its unique identifier (uuid).
+        @since: 15.2.0.
 
         :param uuid: uuid of the agent
         :return: Agent entity.
@@ -113,6 +117,7 @@ class AgentManager(BaseManager):
     def update(self, uuid, config):
         """
         Update some attributes of an agent.
+        @since: 15.2.0.
 
         :param uuid: uuid of the agent
         :param config: dictionary of parameters for update
@@ -126,7 +131,7 @@ class AgentManager(BaseManager):
             ),
             data=json.dumps(config),
             headers={
-                'Accept':  self._accept_header(),
+                'Accept': self._accept_header(),
                 'Content-Type': 'application/json'
             },
         )
@@ -136,6 +141,7 @@ class AgentManager(BaseManager):
     def delete(self, uuid):
         """
         Deletes an agent.
+        @since: 15.2.0.
 
         :param uuid: uuid of the agent.
         :return: a message confirmation if the agent was deleted.
@@ -145,14 +151,16 @@ class AgentManager(BaseManager):
                 base_api=self.base_api,
                 uuid=uuid,
             ),
-            headers={'Accept':  self._accept_header()},
+            headers={'Accept': self._accept_header()},
         )
 
         return response.json().get('message')
 
+    @since('14.3.0')
     def job_history(self, uuid, offset=0):
         """
         Lists the jobs that have executed on an agent.
+        @since: 14.3.0.
 
         :param uuid: uuid of the agent.
         :param offset: number of jobs to be skipped.

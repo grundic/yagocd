@@ -26,77 +26,92 @@
 #
 ###############################################################################
 
+import pytest
+from six import string_types
 # noinspection PyUnresolvedReferences
 from six.moves.urllib.parse import urlencode
 
+from tests import AbstractTestManager, ReturnValueMixin, ConfirmHeaderMixin
 from yagocd.resources import material
 
-import pytest
 
+class BaseTestConfigurationManager(AbstractTestManager):
+    def expected_request_url(self, *args, **kwargs):
+        raise NotImplementedError()
 
-class BaseTestConfigurationManager(object):
+    def expected_request_method(self, *args, **kwargs):
+        raise NotImplementedError()
+
+    def _execute_test_action(self, *args, **kwargs):
+        raise NotImplementedError()
+
     @pytest.fixture()
     def manager(self, session_fixture):
         return material.MaterialManager(session=session_fixture)
 
 
-class TestList(BaseTestConfigurationManager):
-    def test_list_request_url(self, manager, my_vcr):
+class TestList(BaseTestConfigurationManager, ReturnValueMixin):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("material/list") as cass:
-            manager.list()
-            assert cass.requests[0].path == '/go/api/config/materials'
+            return cass, manager.list()
 
-    def test_list_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/list") as cass:
-            manager.list()
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/config/materials'
 
-    def test_list_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/list") as cass:
-            manager.list()
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_list_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/list") as cass:
-            manager.list()
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
-    def test_list_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/list"):
-            result = manager.list()
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
             assert all(isinstance(i, material.MaterialEntity) for i in result)
 
+        return check_value
 
-class TestModifications(BaseTestConfigurationManager):
+
+class TestModifications(BaseTestConfigurationManager, ReturnValueMixin):
     FINGERPRINT = 'e302ce7f43cd1a5009d218e7d6c1adf6a38fa9a33f6d0054d1607a00209fa810'
 
-    def test_modifications_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("material/modifications") as cass:
-            manager.modifications(self.FINGERPRINT)
-            assert cass.requests[0].path == '/go/api/materials/{0}/modifications/{1}'.format(
+            return cass, manager.modifications(self.FINGERPRINT)
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/materials/{0}/modifications/{1}'.format(
                 self.FINGERPRINT, 0
             )
 
-    def test_modifications_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/modifications") as cass:
-            manager.modifications(self.FINGERPRINT)
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_modifications_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/modifications") as cass:
-            manager.modifications(self.FINGERPRINT)
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
-    def test_modifications_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/modifications") as cass:
-            manager.modifications(self.FINGERPRINT)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
 
-    def test_modifications_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/modifications"):
-            result = manager.modifications(self.FINGERPRINT)
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
             assert all(isinstance(i, material.ModificationEntity) for i in result)
 
+        return check_value
 
 #
 # class TestNotifySvn(BaseTestConfigurationManager):
@@ -133,41 +148,34 @@ class TestModifications(BaseTestConfigurationManager):
 #             assert all(isinstance(i, material.ModificationEntity) for i in result)
 
 
-class TestNotifyGit(BaseTestConfigurationManager):
+class TestNotifyGit(BaseTestConfigurationManager, ReturnValueMixin, ConfirmHeaderMixin):
     URL = 'https://github.com/grundic/yagocd.git'
 
-    def test_notify_git_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("material/notify_git") as cass:
-            manager.notify_git(self.URL)
-            assert cass.requests[0].path == '/go/api/material/notify/git'
+            return cass, manager.notify_git(self.URL)
 
-    def test_notify_git_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/notify_git") as cass:
-            manager.notify_git(self.URL)
-            assert cass.requests[0].method == 'POST'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/material/notify/git'
 
-    def test_notify_git_request_data(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/notify_git") as cass:
-            manager.notify_git(self.URL)
-            assert cass.requests[0].body.decode('ascii') == urlencode({'repository_url': self.URL})
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'POST'
 
-    def test_notify_git_request_accept_header(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/notify_git") as cass:
-            manager.notify_git(self.URL)
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_response_code(self, *args, **kwargs):
+        return 202
 
-    def test_notify_git_request_confirm_header(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/notify_git") as cass:
-            manager.notify_git(self.URL)
-            assert cass.requests[0].headers['Confirm'] == 'true'
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
-    def test_notify_git_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/notify_git") as cass:
-            manager.notify_git(self.URL)
-            assert cass.responses[0]['status']['code'] == 202
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
 
-    def test_notify_git_return_type(self, manager, my_vcr):
-        with my_vcr.use_cassette("material/notify_git"):
-            result = manager.notify_git(self.URL)
-            assert result == ('The material is now scheduled for an update. '
-                              'Please check relevant pipeline(s) for status.\n')
+    @pytest.fixture()
+    def expected_return_value(self):
+        return 'The material is now scheduled for an update. Please check relevant pipeline(s) for status.\n'

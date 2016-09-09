@@ -27,17 +27,23 @@
 ###############################################################################
 
 import json
+
 from yagocd.resources import BaseManager, Base
+from yagocd.util import since
 
 
+@since('15.2.0')
 class UserManager(BaseManager):
     """
     The users API allows users with administrator role to manage users.
+    @since: 15.2.0.
     """
 
     def list(self):
         """
         Lists all available users.
+        @since: 15.2.0.
+
         :return: an array of user objects :class:`yagocd.resources.user.UserEntity`.
         :rtype: yagocd.resources.user.UserEntity
         """
@@ -54,6 +60,7 @@ class UserManager(BaseManager):
     def get(self, login):
         """
         Gets a user by its login name.
+        @since: 15.2.0.
 
         :param login: login name.
         :return: a user object :class:`yagocd.resources.user.UserEntity`.
@@ -68,11 +75,13 @@ class UserManager(BaseManager):
 
         return UserEntity(session=self._session, data=response.json())
 
+    @since('15.3.0')
     def create(self, options):
         """
         Creates a user.
+        @since 15.3.0.
 
-        Can't make this one work: returns 404 all the time.
+        TODO: can't make this one work: returns 404 all the time.
 
         :param options: dictionary of parameters for creating a user.
         :return: a user object :class:`yagocd.resources.user.UserEntity`.
@@ -93,6 +102,7 @@ class UserManager(BaseManager):
     def update(self, login, options):
         """
         Update some attributes of a user.
+        @since: 15.2.0.
 
         :param login: login name.
         :param options: dictionary of parameters for updating a user.
@@ -115,6 +125,8 @@ class UserManager(BaseManager):
     def delete(self, login):
         """
         Deletes a user.
+        @since: 15.2.0.
+
         :param login: login name.
         :return: a message confirmation if the user was deleted.
         """

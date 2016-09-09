@@ -51,7 +51,7 @@ class Session(object):
         Joins given arguments into a url. Trailing but not leading slashes are
         stripped for each argument.
         """
-        return "/".join(map(lambda x: str(x).rstrip('/').rstrip('/'), args)).rstrip('/')
+        return "/".join(map(lambda x: str(x).rstrip('/'), args)).rstrip('/')
 
     @property
     def server_url(self):

@@ -29,6 +29,9 @@
 import time
 import hashlib
 
+from six import string_types
+
+from tests import AbstractTestManager, ReturnValueMixin, ConfirmHeaderMixin, RequestContentTypeHeadersMixin
 from yagocd.resources import pipeline
 
 import mock
@@ -48,119 +51,128 @@ class BaseTestPipelineManager(object):
     def manager(self, session_fixture):
         return pipeline.PipelineManager(session=session_fixture)
 
+    @pytest.fixture()
+    def mock_manager(self, mock_session):
+        return pipeline.PipelineManager(session=mock_session)
 
-class TestList(BaseTestPipelineManager):
-    def test_list_request_url(self, manager, my_vcr):
+
+class TestList(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
-            manager.list()
-            assert cass.requests[0].path == '/go/api/config/pipeline_groups'
+            return cass, manager.list()
 
-    def test_list_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
-            manager.list()
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/config/pipeline_groups'
 
-    def test_list_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
-            manager.list()
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_list_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
-            manager.list()
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
-    def test_list_is_not_empty(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list"):
-            result = manager.list()
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
             assert len(result) > 0
-
-    def test_elements_in_list_are_pipelines_entities(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list"):
-            result = manager.list()
             assert all(isinstance(i, pipeline.PipelineEntity) for i in result)
 
+        return check_value
+
     @mock.patch('yagocd.util.YagocdUtil.build_graph')
-    def build_graph_is_called(self, mock_build_graph, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list"):
-            manager.list()
-            mock_build_graph.assert_called()
+    def test_build_graph_is_called(self, mock_build_graph, manager, my_vcr):
+        self._execute_test_action(manager, my_vcr)
+        mock_build_graph.assert_called()
 
 
-class TestFind(BaseTestPipelineManager):
+class TestFind(TestList):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr, name=''):
+        with my_vcr.use_cassette("pipeline/pipeline_list") as cass:
+            return cass, manager.find(name)
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return None
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        return None
+
     @mock.patch('yagocd.resources.pipeline.PipelineManager.list')
-    def test_list_is_called(self, mock_list, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list"):
-            name = 'Production_Services'
-            manager.find(name)
-            mock_list.assert_called()
+    def test_list_is_called(self, mock_list, manager):
+        manager.find(mock.MagicMock())
+        mock_list.assert_called()
 
     def test_find_non_existing(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list"):
-            result = manager.find('This_Pipeline_Doesnt_Exists')
-            assert result is None
+        name = 'This_Pipeline_Doesnt_Exists'
+        cass, result = self._execute_test_action(manager, my_vcr, name)
+        assert result is None
 
     def test_find_returns_pipeline_entity(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list"):
-            name = 'Production_Services'
-            result = manager.find(name)
-            assert isinstance(result, pipeline.PipelineEntity)
+        name = 'Production_Services'
+        cass, result = self._execute_test_action(manager, my_vcr, name)
+        assert isinstance(result, pipeline.PipelineEntity)
 
     def test_find_returns_entity_with_same_name(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pipeline_list"):
-            name = 'Production_Services'
-            result = manager.find(name)
-            assert result.data.name == name
+        name = 'Production_Services'
+        cass, result = self._execute_test_action(manager, my_vcr, name)
+        assert result.data.name == name
 
 
-class TestHistory(BaseTestPipelineManager):
-    def test_history_non_existing(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/history_non_existing"):
-            with pytest.raises(HTTPError):
-                manager.history("pipeline_non_existing")
+class TestHistory(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin):
+    NAME = 'Consumer_Website'
 
-    def test_history_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/history_Consumer_Website") as cass:
-            name = "Consumer_Website"
-            manager.history(name)
-            assert cass.requests[0].path == '/go/api/pipelines/{name}/history/{offset}'.format(
-                name=name, offset=0
-            )
+            return cass, manager.history(self.NAME)
 
-    def test_history_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/history_Consumer_Website") as cass:
-            name = "Consumer_Website"
-            manager.history(name)
-            assert cass.requests[0].method == 'GET'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/pipelines/{name}/history/{offset}'.format(name=self.NAME, offset=0)
 
-    def test_history_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/history_Consumer_Website") as cass:
-            name = "Consumer_Website"
-            manager.history(name)
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    def test_history_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/history_Consumer_Website") as cass:
-            name = "Consumer_Website"
-            manager.history(name)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
-    def test_history(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/history_Consumer_Website"):
-            name = "Consumer_Website"
-            result = manager.history(name)
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
 
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
+            assert len(result) > 0
             assert all(isinstance(i, pipeline.PipelineInstance) for i in result)
-            assert all(i.data.name == name for i in result)
+            assert all(i.data.name == self.NAME for i in result)
+
+        return check_value
+
+    def test_non_existing_history_raises_http_error(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/history_non_existing") as cass:
+            with pytest.raises(HTTPError):
+                return cass, manager.history("pipeline_non_existing")
 
 
 class TestFullHistory(BaseTestPipelineManager):
     @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
-    def test_history_is_called(self, history_mock, manager, my_vcr):
+    def test_history_is_called(self, history_mock, mock_manager):
         history_mock.side_effect = [['foo', 'bar', 'baz'], []]
 
         name = "Consumer_Website"
-        list(manager.full_history(name))
+        list(mock_manager.full_history(name))
 
         calls = [mock.call(name, 0), mock.call(name, 3)]
         history_mock.assert_has_calls(calls)
@@ -168,99 +180,111 @@ class TestFullHistory(BaseTestPipelineManager):
 
 class TestLast(BaseTestPipelineManager):
     @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
-    def test_history_is_called(self, history_mock, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/history_Consumer_Website"):
-            name = "Consumer_Website"
-            manager.last(name)
-            history_mock.assert_called_with(name=name)
+    def test_history_is_called(self, history_mock, mock_manager):
+        name = "Consumer_Website"
+        mock_manager.last(name)
+        history_mock.assert_called_with(name=name)
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
-    def test_last_return_last(self, history_mock, manager, my_vcr):
+    def test_last_return_last(self, history_mock, mock_manager):
         history_mock.return_value = ['foo', 'bar', 'baz']
-        with my_vcr.use_cassette("pipeline/history_Consumer_Website"):
-            name = "Consumer_Website"
-            assert manager.last(name) == 'foo'
+        assert mock_manager.last(mock.MagicMock()) == 'foo'
 
 
-class TestGet(BaseTestPipelineManager):
+class TestGet(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin):
+    NAME = "Consumer_Website"
+    COUNTER = 2
+
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
+            return cass, manager.get(self.NAME, self.COUNTER)
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/pipelines/{name}/instance/{counter}'.format(
+                name=self.NAME, counter=self.COUNTER
+            )
+
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
+
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return pipeline.PipelineInstance
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
+            assert result.data.name == self.NAME
+
+        return check_value
+
     def test_get_non_existing(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/get_non_existing"):
             with pytest.raises(HTTPError):
                 manager.get("pipeline_instance_non_existing", 1)
 
-    def test_get_request_url(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
-            name = "Consumer_Website"
-            counter = 2
-            manager.get(name, counter)
-            assert cass.requests[0].path == '/go/api/pipelines/{name}/instance/{counter}'.format(
-                name=name, counter=counter
-            )
 
-    def test_get_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
-            name = "Consumer_Website"
-            manager.get(name, 2)
-            assert cass.requests[0].method == 'GET'
+class TestStatus(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin):
+    NAME = "Consumer_Website"
 
-    def test_get_request_accept_headers(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
-            name = "Consumer_Website"
-            manager.get(name, 2)
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/status_Consumer_Website") as cass:
+            return cass, manager.status(self.NAME)
 
-    def test_get_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/get_Consumer_Website") as cass:
-            name = "Consumer_Website"
-            manager.get(name, 2)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/pipelines/{name}/status'.format(name=self.NAME)
 
-    def test_get(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/get_Consumer_Website"):
-            name = "Consumer_Website"
-            result = manager.get(name, 2)
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-            assert isinstance(result, pipeline.PipelineInstance)
-            assert result.data.name == name
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
-    def test_status(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/status_Consumer_Website"):
-            name = "Consumer_Website"
-            result = manager.status(name)
+    @pytest.fixture()
+    def expected_return_type(self):
+        return dict
 
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
             expected_items = {'paused': False, 'schedulable': True, 'locked': False}
             for name, value in expected_items.items():
                 assert result[name] == value
 
+        return check_value
 
-class TestPause(BaseTestPipelineManager):
+
+class TestPause(BaseTestPipelineManager, AbstractTestManager, ConfirmHeaderMixin):
     NAME = 'Consumer_Website'
     REASON = 'Test pause reason'
 
-    def test_pause_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
-            manager.pause(self.NAME, self.REASON)
-            assert cass.requests[0].path == '/go/api/pipelines/{name}/pause'.format(name=self.NAME)
+            return cass, manager.pause(self.NAME, self.REASON)
 
-    def test_pause_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
-            manager.pause(self.NAME, self.REASON)
-            assert cass.requests[0].method == 'POST'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/pipelines/{name}/pause'.format(name=self.NAME)
 
-    def test_pause_request_accept_header(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
-            manager.pause(self.NAME, self.REASON)
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'POST'
 
-    def test_pause_request_confirm_header(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
-            manager.pause(self.NAME, self.REASON)
-            assert cass.requests[0].headers['Confirm'] == 'true'
-
-    def test_pause_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
-            manager.pause(self.NAME, self.REASON)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
     def test_pause(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/pause_Consumer_Website_complex"):
@@ -277,33 +301,25 @@ class TestPause(BaseTestPipelineManager):
             manager.unpause(self.NAME)
 
 
-class TestUnPause(BaseTestPipelineManager):
+class TestUnpause(BaseTestPipelineManager, AbstractTestManager, ConfirmHeaderMixin):
     NAME = "Consumer_Website"
 
-    def test_unpause_request_url(self, manager, my_vcr):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
-            manager.unpause(self.NAME)
-            assert cass.requests[0].path == '/go/api/pipelines/{name}/unpause'.format(name=self.NAME)
+            return cass, manager.unpause(self.NAME)
 
-    def test_unpause_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
-            manager.unpause(self.NAME)
-            assert cass.requests[0].method == 'POST'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/pipelines/{name}/unpause'.format(name=self.NAME)
 
-    def test_unpause_request_accept_header(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
-            manager.unpause(self.NAME)
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'POST'
 
-    def test_unpause_request_confirm_header(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
-            manager.unpause(self.NAME)
-            assert cass.requests[0].headers['Confirm'] == 'true'
-
-    def test_unpause_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
-            manager.unpause(self.NAME)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
     def test_unpause(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/unpause_Consumer_Website_complex"):
@@ -318,138 +334,154 @@ class TestUnPause(BaseTestPipelineManager):
                 assert status[name] == value
 
 
-class TestReleaseLock(BaseTestPipelineManager):
-    def test_release_lock_request_url(self, manager, my_vcr):
+class TestReleaseLock(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin, ConfirmHeaderMixin):
+    NAME = "Deploy_UAT"
+
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/release_lock") as cass:
-            name = "Deploy_UAT"
-            manager.release_lock(name)
-            assert cass.requests[0].path == '/go/api/pipelines/{name}/releaseLock'.format(
-                name=name
-            )
+            return cass, manager.release_lock(self.NAME)
 
-    def test_release_lock_request_method(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/release_lock") as cass:
-            name = "Deploy_UAT"
-            manager.release_lock(name)
-            assert cass.requests[0].method == 'POST'
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/pipelines/{name}/releaseLock'.format(name=self.NAME)
 
-    def test_release_lock_request_accept_header(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/release_lock") as cass:
-            name = "Deploy_UAT"
-            manager.release_lock(name)
-            assert cass.requests[0].headers['accept'] == 'application/json'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'POST'
 
-    def test_release_lock_request_confirm_header(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/release_lock") as cass:
-            name = "Deploy_UAT"
-            manager.release_lock(name)
-            assert cass.requests[0].headers['Confirm'] == 'true'
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
-    def test_release_lock_response_code(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/release_lock") as cass:
-            name = "Deploy_UAT"
-            manager.release_lock(name)
-            assert cass.responses[0]['status']['code'] == 200
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
 
-    def test_release_lock_return_value(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/release_lock"):
-            name = "Deploy_UAT"
-            result = manager.release_lock(name)
-            assert result == 'pipeline lock released for {0}\n'.format(name)
+    @pytest.fixture()
+    def expected_return_value(self):
+        return 'pipeline lock released for {0}\n'.format(self.NAME)
 
 
-class TestSchedule(BaseTestPipelineManager):
+@pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+@pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+class TestSchedule(
+    BaseTestPipelineManager,
+    AbstractTestManager,
+    RequestContentTypeHeadersMixin,
+    ReturnValueMixin,
+    ConfirmHeaderMixin
+):
     NAME = "TestSchedule"
 
-    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
-    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
-    def test_schedule_request_url(self, manager, my_vcr, variables, secure_variables):
-        suffix = self.get_suffix(variables, secure_variables)
+    @pytest.fixture()
+    def suffix(self, variables, secure_variables):
+        return self.get_suffix(variables, secure_variables)
+
+    @pytest.fixture()
+    def _execute_test_action(self, suffix, variables, secure_variables, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)) as cass:
-            manager.schedule(
+            return cass, manager.schedule(
                 name='{0}-{1}'.format(self.NAME, suffix),
                 variables=variables,
                 secure_variables=secure_variables
             )
-            assert cass.requests[0].path == '/go/api/pipelines/{name}/schedule'.format(
+
+    @pytest.fixture()
+    def expected_request_url(self, suffix, variables, secure_variables):
+        return '/go/api/pipelines/{name}/schedule'.format(
                 name='{0}-{1}'.format(self.NAME, suffix)
             )
 
-    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
-    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
-    def test_schedule_request_method(self, manager, my_vcr, variables, secure_variables):
-        suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)) as cass:
-            manager.schedule(
-                name='{0}-{1}'.format(self.NAME, suffix),
-                variables=variables,
-                secure_variables=secure_variables
-            )
-            assert cass.requests[0].method == 'POST'
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'POST'
 
-    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
-    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
-    def test_schedule_request_headers(self, manager, my_vcr, variables, secure_variables):
-        suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)) as cass:
-            manager.schedule(
-                name='{0}-{1}'.format(self.NAME, suffix),
-                variables=variables,
-                secure_variables=secure_variables
-            )
-            assert cass.requests[0].headers['accept'] == 'application/json'
-            assert cass.requests[0].headers['content-type'] == 'application/json'
-            assert cass.requests[0].headers['Confirm'] == 'true'
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
 
-    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
-    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
-    def test_schedule_response_code(self, manager, my_vcr, variables, secure_variables):
-        suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)) as cass:
-            manager.schedule(
-                name='{0}-{1}'.format(self.NAME, suffix),
-                variables=variables,
-                secure_variables=secure_variables
-            )
-            assert cass.responses[0]['status']['code'] == 202
+    @pytest.fixture()
+    def expected_content_type_headers(self, *args, **kwargs):
+        return 'application/json'
 
-    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
-    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
-    def test_schedule_return_value(self, manager, my_vcr, variables, secure_variables):
-        suffix = self.get_suffix(variables, secure_variables)
-        with my_vcr.use_cassette("pipeline/schedule-{0}".format(suffix)):
-            result = manager.schedule(
-                name='{0}-{1}'.format(self.NAME, suffix),
-                variables=variables,
-                secure_variables=secure_variables
-            )
-            assert result == 'Request to schedule pipeline {0}-{1} accepted\n'.format(self.NAME, suffix)
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
+
+    @pytest.fixture()
+    def expected_return_value(self, suffix):
+        return 'Request to schedule pipeline {0}-{1} accepted\n'.format(self.NAME, suffix)
+
+    # Have to override and call super, as we're putting parameters to the class
+    # and they are applied to parent classes. As there are two classes for which
+    # we putting that parameters, we got an error from py.test `ValueError: duplicate 'variables'`
+
+    def test_request_url(self, _execute_test_action, expected_request_url):
+        return super(self.__class__, self).test_request_url(_execute_test_action, expected_request_url)
+
+    def test_request_method(self, _execute_test_action, expected_request_method):
+        return super(self.__class__, self).test_request_method(_execute_test_action, expected_request_method)
+
+    def test_request_accept_headers(self, _execute_test_action, expected_accept_headers):
+        return super(self.__class__, self).test_request_accept_headers(_execute_test_action, expected_accept_headers)
+
+    def test_response_code(self, _execute_test_action, expected_response_code):
+        return 202
+
+    def test_update_request_content_type_headers(self, _execute_test_action, expected_content_type_headers):
+        return super(self.__class__, self).test_update_request_content_type_headers(
+            _execute_test_action, expected_content_type_headers)
+
+    def test_return_type(self, _execute_test_action, expected_return_type):
+        return super(self.__class__, self).test_return_type(_execute_test_action, expected_return_type)
+
+    def test_return_value(self, _execute_test_action, expected_return_value):
+        return super(self.__class__, self).test_return_value(_execute_test_action, expected_return_value)
+
+    def test_confirm_header(self, _execute_test_action):
+        return super(self.__class__, self).test_confirm_header(_execute_test_action)
 
 
-class TestScheduleWithInstance(BaseTestPipelineManager):
+@pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
+@pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
+class TestScheduleWithInstance(
+    BaseTestPipelineManager,
+    AbstractTestManager,
+    ReturnValueMixin
+):
+    EXPECTED_CASSETTE_COUNT = None
     NAME = "TestScheduleWithInstance"
 
-    def _do_schedule_with_instance(self, my_vcr, cass_name, manager, pipeline_name, variables, secure_variables):
-        should_wait = False
-        with my_vcr.use_cassette(cass_name) as cass:
+    variables = [None, {'MY_VARIABLE': 'some value'}]
+    secure_variables = [None, {'MY_SECRET_VARIABLE': 'secret variable'}]
+
+    @pytest.fixture()
+    def suffix(self, variables, secure_variables):
+        return self.get_suffix(variables, secure_variables)
+
+    @pytest.fixture()
+    def pipeline_name(self, suffix):
+        return '{0}-{1}'.format(self.NAME, suffix)
+
+    @pytest.fixture()
+    def _execute_test_action(self, suffix, pipeline_name, variables, secure_variables, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/schedule-instance-{0}".format(suffix)) as cass:
             if not len(cass.requests):
-                should_wait = True
+                with my_vcr.use_cassette("pipeline/schedule-instance-prepare-{0}".format(suffix)):
+                    pipeline_instance = manager.last(pipeline_name)
+                    while pipeline_instance and not pipeline_instance.data.can_run:
+                        print("Sleeping...")
+                        time.sleep(10)
+                        pipeline_instance = manager.last(pipeline_name)
 
-        if should_wait:
-            pipeline_instance = manager.last(pipeline_name)
-            while pipeline_instance and not pipeline_instance.data.can_run:
-                print("Sleeping...")
-                time.sleep(10)
-                pipeline_instance = manager.last(pipeline_name)
+                    backoff = 4
+                    max_tries = 50
+            else:
+                backoff = 0
+                max_tries = 20
 
-            backoff = 4
-            max_tries = 50
-        else:
-            backoff = 0
-            max_tries = 20
-
-        with my_vcr.use_cassette(cass_name):
-            return manager.schedule_with_instance(
+            return cass, manager.schedule_with_instance(
                 name=pipeline_name,
                 variables=variables,
                 secure_variables=secure_variables,
@@ -457,45 +489,49 @@ class TestScheduleWithInstance(BaseTestPipelineManager):
                 max_tries=max_tries
             )
 
-    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
-    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
-    @mock.patch('yagocd.resources.pipeline.PipelineManager.schedule')
-    @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
-    def test_schedule_is_called(self, history_mock, schedule_mock, session_fixture, manager, variables, secure_variables):
-        suffix = self.get_suffix(variables, secure_variables)
-        history_mock.return_value = [pipeline.PipelineInstance(session_fixture, dict(counter=1))]
-        manager.schedule_with_instance(
-            name='{0}-{1}'.format(self.NAME, suffix),
-            variables=variables,
-            secure_variables=secure_variables,
-            backoff=0
-        )
-        schedule_mock.assert_called()
+    @pytest.fixture()
+    def expected_request_url(self, suffix, variables, secure_variables):
+        return '/go/api/pipelines/{name}/history/0'.format(
+                name='{0}-{1}'.format(self.NAME, suffix)
+            )
 
-    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
-    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
-    def test_return_value(self, manager, my_vcr, variables, secure_variables):
-        suffix = self.get_suffix(variables, secure_variables)
-        result = self._do_schedule_with_instance(
-            my_vcr,
-            "pipeline/schedule_with_instance-{0}".format(suffix),
-            manager,
-            '{0}-{1}'.format(self.NAME, suffix),
-            variables,
-            secure_variables
-        )
-        assert isinstance(result, pipeline.PipelineInstance)
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
 
-    @pytest.mark.parametrize("variables", [None, {'MY_VARIABLE': 'some value'}])
-    @pytest.mark.parametrize("secure_variables", [None, {'MY_SECRET_VARIABLE': 'secret variable'}])
-    def test_empty_history(self, manager, my_vcr, variables, secure_variables):
-        suffix = self.get_suffix(variables, secure_variables)
-        result = self._do_schedule_with_instance(
-            my_vcr,
-            "pipeline/schedule_with_instance_custom_history-{0}".format(suffix),
-            manager,
-            '{0}-{1}'.format(self.NAME, suffix),
-            variables,
-            secure_variables
-        )
-        assert isinstance(result, pipeline.PipelineInstance)
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return pipeline.PipelineInstance
+
+    @pytest.fixture()
+    def expected_return_value(self, suffix):
+        pytest.skip()
+
+    # Have to override and call super, as we're putting parameters to the class
+    # and they are applied to parent classes. As there are two classes for which
+    # we putting that parameters, we got an error from py.test `ValueError: duplicate 'variables'`
+
+    def test_request_url(self, _execute_test_action, expected_request_url):
+        return super(self.__class__, self).test_request_url(_execute_test_action, expected_request_url)
+
+    def test_request_method(self, _execute_test_action, expected_request_method):
+        return super(self.__class__, self).test_request_method(_execute_test_action, expected_request_method)
+
+    def test_request_accept_headers(self, _execute_test_action, expected_accept_headers):
+        return super(self.__class__, self).test_request_accept_headers(_execute_test_action, expected_accept_headers)
+
+    def test_response_code(self, _execute_test_action, expected_response_code):
+        return super(self.__class__, self).test_response_code(_execute_test_action, expected_response_code)
+
+    def test_return_type(self, _execute_test_action, expected_return_type):
+        return super(self.__class__, self).test_return_type(_execute_test_action, expected_return_type)
+
+    def test_return_value(self, _execute_test_action, expected_return_value):
+        return super(self.__class__, self).test_return_value(_execute_test_action, expected_return_value)
+
+
+

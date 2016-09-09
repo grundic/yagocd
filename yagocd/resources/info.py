@@ -32,6 +32,7 @@ import re
 from six.moves import html_parser
 
 from yagocd.resources import BaseManager
+from yagocd.util import since
 
 
 class AboutPageTableParser(html_parser.HTMLParser):
@@ -52,9 +53,11 @@ class AboutPageTableParser(html_parser.HTMLParser):
         self._in_td = False
 
 
+@since('14.3.0')
 class InfoManager(BaseManager):
     """
     Class for getting general information about GoCD server.
+    @since: 14.3.0.
 
     Right now this class just parses /about page, as there is no REST API for this purpose.
     After it will be implemented, this class should be rewritten.

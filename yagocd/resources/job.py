@@ -29,16 +29,20 @@
 from yagocd.resources import BaseManager, Base
 from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.property import PropertyManager
+from yagocd.util import since
 
 
+@since('14.3.0')
 class JobManager(BaseManager):
     """
     The jobs API allows users to view job information.
+    @since: 14.3.0.
     """
 
     def scheduled(self):
         """
         Lists all the current job instances which are scheduled but not yet assigned to any agent.
+        @since: 14.3.0.
 
         :return: an array of scheduled job instances in XML format.
         """
@@ -53,6 +57,7 @@ class JobManager(BaseManager):
         """
         The job history allows users to list job instances of specified job.
         Supports pagination using offset which tells the API how many instances to skip.
+        @since: 14.3.0.
 
         :return: an array of jobs instances.
         """
