@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=17xuskzmnes4hnlkpyyhikxn]
+      Cookie: [JSESSIONID=d28seza8qk0rcn26smtvjqlu]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/pipelines/Shared_Services/6/Commit/1.xml
@@ -15,12 +15,12 @@ interactions:
     headers:
       Cache-Control: [no-cache]
       Content-Type: [application/xml; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:12:38 GMT']
+      Date: ['Fri, 09 Sep 2016 14:31:26 GMT']
       Location: ['http://localhost:8153/go/api/stages/80.xml']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [cc99d8ff-3d47-458a-a515-70dc530c8d52]
-      X-Runtime: ['0.215000']
+      X-Request-Id: [58615034-2387-4e42-8a51-eaf1f9c89408]
+      X-Runtime: ['0.114000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 302, message: Found}
@@ -31,7 +31,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=17xuskzmnes4hnlkpyyhikxn]
+      Cookie: [JSESSIONID=d28seza8qk0rcn26smtvjqlu]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/stages/80.xml
@@ -46,11 +46,11 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/xml; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:12:38 GMT']
+      Date: ['Fri, 09 Sep 2016 14:31:26 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [819aa7e0-1283-4b47-a0aa-32a5390d6d88]
-      X-Runtime: ['0.149000']
+      X-Request-Id: [19266451-1858-43da-b7bc-a5d7ab7cf75b]
+      X-Runtime: ['0.059000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

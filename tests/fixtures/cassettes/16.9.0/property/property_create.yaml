@@ -10,7 +10,7 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['12']
       Content-Type: [application/x-www-form-urlencoded]
-      Cookie: [JSESSIONID=t80rtmuvg8ur10qnkbgexz33b]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
       User-Agent: [python-requests/2.10.0]
     method: POST
     uri: http://localhost:8153/go/properties/Shared_Services/7/Commit/1/build/foo_bar_baz
@@ -19,6 +19,6 @@ interactions:
     headers:
       Content-Length: ['50']
       Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Sat, 03 Sep 2016 08:25:58 GMT']
+      Date: ['Fri, 09 Sep 2016 14:35:48 GMT']
     status: {code: 201, message: Created}
 version: 1

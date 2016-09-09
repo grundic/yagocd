@@ -11,7 +11,7 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['62']
       Content-Type: [application/x-www-form-urlencoded]
-      Cookie: [JSESSIONID=16uoitsnn5vk3gkx49m033wxi]
+      Cookie: [JSESSIONID=42py1h9d0li9w50reslg5z8u]
       User-Agent: [python-requests/2.10.0]
     method: POST
     uri: http://localhost:8153/go/api/material/notify/git
@@ -24,12 +24,12 @@ interactions:
       Cache-Control: [no-cache]
       Content-Encoding: [gzip]
       Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Fri, 02 Sep 2016 22:32:05 GMT']
+      Date: ['Fri, 09 Sep 2016 14:33:24 GMT']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [9883fd9b-cc47-4f05-ad61-cd99314fd9ce]
-      X-Runtime: ['0.080000']
+      X-Request-Id: [00f3c701-c1da-4af2-ba54-250776e3bce2]
+      X-Runtime: ['0.038000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 202, message: Accepted}

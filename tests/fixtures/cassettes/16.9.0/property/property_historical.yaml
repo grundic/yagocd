@@ -6,10 +6,10 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=t80rtmuvg8ur10qnkbgexz33b]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
       User-Agent: [python-requests/2.10.0]
     method: GET
-    uri: http://localhost:8153/go/properties/search?stageName=Commit&pipelineName=Shared_Services&jobName=build
+    uri: http://localhost:8153/go/properties/search?stageName=Commit&jobName=build&pipelineName=Shared_Services
   response:
     body: {string: 'cruise_agent,cruise_job_duration,cruise_job_id,cruise_job_result,cruise_pipeline_counter,cruise_pipeline_label,cruise_stage_counter,cruise_timestamp_01_scheduled,cruise_timestamp_02_assigned,cruise_timestamp_03_preparing,cruise_timestamp_04_building,cruise_timestamp_05_completing,cruise_timestamp_06_completed,foo_bar
 
@@ -84,6 +84,6 @@ interactions:
       Content-Disposition: [Inline; filename=buildProperties.csv]
       Content-Length: ['5891']
       Content-Type: [text/csv; charset=ISO-8859-1]
-      Date: ['Sat, 03 Sep 2016 08:25:57 GMT']
+      Date: ['Fri, 09 Sep 2016 14:35:48 GMT']
     status: {code: 200, message: OK}
 version: 1

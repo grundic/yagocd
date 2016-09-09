@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=1vca22i02j0fylisq4lm7gq4m]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/pipelines/Shared_Services/6/Commit/1.xml
@@ -15,12 +15,12 @@ interactions:
     headers:
       Cache-Control: [no-cache]
       Content-Type: [application/xml; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:21:43 GMT']
+      Date: ['Fri, 09 Sep 2016 14:35:19 GMT']
       Location: ['http://localhost:8153/go/api/stages/80.xml']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [527d0115-8e73-4c29-8e43-d44ae66360af]
-      X-Runtime: ['0.216000']
+      X-Request-Id: [5ad86fb5-c630-4073-9750-326d46652c2b]
+      X-Runtime: ['0.077000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 302, message: Found}
@@ -31,7 +31,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=1vca22i02j0fylisq4lm7gq4m]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/stages/80.xml
@@ -46,11 +46,11 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/xml; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:21:43 GMT']
+      Date: ['Fri, 09 Sep 2016 14:35:19 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [4936bbc2-690a-4039-ab15-f32598bbfcd4]
-      X-Runtime: ['0.090000']
+      X-Request-Id: [e27fb864-ab3e-4060-a695-3e290ded31ad]
+      X-Runtime: ['0.042000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

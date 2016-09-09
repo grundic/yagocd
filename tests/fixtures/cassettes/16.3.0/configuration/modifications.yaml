@@ -6,39 +6,37 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
+      Cookie: [JSESSIONID=9zpgo4k62mmvkx999zevrepf]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/config/revisions
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAALWVvW5mRQyG7yUVSNnV2B7/0dHRI2gQhWfGXlJ8CUqWCnHvOAWgfCAlEtnq6MyZ
-        45nHfv36p99vLodvvrmhCinmlKxpzGflTPWVrmdUud7c3vz2lI/3ccneHedyd99Ln++eX2Eq+hCf
-        k2Xc3uyHy+Xu8/fffdsb06HWHkSoUkAiBGeOY7SmxTLE/gpQ0bE+PfyYj093D/f9G8hH+ji+IjD6
-        IONIHYIag1FPjFEYVedYaakSpq6EQV93jKf9S17i7zgGf9z+BdiHgWsH3EhmrF79oD2NaO/08TbA
-        vsNLwBFM20x115mevCcVjKUkY69tISd2TZIvDzifj2Lbey7ecchrlkxVNgviM18C/vDrp8c4+S9E
-        QNGrGhpPAziR0KKgBYcTKwYHUFQGL/KRqfnlEeN4nwtxgrl/p3UOitOg00I68koNhWSiM/i1SAfq
-        QkouMC+XuQBMt9XKo76nF2LsteY1IH/EBkSc9mFD+QiJIHCM/8BQ/gdD9saZsfxgluWZLRrr3G9q
-        8ayQVzGG4ZjE1712LKKXaR5UOuydmuUtynWWg69OkXKr/b0w8JQ7FkHKmsN5+C5Rz87ckNj4BoxB
-        2pJ7iaFz5s4WVtTEVkdXLRT74kLW5sHHHc7qG7wTBoB36LYn8lWJwKJ9yhx26gxhfh1DjRzGFYaM
-        pGj745YTqk+pnRiDolfMBXyidcvWu4mqPKgkPbq79pg21sTuWW7PO0LrdQwxanh5iTFVIA22rwCk
-        LjJ2tnDDSY4czAsTt/C79caE1YOntduOxWN6u9jewBs6xR4Wb8BQpE7vVW8oZd83tp41te1a1RaI
-        HEO1QKiZpWut98JYNaKLjKQMhYDGi8V79D3P1p6Hb8AQ0J7ELzGWzfHspWbQqRm7A59Es13axWg7
-        oVze7v8/MX7+Ezif3vIXCAAA
+        H4sIAAAAAAAAALWVzW5mNQyG76UrkDqj+C+22bFjj2CDWDixM9NFW9QOK8S94woB+jpIraBzNkcn
+        SnzyvH5t//Tb1W3K1TdXdGIekZp12ERyFZf6Ktcc57heXV/9+lgPd3FbvTvy9uaulz7dPH0CKzEB
+        shvb9dW+v729+fT9d9/2xsqRMSy2EOHSrTkPopwxhhYJo8sOA+lYH+5/rIfHm/u7PgbzPb0fXxEY
+        vZujzyRBnxHUjjYOxjmZdvSoEpaugkFfd4zH/bFu4+84Br9f/wW4DMG1A24kM1E//aLNRrR3+Xgd
+        IA6+BLTF8/BiljoJZ8a2YCFllFUlU31o/qnfFwbkmS2z7c2rNU3yw2eyqpgFSfIl4A+/fHiIrM8Q
+        gWz4JaLPxGVthJi7rwZBTZWwwZEhT+kGPDTGl0eM9BgCkSHSx2ll4nQalIgn5ws5nDSf/AY+xyXg
+        QF1IJQfMj09eAKbbzqpU3+zt2Nhr8XNAeY8NiMj2bsPxETOCWpX4FwyVfzDm3sgVyxPrWCVvbtWn
+        787AWTFfxBjWPiQZz2vNInqZOFEpxVua5ey1cjn4aom0y3C/FQa2r70zDzUXD5fh+7QzqpUbXQf4
+        CoxBOh0uMZS5dp2KOIztjs5aKPbFJxkkS7pDrvysZfxXDADv0DoP+TqF0DXbf+FheXJMkZcx1Mhh
+        PMOYoyjKQdpOqN5dYhfGoOgV8wnOaF2y581MdTzozPLo6tqDbSzGKJDueTlpvYwxjRp+XmKwTiiD
+        7SsAqZOMrRZuyJKoIbKwcE95s9pgWD142rvdsWSwdxfbG2RDS+xh8QoMRWp5n9WGUvV9owfQYjXt
+        xxbMmYZqgXC4jq613gpjnRGdZCQV6JaJJkumZ7uqZ+se9AqMCdqT+BJjGY+nXmoGLc3oxmtZaLaP
+        djK6nVCtp4n6PzF+/gNaBKIrFwgAAA==
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 12:49:06 GMT']
-      ETag: ['"031bb95e5c70eb5a374a2e9f39bcfdfc--gzip"']
-      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=15h8fki0vvtd1ke2uda8zr695;Path=/go;Expires=Sat, 17-Sep-2016
-          12:49:06 GMT']
+      Date: ['Fri, 09 Sep 2016 14:27:35 GMT']
+      ETag: ['"1f677b8bd4dcb25710a38b4795d50804--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [c77f8cf7-10c9-4abd-86a0-04ab23626e9c]
-      X-Runtime: ['0.057000']
+      X-Request-Id: [486f7739-0400-4479-848e-6378ba4eebcf]
+      X-Runtime: ['0.219000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

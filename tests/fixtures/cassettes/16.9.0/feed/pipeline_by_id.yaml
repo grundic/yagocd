@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=1vca22i02j0fylisq4lm7gq4m]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/pipelines/THIS_PARAMETER_IS_USELESS/3.xml
@@ -28,11 +28,11 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/xml; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:21:40 GMT']
+      Date: ['Fri, 09 Sep 2016 14:35:18 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [eee75baa-c645-4681-a5d3-4d34c49c736a]
-      X-Runtime: ['0.173000']
+      X-Request-Id: [43bb612a-b1c6-4696-95de-bd1df19eeeb2]
+      X-Runtime: ['0.113000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=cotdp7qzw38dejusd7rojz5s]
+      Cookie: [JSESSIONID=42py1h9d0li9w50reslg5z8u]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/pipelines/Consumer_Website/instance/2
@@ -29,13 +29,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 02 Sep 2016 22:32:06 GMT']
+      Date: ['Fri, 09 Sep 2016 14:33:26 GMT']
       ETag: ['"8237146d8c2280eb8e3ad6825cdb1efa--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [1b0ddc7e-e73a-44e5-a972-5e991b39ba79]
-      X-Runtime: ['0.048000']
+      X-Request-Id: [ccb46965-07e5-40fa-a26c-f7e7d7be573b]
+      X-Runtime: ['0.044000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

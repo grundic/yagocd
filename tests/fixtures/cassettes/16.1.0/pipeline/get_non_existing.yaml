@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=1uasn40hrre2xz0zf5o1srfhq]
+      Cookie: [JSESSIONID=1x101k33bnawj1v2yfa9ah4gnm]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/pipelines/pipeline_instance_non_existing/instance/1
@@ -18,10 +18,10 @@ interactions:
     headers:
       Cache-Control: [no-cache]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 12:38:11 GMT']
+      Date: ['Fri, 09 Sep 2016 14:24:08 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [fb9b6eeb-6d9c-42d5-8482-6415a23156e4]
+      X-Request-Id: [860eebaf-9f64-4454-9694-ef59daa78313]
       X-Runtime: ['0.013000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]

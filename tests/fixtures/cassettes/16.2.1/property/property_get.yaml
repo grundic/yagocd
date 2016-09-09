@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=4nco9t3q9efih094upf4inku]
+      Cookie: [JSESSIONID=x6npwujsri9k1sz8u1w97smdy]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/properties/Shared_Services/7/Commit/1/build/cruise_pipeline_counter
@@ -20,6 +20,6 @@ interactions:
       Content-Disposition: [Inline; filename=buildProperties.csv]
       Content-Length: ['26']
       Content-Type: [text/csv; charset=ISO-8859-1]
-      Date: ['Sat, 03 Sep 2016 12:48:03 GMT']
+      Date: ['Fri, 09 Sep 2016 14:26:22 GMT']
     status: {code: 200, message: OK}
 version: 1

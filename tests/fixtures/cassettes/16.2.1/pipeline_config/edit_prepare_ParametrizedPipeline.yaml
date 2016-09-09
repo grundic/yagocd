@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=x6npwujsri9k1sz8u1w97smdy]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKVVW2/TMBR+76+oAo+j0ZgmUCUexlQhELtolAmEKstxTlozx458KWxT/zvHbpI6
+        TXYRy1N8zufvnHznkvvReJwQweWNSabjezzh2YAo2hOeVxr8OVlZW03TVChGxUoZO31/eHyULlVK
+        K57SvOQyrXgFyAYmvaSalmA1v4P8srYmgXFzsA2TK/ZIFOScLNWE5emrhpQwJQu+7LIUXOYvTnYq
+        Mdead1RzJ4JmIIiFshLUgud8fX968f18vkmCHyTNBJA2Owx1w+USgQUVBgIm8OLNQTUCIuKXTohg
+        q7Zo0L4ov0ZoWtQR11wrWYK0ZE019/G3EJ95K4EB5jTEeQRzk8vZT3J9cvX55OPXWdI611S42jsO
+        7+PDt0cdpZ9LPzu7nD8a4QlWq91gzt9mp1ez+QAxSKZvKws5aUOsL37cnc6PP707MR/+J9z2G14Y
+        sS1bieXFYomBUtnbKlxfcrujpxYbJXMWTNTYaHdaNJ1tsLXxzsplE6ZKbGuWv8mhVKkBveYMzCRm
+        9MMGxnJJLVcy6rTaWXCBGfbttRx7VuqsIq7Kt00b64fOTFPJVj7NkhpPGvmMy0qVO5yZQom8DVgD
+        NnuqGUuXQ93d1CiHgjphv3nYTrsCLFuRWPFOgZkAKskfpf2kkpxrYFbp234zwxo0CWhXEaotLyiz
+        poejVaUVNkG3UE1VjWNYCpN0xVspXANNJXa30KlVM8+RdXEQQ5yJtkILad83jZhRrz60M0Z7/Mlv
+        le30jjUf0v2LypJOZtpJwiVWTTK/qZ20vdbx0vASlBt0Pb7dhnIK14bXUS/t2fm1n2RymPQge5tp
+        X8uOSNtPBaOcZk/VylJz84wPaLoF/gLrJ/fAMtjl4mUvelFqb0WNgTzpuRb7cRCrJGG+eGKgODUE
+        d01Jw/82qTSXFkvWyxhhQ/MVTXrzbJ4pt6XZE0rHA/oIDGe1AoQGLTsJNcEXe0vIahp+6sQqFesS
+        +rhdYJvRP3e+ZfpICQAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Fri, 09 Sep 2016 14:25:57 GMT']
+      ETag: ['"530e5a63f87d14c5d42d59a11a8cfb41--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [7189a545-bcd5-4c16-925e-0e08f461a1fa]
+      X-Runtime: ['0.129000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

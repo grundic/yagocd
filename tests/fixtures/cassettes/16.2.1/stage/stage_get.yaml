@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=1gocnklzmthe41m98vckekumz0]
+      Cookie: [JSESSIONID=x6npwujsri9k1sz8u1w97smdy]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/stages/CancelledPipeline/defaultStage/instance/2/1
@@ -25,13 +25,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 12:48:07 GMT']
+      Date: ['Fri, 09 Sep 2016 14:26:27 GMT']
       ETag: ['"1d83cdb5d8dd8e513a9fffbcfad39bf4--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [8b483a22-a346-4ee6-8b1e-031f13a24816]
-      X-Runtime: ['0.013000']
+      X-Request-Id: [d4fa61a7-2eb9-444b-bf8e-009bec12d715]
+      X-Runtime: ['0.016000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

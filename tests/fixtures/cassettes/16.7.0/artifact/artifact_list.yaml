@@ -6,6 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
+      Cookie: [JSESSIONID=d28seza8qk0rcn26smtvjqlu]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build.json
@@ -22,10 +23,7 @@ interactions:
       Content-Language: [en-US]
       Content-Length: ['186']
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:12:30 GMT']
-      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=hlb273x0invuz9e3zwumtdpc;Path=/go;Expires=Sat, 17-Sep-2016
-          08:12:30 GMT;HttpOnly']
+      Date: ['Fri, 09 Sep 2016 14:31:18 GMT']
       Vary: ['Accept-Encoding, User-Agent']
     status: {code: 200, message: OK}
 version: 1

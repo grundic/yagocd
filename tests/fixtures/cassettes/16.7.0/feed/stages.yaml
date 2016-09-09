@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=17xuskzmnes4hnlkpyyhikxn]
+      Cookie: [JSESSIONID=d28seza8qk0rcn26smtvjqlu]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/pipelines/Shared_Services/stages.xml
@@ -395,11 +395,11 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/atom+xml; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:12:36 GMT']
+      Date: ['Fri, 09 Sep 2016 14:31:25 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [7e852bce-1968-4a52-af4a-81e9e4d77e11]
-      X-Runtime: ['1.470000']
+      X-Request-Id: [1c57da6b-09db-4872-a31e-effb0e58fd6a]
+      X-Runtime: ['0.790000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

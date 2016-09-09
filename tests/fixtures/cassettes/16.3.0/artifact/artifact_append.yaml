@@ -1,17 +1,17 @@
 interactions:
 - request:
     body: !!binary |
-      LS03M2M3Yjk0OWEzMjY0OWIwYTY2ZjI2NTU0ZjdjZTJkNA0KQ29udGVudC1EaXNwb3NpdGlvbjog
+      LS0yMzY2NDEyOGVlZWM0ZWQ0OGI2YmUxZGFlZjYzZDY5OA0KQ29udGVudC1EaXNwb3NpdGlvbjog
       Zm9ybS1kYXRhOyBuYW1lPSJmaWxlIjsgZmlsZW5hbWU9ImFydGlmYWN0LWFwcGVuZC50eHQiDQoN
-      CkRhdGEgdG8gYXBwZW5kLg0KLS03M2M3Yjk0OWEzMjY0OWIwYTY2ZjI2NTU0ZjdjZTJkNC0tDQo=
+      CkRhdGEgdG8gYXBwZW5kLg0KLS0yMzY2NDEyOGVlZWM0ZWQ0OGI2YmUxZGFlZjYzZDY5OC0tDQo=
     headers:
       Accept: [application/vnd.go.cd.v1+json]
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       Content-Length: ['170']
-      Content-Type: [multipart/form-data; boundary=73c7b949a32649b0a66f26554f7ce2d4]
-      Cookie: [JSESSIONID=1d7kjsgwvg37ydberj2mp2pfo]
+      Content-Type: [multipart/form-data; boundary=23664128eeec4ed48b6be1daef63d698]
+      Cookie: [JSESSIONID=9zpgo4k62mmvkx999zevrepf]
       User-Agent: [python-requests/2.10.0]
     method: PUT
     uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file-append.txt
@@ -21,6 +21,6 @@ interactions:
       Content-Language: [en-US]
       Content-Length: ['58']
       Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Sat, 03 Sep 2016 12:49:06 GMT']
+      Date: ['Fri, 09 Sep 2016 14:27:34 GMT']
     status: {code: 200, message: OK}
 version: 1

@@ -7,7 +7,7 @@ interactions:
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       Content-Length: ['0']
-      Cookie: [JSESSIONID=bdewkgj197t01uhwaifpkxae5]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
       User-Agent: [python-requests/2.10.0]
     method: DELETE
     uri: http://localhost:8153/go/api/admin/pipelines/Spam_foo_bar
@@ -16,11 +16,11 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
-      Date: ['Mon, 05 Sep 2016 21:48:24 GMT']
+      Date: ['Fri, 09 Sep 2016 14:35:24 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [4e2b529f-a025-403e-969d-ee0d233ebf28]
-      X-Runtime: ['0.148000']
+      X-Request-Id: [42c5fa2d-baac-480e-98ec-1a11c44745d9]
+      X-Runtime: ['0.080000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

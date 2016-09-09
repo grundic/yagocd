@@ -9,7 +9,7 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['23']
       Content-Type: [application/json]
-      Cookie: [JSESSIONID=1gren1scb90t2p8zbo6sqlqv1]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
       User-Agent: [python-requests/2.10.0]
     method: PATCH
     uri: http://localhost:8153/go/api/agents/68e5d48c-753a-4395-a79c-1cb22d77a12f
@@ -25,11 +25,11 @@ interactions:
     headers:
       Cache-Control: ['private, must-revalidate']
       Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:21:12 GMT']
+      Date: ['Fri, 09 Sep 2016 14:35:07 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [1ebaf6fa-666b-4a14-bc18-4508f89d8855]
-      X-Runtime: ['1.153000']
+      X-Request-Id: [a72c0832-7474-4144-abaa-41cc142c9cea]
+      X-Runtime: ['0.472000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

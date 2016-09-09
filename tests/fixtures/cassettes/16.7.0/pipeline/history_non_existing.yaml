@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=qhizg3rsiymi1mgqjkfqrlh72]
+      Cookie: [JSESSIONID=d28seza8qk0rcn26smtvjqlu]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/pipelines/pipeline_non_existing/history/0
@@ -17,11 +17,11 @@ interactions:
     headers:
       Cache-Control: [no-cache]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:12:43 GMT']
+      Date: ['Fri, 09 Sep 2016 14:31:33 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [70931a3e-fc88-4294-87de-93d005b06f35]
-      X-Runtime: ['0.029000']
+      X-Request-Id: [8f0b359e-f069-4838-884a-417e63efc2da]
+      X-Runtime: ['0.016000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 404, message: Not Found}

@@ -6,19 +6,15 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=1br0wi8ytdt0grewm6sfd62n2]
+      Cookie: [JSESSIONID=42py1h9d0li9w50reslg5z8u]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/.zip
   response:
-    body:
-      string: !!binary |
-        UEsDBBQACAgIAPyzIkkAAAAAAAAAAAAAAAAEAAAAdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIU
-        ABQACAgIAPyzIkkAAAAAAgAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAB0aGUvUEsFBgAAAAABAAEA
-        MgAAADQAAAAAAA==
+    body: {string: "PK\x03\x04\x14\0\b\b\b\0't)I\0\0\0\0\0\0\0\0\0\0\0\0\x04\0\0\0the/\x03\0PK\a\b\0\0\0\0\x02\0\0\0\0\0\0\0PK\x01\x02\x14\0\x14\0\b\b\b\0't)I\0\0\0\0\x02\0\0\0\0\0\0\0\x04\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0the/PK\x05\x06\0\0\0\0\x01\0\x01\02\0\0\04\0\0\0\0\0"}
     headers:
       Content-Language: [en-US]
       Content-Type: [application/zip]
-      Date: ['Fri, 02 Sep 2016 22:31:57 GMT']
+      Date: ['Fri, 09 Sep 2016 14:33:15 GMT']
     status: {code: 200, message: OK}
 version: 1

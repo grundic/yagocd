@@ -1,92 +1,35 @@
 interactions:
 - request:
-    body: null
-    headers:
-      Accept: [application/vnd.go.cd.v2+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=1e2hkhvijbscyc3m7vu0a1oin]
-      User-Agent: [python-requests/2.10.0]
-    method: GET
-    uri: http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline
-  response:
-    body: {string: "{\n  \"_links\": {\n    \"self\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline\"\n
-        \   },\n    \"doc\": {\n      \"href\": \"https://api.go.cd/#pipeline-config\"\n
-        \   },\n    \"find\": {\n      \"href\": \"http://localhost:8153/go/api/admin/pipelines/:pipeline_name\"\n
-        \   }\n  },\n  \"label_template\": \"${COUNT}\",\n  \"enable_pipeline_locking\":
-        false,\n  \"name\": \"ParametrizedPipeline\",\n  \"template\": null,\n  \"parameters\":
-        [\n\n  ],\n  \"environment_variables\": [\n    {\n      \"secure\": false,\n
-        \     \"name\": \"MY_VARIABLE\",\n      \"value\": \"MY value 123\"\n    },\n
-        \   {\n      \"secure\": false,\n      \"name\": \"EMPTY_VARIABLE\",\n      \"value\":
-        \"\"\n    },\n    {\n      \"secure\": true,\n      \"name\": \"MY_SECRET_VARIABLE\",\n
-        \     \"encrypted_value\": \"vOXzCT5G7As=\"\n    },\n    {\n      \"secure\":
-        true,\n      \"name\": \"EMPTY_SECRET_VARIABLE\",\n      \"encrypted_value\":
-        \"vOXzCT5G7As=\"\n    }\n  ],\n  \"materials\": [\n    {\n      \"type\":
-        \"git\",\n      \"attributes\": {\n        \"url\": \"https://github.com/gocd-demo/services.git\",\n
-        \       \"destination\": null,\n        \"filter\": null,\n        \"invert_filter\":
-        false,\n        \"name\": null,\n        \"auto_update\": true,\n        \"branch\":
-        \"master\",\n        \"submodule_folder\": null,\n        \"shallow_clone\":
-        false\n      }\n    }\n  ],\n  \"stages\": [\n    {\n      \"name\": \"defaultStage\",\n
-        \     \"fetch_materials\": true,\n      \"clean_working_directory\": false,\n
-        \     \"never_cleanup_artifacts\": false,\n      \"approval\": {\n        \"type\":
-        \"success\",\n        \"authorization\": {\n          \"roles\": [\n\n          ],\n
-        \         \"users\": [\n\n          ]\n        }\n      },\n      \"environment_variables\":
-        [\n\n      ],\n      \"jobs\": [\n        {\n          \"name\": \"defaultJob\",\n
-        \         \"run_instance_count\": null,\n          \"timeout\": null,\n          \"environment_variables\":
-        [\n            {\n              \"secure\": false,\n              \"name\":
-        \"ENV_VAR_1\",\n              \"value\": \"\"\n            }\n          ],\n
-        \         \"resources\": [\n\n          ],\n          \"tasks\": [\n            {\n
-        \             \"type\": \"exec\",\n              \"attributes\": {\n                \"run_if\":
-        [\n                  \"passed\"\n                ],\n                \"on_cancel\":
-        null,\n                \"command\": \"printenv\",\n                \"working_directory\":
-        null\n              }\n            }\n          ],\n          \"tabs\": [\n\n
-        \         ],\n          \"artifacts\": [\n\n          ],\n          \"properties\":
-        null\n        }\n      ]\n    }\n  ],\n  \"tracking_tool\": null,\n  \"timer\":
-        null\n}\n"}
-    headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
-      Date: ['Mon, 05 Sep 2016 21:55:35 GMT']
-      ETag: ['"82f95ffd23872c7afb7ffda29f4469cc"']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [25aa9954-9b45-4a75-8e07-01cdfe813324]
-      X-Runtime: ['0.222000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
-- request:
     body: !!binary |
-      eyJwYXJhbWV0ZXJzIjogW10sICJ0ZW1wbGF0ZSI6IG51bGwsICJsYWJlbF90ZW1wbGF0ZSI6ICIk
-      e0NPVU5UfS1zb21lLW5ldy12YWx1ZSIsICJuYW1lIjogIlBhcmFtZXRyaXplZFBpcGVsaW5lIiwg
-      Il9saW5rcyI6IHsic2VsZiI6IHsiaHJlZiI6ICJodHRwOi8vbG9jYWxob3N0OjgxNTMvZ28vYXBp
-      L2FkbWluL3BpcGVsaW5lcy9QYXJhbWV0cml6ZWRQaXBlbGluZSJ9LCAiZG9jIjogeyJocmVmIjog
-      Imh0dHBzOi8vYXBpLmdvLmNkLyNwaXBlbGluZS1jb25maWcifSwgImZpbmQiOiB7ImhyZWYiOiAi
-      aHR0cDovL2xvY2FsaG9zdDo4MTUzL2dvL2FwaS9hZG1pbi9waXBlbGluZXMvOnBpcGVsaW5lX25h
-      bWUifX0sICJtYXRlcmlhbHMiOiBbeyJ0eXBlIjogImdpdCIsICJhdHRyaWJ1dGVzIjogeyJzdWJt
-      b2R1bGVfZm9sZGVyIjogbnVsbCwgImF1dG9fdXBkYXRlIjogdHJ1ZSwgImZpbHRlciI6IG51bGws
-      ICJkZXN0aW5hdGlvbiI6IG51bGwsICJuYW1lIjogbnVsbCwgInVybCI6ICJodHRwczovL2dpdGh1
-      Yi5jb20vZ29jZC1kZW1vL3NlcnZpY2VzLmdpdCIsICJzaGFsbG93X2Nsb25lIjogZmFsc2UsICJi
-      cmFuY2giOiAibWFzdGVyIiwgImludmVydF9maWx0ZXIiOiBmYWxzZX19XSwgImVudmlyb25tZW50
-      X3ZhcmlhYmxlcyI6IFt7InZhbHVlIjogIk1ZIHZhbHVlIDEyMyIsICJzZWN1cmUiOiBmYWxzZSwg
-      Im5hbWUiOiAiTVlfVkFSSUFCTEUifSwgeyJ2YWx1ZSI6ICIiLCAic2VjdXJlIjogZmFsc2UsICJu
-      YW1lIjogIkVNUFRZX1ZBUklBQkxFIn0sIHsic2VjdXJlIjogdHJ1ZSwgIm5hbWUiOiAiTVlfU0VD
-      UkVUX1ZBUklBQkxFIiwgImVuY3J5cHRlZF92YWx1ZSI6ICJ2T1h6Q1Q1RzdBcz0ifSwgeyJzZWN1
-      cmUiOiB0cnVlLCAibmFtZSI6ICJFTVBUWV9TRUNSRVRfVkFSSUFCTEUiLCAiZW5jcnlwdGVkX3Zh
-      bHVlIjogInZPWHpDVDVHN0FzPSJ9XSwgInN0YWdlcyI6IFt7ImpvYnMiOiBbeyJhcnRpZmFjdHMi
-      OiBbXSwgIm5hbWUiOiAiZGVmYXVsdEpvYiIsICJyZXNvdXJjZXMiOiBbXSwgImVudmlyb25tZW50
-      X3ZhcmlhYmxlcyI6IFt7InZhbHVlIjogIiIsICJzZWN1cmUiOiBmYWxzZSwgIm5hbWUiOiAiRU5W
-      X1ZBUl8xIn1dLCAidGFicyI6IFtdLCAidGltZW91dCI6IG51bGwsICJydW5faW5zdGFuY2VfY291
-      bnQiOiBudWxsLCAicHJvcGVydGllcyI6IG51bGwsICJ0YXNrcyI6IFt7InR5cGUiOiAiZXhlYyIs
-      ICJhdHRyaWJ1dGVzIjogeyJjb21tYW5kIjogInByaW50ZW52IiwgInJ1bl9pZiI6IFsicGFzc2Vk
-      Il0sICJvbl9jYW5jZWwiOiBudWxsLCAid29ya2luZ19kaXJlY3RvcnkiOiBudWxsfX1dfV0sICJm
-      ZXRjaF9tYXRlcmlhbHMiOiB0cnVlLCAibmFtZSI6ICJkZWZhdWx0U3RhZ2UiLCAiZW52aXJvbm1l
-      bnRfdmFyaWFibGVzIjogW10sICJuZXZlcl9jbGVhbnVwX2FydGlmYWN0cyI6IGZhbHNlLCAiY2xl
-      YW5fd29ya2luZ19kaXJlY3RvcnkiOiBmYWxzZSwgImFwcHJvdmFsIjogeyJ0eXBlIjogInN1Y2Nl
-      c3MiLCAiYXV0aG9yaXphdGlvbiI6IHsidXNlcnMiOiBbXSwgInJvbGVzIjogW119fX1dLCAidGlt
-      ZXIiOiBudWxsLCAidHJhY2tpbmdfdG9vbCI6IG51bGwsICJlbmFibGVfcGlwZWxpbmVfbG9ja2lu
-      ZyI6IGZhbHNlfQ==
+      eyJfbGlua3MiOiB7ImRvYyI6IHsiaHJlZiI6ICJodHRwczovL2FwaS5nby5jZC8jcGlwZWxpbmUt
+      Y29uZmlnIn0sICJmaW5kIjogeyJocmVmIjogImh0dHA6Ly9sb2NhbGhvc3Q6ODE1My9nby9hcGkv
+      YWRtaW4vcGlwZWxpbmVzLzpwaXBlbGluZV9uYW1lIn0sICJzZWxmIjogeyJocmVmIjogImh0dHA6
+      Ly9sb2NhbGhvc3Q6ODE1My9nby9hcGkvYWRtaW4vcGlwZWxpbmVzL1BhcmFtZXRyaXplZFBpcGVs
+      aW5lIn19LCAiZW5hYmxlX3BpcGVsaW5lX2xvY2tpbmciOiBmYWxzZSwgInRyYWNraW5nX3Rvb2wi
+      OiBudWxsLCAic3RhZ2VzIjogW3siY2xlYW5fd29ya2luZ19kaXJlY3RvcnkiOiBmYWxzZSwgIm5l
+      dmVyX2NsZWFudXBfYXJ0aWZhY3RzIjogZmFsc2UsICJuYW1lIjogImRlZmF1bHRTdGFnZSIsICJh
+      cHByb3ZhbCI6IHsidHlwZSI6ICJzdWNjZXNzIiwgImF1dGhvcml6YXRpb24iOiB7InVzZXJzIjog
+      W10sICJyb2xlcyI6IFtdfX0sICJqb2JzIjogW3sidGltZW91dCI6IG51bGwsICJ0YXNrcyI6IFt7
+      InR5cGUiOiAiZXhlYyIsICJhdHRyaWJ1dGVzIjogeyJjb21tYW5kIjogInByaW50ZW52IiwgIndv
+      cmtpbmdfZGlyZWN0b3J5IjogbnVsbCwgInJ1bl9pZiI6IFsicGFzc2VkIl0sICJvbl9jYW5jZWwi
+      OiBudWxsfX1dLCAicHJvcGVydGllcyI6IG51bGwsICJuYW1lIjogImRlZmF1bHRKb2IiLCAicmVz
+      b3VyY2VzIjogW10sICJ0YWJzIjogW10sICJhcnRpZmFjdHMiOiBbXSwgInJ1bl9pbnN0YW5jZV9j
+      b3VudCI6IG51bGwsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbeyJ2YWx1ZSI6ICIiLCAic2Vj
+      dXJlIjogZmFsc2UsICJuYW1lIjogIkVOVl9WQVJfMSJ9XX1dLCAiZmV0Y2hfbWF0ZXJpYWxzIjog
+      dHJ1ZSwgImVudmlyb25tZW50X3ZhcmlhYmxlcyI6IFtdfV0sICJuYW1lIjogIlBhcmFtZXRyaXpl
+      ZFBpcGVsaW5lIiwgInRpbWVyIjogbnVsbCwgInBhcmFtZXRlcnMiOiBbXSwgImxhYmVsX3RlbXBs
+      YXRlIjogIiR7Q09VTlR9LXNvbWUtbmV3LXZhbHVlIiwgIm1hdGVyaWFscyI6IFt7InR5cGUiOiAi
+      Z2l0IiwgImF0dHJpYnV0ZXMiOiB7InN1Ym1vZHVsZV9mb2xkZXIiOiBudWxsLCAibmFtZSI6IG51
+      bGwsICJpbnZlcnRfZmlsdGVyIjogZmFsc2UsICJmaWx0ZXIiOiBudWxsLCAiZGVzdGluYXRpb24i
+      OiBudWxsLCAidXJsIjogImh0dHBzOi8vZ2l0aHViLmNvbS9nb2NkLWRlbW8vc2VydmljZXMuZ2l0
+      IiwgImF1dG9fdXBkYXRlIjogdHJ1ZSwgInNoYWxsb3dfY2xvbmUiOiBmYWxzZSwgImJyYW5jaCI6
+      ICJtYXN0ZXIifX1dLCAiZW52aXJvbm1lbnRfdmFyaWFibGVzIjogW3sidmFsdWUiOiAiTVkgdmFs
+      dWUgMTIzIiwgInNlY3VyZSI6IGZhbHNlLCAibmFtZSI6ICJNWV9WQVJJQUJMRSJ9LCB7InZhbHVl
+      IjogIiIsICJzZWN1cmUiOiBmYWxzZSwgIm5hbWUiOiAiRU1QVFlfVkFSSUFCTEUifSwgeyJlbmNy
+      eXB0ZWRfdmFsdWUiOiAidk9YekNUNUc3QXM9IiwgInNlY3VyZSI6IHRydWUsICJuYW1lIjogIk1Z
+      X1NFQ1JFVF9WQVJJQUJMRSJ9LCB7ImVuY3J5cHRlZF92YWx1ZSI6ICJ2T1h6Q1Q1RzdBcz0iLCAi
+      c2VjdXJlIjogdHJ1ZSwgIm5hbWUiOiAiRU1QVFlfU0VDUkVUX1ZBUklBQkxFIn1dLCAidGVtcGxh
+      dGUiOiBudWxsfQ==
     headers:
       Accept: [application/vnd.go.cd.v2+json]
       Accept-Encoding: ['gzip, deflate']
@@ -94,7 +37,7 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['1606']
       Content-Type: [application/json]
-      Cookie: [JSESSIONID=1e2hkhvijbscyc3m7vu0a1oin]
+      Cookie: [JSESSIONID=42py1h9d0li9w50reslg5z8u]
       If-Match: ['"82f95ffd23872c7afb7ffda29f4469cc"']
       User-Agent: [python-requests/2.10.0]
     method: PUT
@@ -136,12 +79,12 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
-      Date: ['Mon, 05 Sep 2016 21:55:35 GMT']
+      Date: ['Fri, 09 Sep 2016 14:33:24 GMT']
       ETag: ['"a80f3ac4069a92b318fe3886731f8381"']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [eb057cf1-da1c-4b97-815d-1b3118aa024f]
-      X-Runtime: ['0.599000']
+      X-Request-Id: [52eee312-89d3-4aef-800e-12c11a8ed7b9]
+      X-Runtime: ['0.303000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

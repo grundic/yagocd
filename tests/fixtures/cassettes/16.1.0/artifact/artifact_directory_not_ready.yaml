@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=f8q5o7nqdb601lzqn51baeoc9]
+      Cookie: [JSESSIONID=1x101k33bnawj1v2yfa9ah4gnm]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/.zip
@@ -15,6 +15,6 @@ interactions:
     headers:
       Content-Language: [en-US]
       Content-Length: ['0']
-      Date: ['Sat, 03 Sep 2016 12:38:00 GMT']
+      Date: ['Fri, 09 Sep 2016 14:23:54 GMT']
     status: {code: 202, message: Accepted}
 version: 1

@@ -2,10 +2,101 @@ interactions:
 - request:
     body: null
     headers:
+      Accept: [text/html]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/about
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAMVa63LbOJb+76dAa6vGSZUliro7LWvLjj2Ok9jxWE7S2a0uFUiAJCwSYJGgFc3U
+        PM48ybzYfgBJifIl407/2O5OhOu54TsH54A9/eX009vbb9dn5N3t5cfZ3jTSSUy+J7HMj1qR1ukb
+        x1mtVp1Vv6Oy0HEPDw+d72ZNi8RUhkf7XO7P9vawj1M22yP4Z6qFjnnZnvPsnmfklGsq4py0ybna
+        mzrVgr1pLOSSMO4V4VEroHHOWyTKeHDUckLl0DznOndomsbCp1oo2WauT+mAuaPJeDRwDwPmDikb
+        971Rz+Ne151MBgEb+pOx1xsHExaMBnzIet0e7wWDnt+bDDt+nrdIwpmgRy0aQ4mMx0etXK9jnkec
+        6xZxZi8TK6Va80zuyjfqDyZBl048F//2e9wd9scup+PA6/kj5nYnPOj22OGw3x8eBnzMJv2ADviI
+        doMJ9yd+72Xy7U1zPxOpfiBinvnPGs71+91hzxvSER3Sw74b9Hqee8j8QeDT0fjQH7BJtzce9bnn
+        TQ4ZbNdnvUkw8Iee79LeaNK5y1uzqVPyhYV++V8RkF8uzn6vjrwS6KEIsfAc1m/3O25n2EmEbMM0
+        Po7JC0ZD8BiywSAYs8Dv9ruHk0FviJPsTgb9Sc/1goBOIPCAMzYajgddf+KOB95jObhkIvjdNNtt
+        I1SoycUZmfw+MwP/39K12xsJjTA14stDjVSm/UIT4Sv5BMD8rBA5b7vDw14XMtHR0B2Mu3w4HNDh
+        ALDyRh4feW6/PxqMAG53MuLjAYA2CIaDwB2P++OxN+xPOiDfMqB2Sg+deoqtiWDAl6cKAMqPwbDu
+        YZ6Jeztt1i28sFXZsB42VHhWjW5mKiLlJHqcZosgVlTbhVPaUC8VKYcVOIBupdiidBGrULVmf5Fe
+        nv46dajd2qDeXCrpfUlayNTYEJRyG2sWWiQ81zRJW0TShO+Mt4hepxiKBGMcRr+ncYEuDNsf9N1R
+        t2f8a6NYEdeci3xHZczFYqtznO7MNfQ1ATRHBA1Vx2eOXUk0zUKuj1oLDwF02Zpdcc7IO0z9d6Xy
+        hgoA+oDulqtfZBmXemEkKxG0u3RHjP9qPbVtYcxDWKZSplYAf5apVbskRRnc4YE4D42CyB9R6XO2
+        qEmQ0qz7j3dVwj89sSOqQYimnpOsS/w7pemvMckhuc/zJ8V62l5P2M1ArNBPGKshSbU0F6FcWBdp
+        +GahI6eiYUEHHLZrmnNsIGj9QQmnThE/OOeddeX8XumGW0zCSnnTDaEjBNqvwkbpiW0sam8cbr/e
+        +hxcd91zdn1xffbx4upsbhR6RrZnuXJ5LzIlE6DtZYybG1qzs6svFzefri7Prm5/ij0NX8y4XNqa
+        HZ+/iFnrCWbGXVrP8Kr4VZNPuRthVNO2VmEY8+2K1sZ5Z8enlxdXTcE2dLdw2BCGAQvkDcrQsu0f
+        YB0alQvTjOewgo2tdcTfsZHRcAcbddOIVdrpj1LTPEljqg2127r589RgyECEC2Surdlb2ya/XX78
+        s/Sc8vKAb5eJbEm5yOzmnydughrU/myC97xIEpqtf4aYsuGokjcWJYw/HWOQvC27Py9iSFlo0hDL
+        Y/GA+pmkXoxr69wuIteZuhdwhj/BzqP+ssA9emJ/f55OGhehkAagZeNPUIIkCA2LjKcqF1plgueO
+        5CuQLmfITWNmy+eRk+2E9+2a7Xgzx+EIC9kCGUxOIX648FUhdZV8bHKwMgJVq3i5Jt/e8Tuz5R0x
+        dbD3RzRMtocSwhQaiCUihzuu30gl+a/P0C13NGiXKta5dplnaf5dO3f0npajjVD0WYu4Y1M+yl4F
+        hfTNYbx6Tf7RsB+MTY7v6PcbHmSm/Mle7ZvjKV3SqfVD0q3k/gGRRRwf7OwnhH/nyLD5RWJLKs3j
+        9Ruis4If7KyiASxcMXlDtsL848FZ3v2t4Nn6FVN+YW6p1x2diTCEWFWKaa6EWEftWrJ2VtJs+wrh
+        jWvOWq9/3aH5z0bvn425TbtRTFRWrn63aTrAuNAK/6X1Se03xvaJLbaPWnMf4I+JVuQWK2f46wHF
+        kt32KGsO+7YQQDjU0LmR2zVRu8XrKkOWDrxa2R4PP7iGGyQC/ETNbXyRUslbW80fOlZD4Cah1Gzd
+        qVKmkTvbfYhAMeTOmoo3FS5Lobahs3G7R4QuZKBKKtWbhwmINa2pNjbb9rIGE81m56p+F/mCmAmo
+        vZk6mu2ucUedSadLXvUPe4dtVOdjFwVgcEjdgecOx93uqNcfsUnAaH8w6no+RR3PvNdNOmhnz4rw
+        /ssluX+eeWfc6S5c130xvU9za5EssUH1CZIfhSy+k0Fn0HEP24ny1i8m/Tk3piU54jEnQhKaaRFQ
+        X+dkE5nXTzAc9Dp9cn7yYjanyME8moORH/GE/sg6oy4O4HnbOI3TnzobYGxhvAsooOGW06QJpqiH
+        OybXhEpGqsuKJDzx7A2LyWpZOruNMElSrhBeYBh+QFRGInrPice5PCApjEVUQHTECfho8CGvjA3j
+        NKIe16imY2yBq7zuTJ10S/hYgndEyYdM5BHaB+RYFnlEbmhCpUAvo/cC0s0jkaiQAshyCQNKmuFP
+        mlKzQiwpmK4povKJ8rw1uVKZViD1NqKMfKU6QmSoBsAG1ylldXuu+T2X+Xbytsgkzw7gwDzFRnJu
+        qEiW0UQVMQQ6p4p8NL8ihpkQ5S45JqU6IO8K8oFi5t2//7Wkktz8+19YEB6Q9xS1xh1dkznEiNDn
+        ATnhS56bppRr8lVJs4z/HSQSHCLaipNLJWlkDPJeSXIrstzY+X0hqTDWoIbQWmlRU/0IUQsqkdkL
+        2/lGZVSYZrHk5ARFANf6gFzCqLDutYhjvqKZGch8RY49kdv20mobmja0XSJn9CO6RJeRY6Q1Z3f0
+        7wfkyh7ZskA2WZ4TLGwEvcb9K8kHbGI0y8shHB8AQk7NAWKWooBlhu91JlBjk0tYR8iqu0YnMWb5
+        m7BGtoLYNpRhquxJ/LGK3dAwKgx6jK0hxbJEENqqmsSZkZMISCnFu6F3uCPJZQHYxDGtB+4NlMgx
+        BnOarDEq/OUaZgOLOfUBHaNPBCVwzGZIagUq5+QdDxk3AxmF5gXANze85JrC3PCDtRkQcWqwGTd6
+        V8WSGu7zaIU7gsxx6xqEGklxQPOMc6AHqe8XynClZUYMg3AzNIe4lFVDEvbMyeeUsmhN7YjR9woi
+        rI22tzAf+YYMhHwREuA7NcPGWmYgRTl3Tg04fyvIV4MYWDgk76iZ/qZCQT4U8ZJmxgP/J8IBnABk
+        Db9FaICXm6s6E16BwPijcGHDxGYtknlfGcMhj6c4a/NaZoIJh9eF6xcGDQZNjX+EOOrjO76GiU1M
+        OpZ3Bf6Cq8PcJ7bwJR9WxhonAjPXOACRGoT7S1X7+4lJqnnCRa6N279dSybIpdAIzibNO0X4YQYT
+        IH8KFGT0DvGDMTA4xcEhGGXwu1TDbmc4JnKqOOKH9Apj3HfGIWsgv6eIMuQ64IZ0Vve/idQ019I6
+        qbRBQUUSNJGgC260eg9PxFnORZLaOGX7uUHbynr6pTI/BY5QWR/WMOFf1So2TC55SE0vzlWCnoA3
+        85jcKE+UMe+KhjS7K+C1pm1ySMSwNOcHFtKWVZFv3fg4hyuVoLzZgs06F87PhEIYzfjzDXyRQhgA
+        2xzyjaqiH4UUN0Vq+Zj4YfwHdPgqMUSMo4kM0EVoEgbCiYnV98YotyrBdJzbMP7VmPW9qBq/IUKg
+        jgotVK29scTcaOYyAt11DcRVpJ4Go0lWzeJP8zl5a4uPt2aFinEpqjvua4u+bRL4H/LYQClgqY2q
+        oh2gYmI2VWkmtOWCTUJqe83n72oC8H3m+TtPEMHabs9+wSmS9ojE5rG3PYE6cZHI/GH+m25qK5Wu
+        UUxE2jxeVE3yFzP6K+l13dHzb7v1E7P5SKcjVWDjSmXLvIOiw4GdWOGb2rB6dd4vX533EQrs0q9m
+        6QFyN7/z5KvlR3iYzHEesBdM8yRXisws4vbzYFwuz52PF2/PruZn7V6n+/jF+9huqGkf1FkwwWIj
+        RGfqZc5jURDZcBnFBeP5brl+9ekW3KrvJQuJy9fni0DEvJOy4DF3YD9jbZMZrUmuAg1Qc8v2KY51
+        gk5+Lh/fpbkNlg2MvhxFg+dQhNRY1puFNK9y7RhxE9r5gsY/+jBQH6NeCfM102ImVMjjfdaqC8dq
+        bvMMUPdnT38fePTpQ+io8CrKPrN/bWiXkxvSVfellDNVpHknVArZlWXAHIheGEbtBhM7tn0eqbov
+        ZIJi37Awn2+qbycbuvU7QPmOtHmH3Rl9IRfjRhUTlSSFFHpdv2R1yo/tFc/6eWtT7NbPXS/jQ1NR
+        8dlQxND2GyDa/4GSfR8rPxzWBHY+I1YvIayss19Czfc1rqvO94aW5dD24ansPqY1dQz0t4XXw/g/
+        dcogXlZdL3iZQtJJihQ3A2LdkX1/qgLA53Lw1X71v0TECklQpHL9ZuIO+9YoqXCqmnEhUArnTq5p
+        zPcPyB/ZE6pFacH96gWokqZT/r6yo9tHoV1lq5+y+kTmB+DM9v4PBydBkuEhAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [text/html; charset=UTF-8]
+      Date: ['Fri, 09 Sep 2016 14:33:22 GMT']
+      ETag: ['"3b605a0447ea359b10217c7252ee0e80--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=1tc8k9i7fsjw31ndti4ok4jtlv;Path=/go;Expires=Fri, 23-Sep-2016
+          14:33:22 GMT;HttpOnly']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [50136cb0-3d84-478a-a356-f5aac0e83092]
+      X-Runtime: ['0.082000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
       Accept: [application/json]
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
+      Cookie: [JSESSIONID=1tc8k9i7fsjw31ndti4ok4jtlv]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/config/pipeline_groups
@@ -36,16 +127,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 02 Sep 2016 22:32:03 GMT']
+      Date: ['Fri, 09 Sep 2016 14:33:22 GMT']
       ETag: ['"3717d5e807e909ec1a38adc6bf079afa--gzip"']
-      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=nyvczecp8m261ewszqb6duw2a;Path=/go;Expires=Fri, 16-Sep-2016
-          22:32:03 GMT;HttpOnly']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [c796ebaa-1de0-47c1-9c2c-7748bfd1d13f]
-      X-Runtime: ['0.077000']
+      X-Request-Id: [07309c13-befb-4284-85af-c7c0fe660507]
+      X-Runtime: ['0.087000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
@@ -56,7 +144,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=nyvczecp8m261ewszqb6duw2a]
+      Cookie: [JSESSIONID=1tc8k9i7fsjw31ndti4ok4jtlv]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/pipelines/Consumer_Website/history/0
@@ -96,13 +184,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 02 Sep 2016 22:32:03 GMT']
+      Date: ['Fri, 09 Sep 2016 14:33:22 GMT']
       ETag: ['"4ceee07200186432b5f5e0e9f1d37583--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [9877f896-88c1-4aa3-9d04-f584767620c7]
-      X-Runtime: ['0.481000']
+      X-Request-Id: [548de55e-66fb-47c3-8921-c11ef3df730c]
+      X-Runtime: ['0.288000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

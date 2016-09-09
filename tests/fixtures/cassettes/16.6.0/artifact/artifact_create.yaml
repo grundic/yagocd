@@ -1,10 +1,10 @@
 interactions:
 - request:
     body: !!binary |
-      LS0wN2IyYmRhZmJkNjg0M2RhYmRmODRjNmIzM2M2OTI1ZA0KQ29udGVudC1EaXNwb3NpdGlvbjog
+      LS02NzBhNjIyOTI5ODg0MWVmYWFlMTA4NjE4ZDhlNjFhYg0KQ29udGVudC1EaXNwb3NpdGlvbjog
       Zm9ybS1kYXRhOyBuYW1lPSJmaWxlIjsgZmlsZW5hbWU9ImFydGlmYWN0LnR4dCINCg0KU2FtcGxl
-      IHRlc3QgZGF0YS4KRm9vIGFuZCBCYXIuDQotLTA3YjJiZGFmYmQ2ODQzZGFiZGY4NGM2YjMzYzY5
-      MjVkLS0NCg==
+      IHRlc3QgZGF0YS4KRm9vIGFuZCBCYXIuDQotLTY3MGE2MjI5Mjk4ODQxZWZhYWUxMDg2MThkOGU2
+      MWFiLS0NCg==
     headers:
       Accept: [application/vnd.go.cd.v1+json]
       Accept-Encoding: ['gzip, deflate']
@@ -12,8 +12,8 @@ interactions:
       Confirm: ['true']
       Connection: [keep-alive]
       Content-Length: ['178']
-      Content-Type: [multipart/form-data; boundary=07b2bdafbd6843dabdf84c6b33c6925d]
-      Cookie: [JSESSIONID=1u4bd7sbnvn8v120nx3pe9qkzv]
+      Content-Type: [multipart/form-data; boundary=670a6229298841efaae108618d8e61ab]
+      Cookie: [JSESSIONID=1uvslg1lqgvcknt57u9ggr213]
       User-Agent: [python-requests/2.10.0]
     method: POST
     uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file.txt
@@ -23,6 +23,6 @@ interactions:
       Content-Language: [en-US]
       Content-Length: ['50']
       Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Fri, 02 Sep 2016 22:14:15 GMT']
+      Date: ['Fri, 09 Sep 2016 14:29:25 GMT']
     status: {code: 201, message: Created}
 version: 1

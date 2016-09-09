@@ -11,7 +11,7 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['63']
       Content-Type: [application/json]
-      Cookie: [JSESSIONID=1tthwfogg4jteh31hhkr2l98d]
+      Cookie: [JSESSIONID=1uvslg1lqgvcknt57u9ggr213]
       User-Agent: [python-requests/2.10.0]
     method: POST
     uri: http://localhost:8153/go/api/pipelines/TestSchedule-bfb99c42/schedule
@@ -24,12 +24,12 @@ interactions:
       Cache-Control: [no-cache]
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 02 Sep 2016 22:14:23 GMT']
+      Date: ['Fri, 09 Sep 2016 14:29:37 GMT']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [794ad18b-0fa9-4a80-b421-3c9f68456b85]
-      X-Runtime: ['0.032000']
+      X-Request-Id: [abb05120-d18b-4aeb-a1e4-8a052fdbd65c]
+      X-Runtime: ['0.282000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 202, message: Accepted}

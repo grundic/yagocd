@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=1eku3m5l9gnsw1j05j1burd57a]
+      Cookie: [JSESSIONID=x6npwujsri9k1sz8u1w97smdy]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/config/diff/3336409d194252e8c82799472196e70cbe4c7916/719be0bb99470b79fc48a949c24845f65a0fd8ef
@@ -20,13 +20,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Sat, 03 Sep 2016 12:43:39 GMT']
+      Date: ['Fri, 09 Sep 2016 14:25:50 GMT']
       ETag: ['"0cc51796189e5c7d55befca46d1f6c8d--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [04728b4a-acfd-4323-895c-498af82a0f11]
-      X-Runtime: ['0.289000']
+      X-Request-Id: [d186a489-9da2-4f61-b43e-ed5142de72b4]
+      X-Runtime: ['0.089000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

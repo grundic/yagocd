@@ -1,76 +1,34 @@
 interactions:
 - request:
-    body: null
-    headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=1xjv52m1hzwdxk2v98vr0nx1x]
-      User-Agent: [python-requests/2.10.0]
-    method: GET
-    uri: http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline
-  response:
-    body:
-      string: !!binary |
-        H4sIAAAAAAAAAKVVW2/TMBR+76+oAo+j0ZgmUCUexlQhELtolAmEKstxTlozx458KWxT/zvHbpI6
-        TXYRy1N8zufvnHznkvvReJwQweWNSabjezzh2YAo2hOeVxr8OVlZW03TVChGxUoZO31/eHyULlVK
-        K57SvOQyrXgFyAYmvaSalmA1v4P8srYmgXFzsA2TK/ZIFOScLNWE5emrhpQwJQu+7LIUXOYvTnYq
-        Mdead1RzJ4JmIIiFshLUgud8fX968f18vkmCHyTNBJA2Owx1w+USgQUVBgIm8OLNQTUCIuKXTohg
-        q7Zo0L4ov0ZoWtQR11wrWYK0ZE019/G3EJ95K4EB5jTEeQRzk8vZT3J9cvX55OPXWdI611S42jsO
-        7+PDt0cdpZ9LPzu7nD8a4QlWq91gzt9mp1ez+QAxSKZvKws5aUOsL37cnc6PP707MR/+J9z2G14Y
-        sS1bieXFYomBUtnbKlxfcrujpxYbJXMWTNTYaHdaNJ1tsLXxzsplE6ZKbGuWv8mhVKkBveYMzCRm
-        9MMGxnJJLVcy6rTaWXCBGfbttRx7VuqsIq7Kt00b64fOTFPJVj7NkhpPGvmMy0qVO5yZQom8DVgD
-        NnuqGUuXQ93d1CiHgjphv3nYTrsCLFuRWPFOgZkAKskfpf2kkpxrYFbp234zwxo0CWhXEaotLyiz
-        poejVaUVNkG3UE1VjWNYCpN0xVspXANNJXa30KlVM8+RdXEQQ5yJtkILad83jZhRrz60M0Z7/Mlv
-        le30jjUf0v2LypJOZtpJwiVWTTK/qZ20vdbx0vASlBt0Pb7dhnIK14bXUS/t2fm1n2RymPQge5tp
-        X8uOSNtPBaOcZk/VylJz84wPaLoF/gLrJ/fAMtjl4mUvelFqb0WNgTzpuRb7cRCrJGG+eGKgODUE
-        d01Jw/82qTSXFkvWyxhhQ/MVTXrzbJ4pt6XZE0rHA/oIDGe1AoQGLTsJNcEXe0vIahp+6sQqFesS
-        +rhdYJvRP3e+ZfpICQAA
-    headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Mon, 05 Sep 2016 08:51:23 GMT']
-      ETag: ['"530e5a63f87d14c5d42d59a11a8cfb41--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [abc5c43a-4f83-4279-9559-512957892908]
-      X-Runtime: ['0.078000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
-- request:
     body: !!binary |
-      eyJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbeyJzZWN1cmUiOiBmYWxzZSwgIm5hbWUiOiAiTVlf
-      VkFSSUFCTEUiLCAidmFsdWUiOiAiTVkgdmFsdWUgMTIzIn0sIHsic2VjdXJlIjogZmFsc2UsICJu
-      YW1lIjogIkVNUFRZX1ZBUklBQkxFIiwgInZhbHVlIjogIiJ9LCB7ImVuY3J5cHRlZF92YWx1ZSI6
-      ICJ2T1h6Q1Q1RzdBcz0iLCAic2VjdXJlIjogdHJ1ZSwgIm5hbWUiOiAiTVlfU0VDUkVUX1ZBUklB
-      QkxFIn0sIHsiZW5jcnlwdGVkX3ZhbHVlIjogInZPWHpDVDVHN0FzPSIsICJzZWN1cmUiOiB0cnVl
-      LCAibmFtZSI6ICJFTVBUWV9TRUNSRVRfVkFSSUFCTEUifV0sICJsYWJlbF90ZW1wbGF0ZSI6ICIk
-      e0NPVU5UfS1zb21lLW5ldy12YWx1ZSIsICJuYW1lIjogIlBhcmFtZXRyaXplZFBpcGVsaW5lIiwg
-      Il9saW5rcyI6IHsiZG9jIjogeyJocmVmIjogImh0dHA6Ly9hcGkuZ28uY2QvI3BpcGVsaW5lX2Nv
-      bmZpZyJ9LCAic2VsZiI6IHsiaHJlZiI6ICJodHRwOi8vbG9jYWxob3N0OjgxNTMvZ28vYXBpL2Fk
-      bWluL3BpcGVsaW5lcy9QYXJhbWV0cml6ZWRQaXBlbGluZSJ9LCAiZmluZCI6IHsiaHJlZiI6ICJo
-      dHRwOi8vbG9jYWxob3N0OjgxNTMvZ28vYXBpL2FkbWluL3BpcGVsaW5lcy86bmFtZSJ9fSwgInRp
-      bWVyIjogbnVsbCwgInRlbXBsYXRlIjogbnVsbCwgImVuYWJsZV9waXBlbGluZV9sb2NraW5nIjog
-      ZmFsc2UsICJ0cmFja2luZ190b29sIjogbnVsbCwgIm1hdGVyaWFscyI6IFt7InR5cGUiOiAiZ2l0
-      IiwgImF0dHJpYnV0ZXMiOiB7ImRlc3RpbmF0aW9uIjogbnVsbCwgImJyYW5jaCI6ICJtYXN0ZXIi
-      LCAidXJsIjogImh0dHBzOi8vZ2l0aHViLmNvbS9nb2NkLWRlbW8vc2VydmljZXMuZ2l0IiwgInN1
-      Ym1vZHVsZV9mb2xkZXIiOiBudWxsLCAibmFtZSI6IG51bGwsICJmaWx0ZXIiOiBudWxsLCAiYXV0
-      b191cGRhdGUiOiB0cnVlfX1dLCAic3RhZ2VzIjogW3siZW52aXJvbm1lbnRfdmFyaWFibGVzIjog
-      W10sICJuYW1lIjogImRlZmF1bHRTdGFnZSIsICJmZXRjaF9tYXRlcmlhbHMiOiB0cnVlLCAiYXBw
-      cm92YWwiOiB7InR5cGUiOiAic3VjY2VzcyIsICJhdXRob3JpemF0aW9uIjogeyJyb2xlcyI6IFtd
-      LCAidXNlcnMiOiBbXX19LCAibmV2ZXJfY2xlYW51cF9hcnRpZmFjdHMiOiBmYWxzZSwgImpvYnMi
-      OiBbeyJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbeyJzZWN1cmUiOiBmYWxzZSwgIm5hbWUiOiAi
-      RU5WX1ZBUl8xIiwgInZhbHVlIjogIiJ9XSwgInJlc291cmNlcyI6IFtdLCAibmFtZSI6ICJkZWZh
-      dWx0Sm9iIiwgInRpbWVvdXQiOiBudWxsLCAidGFza3MiOiBbeyJ0eXBlIjogImV4ZWMiLCAiYXR0
-      cmlidXRlcyI6IHsicnVuX2lmIjogWyJwYXNzZWQiXSwgIm9uX2NhbmNlbCI6IG51bGwsICJjb21t
-      YW5kIjogInByaW50ZW52IiwgIndvcmtpbmdfZGlyZWN0b3J5IjogbnVsbH19XSwgImFydGlmYWN0
-      cyI6IFtdLCAicnVuX2luc3RhbmNlX2NvdW50IjogbnVsbCwgInRhYnMiOiBbXSwgInByb3BlcnRp
-      ZXMiOiBudWxsfV0sICJjbGVhbl93b3JraW5nX2RpcmVjdG9yeSI6IGZhbHNlfV0sICJwYXJhbWV0
-      ZXJzIjogW119
+      eyJfbGlua3MiOiB7ImRvYyI6IHsiaHJlZiI6ICJodHRwOi8vYXBpLmdvLmNkLyNwaXBlbGluZV9j
+      b25maWcifSwgImZpbmQiOiB7ImhyZWYiOiAiaHR0cDovL2xvY2FsaG9zdDo4MTUzL2dvL2FwaS9h
+      ZG1pbi9waXBlbGluZXMvOm5hbWUifSwgInNlbGYiOiB7ImhyZWYiOiAiaHR0cDovL2xvY2FsaG9z
+      dDo4MTUzL2dvL2FwaS9hZG1pbi9waXBlbGluZXMvUGFyYW1ldHJpemVkUGlwZWxpbmUifX0sICJl
+      bmFibGVfcGlwZWxpbmVfbG9ja2luZyI6IGZhbHNlLCAidHJhY2tpbmdfdG9vbCI6IG51bGwsICJz
+      dGFnZXMiOiBbeyJjbGVhbl93b3JraW5nX2RpcmVjdG9yeSI6IGZhbHNlLCAibmV2ZXJfY2xlYW51
+      cF9hcnRpZmFjdHMiOiBmYWxzZSwgIm5hbWUiOiAiZGVmYXVsdFN0YWdlIiwgImFwcHJvdmFsIjog
+      eyJ0eXBlIjogInN1Y2Nlc3MiLCAiYXV0aG9yaXphdGlvbiI6IHsidXNlcnMiOiBbXSwgInJvbGVz
+      IjogW119fSwgImpvYnMiOiBbeyJ0aW1lb3V0IjogbnVsbCwgInRhc2tzIjogW3sidHlwZSI6ICJl
+      eGVjIiwgImF0dHJpYnV0ZXMiOiB7ImNvbW1hbmQiOiAicHJpbnRlbnYiLCAid29ya2luZ19kaXJl
+      Y3RvcnkiOiBudWxsLCAicnVuX2lmIjogWyJwYXNzZWQiXSwgIm9uX2NhbmNlbCI6IG51bGx9fV0s
+      ICJwcm9wZXJ0aWVzIjogbnVsbCwgIm5hbWUiOiAiZGVmYXVsdEpvYiIsICJyZXNvdXJjZXMiOiBb
+      XSwgInRhYnMiOiBbXSwgImFydGlmYWN0cyI6IFtdLCAicnVuX2luc3RhbmNlX2NvdW50IjogbnVs
+      bCwgImVudmlyb25tZW50X3ZhcmlhYmxlcyI6IFt7InZhbHVlIjogIiIsICJzZWN1cmUiOiBmYWxz
+      ZSwgIm5hbWUiOiAiRU5WX1ZBUl8xIn1dfV0sICJmZXRjaF9tYXRlcmlhbHMiOiB0cnVlLCAiZW52
+      aXJvbm1lbnRfdmFyaWFibGVzIjogW119XSwgIm5hbWUiOiAiUGFyYW1ldHJpemVkUGlwZWxpbmUi
+      LCAidGltZXIiOiBudWxsLCAicGFyYW1ldGVycyI6IFtdLCAibGFiZWxfdGVtcGxhdGUiOiAiJHtD
+      T1VOVH0tc29tZS1uZXctdmFsdWUiLCAibWF0ZXJpYWxzIjogW3sidHlwZSI6ICJnaXQiLCAiYXR0
+      cmlidXRlcyI6IHsibmFtZSI6IG51bGwsICJmaWx0ZXIiOiBudWxsLCAiZGVzdGluYXRpb24iOiBu
+      dWxsLCAidXJsIjogImh0dHBzOi8vZ2l0aHViLmNvbS9nb2NkLWRlbW8vc2VydmljZXMuZ2l0Iiwg
+      ImF1dG9fdXBkYXRlIjogdHJ1ZSwgInN1Ym1vZHVsZV9mb2xkZXIiOiBudWxsLCAiYnJhbmNoIjog
+      Im1hc3RlciJ9fV0sICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbeyJ2YWx1ZSI6ICJNWSB2YWx1
+      ZSAxMjMiLCAic2VjdXJlIjogZmFsc2UsICJuYW1lIjogIk1ZX1ZBUklBQkxFIn0sIHsidmFsdWUi
+      OiAiIiwgInNlY3VyZSI6IGZhbHNlLCAibmFtZSI6ICJFTVBUWV9WQVJJQUJMRSJ9LCB7ImVuY3J5
+      cHRlZF92YWx1ZSI6ICJ2T1h6Q1Q1RzdBcz0iLCAic2VjdXJlIjogdHJ1ZSwgIm5hbWUiOiAiTVlf
+      U0VDUkVUX1ZBUklBQkxFIn0sIHsiZW5jcnlwdGVkX3ZhbHVlIjogInZPWHpDVDVHN0FzPSIsICJz
+      ZWN1cmUiOiB0cnVlLCAibmFtZSI6ICJFTVBUWV9TRUNSRVRfVkFSSUFCTEUifV0sICJ0ZW1wbGF0
+      ZSI6IG51bGx9
     headers:
       Accept: [application/vnd.go.cd.v1+json]
       Accept-Encoding: ['gzip, deflate']
@@ -78,7 +36,7 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['1548']
       Content-Type: [application/json]
-      Cookie: [JSESSIONID=1xjv52m1hzwdxk2v98vr0nx1x]
+      Cookie: [JSESSIONID=1x101k33bnawj1v2yfa9ah4gnm]
       If-Match: ['"530e5a63f87d14c5d42d59a11a8cfb41--gzip"']
       User-Agent: [python-requests/2.10.0]
     method: PUT
@@ -104,13 +62,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Mon, 05 Sep 2016 08:51:23 GMT']
+      Date: ['Fri, 09 Sep 2016 14:24:05 GMT']
       ETag: ['"b20bfb95394e98c95ae0825568c38abc--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [f23b8be8-db98-4757-aa7c-d3f6b6e5b3d1]
-      X-Runtime: ['0.201000']
+      X-Request-Id: [f845a9c5-8d70-4a9b-9caa-b76a7fa147f7]
+      X-Runtime: ['0.331000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=tyd5diiqays9184hs2vezn1ln]
+      Cookie: [JSESSIONID=42py1h9d0li9w50reslg5z8u]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/jobs/1.xml
@@ -35,11 +35,11 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/xml; charset=utf-8]
-      Date: ['Fri, 02 Sep 2016 22:32:03 GMT']
+      Date: ['Fri, 09 Sep 2016 14:33:22 GMT']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [26f3fdb9-0dcc-4ee2-b73c-8eb6b0f4acfe]
-      X-Runtime: ['0.163000']
+      X-Request-Id: [d92c3043-e8ee-4bc4-9a83-dd1a0f02c853]
+      X-Runtime: ['0.091000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

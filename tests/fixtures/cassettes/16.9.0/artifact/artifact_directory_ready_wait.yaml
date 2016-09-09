@@ -1,0 +1,20 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/.zip
+  response:
+    body: {string: "PK\x03\x04\x14\0\b\b\b\0et)I\0\0\0\0\0\0\0\0\0\0\0\0\x03\0\0\0to/\x03\0PK\a\b\0\0\0\0\x02\0\0\0\0\0\0\0PK\x03\x04\x14\0\b\b\b\0et)I\0\0\0\0\0\0\0\0\0\0\0\0\a\0\0\0to/the/\x03\0PK\a\b\0\0\0\0\x02\0\0\0\0\0\0\0PK\x01\x02\x14\0\x14\0\b\b\b\0et)I\0\0\0\0\x02\0\0\0\0\0\0\0\x03\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0to/PK\x01\x02\x14\0\x14\0\b\b\b\0et)I\0\0\0\0\x02\0\0\0\0\0\0\0\a\0\0\0\0\0\0\0\0\0\0\0\0\03\0\0\0to/the/PK\x05\x06\0\0\0\0\x02\0\x02\0f\0\0\0j\0\0\0\0\0"}
+    headers:
+      Content-Language: [en-US]
+      Content-Type: [application/zip]
+      Date: ['Fri, 09 Sep 2016 14:35:13 GMT']
+    status: {code: 200, message: OK}
+version: 1

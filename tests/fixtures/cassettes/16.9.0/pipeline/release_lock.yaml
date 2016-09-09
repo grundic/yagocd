@@ -8,7 +8,7 @@ interactions:
       Confirm: ['true']
       Connection: [keep-alive]
       Content-Length: ['0']
-      Cookie: [JSESSIONID=bfhubnlf4hye169dfjp0lxbix]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
       User-Agent: [python-requests/2.10.0]
     method: POST
     uri: http://localhost:8153/go/api/pipelines/Deploy_UAT/releaseLock
@@ -21,13 +21,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Sat, 03 Sep 2016 08:21:50 GMT']
+      Date: ['Fri, 09 Sep 2016 14:35:27 GMT']
       ETag: ['"86115cc41905cb66dc5f9de524b9f19f--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [43fe4a2a-1ad9-4dbe-a33e-6481725c7485]
-      X-Runtime: ['0.036000']
+      X-Request-Id: [f277db1a-5028-4e56-8aaa-3806e1a346b5]
+      X-Runtime: ['0.014000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

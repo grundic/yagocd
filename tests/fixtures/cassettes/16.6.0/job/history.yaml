@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=94scbdnpiduenmymh4geym0f]
+      Cookie: [JSESSIONID=1uvslg1lqgvcknt57u9ggr213]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/jobs/Shared_Services/Commit/build/history/0
@@ -25,13 +25,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/json; charset=utf-8]
-      Date: ['Fri, 02 Sep 2016 22:14:21 GMT']
+      Date: ['Fri, 09 Sep 2016 14:29:31 GMT']
       ETag: ['"8cb450745c013d7e2af00c2cba71702b--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [7083e40d-564b-4fd9-9197-0b713bafb92a]
-      X-Runtime: ['0.031000']
+      X-Request-Id: [430a7463-8b1e-4102-9c7d-6b657aeb45e0]
+      X-Runtime: ['0.036000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

@@ -6,7 +6,7 @@ interactions:
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
-      Cookie: [JSESSIONID=15h8fki0vvtd1ke2uda8zr695]
+      Cookie: [JSESSIONID=9zpgo4k62mmvkx999zevrepf]
       User-Agent: [python-requests/2.10.0]
     method: GET
     uri: http://localhost:8153/go/api/admin/config/412f48f7e2ff254e47564a6852ed7a2e.xml
@@ -39,7 +39,7 @@ interactions:
       Content-Encoding: [gzip]
       Content-Length: ['1214']
       Content-Type: [text/xml]
-      Date: ['Sat, 03 Sep 2016 12:49:07 GMT']
+      Date: ['Fri, 09 Sep 2016 14:27:36 GMT']
       Vary: ['Accept-Encoding, User-Agent']
       X-CRUISE-CONFIG-MD5: [412f48f7e2ff254e47564a6852ed7a2e]
     status: {code: 200, message: OK}

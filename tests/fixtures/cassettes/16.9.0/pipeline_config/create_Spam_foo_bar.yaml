@@ -1,22 +1,22 @@
 interactions:
 - request:
     body: !!binary |
-      eyJncm91cCI6ICJmaXJzdCIsICJwaXBlbGluZSI6IHsidGVtcGxhdGUiOiBudWxsLCAiZW5hYmxl
-      X3BpcGVsaW5lX2xvY2tpbmciOiB0cnVlLCAic3RhZ2VzIjogW3siYXBwcm92YWwiOiB7ImF1dGhv
-      cml6YXRpb24iOiB7InVzZXJzIjogW10sICJyb2xlcyI6IFtdfSwgInR5cGUiOiAic3VjY2VzcyJ9
-      LCAibmV2ZXJfY2xlYW51cF9hcnRpZmFjdHMiOiBmYWxzZSwgImZldGNoX21hdGVyaWFscyI6IHRy
-      dWUsICJjbGVhbl93b3JraW5nX2RpcmVjdG9yeSI6IGZhbHNlLCAibmFtZSI6ICJkZWZhdWx0U3Rh
-      Z2UiLCAiam9icyI6IFt7InJlc291cmNlcyI6IFtdLCAicnVuX2luc3RhbmNlX2NvdW50IjogbnVs
-      bCwgIm5hbWUiOiAiZGVmYXVsdEpvYiIsICJ0aW1lb3V0IjogMCwgImVudmlyb25tZW50X3Zhcmlh
-      YmxlcyI6IFtdLCAidGFza3MiOiBbeyJhdHRyaWJ1dGVzIjogeyJ3b3JraW5nX2RpcmVjdG9yeSI6
-      IG51bGwsICJjb21tYW5kIjogImxzIiwgInJ1bl9pZiI6IFsicGFzc2VkIl19LCAidHlwZSI6ICJl
-      eGVjIn1dfV0sICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXX1dLCAibmFtZSI6ICJTcGFtX2Zv
-      b19iYXIiLCAibGFiZWxfdGVtcGxhdGUiOiAiJHtDT1VOVH0iLCAibWF0ZXJpYWxzIjogW3siYXR0
-      cmlidXRlcyI6IHsiYXV0b191cGRhdGUiOiB0cnVlLCAic2hhbGxvd19jbG9uZSI6IHRydWUsICJk
-      ZXN0aW5hdGlvbiI6ICJkZXN0IiwgImludmVydF9maWx0ZXIiOiBmYWxzZSwgIm5hbWUiOiBudWxs
-      LCAiZmlsdGVyIjogbnVsbCwgInVybCI6ICJnaXRAZ2l0aHViLmNvbTpzYW1wbGVfcmVwby9leGFt
-      cGxlLmdpdCIsICJicmFuY2giOiAibWFzdGVyIiwgInN1Ym1vZHVsZV9mb2xkZXIiOiBudWxsfSwg
-      InR5cGUiOiAiZ2l0In1dfX0=
+      eyJwaXBlbGluZSI6IHsiZW5hYmxlX3BpcGVsaW5lX2xvY2tpbmciOiB0cnVlLCAic3RhZ2VzIjog
+      W3siY2xlYW5fd29ya2luZ19kaXJlY3RvcnkiOiBmYWxzZSwgIm5ldmVyX2NsZWFudXBfYXJ0aWZh
+      Y3RzIjogZmFsc2UsICJuYW1lIjogImRlZmF1bHRTdGFnZSIsICJhcHByb3ZhbCI6IHsidHlwZSI6
+      ICJzdWNjZXNzIiwgImF1dGhvcml6YXRpb24iOiB7InVzZXJzIjogW10sICJyb2xlcyI6IFtdfX0s
+      ICJqb2JzIjogW3sidGltZW91dCI6IDAsICJ0YXNrcyI6IFt7InR5cGUiOiAiZXhlYyIsICJhdHRy
+      aWJ1dGVzIjogeyJjb21tYW5kIjogImxzIiwgIndvcmtpbmdfZGlyZWN0b3J5IjogbnVsbCwgInJ1
+      bl9pZiI6IFsicGFzc2VkIl19fV0sICJuYW1lIjogImRlZmF1bHRKb2IiLCAicmVzb3VyY2VzIjog
+      W10sICJydW5faW5zdGFuY2VfY291bnQiOiBudWxsLCAiZW52aXJvbm1lbnRfdmFyaWFibGVzIjog
+      W119XSwgImZldGNoX21hdGVyaWFscyI6IHRydWUsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBb
+      XX1dLCAibmFtZSI6ICJTcGFtX2Zvb19iYXIiLCAibGFiZWxfdGVtcGxhdGUiOiAiJHtDT1VOVH0i
+      LCAibWF0ZXJpYWxzIjogW3sidHlwZSI6ICJnaXQiLCAiYXR0cmlidXRlcyI6IHsic2hhbGxvd19j
+      bG9uZSI6IHRydWUsICJuYW1lIjogbnVsbCwgImludmVydF9maWx0ZXIiOiBmYWxzZSwgImZpbHRl
+      ciI6IG51bGwsICJkZXN0aW5hdGlvbiI6ICJkZXN0IiwgImJyYW5jaCI6ICJtYXN0ZXIiLCAiYXV0
+      b191cGRhdGUiOiB0cnVlLCAic3VibW9kdWxlX2ZvbGRlciI6IG51bGwsICJ1cmwiOiAiZ2l0QGdp
+      dGh1Yi5jb206c2FtcGxlX3JlcG8vZXhhbXBsZS5naXQifX1dLCAidGVtcGxhdGUiOiBudWxsfSwg
+      Imdyb3VwIjogImZpcnN0In0=
     headers:
       Accept: [application/vnd.go.cd.v2+json]
       Accept-Encoding: ['gzip, deflate']
@@ -24,7 +24,7 @@ interactions:
       Connection: [keep-alive]
       Content-Length: ['872']
       Content-Type: [application/json]
-      Cookie: [JSESSIONID=bdewkgj197t01uhwaifpkxae5]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
       User-Agent: [python-requests/2.10.0]
     method: POST
     uri: http://localhost:8153/go/api/admin/pipelines
@@ -58,12 +58,12 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
-      Date: ['Mon, 05 Sep 2016 21:48:23 GMT']
+      Date: ['Fri, 09 Sep 2016 14:35:24 GMT']
       ETag: ['"4a1d664d69f0b3aee0660419d173e901"']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [357c75b1-3a8a-4821-9588-741c3df77edf]
-      X-Runtime: ['0.441000']
+      X-Request-Id: [bdaeebe6-e95a-4dbd-bf13-a9add25678cb]
+      X-Runtime: ['0.199000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}
