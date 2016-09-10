@@ -42,6 +42,7 @@ from yagocd.resources.pipeline_config import PipelineConfigManager
 from yagocd.resources.property import PropertyManager
 from yagocd.resources.stage import StageManager
 from yagocd.resources.user import UserManager
+from yagocd.resources.version import VersionManager
 from yagocd.session import Session
 
 
@@ -199,3 +200,12 @@ class Yagocd(object):
         :rtype: yagocd.resources.user.UserManager
         """
         return UserManager(session=self._session)
+
+    @property
+    def versions(self):
+        """
+        Property for accessing ``VersionManager`` instance, which is used to get server info.
+
+        :rtype: yagocd.resources.version.VersionManager
+        """
+        return VersionManager(session=self._session)

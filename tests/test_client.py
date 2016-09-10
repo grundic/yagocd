@@ -29,8 +29,20 @@
 import pytest
 
 from yagocd import Yagocd
-from yagocd.resources import agent, artifact, configuration, feed, job, info, material, pipeline, property as prop, \
-    stage, user
+from yagocd.resources import (
+    agent,
+    artifact,
+    configuration,
+    feed,
+    job,
+    info,
+    material,
+    pipeline,
+    property as prop,
+    stage,
+    user,
+    version
+)
 
 
 class TestInit(object):
@@ -102,3 +114,6 @@ class TestManagers(object):
 
     def test_users(self, go_fixture):
         assert isinstance(go_fixture.users, user.UserManager)
+
+    def test_versions(self, go_fixture):
+        assert isinstance(go_fixture.versions, version.VersionManager)
