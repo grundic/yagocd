@@ -91,6 +91,9 @@ class TestManagers(object):
     def test_pipelines(self, go_fixture):
         assert isinstance(go_fixture.pipelines, pipeline.PipelineManager)
 
+    def test_pipeline_configs(self, go_fixture):
+        assert isinstance(go_fixture.pipeline_configs, pipeline.PipelineConfigManager)
+
     def test_properties(self, go_fixture):
         assert isinstance(go_fixture.properties, prop.PropertyManager)
 
