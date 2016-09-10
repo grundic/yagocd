@@ -32,6 +32,7 @@ import hashlib
 from six import string_types
 
 from tests import AbstractTestManager, ReturnValueMixin, ConfirmHeaderMixin, RequestContentTypeHeadersMixin
+from yagocd.resources import material
 from yagocd.resources import pipeline
 
 import mock
@@ -203,8 +204,8 @@ class TestGet(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin):
     @pytest.fixture()
     def expected_request_url(self):
         return '/go/api/pipelines/{name}/instance/{counter}'.format(
-                name=self.NAME, counter=self.COUNTER
-            )
+            name=self.NAME, counter=self.COUNTER
+        )
 
     @pytest.fixture()
     def expected_request_method(self):
@@ -390,8 +391,8 @@ class TestSchedule(
     @pytest.fixture()
     def expected_request_url(self, suffix, variables, secure_variables):
         return '/go/api/pipelines/{name}/schedule'.format(
-                name='{0}-{1}'.format(self.NAME, suffix)
-            )
+            name='{0}-{1}'.format(self.NAME, suffix)
+        )
 
     @pytest.fixture()
     def expected_request_method(self):
@@ -492,8 +493,8 @@ class TestScheduleWithInstance(
     @pytest.fixture()
     def expected_request_url(self, suffix, variables, secure_variables):
         return '/go/api/pipelines/{name}/history/0'.format(
-                name='{0}-{1}'.format(self.NAME, suffix)
-            )
+            name='{0}-{1}'.format(self.NAME, suffix)
+        )
 
     @pytest.fixture()
     def expected_request_method(self):
@@ -534,4 +535,35 @@ class TestScheduleWithInstance(
         return super(self.__class__, self).test_return_value(_execute_test_action, expected_return_value)
 
 
+class TestValueStreamMap(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin):
+    NAME = 'Automated_Tests'
+    COUNTER = 7
 
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
+        with my_vcr.use_cassette("pipeline/value_stream_map") as cass:
+            return cass, manager.value_stream_map(self.NAME, self.COUNTER)
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/pipelines/value_stream_map/{name}/{counter}.json'.format(name=self.NAME, counter=self.COUNTER)
+
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
+
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        return 'application/json'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return list
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
+            assert len(result) > 0
+            assert all(isinstance(i, (pipeline.PipelineInstance, material.ModificationEntity)) for i in result)
+
+        return check_value
