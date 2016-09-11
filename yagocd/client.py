@@ -39,6 +39,7 @@ from yagocd.resources.job import JobManager
 from yagocd.resources.material import MaterialManager
 from yagocd.resources.pipeline import PipelineManager
 from yagocd.resources.pipeline_config import PipelineConfigManager
+from yagocd.resources.plugin_info import PluginInfoManager
 from yagocd.resources.property import PropertyManager
 from yagocd.resources.stage import StageManager
 from yagocd.resources.user import UserManager
@@ -173,6 +174,15 @@ class Yagocd(object):
         :rtype: yagocd.resources.pipeline_config.PipelineConfigManager
         """
         return PipelineConfigManager(session=self._session)
+
+    @property
+    def plugin_info(self):
+        """
+        Property for accessing ``PluginInfoManager`` instance, which is used to manage pipeline configurations.
+
+        :rtype: yagocd.resources.plugin_info.PluginInfoManager
+        """
+        return PluginInfoManager(session=self._session)
 
     @property
     def properties(self):

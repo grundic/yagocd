@@ -38,6 +38,7 @@ from yagocd.resources import (
     info,
     material,
     pipeline,
+    plugin_info,
     property as prop,
     stage,
     user,
@@ -105,6 +106,9 @@ class TestManagers(object):
 
     def test_pipeline_configs(self, go_fixture):
         assert isinstance(go_fixture.pipeline_configs, pipeline.PipelineConfigManager)
+
+    def test_plugin_info(self, go_fixture):
+        assert isinstance(go_fixture.plugin_info, plugin_info.PluginInfoManager)
 
     def test_properties(self, go_fixture):
         assert isinstance(go_fixture.properties, prop.PropertyManager)
