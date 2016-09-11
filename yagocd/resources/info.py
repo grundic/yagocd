@@ -27,7 +27,9 @@
 ###############################################################################
 
 import re
+from distutils.version import LooseVersion
 
+from easydict import EasyDict
 # noinspection PyUnresolvedReferences
 from six.moves import html_parser
 
@@ -57,12 +59,12 @@ class AboutPageTableParser(html_parser.HTMLParser):
 class InfoManager(BaseManager):
     """
     Class for getting general information about GoCD server.
+    Mostly this class returns some system information about the
+    server and not assumed to be used often.
     @since: 14.3.0.
 
-    Right now this class just parses /about page, as there is no REST API for this purpose.
-    After it will be implemented, this class should be rewritten.
-
-    TODO: rewrite after https://github.com/gocd/gocd/issues/2202 would be fixed.
+    Right now this class just parses /about page, for more robust approach
+    you can use yagocd.resources.version.VersionManager class.
     """
 
     SERVER_VERSION_RE = re.compile(r'Server Version')
@@ -120,3 +122,32 @@ class InfoManager(BaseManager):
     @property
     def db_schema_version(self):
         return self._get_value(self.DB_SCHEMA_VERSION_RE)
+
+    def support(self):
+        """
+        Method for getting different server support information.
+        """
+        response = self._session.get(
+            path='{base_api}/support'.format(base_api=self.base_api),
+            headers={
+                'Accept': 'application/json',
+            },
+        )
+
+        if self._session.server_version <= LooseVersion('16.3.0'):
+            return response.text
+
+        return EasyDict(response.json())
+
+    def process_list(self):
+        """
+        Method for getting processes, executed by server.
+        """
+        response = self._session.get(
+            path='{base_api}/process_list'.format(base_api=self.base_api),
+            headers={
+                'Accept': 'application/json',
+            },
+        )
+
+        return EasyDict(response.json())

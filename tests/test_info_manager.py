@@ -25,7 +25,11 @@
 # THE SOFTWARE.
 #
 ###############################################################################
+from distutils.version import LooseVersion
 
+from six import string_types
+
+from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import info
 
 import mock
@@ -119,3 +123,65 @@ class TestDbSchemaVersion(BaseTestInfoManager):
                 assert result is not None
 
             assert len(cass.requests) == 1
+
+
+class TestSupport(BaseTestInfoManager, AbstractTestManager, ReturnValueMixin):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
+        with my_vcr.use_cassette("info/support") as cass:
+            return cass, manager.support()
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/support'
+
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
+
+    @pytest.fixture()
+    def expected_accept_headers(self, *args, **kwargs):
+        return 'application/json'
+
+    @pytest.fixture()
+    def expected_return_type(self, manager):
+        if manager._session.server_version <= LooseVersion('16.3.0'):
+            return string_types
+        return dict
+
+    @pytest.fixture()
+    def expected_return_value(self, manager, gocd_docker):
+        def check_value(result):
+            if manager._session.server_version <= LooseVersion('16.3.0'):
+                assert gocd_docker in result
+            else:
+                assert result["Go Server Information"]["Version"].startswith(gocd_docker)
+
+        return check_value
+
+
+class TestProcessList(BaseTestInfoManager, AbstractTestManager, ReturnValueMixin):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
+        with my_vcr.use_cassette("info/process_list") as cass:
+            return cass, manager.process_list()
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/process_list'
+
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
+
+    @pytest.fixture()
+    def expected_accept_headers(self, *args, **kwargs):
+        return 'application/json'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return dict
+
+    @pytest.fixture()
+    def expected_return_value(self, gocd_docker):
+        pytest.skip()

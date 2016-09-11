@@ -1,0 +1,34 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1kp5bdvkk1pvcdnz9x4cd9jns]
+      User-Agent: [python-requests/2.10.0]
+    method: GET
+    uri: http://localhost:8153/go/api/process_list
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKtWKijKT04tLtbNySwuUbKKjq0FALEVr0oTAAAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sun, 11 Sep 2016 15:09:16 GMT']
+      ETag: ['"5478c10ac51584fa46fcf9c75565d6ee--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=crrn9o8d3gciwj1xeu9fu1go;Path=/go;Expires=Sun, 25-Sep-2016
+          15:09:16 GMT;HttpOnly']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [7416b512-5ac6-4501-a3fb-561cc4cecfc9]
+      X-Runtime: ['0.005000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
