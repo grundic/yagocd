@@ -33,6 +33,7 @@ from yagocd.resources import BaseManager
 from yagocd.resources.agent import AgentManager
 from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.configuration import ConfigurationManager
+from yagocd.resources.environment import EnvironmentManager
 from yagocd.resources.feed import FeedManager
 from yagocd.resources.info import InfoManager
 from yagocd.resources.job import JobManager
@@ -120,6 +121,15 @@ class Yagocd(object):
         :rtype: yagocd.resources.configuration.ConfigurationManager
         """
         return ConfigurationManager(session=self._session)
+
+    @property
+    def environments(self):
+        """
+        Property for accessing ``EnvironmentManager`` instance, which is used to manage environments.
+
+        :rtype: yagocd.resources.environment.EnvironmentManager
+        """
+        return EnvironmentManager(session=self._session)
 
     @property
     def feeds(self):

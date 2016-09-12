@@ -34,6 +34,7 @@ from yagocd.resources import (
     artifact,
     configuration,
     feed,
+    environment,
     job,
     info,
     material,
@@ -91,6 +92,9 @@ class TestManagers(object):
 
     def test_feeds(self, go_fixture):
         assert isinstance(go_fixture.feeds, feed.FeedManager)
+
+    def environments(self, go_fixture):
+        assert isinstance(go_fixture.feeds, environment.EnvironmentManager)
 
     def test_jobs(self, go_fixture):
         assert isinstance(go_fixture.jobs, job.JobManager)

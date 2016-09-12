@@ -31,13 +31,13 @@ from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import version
 
 
-class BaseTestPipelineConfigManager(AbstractTestManager):
+class BaseManager(AbstractTestManager):
     @pytest.fixture()
     def manager(self, session_fixture):
         return version.VersionManager(session=session_fixture)
 
 
-class TestGet(BaseTestPipelineConfigManager, ReturnValueMixin):
+class TestGet(BaseManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("version/get") as cass:
