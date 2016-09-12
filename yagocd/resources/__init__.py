@@ -26,7 +26,6 @@
 # THE SOFTWARE.
 #
 ###############################################################################
-from collections import OrderedDict
 
 from easydict import EasyDict
 

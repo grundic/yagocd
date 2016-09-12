@@ -26,16 +26,16 @@
 #
 ###############################################################################
 
-import time
 import json
-
-from yagocd.resources import BaseManager, BaseNode
-from yagocd.resources.stage import StageInstance
-from yagocd.resources.material import ModificationEntity
-from yagocd.resources.pipeline_config import PipelineConfigManager
-from yagocd.util import YagocdUtil, since
+import time
 
 from easydict import EasyDict
+
+from yagocd.resources import BaseManager, BaseNode
+from yagocd.resources.material import ModificationEntity
+from yagocd.resources.pipeline_config import PipelineConfigManager
+from yagocd.resources.stage import StageInstance
+from yagocd.util import YagocdUtil, since
 
 
 @since('14.3.0')

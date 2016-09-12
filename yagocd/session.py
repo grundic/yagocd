@@ -27,10 +27,10 @@
 ###############################################################################
 
 import copy
-# noinspection PyUnresolvedReferences
-from six.moves.urllib.parse import urljoin
 
 import requests
+# noinspection PyUnresolvedReferences
+from six.moves.urllib.parse import urljoin
 
 
 class Session(object):
@@ -39,6 +39,7 @@ class Session(object):
     Instance of this class is created only once in the initialization of ``yagocd.client.Client`` and then passed
     as a parameter for all managers.
     """
+
     def __init__(self, auth, options):
         self._auth = auth
         self._options = options
