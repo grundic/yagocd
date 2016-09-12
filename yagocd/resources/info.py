@@ -134,7 +134,7 @@ class InfoManager(BaseManager):
             },
         )
 
-        if self._session.server_version <= LooseVersion('16.3.0'):
+        if LooseVersion(self._session.server_version) <= LooseVersion('16.3.0'):
             return response.text
 
         return EasyDict(response.json())
