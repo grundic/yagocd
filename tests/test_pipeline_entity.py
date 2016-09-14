@@ -31,6 +31,7 @@ import pytest
 
 from yagocd.resources import Base
 from yagocd.resources import pipeline
+from yagocd.resources.pipeline_config import PipelineConfigManager
 
 
 class TestPipelineEntity(object):
@@ -152,6 +153,18 @@ class TestPipelineEntity(object):
         assert parent_4.descendants == []
         assert (sorted(parent_4.get_descendants(True), key=lambda x: x.data.name) == [])
 
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.get')
+    def test_indexed_based_access(self, get_mock, pipeline_entity):
+        counter = 123
+        _ = pipeline_entity[counter]  # noqa
+        get_mock.assert_called_once_with(counter=counter, name=pipeline_entity.data.name)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.full_history')
+    def test_iterator_access(self, full_history_mock, pipeline_entity):
+        for _ in pipeline_entity:
+            pass
+        full_history_mock.assert_called_once_with(name=pipeline_entity.data.name)
+
     def test_get_url(self, pipeline_entity):
         assert (
             pipeline_entity.get_url('http://example.com', 'test_name') ==
@@ -160,6 +173,9 @@ class TestPipelineEntity(object):
 
     def test_url(self, pipeline_entity):
         assert pipeline_entity.url == 'http://example.com/go/tab/pipeline/history/pipeline_1'
+
+    def test_config(self, pipeline_entity):
+        assert isinstance(pipeline_entity.config, PipelineConfigManager)
 
     @mock.patch('yagocd.resources.pipeline.PipelineManager.history')
     def test_history_call(self, history_mock, pipeline_entity):
@@ -219,3 +235,12 @@ class TestPipelineEntity(object):
         pipeline_entity.schedule_with_instance()
         schedule_with_instance_mock.assert_called_with(name=pipeline_entity.data.name, materials=None, variables=None,
                                                        secure_variables=None, backoff=0.5, max_tries=20)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.value_stream_map')
+    def test_value_stream_map_call(self, value_stream_map_mock, pipeline_entity):
+        counter = mock.MagicMock()
+        pipeline_entity.value_stream_map(counter=counter)
+        value_stream_map_mock.assert_called_with(
+            name=pipeline_entity.data.name,
+            counter=counter
+        )

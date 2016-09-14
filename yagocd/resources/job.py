@@ -88,6 +88,12 @@ class JobInstance(Base):
         * get stage name/counter
         * list available artifacts
         * list available properties
+
+    As this class is a container for multiple entities like artifacts,
+    properties, so it doesn't have magic methods `__iter__` or `__getitem__`,
+    as they would be ambiguous about their operands. This class gives
+    access to those entities through the python properties, and each entity
+    could implement those magic methods as needed.
     """
 
     def __init__(self, session, data, stage):
@@ -179,7 +185,7 @@ class JobInstance(Base):
         return self._stage
 
     @property
-    def artifact(self):
+    def artifacts(self):
         """
         Property for accessing artifact manager of the current job.
 
@@ -196,7 +202,7 @@ class JobInstance(Base):
         )
 
     @property
-    def prop(self):
+    def properties(self):
         """
         Property for accessing property (doh!) manager of the current job.
 

@@ -214,6 +214,25 @@ class StageInstance(Base):
 
         self._manager = StageManager(session=self._session)
 
+    def __iter__(self):
+        """
+        Method for iterating over jobs of a current stage.
+
+        :return: arrays of jobs.
+        :rtype: list of yagocd.resources.job.JobInstance
+        """
+        return iter(self.jobs())
+
+    def __getitem__(self, name):
+        """
+        Method for accessing to specific job in array-like manner by name.
+
+        :param name: name of the job to get.
+        :return: found job or None.
+        :rtype: yagocd.resources.job.JobInstance
+        """
+        return self.job(name=name)
+
     @property
     def url(self):
         """
@@ -305,3 +324,15 @@ class StageInstance(Base):
             jobs.append(JobInstance(session=self._session, data=data, stage=self))
 
         return jobs
+
+    def job(self, name):
+        """
+        Method for searching specific job by it's name.
+
+        :param name: name of the job to search.
+        :return: found job or None.
+        :rtype: yagocd.resources.job.JobInstance
+        """
+        for job in self.jobs():
+            if job.data.name == name:
+                return job

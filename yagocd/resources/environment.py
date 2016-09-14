@@ -39,6 +39,23 @@ class EnvironmentManager(BaseManager):
     @since: 16.7.0.
     """
 
+    def __iter__(self):
+        """
+        Method add iterator protocol for the manager.
+
+        :rtype: (list of yagocd.resources.environment.EnvironmentConfig, str)
+        """
+        return iter(self.list()[0])
+
+    def __getitem__(self, name):
+        """
+        Method add possibility to get environment by the name using dictionary like syntax.
+
+        :param name: name of the environment to fetch.
+        :rtype: (yagocd.resources.environment.EnvironmentConfig, str)
+        """
+        return self.get(name=name)
+
     def list(self):
         """
         Lists all available environments.
@@ -58,7 +75,7 @@ class EnvironmentManager(BaseManager):
 
     def get(self, name):
         """
-        Gets plugin info for a specified plugin id.
+        Gets environment by the given name.
 
         :param name: name of the environment to fetch.
         :rtype: (yagocd.resources.environment.EnvironmentConfig, str)

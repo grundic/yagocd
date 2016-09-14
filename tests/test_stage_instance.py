@@ -43,6 +43,18 @@ class TestStageInstance(object):
         with my_vcr.use_cassette("stage/stage_instance_from_stage_history"):
             return stage.StageManager(session_fixture).history('Consumer_Website', 'Commit')[0]
 
+    @mock.patch('yagocd.resources.stage.StageInstance.job')
+    def test_indexed_based_access(self, job_mock, stage_instance_from_pipeline):
+        name = mock.MagicMock()
+        _ = stage_instance_from_pipeline[name]  # noqa
+        job_mock.assert_called_once_with(name=name)
+
+    @mock.patch('yagocd.resources.stage.StageInstance.jobs')
+    def test_iterator_access(self, jobs_mock, stage_instance_from_pipeline):
+        for _ in stage_instance_from_pipeline:
+            pass
+        jobs_mock.assert_called_once_with()
+
     def test_url_from_pipeline(self, stage_instance_from_pipeline):
         assert stage_instance_from_pipeline.url == '{server}go/pipelines/Consumer_Website/31/Commit/1'.format(
             server=stage_instance_from_pipeline._session._options['server']
@@ -88,3 +100,16 @@ class TestStageInstance(object):
     def test_jobs_return_type_from_stage(self, stage_instance_from_stage_history):
         jobs = stage_instance_from_stage_history.jobs()
         assert all(isinstance(j, job.JobInstance) for j in jobs)
+
+    @mock.patch('yagocd.resources.stage.StageInstance.jobs')
+    def test_job(self, stages_mock, stage_instance_from_pipeline):
+        foo = mock.MagicMock()
+        foo.data.name = 'foo'
+        bar = mock.MagicMock()
+        bar.data.name = 'bar'
+        baz = mock.MagicMock()
+        baz.data.name = 'baz'
+        stages_mock.return_value = [foo, bar, baz]
+
+        result = stage_instance_from_pipeline.job(name='baz')
+        assert result == baz

@@ -26,29 +26,20 @@
 #
 ###############################################################################
 import pytest
+from mock import mock
 from six import string_types
-# noinspection PyUnresolvedReferences
 from six.moves.urllib.parse import urlencode
 
 from tests import AbstractTestManager, ConfirmHeaderMixin, ReturnValueMixin
 from yagocd.resources import property
 
 
-class BaseTestPropertyManager(AbstractTestManager):
+class BaseTestPropertyManager(object):
     PIPELINE_NAME = 'Shared_Services'
     PIPELINE_COUNTER = 7
     STAGE_NAME = 'Commit'
     STAGE_COUNTER = '1'
     JOB_NAME = 'build'
-
-    def expected_request_url(self, *args, **kwargs):
-        raise NotImplementedError()
-
-    def expected_request_method(self, *args, **kwargs):
-        raise NotImplementedError()
-
-    def _execute_test_action(self, *args, **kwargs):
-        raise NotImplementedError()
 
     @pytest.fixture()
     def manager(self, session_fixture):
@@ -62,7 +53,7 @@ class BaseTestPropertyManager(AbstractTestManager):
         )
 
 
-class TestList(BaseTestPropertyManager, ReturnValueMixin):
+class TestList(AbstractTestManager, BaseTestPropertyManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("property/property_list") as cass:
@@ -103,7 +94,7 @@ class TestList(BaseTestPropertyManager, ReturnValueMixin):
         pytest.skip()
 
 
-class TestGet(BaseTestPropertyManager, ReturnValueMixin):
+class TestGet(AbstractTestManager, BaseTestPropertyManager, ReturnValueMixin):
     PROPERTY_NAME = 'cruise_pipeline_counter'
 
     @pytest.fixture()
@@ -141,14 +132,14 @@ class TestGet(BaseTestPropertyManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        return dict
+        return string_types
 
     @pytest.fixture()
     def expected_return_value(self):
         pytest.skip()
 
 
-class TestHistorical(BaseTestPropertyManager, ReturnValueMixin):
+class TestHistorical(AbstractTestManager, BaseTestPropertyManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("property/property_historical") as cass:
@@ -183,7 +174,7 @@ class TestHistorical(BaseTestPropertyManager, ReturnValueMixin):
         ]
 
 
-class TestCreate(BaseTestPropertyManager, ReturnValueMixin, ConfirmHeaderMixin):
+class TestCreate(AbstractTestManager, BaseTestPropertyManager, ReturnValueMixin, ConfirmHeaderMixin):
     PROPERTY_NAME = 'foo_bar_baz'
     PROPERTY_VALUE = 100500
 
@@ -235,3 +226,47 @@ class TestCreate(BaseTestPropertyManager, ReturnValueMixin, ConfirmHeaderMixin):
     def test_request_params(self, _execute_test_action):
         cass, result = _execute_test_action
         assert cass.requests[0].body.decode('ascii') == urlencode({'value': self.PROPERTY_VALUE})
+
+
+class TestMagicMethods(BaseTestPropertyManager):
+    @mock.patch('yagocd.resources.property.PropertyManager.list')
+    def test_len(self, list_mock, manager):
+        size = 17
+        list_mock.return_value = [mock.MagicMock] * size
+        assert len(manager) == size
+
+    @mock.patch('yagocd.resources.property.PropertyManager.list')
+    def test_contains(self, list_mock, manager):
+        list_mock.return_value = [1, 3, 5, 7]
+        assert 3 in manager
+        assert 2 not in manager
+
+    @mock.patch('yagocd.resources.property.PropertyManager.get')
+    def test_indexed_based_access(self, get_mock, manager):
+        name = mock.MagicMock()
+        _ = manager[name]  # noqa
+        get_mock.assert_called_once_with(name=name)
+
+    @mock.patch('yagocd.resources.property.PropertyManager.list')
+    def test_iterator_access(self, list_mock, manager):
+        for _ in manager:
+            pass
+        list_mock.assert_called_once_with()
+
+
+@mock.patch('yagocd.resources.property.PropertyManager.list')
+class TestDictionaryMethods(BaseTestPropertyManager):
+    def test_keys(self, list_mock, manager):
+        expected = mock.MagicMock(name='list')
+        list_mock.return_value.keys.return_value = expected
+        assert manager.keys() == expected
+
+    def test_values(self, list_mock, manager):
+        expected = mock.MagicMock(name='values')
+        list_mock.return_value.values.return_value = expected
+        assert manager.values() == expected
+
+    def test_items(self, list_mock, manager):
+        expected = mock.MagicMock(name='items')
+        list_mock.return_value.items.return_value = expected
+        assert manager.items() == expected

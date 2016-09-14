@@ -39,6 +39,8 @@ class PropertyManager(BaseManager):
     """
     The properties API allows managing of job properties.
     @since: 14.3.0.
+
+    This class implements dictionary like methods for similar use.
     """
 
     URL_TEMPLATE = '{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}'
@@ -79,6 +81,40 @@ class PropertyManager(BaseManager):
         self._stage_name = stage_name
         self._stage_counter = stage_counter
         self._job_name = job_name
+
+    def __len__(self):
+        return len(self.list())
+
+    def __iter__(self):
+        """
+        Method for iterating over all properties.
+
+        :return: dictionary of properties.
+        :rtype: dict[str, str]
+        """
+        return iter(self.list())
+
+    def __getitem__(self, name):
+        """
+        Method for accessing to specific property in array-like manner by name.
+        Method for downloading artifact or directory zip by given path.
+
+        :param name: name of property to get.
+        :return: single property as a dictionary.
+        """
+        return self.get(name=name)
+
+    def __contains__(self, key):
+        return key in self.list()
+
+    def keys(self):
+        return self.list().keys()
+
+    def values(self):
+        return self.list().values()
+
+    def items(self):
+        return self.list().items()
 
     def list(
         self,
@@ -133,7 +169,7 @@ class PropertyManager(BaseManager):
         job_name=None
     ):
         """
-        Gets a property by its name.
+        Gets a property value by it's name.
         :info: You can use keyword `latest` as a pipeline counter or a stage counter.
         @since: 14.3.0.
 
@@ -143,7 +179,7 @@ class PropertyManager(BaseManager):
         :param stage_name: name of the stage.
         :param stage_counter: stage counter.
         :param job_name: name of the job.
-        :return: single property as a dictionary.
+        :return: value of requested property.
         """
         assert self._pipeline_name or pipeline_name
         assert self._pipeline_counter or pipeline_counter
@@ -164,9 +200,10 @@ class PropertyManager(BaseManager):
         )
         text = StringIO(response.text)
         parsed = list(csv.reader(text))
-        properties = dict(zip(parsed[0], parsed[1]))
-
-        return properties
+        try:
+            return parsed[1][0]
+        except IndexError:
+            return None
 
     def historical(self, pipeline_name=None, stage_name=None, job_name=None, limit_pipeline=None, limit_count=None):
         """

@@ -134,25 +134,25 @@ class ReturnValueMixin(object):
 
     def test_return_type(self, _execute_test_action, expected_return_type):
         cass, result = _execute_test_action
-        if result is None:
-            assert expected_return_type is None
-            pytest.skip("Skipping checking return type as method is not returning anything")
-            return
 
         if callable(expected_return_type) and not inspect.isclass(expected_return_type):
             expected_return_type(result)
+        elif result is None:
+            assert expected_return_type is None
+            pytest.skip("Skipping checking return type as method is not returning anything")
+            return
         else:
             assert isinstance(result, expected_return_type)
 
     def test_return_value(self, _execute_test_action, expected_return_value):
         cass, result = _execute_test_action
-        if result is None:
-            assert expected_return_value is None
-            pytest.skip("Skipping checking return value as method is not returning anything")
-            return
 
         if callable(expected_return_value):
             expected_return_value(result)
+        elif result is None:
+            assert expected_return_value is None
+            pytest.skip("Skipping checking return value as method is not returning anything")
+            return
         else:
             assert result == expected_return_value
 

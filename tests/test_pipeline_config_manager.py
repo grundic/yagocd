@@ -30,17 +30,19 @@ import os
 from distutils.version import LooseVersion
 
 import pytest
+from mock import mock
 from six import string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import pipeline_config
 
 
-class BaseTestPipelineConfigManager(AbstractTestManager):
-    @pytest.fixture()
-    def manager(self, session_fixture):
-        return pipeline_config.PipelineConfigManager(session=session_fixture)
+@pytest.fixture()
+def manager(session_fixture):
+    return pipeline_config.PipelineConfigManager(session=session_fixture)
 
+
+class BaseTestPipelineConfigManager(AbstractTestManager):
     @pytest.fixture()
     def expected_accept_headers(self, server_version):
         if LooseVersion(server_version) <= LooseVersion('16.6.0'):
@@ -180,3 +182,11 @@ class TestDelete(BaseTestPipelineConfigManager, ReturnValueMixin):
     @pytest.fixture()
     def expected_return_value(self):
         return "Pipeline '{}' was deleted successfully.".format(self.PIPELINE_NAME)
+
+
+class TestMagicMethods(object):
+    @mock.patch('yagocd.resources.pipeline_config.PipelineConfigManager.get')
+    def test_indexed_based_access(self, get_mock, manager):
+        name = mock.MagicMock()
+        _ = manager[name]  # noqa
+        get_mock.assert_called_once_with(pipeline_name=name)

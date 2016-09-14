@@ -27,28 +27,19 @@
 ###############################################################################
 
 import pytest
+from mock import mock
 from six import string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import user
 
 
-class BaseTestUserManager(AbstractTestManager):
-    def expected_request_url(self, *args, **kwargs):
-        raise NotImplementedError()
-
-    def expected_request_method(self, *args, **kwargs):
-        raise NotImplementedError()
-
-    def _execute_test_action(self, *args, **kwargs):
-        raise NotImplementedError()
-
-    @pytest.fixture()
-    def manager(self, session_fixture):
-        return user.UserManager(session=session_fixture)
+@pytest.fixture()
+def manager(session_fixture):
+    return user.UserManager(session=session_fixture)
 
 
-class TestList(BaseTestUserManager, ReturnValueMixin):
+class TestList(AbstractTestManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("user/list") as cass:
@@ -74,7 +65,7 @@ class TestList(BaseTestUserManager, ReturnValueMixin):
         return check_value
 
 
-class TestGet(BaseTestUserManager, ReturnValueMixin):
+class TestGet(AbstractTestManager, ReturnValueMixin):
     USERNAME = 'admin'
 
     @pytest.fixture()
@@ -101,7 +92,7 @@ class TestGet(BaseTestUserManager, ReturnValueMixin):
 
 #
 #
-# class TestCreate(BaseTestUserManager):
+# class TestCreate(AbstractTestManager):
 #     OPTIONS = {
 #         'login_name': 'foobar',
 #         'enabled': True,
@@ -136,7 +127,7 @@ class TestGet(BaseTestUserManager, ReturnValueMixin):
 #             assert isinstance(result, user.UserEntity)
 
 
-class TestUpdate(BaseTestUserManager, ReturnValueMixin):
+class TestUpdate(AbstractTestManager, ReturnValueMixin):
     USERNAME = 'admin'
     OPTIONS = {
         'email': 'foo@bar.baz'
@@ -167,7 +158,7 @@ class TestUpdate(BaseTestUserManager, ReturnValueMixin):
         return check_value
 
 
-class TestDelete(BaseTestUserManager, ReturnValueMixin):
+class TestDelete(AbstractTestManager, ReturnValueMixin):
     USERNAME = 'user_02'
 
     @pytest.fixture()
@@ -190,3 +181,17 @@ class TestDelete(BaseTestUserManager, ReturnValueMixin):
     @pytest.fixture()
     def expected_return_value(self):
         return "User '{}' was deleted successfully.".format(self.USERNAME)
+
+
+class TestMagicMethods(object):
+    @mock.patch('yagocd.resources.user.UserManager.get')
+    def test_indexed_based_access(self, get_mock, manager):
+        login = mock.MagicMock()
+        _ = manager[login]  # noqa
+        get_mock.assert_called_once_with(login=login)
+
+    @mock.patch('yagocd.resources.user.UserManager.list')
+    def test_iterator_access(self, list_mock, manager):
+        for _ in manager:
+            pass
+        list_mock.assert_called_once_with()

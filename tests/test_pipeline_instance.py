@@ -28,10 +28,12 @@
 import json
 
 import pytest
+from mock import mock
 
 from yagocd.resources import Base
 from yagocd.resources import pipeline
 from yagocd.resources import stage
+from yagocd.resources.pipeline_config import PipelineConfigManager
 
 
 class TestPipelineEntity(object):
@@ -39,6 +41,18 @@ class TestPipelineEntity(object):
     def pipeline_instance(self, mock_session):
         data = json.load(open('tests/fixtures/resources/pipeline/pipeline_instance.json'))
         return pipeline.PipelineInstance(session=mock_session, data=data)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineInstance.stage')
+    def test_indexed_based_access(self, stage_mock, pipeline_instance):
+        name = mock.MagicMock()
+        _ = pipeline_instance[name]  # noqa
+        stage_mock.assert_called_once_with(name=name)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineInstance.stages')
+    def test_iterator_access(self, stages_mock, pipeline_instance):
+        for _ in pipeline_instance:
+            pass
+        stages_mock.assert_called_once_with()
 
     def test_instance_is_not_none(self, pipeline_instance):
         assert pipeline_instance is not None
@@ -60,3 +74,27 @@ class TestPipelineEntity(object):
 
     def test_stages_instances(self, pipeline_instance):
         assert all(isinstance(i, stage.StageInstance) for i in pipeline_instance.stages())
+
+    @mock.patch('yagocd.resources.pipeline.PipelineInstance.stages')
+    def test_stage(self, stages_mock, pipeline_instance):
+        foo = mock.MagicMock()
+        foo.data.name = 'foo'
+        bar = mock.MagicMock()
+        bar.data.name = 'bar'
+        baz = mock.MagicMock()
+        baz.data.name = 'baz'
+        stages_mock.return_value = [foo, bar, baz]
+
+        result = pipeline_instance.stage(name='bar')
+        assert result == bar
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.value_stream_map')
+    def test_value_stream_map_call(self, value_stream_map_mock, pipeline_instance):
+        pipeline_instance.value_stream_map()
+        value_stream_map_mock.assert_called_with(
+            name=pipeline_instance.data.name,
+            counter=pipeline_instance.data.counter
+        )
+
+    def test_config(self, pipeline_instance):
+        assert isinstance(pipeline_instance.config, PipelineConfigManager)

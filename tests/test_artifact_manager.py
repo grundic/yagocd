@@ -37,21 +37,12 @@ from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import artifact
 
 
-class BaseTestArtifactManager(AbstractTestManager):
+class BaseTestArtifactManager(object):
     PIPELINE_NAME = 'Shared_Services'
     PIPELINE_COUNTER = 7
     STAGE_NAME = 'Commit'
     STAGE_COUNTER = '1'
     JOB_NAME = 'build'
-
-    def expected_request_url(self, *args, **kwargs):
-        raise NotImplementedError()
-
-    def expected_request_method(self, *args, **kwargs):
-        raise NotImplementedError()
-
-    def _execute_test_action(self, *args, **kwargs):
-        raise NotImplementedError()
 
     @pytest.fixture()
     def manager(self, session_fixture):
@@ -65,7 +56,7 @@ class BaseTestArtifactManager(AbstractTestManager):
         )
 
 
-class TestList(BaseTestArtifactManager, ReturnValueMixin):
+class TestList(AbstractTestManager, BaseTestArtifactManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("artifact/artifact_list") as cass:
@@ -106,7 +97,22 @@ class TestList(BaseTestArtifactManager, ReturnValueMixin):
         return check_value
 
 
-class TestDirectoryNotReady(BaseTestArtifactManager, ReturnValueMixin):
+class TestFile(BaseTestArtifactManager):
+    @mock.patch('yagocd.resources.artifact.ArtifactManager.directory')
+    def test_directory_is_executed(self, directory_mock, manager):
+        path = mock.MagicMock()
+        _ = manager.file(path=path)  # noqa
+        directory_mock.assert_called_once_with(
+            path=path,
+            pipeline_name=None,
+            pipeline_counter=None,
+            stage_name=None,
+            stage_counter=None,
+            job_name=None,
+        )
+
+
+class TestDirectoryNotReady(AbstractTestManager, BaseTestArtifactManager, ReturnValueMixin):
     TEST_METHOD_NAME = 'directory'
 
     DIRECTORY_PATH = 'path/to/the/.zip'
@@ -146,11 +152,14 @@ class TestDirectoryNotReady(BaseTestArtifactManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        return string_types, binary_type
+        return None
 
     @pytest.fixture()
     def expected_return_value(self, *args, **kwargs):
-        return b''
+        def check_value(result):
+            assert result is None
+
+        return check_value
 
 
 class TestDirectoryReady(TestDirectoryNotReady):
@@ -162,6 +171,10 @@ class TestDirectoryReady(TestDirectoryNotReady):
     @pytest.fixture()
     def expected_response_code(self, *args, **kwargs):
         return 200
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types, binary_type
 
     @pytest.fixture()
     def expected_return_value(self):
@@ -189,6 +202,10 @@ class TestDirectoryNotReadyWait(TestDirectoryNotReady):
         mock_directory.assert_called()
 
     @pytest.fixture()
+    def expected_return_type(self):
+        return string_types, binary_type
+
+    @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
             myzipfile = zipfile.ZipFile(BytesIO(result))
@@ -210,7 +227,7 @@ class TestDirectoryReadyWait(TestDirectoryNotReadyWait):
         return 200
 
 
-class TestCreate(BaseTestArtifactManager):
+class TestCreate(AbstractTestManager, BaseTestArtifactManager):
     PATH_TO_FILE = 'path/to/the/file.txt'
     FILE_CONTENT = 'Sample test data.\nFoo and Bar.'
 
@@ -262,7 +279,7 @@ class TestCreate(BaseTestArtifactManager):
         return 'File {0} was created successfully'.format(self.PATH_TO_FILE)
 
 
-class TestAppend(BaseTestArtifactManager, ReturnValueMixin):
+class TestAppend(AbstractTestManager, BaseTestArtifactManager, ReturnValueMixin):
     PATH_TO_FILE = 'path/to/the/file-append.txt'
     FILE_CONTENT = 'Data to append.'
 
@@ -308,3 +325,17 @@ class TestAppend(BaseTestArtifactManager, ReturnValueMixin):
     @pytest.fixture()
     def expected_return_value(self):
         return 'File {0} was appended successfully'.format(self.PATH_TO_FILE)
+
+
+class TestMagicMethods(BaseTestArtifactManager):
+    @mock.patch('yagocd.resources.artifact.ArtifactManager.directory_wait')
+    def test_indexed_based_access(self, directory_wait_mock, manager):
+        path = mock.MagicMock()
+        _ = manager[path]  # noqa
+        directory_wait_mock.assert_called_once_with(path=path)
+
+    @mock.patch('yagocd.resources.artifact.ArtifactManager.list')
+    def test_iterator_access(self, list_mock, manager):
+        for _ in manager:
+            pass
+        list_mock.assert_called_once_with()

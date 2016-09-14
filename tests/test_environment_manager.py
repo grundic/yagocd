@@ -26,17 +26,19 @@
 #
 ###############################################################################
 import pytest
+from mock import mock
 from six import string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import environment
 
 
-class BaseManager(AbstractTestManager):
-    @pytest.fixture()
-    def manager(self, session_fixture):
-        return environment.EnvironmentManager(session=session_fixture)
+@pytest.fixture()
+def manager(session_fixture):
+    return environment.EnvironmentManager(session=session_fixture)
 
+
+class BaseManager(AbstractTestManager):
     @pytest.fixture()
     def prepare_environment(self, manager, my_vcr):
         with my_vcr.use_cassette("environment/prepare"):
@@ -204,3 +206,17 @@ class TestDelete(BaseManager, ReturnValueMixin):
             assert result == "Environment '{}' was deleted successfully.".format(self.NAME)
 
         return check_value
+
+
+class TestMagicMethods(object):
+    @mock.patch('yagocd.resources.environment.EnvironmentManager.get')
+    def test_indexed_based_access(self, get_mock, manager):
+        name = mock.MagicMock()
+        _ = manager[name]  # noqa
+        get_mock.assert_called_once_with(name=name)
+
+    @mock.patch('yagocd.resources.environment.EnvironmentManager.list')
+    def test_iterator_access(self, list_mock, manager):
+        for _ in manager:
+            pass
+        list_mock.assert_called_once_with()

@@ -76,6 +76,25 @@ class ArtifactManager(BaseManager):
         self._stage_counter = stage_counter
         self._job_name = job_name
 
+    def __iter__(self):
+        """
+        Method for iterating over all artifacts.
+
+        :return: An array of :class:`yagocd.resources.artifact.Artifact`.
+        :rtype: list of yagocd.resources.artifact.Artifact
+        """
+        return iter(self.list())
+
+    def __getitem__(self, path):
+        """
+        Method for downloading artifact or directory zip by given path.
+
+        :param path: path to the file or directory zip
+        :return: the contents of the file you requested or
+        directory contents in the form of a zip file.
+        """
+        return self.directory_wait(path=path)
+
     def list(
         self,
         pipeline_name=None,
@@ -125,6 +144,38 @@ class ArtifactManager(BaseManager):
             artifacts.append(Artifact(session=self._session, data=data))
 
         return artifacts
+
+    def file(
+        self,
+        path,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+        job_name=None,
+    ):
+        """
+        Gets an artifact file by its path.
+        @since: 14.3.0.
+
+        :note: The `path_to_file` can be a nested file for e.g. `dist/foobar-widgets-1.2.0.jar`.
+
+        :param path: path to the file.
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
+        :return: the contents of the file you requested.
+        """
+        return self.directory(
+            path=path,
+            pipeline_name=pipeline_name,
+            pipeline_counter=pipeline_counter,
+            stage_name=stage_name,
+            stage_counter=stage_counter,
+            job_name=job_name
+        )
 
     def directory(
         self,
@@ -184,6 +235,9 @@ class ArtifactManager(BaseManager):
             ),
         )
 
+        if response.status_code == 202:
+            return None
+
         return response.content
 
     def directory_wait(
@@ -222,7 +276,7 @@ class ArtifactManager(BaseManager):
 
         while time_elapsed < timeout:
             directory_zip = self.directory(path, pipeline_name, pipeline_counter, stage_name, stage_counter, job_name)
-            if directory_zip:
+            if directory_zip is not None:
                 break
 
             time.sleep(min(backoff * (2 ** counter), max_wait))

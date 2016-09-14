@@ -49,6 +49,25 @@ class AgentManager(BaseManager):
         '16.7.0': 'application/vnd.go.cd.v2+json',
     }
 
+    def __iter__(self):
+        """
+        Method add iterator protocol for the manager.
+
+        :return: an array of agents.
+        :rtype: list of yagocd.resources.agent.AgentEntity
+        """
+        return iter(self.list())
+
+    def __getitem__(self, uuid):
+        """
+        Method add possibility to get agent by the uuid using dictionary like syntax.
+
+        :param uuid: uuid of the agent
+        :return: Agent entity.
+        :rtype: yagocd.resources.agent.AgentEntity
+        """
+        return self.get(uuid=uuid)
+
     def list(self):
         """
         Lists all available agents, these are agents that are present in the

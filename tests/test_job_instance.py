@@ -128,8 +128,8 @@ class TestJobInstance(object):
     ])
     def test_artifact(self, job_fixture_func, my_vcr, session_fixture):
         job_fixture = job_fixture_func(self, my_vcr, session_fixture)
-        assert job_fixture.artifact is not None, "Fixture: {}".format(job_fixture_func.__name__)
-        assert isinstance(job_fixture.artifact, artifact.ArtifactManager), "Fixture: {}".format(
+        assert job_fixture.artifacts is not None, "Fixture: {}".format(job_fixture_func.__name__)
+        assert isinstance(job_fixture.artifacts, artifact.ArtifactManager), "Fixture: {}".format(
             job_fixture_func.__name__)
 
     @pytest.mark.parametrize("job_fixture_func", [
@@ -139,5 +139,5 @@ class TestJobInstance(object):
     ])
     def test_property(self, job_fixture_func, my_vcr, session_fixture):
         job_fixture = job_fixture_func(self, my_vcr, session_fixture)
-        assert job_fixture.prop is not None, "Fixture: {}".format(job_fixture_func.__name__)
-        assert isinstance(job_fixture.prop, prop.PropertyManager), "Fixture: {}".format(job_fixture_func.__name__)
+        assert job_fixture.properties is not None, "Fixture: {}".format(job_fixture_func.__name__)
+        assert isinstance(job_fixture.properties, prop.PropertyManager), "Fixture: {}".format(job_fixture_func.__name__)

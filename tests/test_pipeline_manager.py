@@ -38,6 +38,11 @@ from yagocd.resources import material
 from yagocd.resources import pipeline
 
 
+@pytest.fixture()
+def manager(session_fixture):
+    return pipeline.PipelineManager(session=session_fixture)
+
+
 class BaseTestPipelineManager(object):
     @staticmethod
     def get_suffix(*args):
@@ -45,10 +50,6 @@ class BaseTestPipelineManager(object):
         m.update('|'.join([str(x) for x in args]).encode('utf-8'))
         m.hexdigest()
         return m.hexdigest()[:8]
-
-    @pytest.fixture()
-    def manager(self, session_fixture):
-        return pipeline.PipelineManager(session=session_fixture)
 
     @pytest.fixture()
     def mock_manager(self, mock_session):
@@ -565,3 +566,17 @@ class TestValueStreamMap(BaseTestPipelineManager, AbstractTestManager, ReturnVal
             assert all(isinstance(i, (pipeline.PipelineInstance, material.ModificationEntity)) for i in result)
 
         return check_value
+
+
+class TestMagicMethods(object):
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.find')
+    def test_indexed_based_access(self, find_mock, manager):
+        name = mock.MagicMock()
+        _ = manager[name]  # noqa
+        find_mock.assert_called_once_with(name=name)
+
+    @mock.patch('yagocd.resources.pipeline.PipelineManager.list')
+    def test_iterator_access(self, list_mock, manager):
+        for _ in manager:
+            pass
+        list_mock.assert_called_once_with()

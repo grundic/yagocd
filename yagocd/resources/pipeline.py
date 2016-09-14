@@ -44,6 +44,25 @@ class PipelineManager(BaseManager):
     @since: 14.3.0.
     """
 
+    def __iter__(self):
+        """
+        Method add iterator protocol for the manager.
+
+        :return: array of pipelines
+        :rtype: list of yagocd.resources.pipeline.PipelineEntity
+        """
+        return iter(self.list())
+
+    def __getitem__(self, name):
+        """
+        Method add possibility to get pipeline by the name using dictionary like syntax.
+
+        :param name: name of the pipeline
+        :return: if found - pipeline :class:`yagocd.resources.pipeline.PipelineEntity`, otherwise ``None``.
+        :rtype: yagocd.resources.pipeline.PipelineEntity
+        """
+        return self.find(name=name)
+
     @since('14.3.0')
     def list(self):
         """
@@ -394,6 +413,25 @@ class PipelineEntity(BaseNode):
         self._group = group
         self._pipeline = PipelineManager(session=session)
 
+    def __iter__(self):
+        """
+        Method for iterating over all instances of a current pipeline.
+
+        :return: an array of pipeline instances :class:`yagocd.resources.pipeline.PipelineInstance`.
+        :rtype: list of yagocd.resources.pipeline.PipelineInstance
+        """
+        return iter(self.full_history())
+
+    def __getitem__(self, counter):
+        """
+        Method for accessing to specific pipeline instance in array-like manner.
+
+        :param counter: pipeline counter.
+        :return: A pipeline instance object :class:`yagocd.resources.pipeline.PipelineInstance`.
+        :rtype: yagocd.resources.pipeline.PipelineInstance
+        """
+        return self.get(counter=counter)
+
     @property
     def group(self):
         """
@@ -559,6 +597,25 @@ class PipelineInstance(BaseNode):
         super(PipelineInstance, self).__init__(session, data)
         self._manager = PipelineManager(session=session)
 
+    def __iter__(self):
+        """
+        Method for iterating over stages of a current pipeline instance.
+
+        :return: arrays of stages
+        :rtype: list of yagocd.resources.stage.StageInstance
+        """
+        return iter(self.stages())
+
+    def __getitem__(self, name):
+        """
+        Method for accessing to specific stage in array-like manner by name.
+
+        :param name: name of the stage to search.
+        :return: found stage or None.
+        :rtype: yagocd.resources.stage.StageInstance
+        """
+        return self.stage(name=name)
+
     @property
     def url(self):
         """
@@ -589,6 +646,18 @@ class PipelineInstance(BaseNode):
             stages.append(StageInstance(session=self._session, data=data, pipeline=self))
 
         return stages
+
+    def stage(self, name):
+        """
+        Method for searching specific stage by it's name.
+
+        :param name: name of the stage to search.
+        :return: found stage or None.
+        :rtype: yagocd.resources.stage.StageInstance
+        """
+        for stage in self.stages():
+            if stage.data.name == name:
+                return stage
 
     def value_stream_map(self):
         return self._manager.value_stream_map(name=self.data.name, counter=self.data.counter)

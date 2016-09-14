@@ -38,13 +38,32 @@ class UserManager(BaseManager):
     @since: 15.2.0.
     """
 
+    def __iter__(self):
+        """
+        Method add iterator protocol for the manager.
+
+        :return: an array of user objects :class:`yagocd.resources.user.UserEntity`.
+        :rtype: list of yagocd.resources.user.UserEntity
+        """
+        return iter(self.list())
+
+    def __getitem__(self, login):
+        """
+        Method add possibility to get plugin info by the name using dictionary like syntax.
+
+        :param login: login name.
+        :return: a user object :class:`yagocd.resources.user.UserEntity`.
+        :rtype: yagocd.resources.user.UserEntity
+        """
+        return self.get(login=login)
+
     def list(self):
         """
         Lists all available users.
         @since: 15.2.0.
 
         :return: an array of user objects :class:`yagocd.resources.user.UserEntity`.
-        :rtype: yagocd.resources.user.UserEntity
+        :rtype: list of yagocd.resources.user.UserEntity
         """
         response = self._session.get(
             path='{base_api}/users'.format(base_api=self.base_api),

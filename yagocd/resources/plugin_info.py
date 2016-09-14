@@ -37,6 +37,23 @@ class PluginInfoManager(BaseManager):
     @since: 16.7.0.
     """
 
+    def __iter__(self):
+        """
+        Method add iterator protocol for the manager.
+
+        :rtype: list of yagocd.resources.plugin_info.PluginInfo
+        """
+        return iter(self.list())
+
+    def __getitem__(self, name):
+        """
+        Method add possibility to get plugin info by the name using dictionary like syntax.
+
+        :param name: id or name of the plugin to get the info.
+        :rtype: yagocd.resources.plugin_info.PluginInfo
+        """
+        return self.get(name=name)
+
     def list(self):
         """
         Lists all available plugin info.

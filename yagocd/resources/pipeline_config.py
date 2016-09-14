@@ -50,6 +50,16 @@ class PipelineConfigManager(BaseManager):
         super(PipelineConfigManager, self).__init__(session)
         self._pipeline_name = pipeline_name
 
+    def __getitem__(self, pipeline_name):
+        """
+        Method add possibility to get pipeline config by the name using dictionary like syntax.
+
+        :param pipeline_name: name of the pipeline.
+        :return: tuple of pipeline config object and current ETag value.
+        :rtype: (dict, str)
+        """
+        return self.get(pipeline_name=pipeline_name)
+
     def get(self, pipeline_name=None):
         """
         Gets pipeline config for specified pipeline name.

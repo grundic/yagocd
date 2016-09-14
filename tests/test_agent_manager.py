@@ -36,6 +36,11 @@ from tests import AbstractTestManager, RequestContentTypeHeadersMixin, ReturnVal
 from yagocd.resources import agent, job
 
 
+@pytest.fixture()
+def manager(session_fixture):
+    return agent.AgentManager(session=session_fixture)
+
+
 class BaseTestAgentManager(AbstractTestManager):
     @pytest.fixture()
     def expected_request_url(self, *args, **kwargs):
@@ -48,10 +53,6 @@ class BaseTestAgentManager(AbstractTestManager):
     @pytest.fixture()
     def _execute_test_action(self, *args, **kwargs):
         raise NotImplementedError()
-
-    @pytest.fixture()
-    def manager(self, session_fixture):
-        return agent.AgentManager(session=session_fixture)
 
     @pytest.fixture()
     def first_agent_uuid(self, manager, my_vcr):
@@ -255,3 +256,17 @@ class TestJobHistory(BaseTestAgentManager, ReturnValueMixin):
             assert all(isinstance(i, job.JobInstance) for i in result)
 
         return check_value
+
+
+class TestMagicMethods(object):
+    @mock.patch('yagocd.resources.agent.AgentManager.get')
+    def test_indexed_based_access(self, get_mock, manager):
+        uuid = mock.MagicMock()
+        _ = manager[uuid]  # noqa
+        get_mock.assert_called_once_with(uuid=uuid)
+
+    @mock.patch('yagocd.resources.agent.AgentManager.list')
+    def test_iterator_access(self, list_mock, manager):
+        for _ in manager:
+            pass
+        list_mock.assert_called_once_with()
