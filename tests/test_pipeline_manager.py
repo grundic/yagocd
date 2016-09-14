@@ -25,19 +25,17 @@
 # THE SOFTWARE.
 #
 ###############################################################################
-
-import time
 import hashlib
-
-from six import string_types
-
-from tests import AbstractTestManager, ReturnValueMixin, ConfirmHeaderMixin, RequestContentTypeHeadersMixin
-from yagocd.resources import material
-from yagocd.resources import pipeline
+import time
 
 import mock
 import pytest
 from requests import HTTPError
+from six import string_types
+
+from tests import AbstractTestManager, ConfirmHeaderMixin, RequestContentTypeHeadersMixin, ReturnValueMixin
+from yagocd.resources import material
+from yagocd.resources import pipeline
 
 
 class BaseTestPipelineManager(object):
@@ -472,7 +470,7 @@ class TestScheduleWithInstance(
                 with my_vcr.use_cassette("pipeline/schedule-instance-prepare-{0}".format(suffix)):
                     pipeline_instance = manager.last(pipeline_name)
                     while pipeline_instance and not pipeline_instance.data.can_run:
-                        print("Sleeping...")
+                        print("Sleeping...")  # noqa
                         time.sleep(10)
                         pipeline_instance = manager.last(pipeline_name)
 

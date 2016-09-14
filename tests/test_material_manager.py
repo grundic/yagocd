@@ -28,10 +28,8 @@
 
 import pytest
 from six import string_types
-# noinspection PyUnresolvedReferences
-from six.moves.urllib.parse import urlencode
 
-from tests import AbstractTestManager, ReturnValueMixin, ConfirmHeaderMixin
+from tests import AbstractTestManager, ConfirmHeaderMixin, ReturnValueMixin
 from yagocd.resources import material
 
 
@@ -91,8 +89,8 @@ class TestModifications(BaseTestConfigurationManager, ReturnValueMixin):
     @pytest.fixture()
     def expected_request_url(self):
         return '/go/api/materials/{0}/modifications/{1}'.format(
-                self.FINGERPRINT, 0
-            )
+            self.FINGERPRINT, 0
+        )
 
     @pytest.fixture()
     def expected_request_method(self):
@@ -112,6 +110,7 @@ class TestModifications(BaseTestConfigurationManager, ReturnValueMixin):
             assert all(isinstance(i, material.ModificationEntity) for i in result)
 
         return check_value
+
 
 #
 # class TestNotifySvn(BaseTestConfigurationManager):

@@ -32,7 +32,7 @@ import mock
 import pytest
 from six import string_types
 
-from tests import AbstractTestManager, ReturnValueMixin, RequestContentTypeHeadersMixin
+from tests import AbstractTestManager, RequestContentTypeHeadersMixin, ReturnValueMixin
 from yagocd.resources import agent, job
 
 

@@ -25,7 +25,6 @@
 # THE SOFTWARE.
 #
 ###############################################################################
-
 import json
 import time
 
@@ -35,7 +34,7 @@ from yagocd.resources import BaseManager, BaseNode
 from yagocd.resources.material import ModificationEntity
 from yagocd.resources.pipeline_config import PipelineConfigManager
 from yagocd.resources.stage import StageInstance
-from yagocd.util import YagocdUtil, since
+from yagocd.util import since, YagocdUtil
 
 
 @since('14.3.0')

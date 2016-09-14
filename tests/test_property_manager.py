@@ -30,7 +30,7 @@ from six import string_types
 # noinspection PyUnresolvedReferences
 from six.moves.urllib.parse import urlencode
 
-from tests import AbstractTestManager, ReturnValueMixin, ConfirmHeaderMixin
+from tests import AbstractTestManager, ConfirmHeaderMixin, ReturnValueMixin
 from yagocd.resources import property
 
 

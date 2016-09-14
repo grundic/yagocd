@@ -26,9 +26,9 @@
 #
 ###############################################################################
 
-from yagocd.resources import pipeline, stage, job, artifact, property as prop
-
 import pytest
+
+from yagocd.resources import artifact, job, pipeline, property as prop, stage
 
 
 class TestJobInstance(object):
@@ -102,7 +102,8 @@ class TestJobInstance(object):
     ])
     def test_url(self, job_fixture_func, my_vcr, session_fixture):
         job_fixture = job_fixture_func(self, my_vcr, session_fixture)
-        assert job_fixture.url == self.URL.format(server=job_fixture._session._options['server']), "Fixture: {}".format(job_fixture_func.__name__)
+        assert job_fixture.url == self.URL.format(server=job_fixture._session._options['server']), "Fixture: {}".format(
+            job_fixture_func.__name__)
 
     @pytest.mark.parametrize("job_fixture_func", [
         job_instance_from_pipeline,
@@ -128,7 +129,8 @@ class TestJobInstance(object):
     def test_artifact(self, job_fixture_func, my_vcr, session_fixture):
         job_fixture = job_fixture_func(self, my_vcr, session_fixture)
         assert job_fixture.artifact is not None, "Fixture: {}".format(job_fixture_func.__name__)
-        assert isinstance(job_fixture.artifact, artifact.ArtifactManager), "Fixture: {}".format(job_fixture_func.__name__)
+        assert isinstance(job_fixture.artifact, artifact.ArtifactManager), "Fixture: {}".format(
+            job_fixture_func.__name__)
 
     @pytest.mark.parametrize("job_fixture_func", [
         job_instance_from_pipeline,

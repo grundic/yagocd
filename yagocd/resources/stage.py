@@ -25,8 +25,7 @@
 # THE SOFTWARE.
 #
 ###############################################################################
-
-from yagocd.resources import BaseManager, Base
+from yagocd.resources import Base, BaseManager
 from yagocd.resources.job import JobInstance
 from yagocd.util import since
 

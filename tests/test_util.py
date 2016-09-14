@@ -25,11 +25,11 @@
 # THE SOFTWARE.
 #
 ###############################################################################
+import pytest
 from mock import mock
 
 from yagocd.resources import pipeline
-from yagocd.util import YagocdUtil, since
-import pytest
+from yagocd.util import since, YagocdUtil
 
 
 class TestBuildGraph(object):

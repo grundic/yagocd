@@ -25,18 +25,18 @@
 # THE SOFTWARE.
 #
 ###############################################################################
-
-import os
-import sys
-import time
 import copy
+import os
 import shutil
 import subprocess
+import sys
+import time
 
 import mock
 import pytest
 import requests
 from vcr import VCR
+
 from yagocd import Yagocd
 from yagocd.session import Session
 
@@ -131,19 +131,21 @@ def gocd_docker(request, use_docker, fresh_run):
     if fresh_run:
         cassette_library_dir = os.path.join(root_cassette_library_dir, request.param)
         if os.path.exists(cassette_library_dir):
-            print("Removing existing cassettes...")
+            print("Removing existing cassettes from '{}'...".format(cassette_library_dir))  # noqa
             shutil.rmtree(cassette_library_dir)
 
-    print('')
-    print('*' * 47)
-    print('********** Using GoCD version {} **********'.format(request.param))
-    print('*' * 47)
+    print(
+        '\n',
+        '*' * 47 + '\n',
+        '********** Using GoCD version {} **********\n'.format(request.param),
+        '*' * 47 + '\n',
+    )  # noqa
 
     return request.param
 
 
 def start_container(version_tag):
-    print('Starting Docker container [{} version]...'.format(version_tag))
+    print('Starting Docker container [{} version]...'.format(version_tag))  # noqa
     output = subprocess.check_output([
         "/usr/local/bin/docker",
         "ps",

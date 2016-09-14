@@ -26,10 +26,10 @@
 #
 ###############################################################################
 
-from yagocd.resources import pipeline, stage, job
-
 import mock
 import pytest
+
+from yagocd.resources import job, pipeline, stage
 
 
 class TestStageInstance(object):

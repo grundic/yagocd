@@ -27,13 +27,12 @@
 ###############################################################################
 from distutils.version import LooseVersion
 
+import mock
+import pytest
 from six import string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import info
-
-import mock
-import pytest
 
 
 class BaseTestInfoManager(object):

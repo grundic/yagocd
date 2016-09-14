@@ -26,7 +26,7 @@
 #
 ###############################################################################
 
-from yagocd.resources import BaseManager, Base
+from yagocd.resources import Base, BaseManager
 from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.property import PropertyManager
 from yagocd.util import since

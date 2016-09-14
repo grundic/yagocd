@@ -27,10 +27,11 @@
 ###############################################################################
 import json
 
+import pytest
+
+from yagocd.resources import Base
 from yagocd.resources import pipeline
 from yagocd.resources import stage
-from yagocd.resources import Base
-import pytest
 
 
 class TestPipelineEntity(object):

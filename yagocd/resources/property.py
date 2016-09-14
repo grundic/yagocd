@@ -41,6 +41,8 @@ class PropertyManager(BaseManager):
     @since: 14.3.0.
     """
 
+    URL_TEMPLATE = '{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}'
+
     def __init__(
         self,
         session,
@@ -105,7 +107,7 @@ class PropertyManager(BaseManager):
         assert self._job_name or job_name
 
         response = self._session.get(
-            path='{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}'.format(
+            path=self.URL_TEMPLATE.format(
                 base_api=self.base_api,
                 pipeline_name=self._pipeline_name or pipeline_name,
                 pipeline_counter=self._pipeline_counter or pipeline_counter,
@@ -150,14 +152,13 @@ class PropertyManager(BaseManager):
         assert self._job_name or job_name
 
         response = self._session.get(
-            path='{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}/{name}'.format(
+            path=self._session.urljoin(self.URL_TEMPLATE, name).format(
                 base_api=self.base_api,
                 pipeline_name=self._pipeline_name or pipeline_name,
                 pipeline_counter=self._pipeline_counter or pipeline_counter,
                 stage_name=self._stage_name or stage_name,
                 stage_counter=self._stage_counter or stage_counter,
                 job_name=self._job_name or job_name,
-                name=name
             ),
             headers={'Accept': 'application/json'},
         )
@@ -236,14 +237,13 @@ class PropertyManager(BaseManager):
         assert self._job_name or job_name
 
         response = self._session.post(
-            path='{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}/{name}'.format(
+            path=self._session.urljoin(self.URL_TEMPLATE, name).format(
                 base_api=self.base_api,
                 pipeline_name=self._pipeline_name or pipeline_name,
                 pipeline_counter=self._pipeline_counter or pipeline_counter,
                 stage_name=self._stage_name or stage_name,
                 stage_counter=self._stage_counter or stage_counter,
                 job_name=self._job_name or job_name,
-                name=name
             ),
             data={'value': value},
             headers={

@@ -26,7 +26,7 @@
 #
 ###############################################################################
 
-from yagocd.resources import BaseManager, Base, BaseNode
+from yagocd.resources import Base, BaseManager, BaseNode
 from yagocd.util import since
 
 

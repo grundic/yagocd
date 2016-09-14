@@ -26,10 +26,11 @@
 #
 ###############################################################################
 
-from yagocd.resources import pipeline
-from yagocd.resources import Base
 import mock
 import pytest
+
+from yagocd.resources import Base
+from yagocd.resources import pipeline
 
 
 class TestPipelineEntity(object):

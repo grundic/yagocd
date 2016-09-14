@@ -34,15 +34,6 @@ from yagocd.resources import feed
 
 
 class BaseTestConfigurationManager(AbstractTestManager, ReturnValueMixin):
-    def expected_request_url(self, *args, **kwargs):
-        raise NotImplementedError()
-
-    def expected_request_method(self, *args, **kwargs):
-        raise NotImplementedError()
-
-    def _execute_test_action(self, *args, **kwargs):
-        raise NotImplementedError()
-
     @pytest.fixture()
     def manager(self, session_fixture):
         return feed.FeedManager(session=session_fixture)

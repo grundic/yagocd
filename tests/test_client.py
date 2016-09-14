@@ -33,10 +33,10 @@ from yagocd.resources import (
     agent,
     artifact,
     configuration,
-    feed,
     environment,
-    job,
+    feed,
     info,
+    job,
     material,
     pipeline,
     plugin_info,
@@ -64,7 +64,7 @@ class TestInit(object):
 
     def test_set_verify(self):
         go = Yagocd(options=dict(verify=False))
-        assert go._session._options['verify'] == False
+        assert go._session._options['verify'] is False
 
     def test_set_headers(self):
         go = Yagocd(options=dict(headers=dict(Accept='foo/bar')))

@@ -32,8 +32,8 @@ import mock
 import pytest
 from six import string_types
 
-from tests import AbstractTestManager, ReturnValueMixin, ConfirmHeaderMixin
-from yagocd.resources import stage, pipeline
+from tests import AbstractTestManager, ConfirmHeaderMixin, ReturnValueMixin
+from yagocd.resources import pipeline, stage
 
 
 class BaseTestStageManager(object):
@@ -79,9 +79,9 @@ class TestCancel(BaseTestStageManager, AbstractTestManager, ReturnValueMixin, Co
     @pytest.fixture()
     def expected_request_url(self):
         return '/go/api/stages/{pipeline_name}/{stage_name}/cancel'.format(
-                pipeline_name=self.PIPELINE_NAME,
-                stage_name=self.STAGE_NAME
-            )
+            pipeline_name=self.PIPELINE_NAME,
+            stage_name=self.STAGE_NAME
+        )
 
     @pytest.fixture()
     def expected_request_method(self):
@@ -109,20 +109,20 @@ class TestGet(BaseTestStageManager, AbstractTestManager, ReturnValueMixin):
     @pytest.fixture()
     def expected_request_url(self):
         return (
-                '/go'
-                '/api'
-                '/stages'
-                '/{pipeline_name}'
-                '/{stage_name}'
-                '/instance'
-                '/{pipeline_counter}'
-                '/{stage_counter}'
-            ).format(
-                pipeline_name=self.PIPELINE_NAME,
-                stage_name=self.STAGE_NAME,
-                pipeline_counter=self.PIPELINE_COUNTER,
-                stage_counter=self.STAGE_COUNTER
-            )
+            '/go'
+            '/api'
+            '/stages'
+            '/{pipeline_name}'
+            '/{stage_name}'
+            '/instance'
+            '/{pipeline_counter}'
+            '/{stage_counter}'
+        ).format(
+            pipeline_name=self.PIPELINE_NAME,
+            stage_name=self.STAGE_NAME,
+            pipeline_counter=self.PIPELINE_COUNTER,
+            stage_counter=self.STAGE_COUNTER
+        )
 
     @pytest.fixture()
     def expected_request_method(self):
@@ -150,10 +150,10 @@ class TestHistory(BaseTestStageManager, AbstractTestManager, ReturnValueMixin):
     @pytest.fixture()
     def expected_request_url(self):
         return '/go/api/stages/{pipeline_name}/{stage_name}/history/{offset}'.format(
-                pipeline_name=self.PIPELINE_NAME,
-                stage_name=self.STAGE_NAME,
-                offset=0
-            )
+            pipeline_name=self.PIPELINE_NAME,
+            stage_name=self.STAGE_NAME,
+            offset=0
+        )
 
     @pytest.fixture()
     def expected_request_method(self):
