@@ -35,7 +35,8 @@ from yagocd.util import since
 class VersionManager(BaseManager):
     """
     The Version API allows users to get the GoCD server version details.
-    @since: 16.6.0.
+
+    :versionadded: 16.6.0.
     """
 
     def get(self):

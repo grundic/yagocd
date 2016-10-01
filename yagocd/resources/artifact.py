@@ -36,7 +36,8 @@ from yagocd.util import since
 class ArtifactManager(BaseManager):
     """
     The artifacts API allows users to query and create artifacts of a job.
-    @since: 14.3.0.
+
+    :versionadded: 14.3.0.
     """
 
     def __init__(
@@ -105,7 +106,8 @@ class ArtifactManager(BaseManager):
     ):
         """
         Lists all available artifacts in a job.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param pipeline_name: name of the pipeline.
         :param pipeline_counter: pipeline counter.
@@ -156,7 +158,8 @@ class ArtifactManager(BaseManager):
     ):
         """
         Gets an artifact file by its path.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :note: The `path_to_file` can be a nested file for e.g. `dist/foobar-widgets-1.2.0.jar`.
 
@@ -188,14 +191,15 @@ class ArtifactManager(BaseManager):
     ):
         """
         Gets an artifact directory by its path.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :note: The `path` can be a nested directory for e.g. target/dist.zip
 
-        :warning: Since it may take an undetermined amount of time to compress
-        a directory, the server may return a `202 Accepted` code to indicate that
-        it is compressing the requested directory.
-        Users are expected to poll the url every few seconds to check if the
+        :warning: Since it may take an undetermined amount of time to compress \
+        a directory, the server may return a `202 Accepted` code to indicate that \
+        it is compressing the requested directory. \
+        Users are expected to poll the url every few seconds to check if the \
         directory is available.
 
         :param path: path to directory.
@@ -256,7 +260,8 @@ class ArtifactManager(BaseManager):
         Gets an artifact directory by its path.
         This method wraps original `directory` method, adding
         timeout to wait  for directory to be available.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param path: path to directory.
         :param timeout: timeout in seconds to wait for directory.
@@ -297,7 +302,8 @@ class ArtifactManager(BaseManager):
     ):
         """
         Uploads a local file as an artifact.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param path: path to the file within job directory.
         :param filename: the contents file to be uploaded.
@@ -353,7 +359,8 @@ class ArtifactManager(BaseManager):
     ):
         """
         Appends a local file to an existing artifact.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param path: path to the file within job directory.
         :param filename: the contents file to be uploaded.

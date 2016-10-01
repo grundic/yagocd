@@ -36,7 +36,8 @@ class EnvironmentManager(BaseManager):
     """
     The environment config API allows users with administrator role
     to manage environment config.
-    @since: 16.7.0.
+
+    :versionadded: 16.7.0.
     """
 
     def __iter__(self):

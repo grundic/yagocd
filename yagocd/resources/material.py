@@ -34,13 +34,15 @@ from yagocd.util import since
 class MaterialManager(BaseManager):
     """
     The materials API allows users to query and notify materials in the Go configuration.
-    @since: 14.3.0.
+
+    :versionadded: 14.3.0.
     """
 
     def list(self):
         """
         Lists all available materials, these are materials that are present in the in ``cruise-config.xml``.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :return: An array of :class:`yagocd.resources.material.MaterialEntity`.
         :rtype: list of yagocd.resources.material.MaterialEntity
@@ -59,7 +61,8 @@ class MaterialManager(BaseManager):
     def modifications(self, fingerprint, offset=0):
         """
         Get modifications of specific material.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param fingerprint: fingerprint of material.
         :param offset: number of modifications to be skipped.
@@ -85,12 +88,13 @@ class MaterialManager(BaseManager):
         """
         APIs that notify Go Server when a commit has been made in Version Control
         and Go needs to trigger relevant pipelines.
-        @since: 14.3.0.
 
-        [!!!] When using this feature, uncheck Poll for new changes or
-        set autoUpdate flag in cruise configuration to false for the relevant material.
-        Otherwise you will get:
-           requests.exceptions.HTTPError: 404 Client Error:
+        :versionadded: 14.3.0.
+
+        :warning: When using this feature, uncheck Poll for new changes or \
+        set autoUpdate flag in cruise configuration to false for the relevant material. \
+        Otherwise you will get: \
+           requests.exceptions.HTTPError: 404 Client Error: \
            Not Found for url: http://localhost:8153/go/api/material/notify/svn
 
         :param uuid: The subversion repository UUID.
@@ -111,12 +115,13 @@ class MaterialManager(BaseManager):
         """
         APIs that notify Go Server when a commit has been made in Version Control
         and Go needs to trigger relevant pipelines.
-        @since: 14.3.0.
 
-        [!!!] When using this feature, uncheck Poll for new changes or
-        set autoUpdate flag in cruise configuration to false for the relevant material.
-        Otherwise you will get:
-           requests.exceptions.HTTPError: 404 Client Error:
+        :versionadded: 14.3.0.
+
+        :warning: When using this feature, uncheck Poll for new changes or \
+        set autoUpdate flag in cruise configuration to false for the relevant material. \
+        Otherwise you will get: \
+           requests.exceptions.HTTPError: 404 Client Error: \
            Not Found for url: http://localhost:8153/go/api/material/notify/git
 
         :param url: The git repository url as defined in cruise-config.xml.
@@ -137,12 +142,13 @@ class MaterialManager(BaseManager):
         """
         APIs that notify Go Server when a commit has been made in Version Control
         and Go needs to trigger relevant pipelines.
-        @since: 14.3.0.
 
-        [!!!] When using this feature, uncheck Poll for new changes or
-        set autoUpdate flag in cruise configuration to false for the relevant material.
-        Otherwise you will get:
-           requests.exceptions.HTTPError: 404 Client Error:
+        :versionadded: 14.3.0.
+
+        :warning: When using this feature, uncheck Poll for new changes or \
+        set autoUpdate flag in cruise configuration to false for the relevant material. \
+        Otherwise you will get: \
+           requests.exceptions.HTTPError: 404 Client Error: \
            Not Found for url: http://localhost:8153/go/api/material/notify/hg
 
         :param url: The git repository url as defined in cruise-config.xml.

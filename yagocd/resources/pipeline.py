@@ -41,7 +41,8 @@ from yagocd.util import since, YagocdUtil
 class PipelineManager(BaseManager):
     """
     The pipelines API allows users to view pipeline information and operate on it.
-    @since: 14.3.0.
+
+    :versionadded: 14.3.0.
     """
 
     def __iter__(self):
@@ -67,7 +68,8 @@ class PipelineManager(BaseManager):
     def list(self):
         """
         List all available pipelines.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         This method uses ``pipeline_groups`` API method call to list available pipelines.
         It also links them together, so later it's possible to refer to pipeline's descendants.
@@ -99,7 +101,8 @@ class PipelineManager(BaseManager):
     def find(self, name):
         """
         Finds pipeline by it's name.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of required pipeline.
         :return: if found - pipeline :class:`yagocd.resources.pipeline.PipelineEntity`, otherwise ``None``.
@@ -113,7 +116,8 @@ class PipelineManager(BaseManager):
         """
         The pipeline history allows users to list pipeline instances.
         Supports pagination using offset which tells the API how many instances to skip.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of the pipeline.
         :param offset: number of pipeline instances to be skipped.
@@ -138,7 +142,8 @@ class PipelineManager(BaseManager):
     def full_history(self, name):
         """
         Method for accessing full history of specific pipeline.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         It yields each instance and after one chunk is over moves to the next one.
         :param name: name of the pipeline.
@@ -157,7 +162,8 @@ class PipelineManager(BaseManager):
     def last(self, name):
         """
         Get last pipeline instance.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of the pipeline.
         :rtype: yagocd.resources.pipeline.PipelineInstance
@@ -169,7 +175,8 @@ class PipelineManager(BaseManager):
     def get(self, name, counter):
         """
         Gets pipeline instance object.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of the pipeline.
         :param counter: pipeline counter.
@@ -190,7 +197,8 @@ class PipelineManager(BaseManager):
     def status(self, name):
         """
         The pipeline status allows users to check if the pipeline is paused, locked and schedulable.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of the pipeline.
         :return: JSON containing information about pipeline state, wrapped in EasyDict class.
@@ -208,7 +216,8 @@ class PipelineManager(BaseManager):
     def pause(self, name, cause):
         """
         Pause the specified pipeline.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of the pipeline.
         :param cause: reason for pausing the pipeline.
@@ -228,7 +237,8 @@ class PipelineManager(BaseManager):
     def unpause(self, name):
         """
         Unpause the specified pipeline.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of the pipeline.
         """
@@ -247,7 +257,8 @@ class PipelineManager(BaseManager):
         """
         Release a lock on a pipeline so that you can start up a new instance
         without having to wait for the earlier instance to finish.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of the pipeline.
         :return: a text confirmation.
@@ -267,7 +278,8 @@ class PipelineManager(BaseManager):
     def schedule(self, name, materials=None, variables=None, secure_variables=None):
         """
         Scheduling allows user to trigger a specific pipeline.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of the pipeline.
         :param materials: material revisions to use.
@@ -307,9 +319,10 @@ class PipelineManager(BaseManager):
         Schedule pipeline and return instance.
         Credits of implementation comes to `gaqzi`:
         https://github.com/gaqzi/py-gocd/blob/master/gocd/api/pipeline.py#L122
-        @since: 14.3.0.
 
-        :warning: Replace this with whatever is the official way as soon as gocd#990 is fixed.
+        :versionadded: 14.3.0.
+
+        :warning: Replace this with whatever is the official way as soon as gocd#990 is fixed. \
         https://github.com/gocd/gocd/issues/990
 
         :param name: name of the pipeline.
@@ -564,7 +577,7 @@ class PipelineEntity(BaseNode):
         Credits of implementation comes to `gaqzi`:
         https://github.com/gaqzi/py-gocd/blob/master/gocd/api/pipeline.py#L122
 
-        :warning: Replace this with whatever is the official way as soon as gocd#990 is fixed.
+        :warning: Replace this with whatever is the official way as soon as gocd#990 is fixed. \
         https://github.com/gocd/gocd/issues/990
 
         :param materials: material revisions to use.

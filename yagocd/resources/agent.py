@@ -37,7 +37,8 @@ from yagocd.util import since
 class AgentManager(BaseManager):
     """
     The agents API allows users with administrator role to manage agents.
-    @since: 15.2.0.
+
+    :versionadded: 15.2.0.
 
     :warning: Please note that this API requires using v3 of the API using `Accept: application/vnd.go.cd.v3+json`
     """
@@ -73,7 +74,8 @@ class AgentManager(BaseManager):
         Lists all available agents, these are agents that are present in the
         <agents/> tag inside cruise-config.xml and also agents that are in
         Pending state awaiting registration.
-        @since: 15.2.0.
+
+        :versionadded: 15.2.0.
 
         :return: an array of agents.
         :rtype: list of yagocd.resources.agent.AgentEntity
@@ -117,7 +119,8 @@ class AgentManager(BaseManager):
     def get(self, uuid):
         """
         Gets an agent by its unique identifier (uuid).
-        @since: 15.2.0.
+
+        :versionadded: 15.2.0.
 
         :param uuid: uuid of the agent
         :return: Agent entity.
@@ -136,7 +139,8 @@ class AgentManager(BaseManager):
     def update(self, uuid, config):
         """
         Update some attributes of an agent.
-        @since: 15.2.0.
+
+        :versionadded: 15.2.0.
 
         :param uuid: uuid of the agent
         :param config: dictionary of parameters for update
@@ -160,7 +164,8 @@ class AgentManager(BaseManager):
     def delete(self, uuid):
         """
         Deletes an agent.
-        @since: 15.2.0.
+
+        :versionadded: 15.2.0.
 
         :param uuid: uuid of the agent.
         :return: a message confirmation if the agent was deleted.
@@ -179,7 +184,8 @@ class AgentManager(BaseManager):
     def job_history(self, uuid, offset=0):
         """
         Lists the jobs that have executed on an agent.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param uuid: uuid of the agent.
         :param offset: number of jobs to be skipped.

@@ -34,13 +34,15 @@ from yagocd.util import since
 class FeedManager(BaseManager):
     """
     The feed API allows users to view feed information.
-    @since: 14.3.0.
+
+    :versionadded: 14.3.0.
     """
 
     def pipelines(self):
         """
         Lists all pipelines.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :return: an array of pipelines in XML format.
         """
@@ -54,7 +56,8 @@ class FeedManager(BaseManager):
     def pipeline_by_id(self, pipeline_id):
         """
         Gets XML representation of pipeline.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param pipeline_id: id of pipeline. Note: this is *not* a counter.
         :return: a pipeline object in XML format.
@@ -73,7 +76,8 @@ class FeedManager(BaseManager):
     def stages(self, pipeline_name):
         """
         Gets feed of all stages for the specified pipeline with links to the pipeline and stage details.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param pipeline_name: name of pipeline, for which to list stages
         :return: an array of feed of stages in XML format.
@@ -91,7 +95,8 @@ class FeedManager(BaseManager):
     def stage_by_id(self, stage_id):
         """
         Gets XML representation of stage.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param stage_id: id of stage. Note: this is *not* a counter.
         :return: a stage object in XML format.
@@ -109,7 +114,8 @@ class FeedManager(BaseManager):
     def stage(self, pipeline_name, pipeline_counter, stage_name, stage_counter):
         """
         Gets XML representation of stage.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param pipeline_name: name of pipeline.
         :param pipeline_counter: pipeline counter.
@@ -133,7 +139,8 @@ class FeedManager(BaseManager):
     def job_by_id(self, job_id):
         """
         Gets XML representation of job.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param job_id: id of job. Note: this is *not* a counter.
         :return: a job object in XML format.

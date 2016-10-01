@@ -34,7 +34,8 @@ class PluginInfoManager(BaseManager):
     """
     The plugin info API allows users with administrator role
     to fetch information about installed plugins.
-    @since: 16.7.0.
+
+    :versionadded: 16.7.0.
     """
 
     def __iter__(self):

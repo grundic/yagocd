@@ -35,13 +35,15 @@ class ConfigurationManager(BaseManager):
     """
     The configuration API allows users with administration role
     to view and manage configuration.
-    @since: 14.3.0.
+
+    :versionadded: 14.3.0.
     """
 
     def modifications(self):
         """
         Lists the config repository modifications.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :return: An array of repository modifications.
         """
@@ -55,7 +57,8 @@ class ConfigurationManager(BaseManager):
     def diff(self, start, end):
         """
         Gets the diff between two config repository modifications.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param start: starting SHA commit.
         :param end: ending SHA commit.
@@ -75,7 +78,8 @@ class ConfigurationManager(BaseManager):
     def config(self, md5=None):
         """
         Gets the current configuration file.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param md5: md5 sum of config to get. If not given, current will be returned.
         :return: the contents of the configuration file.

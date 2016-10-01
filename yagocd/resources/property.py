@@ -38,7 +38,8 @@ from yagocd.util import since
 class PropertyManager(BaseManager):
     """
     The properties API allows managing of job properties.
-    @since: 14.3.0.
+
+    :versionadded: 14.3.0.
 
     This class implements dictionary like methods for similar use.
     """
@@ -126,7 +127,8 @@ class PropertyManager(BaseManager):
     ):
         """
         Lists all job properties.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param pipeline_name: name of the pipeline.
         :param pipeline_counter: pipeline counter.
@@ -171,7 +173,8 @@ class PropertyManager(BaseManager):
         """
         Gets a property value by it's name.
         :info: You can use keyword `latest` as a pipeline counter or a stage counter.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of property to get.
         :param pipeline_name: name of the pipeline.
@@ -210,7 +213,8 @@ class PropertyManager(BaseManager):
         Get historical properties.
         :info: `limitPipeline` and `limitCount` are optional parameters. The default value of
         `limitPipeline` is latest pipeline instance’s counter. The default value of `limitCount` is `100`.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param pipeline_name: name of the pipeline.
         :param stage_name: name of the stage.
@@ -256,7 +260,8 @@ class PropertyManager(BaseManager):
     ):
         """
         Defines a property on a specific job instance.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param name: name of property.
         :param value: value of property.

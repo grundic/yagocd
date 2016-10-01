@@ -34,7 +34,8 @@ from yagocd.util import since
 class StageManager(BaseManager):
     """
     The stages API allows users to view stage information and operate on it.
-    @since: 14.3.0.
+
+    :versionadded: 14.3.0.
     """
 
     def __init__(
@@ -55,7 +56,8 @@ class StageManager(BaseManager):
     def run(self, pipeline_name=None, pipeline_counter=None, stage_name=None):
         """
         Run stage, configured for manual trigger.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param pipeline_name: pipeline name.
         :param stage_name: stage name.
@@ -81,7 +83,8 @@ class StageManager(BaseManager):
     def cancel(self, pipeline_name=None, stage_name=None):
         """
         Cancel an active stage of a specified stage.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param pipeline_name: pipeline name.
         :param stage_name: stage name.
@@ -113,7 +116,8 @@ class StageManager(BaseManager):
     ):
         """
         Gets stage instance object.
-        @since: 15.1.0.
+
+        :versionadded: 15.1.0.
 
         :param pipeline_name: pipeline name.
         :param stage_name: stage name.
@@ -144,7 +148,8 @@ class StageManager(BaseManager):
         """
         The stage history allows users to list stage instances of specified stage.
         Supports pagination using offset which tells the API how many instances to skip.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :param pipeline_name: pipeline name.
         :param stage_name: stage name.

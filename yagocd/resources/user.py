@@ -35,7 +35,8 @@ from yagocd.util import since
 class UserManager(BaseManager):
     """
     The users API allows users with administrator role to manage users.
-    @since: 15.2.0.
+
+    :versionadded: 15.2.0.
     """
 
     def __iter__(self):
@@ -60,7 +61,8 @@ class UserManager(BaseManager):
     def list(self):
         """
         Lists all available users.
-        @since: 15.2.0.
+
+        :versionadded: 15.2.0.
 
         :return: an array of user objects :class:`yagocd.resources.user.UserEntity`.
         :rtype: list of yagocd.resources.user.UserEntity
@@ -78,7 +80,8 @@ class UserManager(BaseManager):
     def get(self, login):
         """
         Gets a user by its login name.
-        @since: 15.2.0.
+
+        :versionadded: 15.2.0.
 
         :param login: login name.
         :return: a user object :class:`yagocd.resources.user.UserEntity`.
@@ -120,7 +123,8 @@ class UserManager(BaseManager):
     def update(self, login, options):
         """
         Update some attributes of a user.
-        @since: 15.2.0.
+
+        :versionadded: 15.2.0.
 
         :param login: login name.
         :param options: dictionary of parameters for updating a user.
@@ -143,7 +147,8 @@ class UserManager(BaseManager):
     def delete(self, login):
         """
         Deletes a user.
-        @since: 15.2.0.
+
+        :versionadded: 15.2.0.
 
         :param login: login name.
         :return: a message confirmation if the user was deleted.

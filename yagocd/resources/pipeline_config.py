@@ -37,7 +37,8 @@ from yagocd.util import since
 class PipelineConfigManager(BaseManager):
     """
     The pipeline config API allows users with administrator role to manage pipeline config.
-    @since: 15.3.0.
+
+    :versionadded: 15.3.0.
     """
 
     ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
@@ -63,7 +64,8 @@ class PipelineConfigManager(BaseManager):
     def get(self, pipeline_name=None):
         """
         Gets pipeline config for specified pipeline name.
-        @since: 15.3.0.
+
+        :versionadded: 15.3.0.
 
         :param pipeline_name: name of the pipeline. Could be skipped
         if name was configured from constructor.
@@ -85,7 +87,8 @@ class PipelineConfigManager(BaseManager):
     def edit(self, config, etag, pipeline_name=None):
         """
         Update pipeline config for specified pipeline name.
-        @since: 15.3.0.
+
+        :versionadded: 15.3.0.
 
         :param config: dictionary containing new configuration
         for a given pipeline.
@@ -114,7 +117,8 @@ class PipelineConfigManager(BaseManager):
     def create(self, config):
         """
         Creates new pipeline.
-        @since: 15.3.0.
+
+        :versionadded: 15.3.0.
 
         :param config: configuration data.
         :return: tuple of created pipeline config object and ETag.
@@ -136,7 +140,8 @@ class PipelineConfigManager(BaseManager):
     def delete(self, pipeline_name=None):
         """
         Deletes a pipeline.
-        @since: 16.6.0.
+
+        :versionadded: 16.6.0.
 
         :param pipeline_name: name of pipeline to delete
         :return: A message confirmation if the pipeline was deleted.

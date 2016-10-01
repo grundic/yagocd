@@ -36,13 +36,15 @@ from yagocd.util import since
 class JobManager(BaseManager):
     """
     The jobs API allows users to view job information.
-    @since: 14.3.0.
+
+    :versionadded: 14.3.0.
     """
 
     def scheduled(self):
         """
         Lists all the current job instances which are scheduled but not yet assigned to any agent.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :return: an array of scheduled job instances in XML format.
         """
@@ -57,7 +59,8 @@ class JobManager(BaseManager):
         """
         The job history allows users to list job instances of specified job.
         Supports pagination using offset which tells the API how many instances to skip.
-        @since: 14.3.0.
+
+        :versionadded: 14.3.0.
 
         :return: an array of jobs instances.
         """
