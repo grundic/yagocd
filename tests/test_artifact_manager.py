@@ -55,6 +55,17 @@ class BaseTestArtifactManager(object):
             job_name=self.JOB_NAME
         )
 
+    @pytest.fixture()
+    def mock_manager(self, mock_session):
+        return artifact.ArtifactManager(
+            session=mock_session,
+            pipeline_name=self.PIPELINE_NAME,
+            pipeline_counter=self.PIPELINE_COUNTER,
+            stage_name=self.STAGE_NAME,
+            stage_counter=self.STAGE_COUNTER,
+            job_name=self.JOB_NAME
+        )
+
 
 class TestList(AbstractTestManager, BaseTestArtifactManager, ReturnValueMixin):
     @pytest.fixture()
@@ -99,9 +110,9 @@ class TestList(AbstractTestManager, BaseTestArtifactManager, ReturnValueMixin):
 
 class TestFile(BaseTestArtifactManager):
     @mock.patch('yagocd.resources.artifact.ArtifactManager.directory')
-    def test_directory_is_executed(self, directory_mock, manager):
+    def test_directory_is_executed(self, directory_mock, mock_manager):
         path = mock.MagicMock()
-        _ = manager.file(path=path)  # noqa
+        _ = mock_manager.file(path=path)  # noqa
         directory_mock.assert_called_once_with(
             path=path,
             pipeline_name=None,

@@ -52,6 +52,17 @@ class BaseTestPropertyManager(object):
             job_name=self.JOB_NAME
         )
 
+    @pytest.fixture()
+    def mock_manager(self, mock_session):
+        return property.PropertyManager(
+            session=mock_session,
+            pipeline_name=self.PIPELINE_NAME,
+            pipeline_counter=self.PIPELINE_COUNTER,
+            stage_name=self.STAGE_NAME,
+            stage_counter=self.STAGE_COUNTER,
+            job_name=self.JOB_NAME
+        )
+
 
 class TestList(AbstractTestManager, BaseTestPropertyManager, ReturnValueMixin):
     @pytest.fixture()
@@ -256,17 +267,17 @@ class TestMagicMethods(BaseTestPropertyManager):
 
 @mock.patch('yagocd.resources.property.PropertyManager.list')
 class TestDictionaryMethods(BaseTestPropertyManager):
-    def test_keys(self, list_mock, manager):
+    def test_keys(self, list_mock, mock_manager):
         expected = mock.MagicMock(name='list')
         list_mock.return_value.keys.return_value = expected
-        assert manager.keys() == expected
+        assert mock_manager.keys() == expected
 
-    def test_values(self, list_mock, manager):
+    def test_values(self, list_mock, mock_manager):
         expected = mock.MagicMock(name='values')
         list_mock.return_value.values.return_value = expected
-        assert manager.values() == expected
+        assert mock_manager.values() == expected
 
-    def test_items(self, list_mock, manager):
+    def test_items(self, list_mock, mock_manager):
         expected = mock.MagicMock(name='items')
         list_mock.return_value.items.return_value = expected
-        assert manager.items() == expected
+        assert mock_manager.items() == expected
