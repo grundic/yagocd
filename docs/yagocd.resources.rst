@@ -28,10 +28,26 @@ yagocd.resources.configuration module
     :undoc-members:
     :show-inheritance:
 
+yagocd.resources.environment module
+-----------------------------------
+
+.. automodule:: yagocd.resources.environment
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 yagocd.resources.feed module
 ----------------------------
 
 .. automodule:: yagocd.resources.feed
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+yagocd.resources.info module
+----------------------------
+
+.. automodule:: yagocd.resources.info
     :members:
     :undoc-members:
     :show-inheritance:
@@ -60,6 +76,22 @@ yagocd.resources.pipeline module
     :undoc-members:
     :show-inheritance:
 
+yagocd.resources.pipeline_config module
+---------------------------------------
+
+.. automodule:: yagocd.resources.pipeline_config
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+yagocd.resources.plugin_info module
+-----------------------------------
+
+.. automodule:: yagocd.resources.plugin_info
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 yagocd.resources.property module
 --------------------------------
 
@@ -80,6 +112,14 @@ yagocd.resources.user module
 ----------------------------
 
 .. automodule:: yagocd.resources.user
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+yagocd.resources.version module
+-------------------------------
+
+.. automodule:: yagocd.resources.version
     :members:
     :undoc-members:
     :show-inheritance:
