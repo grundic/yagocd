@@ -27,6 +27,14 @@ yagocd.session module
     :undoc-members:
     :show-inheritance:
 
+yagocd.util module
+------------------
+
+.. automodule:: yagocd.util
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------

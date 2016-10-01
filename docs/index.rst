@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Welcome to GOCD Python API client's documentation!
-======================================
+==================================================
 
 Contents:
 
@@ -12,10 +12,7 @@ Contents:
    :maxdepth: 2
 
    readme
-   installation
    usage
-   contributing
-   authors
    history
 
 Indices and tables
