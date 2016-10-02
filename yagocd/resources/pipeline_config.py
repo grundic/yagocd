@@ -68,7 +68,7 @@ class PipelineConfigManager(BaseManager):
         :versionadded: 15.3.0.
 
         :param pipeline_name: name of the pipeline. Could be skipped
-        if name was configured from constructor.
+          if name was configured from constructor.
         :return: tuple of pipeline config object and current ETag value.
         :rtype: (dict, str)
         """
@@ -91,10 +91,10 @@ class PipelineConfigManager(BaseManager):
         :versionadded: 15.3.0.
 
         :param config: dictionary containing new configuration
-        for a given pipeline.
+          for a given pipeline.
         :param etag: etag value from current configuration resource.
         :param pipeline_name: name of the pipeline. Could be skipped
-        if name was configured from constructor.
+          if name was configured from constructor.
         :return: tuple of updated pipeline config object and updated ETag.
         :rtype: (dict, str)
         """
