@@ -65,7 +65,7 @@ class Yagocd(object):
 
     def __init__(self, server=None, auth=None, options=None):
         """
-        Construct a GOCD client instance.
+        Construct a GoCD client instance.
 
         :param server: url of the Go server
         :param auth: authorization, that will be passed to requests.

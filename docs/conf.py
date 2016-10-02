@@ -60,7 +60,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'GOCD Python API client'
+project = u'GoCD Python API client'
 copyright = u'2016, Grigory Chernyshev'
 
 # The version info for the project you're documenting, acts as replacement
@@ -214,7 +214,7 @@ latex_elements = {
 # [howto/manual]).
 latex_documents = [
     ('index', 'yagocd.tex',
-     u'GOCD Python API client Documentation',
+     u'GoCD Python API client Documentation',
      u'Grigory Chernyshev', 'manual'),
 ]
 
@@ -245,7 +245,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'yagocd',
-     u'GOCD Python API client Documentation',
+     u'GoCD Python API client Documentation',
      [u'Grigory Chernyshev'], 1)
 ]
 
@@ -260,7 +260,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     ('index', 'yagocd',
-     u'GOCD Python API client Documentation',
+     u'GoCD Python API client Documentation',
      u'Grigory Chernyshev',
      'yagocd',
      'One line description of project.',
