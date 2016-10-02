@@ -9,7 +9,7 @@ Welcome to GoCD Python API client's documentation!
 Intro
 -----
 
-This library is a high level python API wrapper upon ThoughtWorks GoCD REST API.
+This `library <https://github.com/grundic/yagocd>`_ is a high level python API wrapper upon ThoughtWorks GoCD REST API.
 
 Here are some highlights:
 
