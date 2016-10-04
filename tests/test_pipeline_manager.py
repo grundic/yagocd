@@ -30,10 +30,10 @@ import time
 
 import mock
 import pytest
-from requests import HTTPError
 from six import string_types
 
 from tests import AbstractTestManager, ConfirmHeaderMixin, RequestContentTypeHeadersMixin, ReturnValueMixin
+from yagocd.exception import RequestError
 from yagocd.resources import material
 from yagocd.resources import pipeline
 
@@ -162,7 +162,7 @@ class TestHistory(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin
 
     def test_non_existing_history_raises_http_error(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/history_non_existing") as cass:
-            with pytest.raises(HTTPError):
+            with pytest.raises(RequestError):
                 return cass, manager.history("pipeline_non_existing")
 
 
@@ -227,7 +227,7 @@ class TestGet(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin):
 
     def test_get_non_existing(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline/get_non_existing"):
-            with pytest.raises(HTTPError):
+            with pytest.raises(RequestError):
                 manager.get("pipeline_instance_non_existing", 1)
 
 

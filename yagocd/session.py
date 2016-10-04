@@ -32,6 +32,8 @@ import requests
 # noinspection PyUnresolvedReferences
 from six.moves.urllib.parse import urljoin
 
+from yagocd.exception import RequestError
+
 
 class Session(object):
     """
@@ -98,9 +100,22 @@ class Session(object):
             verify=self._options['verify']
         )
         # raise exception if we got 4xx/5xx response
-        response.raise_for_status()
+        self._raise_for_status(response)
 
         return response
+
+    @staticmethod
+    def _raise_for_status(response):
+        summary = ''
+
+        if 400 <= response.status_code < 500:
+            summary = '[%s] Client Error: %s for url: %s' % (response.status_code, response.reason, response.url)
+
+        elif 500 <= response.status_code < 600:
+            summary = '[%s] Server Error: %s for url: %s' % (response.status_code, response.reason, response.url)
+
+        if summary:
+            raise RequestError(summary=summary, response=response)
 
     def get(self, path, params=None, headers=None):
         return self.request(method='get', path=path, params=params, headers=headers)
