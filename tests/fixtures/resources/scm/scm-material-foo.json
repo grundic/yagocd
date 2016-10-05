@@ -1,0 +1,23 @@
+{
+    "id": "scm-id-foo",
+    "name": "foo",
+    "auto_update": true,
+    "plugin_metadata": {
+        "id": "github.pr",
+        "version": "1"
+    },
+    "configuration": [
+        {
+            "key": "url",
+            "value": "http://example.com/foo"
+        },
+        {
+            "key": "username",
+            "value": "admin"
+        },
+        {
+            "key": "password",
+            "value": "secret"
+        }
+    ]
+}

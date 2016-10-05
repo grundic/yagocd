@@ -92,7 +92,7 @@ class EnvironmentManager(BaseManager):
 
     def create(self, config):
         """
-        Creates an environment
+        Creates an environment.
 
         :param config: new environment configuration.
         :rtype: (yagocd.resources.environment.EnvironmentConfig, str)

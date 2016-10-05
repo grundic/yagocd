@@ -15,6 +15,10 @@ unzip -o -d /var/lib/go-server/artifacts /tmp/artifacts.zip
 
 cp passwd /var/lib/go-server/
 
+# install plugin for testing pluggable SCM materials
+mkdir -p /var/lib/go-server/plugins/external/
+cp github-pr-poller-1.2.4.jar /var/lib/go-server/plugins/external/github-pr-poller-1.2.4.jar
+
 chown -R go:go /var/lib/go-server/ /etc/go/
 
 /sbin/my_init

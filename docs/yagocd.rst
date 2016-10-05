@@ -19,6 +19,14 @@ yagocd.client module
     :undoc-members:
     :show-inheritance:
 
+yagocd.exception module
+-----------------------
+
+.. automodule:: yagocd.exception
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 yagocd.session module
 ---------------------
 

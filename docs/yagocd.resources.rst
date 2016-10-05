@@ -100,6 +100,14 @@ yagocd.resources.property module
     :undoc-members:
     :show-inheritance:
 
+yagocd.resources.scm module
+---------------------------
+
+.. automodule:: yagocd.resources.scm
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 yagocd.resources.stage module
 -----------------------------
 

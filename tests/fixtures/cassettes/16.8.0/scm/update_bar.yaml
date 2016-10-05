@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJpZCI6ICJzY20taWQtYmFyIiwgImNvbmZpZ3VyYXRpb24iOiBbeyJrZXkiOiAidXJsIiwgInZh
+      bHVlIjogIk5FVy1EVU1NWS1WQUxVRSJ9LCB7ImtleSI6ICJ1c2VybmFtZSIsICJ2YWx1ZSI6ICJh
+      ZG1pbiJ9LCB7ImtleSI6ICJwYXNzd29yZCIsICJ2YWx1ZSI6ICJzZWNyZXQifV0sICJhdXRvX3Vw
+      ZGF0ZSI6IHRydWUsICJwbHVnaW5fbWV0YWRhdGEiOiB7InZlcnNpb24iOiAiMSIsICJpZCI6ICJn
+      aXRodWIucHIifSwgIm5hbWUiOiAiYmFyIn0=
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['254']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=jw2zd6kq33nieh4rcby8t1z3]
+      If-Match: ['"7eff689793f4f71ed246646a97406586--gzip"']
+      User-Agent: [python-requests/2.11.1]
+    method: PATCH
+    uri: http://localhost:8153/go/api/admin/scms/bar
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWQX0vDMBTF3/spSnzULhRRpOCD4N7c3qoMkXKXZG1YmoT8cYyx726SlpYx9MXH
+        c3LPL/eeU5bnqBFc7i2q8lNQQVsmdpMKujMsatQ5pyuMhSIgOmVd9VQ+3ONWYdAcA+25xJb0Fm/B
+        oJQ93w1AqshvPBuAIb5o1YJQfBPzl9kdl/Q/y1Q9OGY4iEZCz0Z2NvIRj2wUBgtOi7h3ctNk8CdD
+        C99y2fTMAQUHc1VDvuWu89uFHqaD/c2M5UrGtxJNn4F3qvE6ECLdGc+STZTc8dYbcEPkMzGmg/fs
+        GDneiJEe+SB82nC9/Che69VqU7y/vNXLi+quCJaZdNk1JvX1Z1iDtQdl6Bxmkpijdow2E+b28FiS
+        ul5vuvp5bvorO2c/vJHMt2gCAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Wed, 05 Oct 2016 20:46:56 GMT']
+      ETag: ['"a5d32e68b59074750b7fe15fb38b7e97--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [1fdd40e0-a350-46d9-8ba4-b60fb2a6d2e1]
+      X-Runtime: ['0.219000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJpZCI6ICJzY20taWQtYmFyIiwgImNvbmZpZ3VyYXRpb24iOiBbeyJrZXkiOiAidXJsIiwgInZh
+      bHVlIjogIk5FVy1EVU1NWS1WQUxVRSJ9LCB7ImtleSI6ICJ1c2VybmFtZSIsICJ2YWx1ZSI6ICJh
+      ZG1pbiJ9LCB7ImtleSI6ICJwYXNzd29yZCIsICJ2YWx1ZSI6ICJzZWNyZXQifV0sICJhdXRvX3Vw
+      ZGF0ZSI6IHRydWUsICJwbHVnaW5fbWV0YWRhdGEiOiB7InZlcnNpb24iOiAiMSIsICJpZCI6ICJn
+      aXRodWIucHIifSwgIm5hbWUiOiAiYmFyIn0=
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['254']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=1l9bmokw5npv7112p8f9kovzvv]
+      If-Match: ['"7508a35fb3f0832c2d9c521bacb40d24--gzip"']
+      User-Agent: [python-requests/2.11.1]
+    method: PATCH
+    uri: http://localhost:8153/go/api/admin/scms/bar
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWQzWrDMBCE734Kox5bR5jSUgw9FJpbk5tbQilmIym2iCwJ/TSEkHevJBubEMil
+        xxntfNqdU5bnqBFc7i2q8lNQQVsmdpMKujMsatQ5pyuMhSIgOmVd9VI+PeJWYdAcA+25xJb0Fm/B
+        oJQ9PwxAqsgNXkgvWrUgFN/F+GV0xyX9zy5VD44ZDqKR0LORnY18xCMbhcGC0yKundw0GfzJ0MK3
+        XDY9c0DBwdzUkG+56/x2oYfpYP8yY7mS8a1E02fgnWq8DoRId8azZBMld7z1BtwQ+U6M6eA9O0aO
+        N2KkRz4InzZcL7+K93q12hSfbx/18qK6K4JlJl12jUl93QxrsPagDJ3DTBJz1I7RZsLcH55LUtfr
+        TVe/zk3/ZOfsD8zgdKVnAgAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Wed, 05 Oct 2016 20:45:00 GMT']
+      ETag: ['"458d3e47082c954a2ae6d9ea93d21788--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [b85cb0a5-9bd2-4b78-9544-aad49611e499]
+      X-Runtime: ['0.555000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

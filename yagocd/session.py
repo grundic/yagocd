@@ -60,6 +60,7 @@ class Session(object):
     def server_url(self):
         """
         Property for getting server url.
+
         :return: server url for this instance.
         """
         return self._options['server'].rstrip('/')

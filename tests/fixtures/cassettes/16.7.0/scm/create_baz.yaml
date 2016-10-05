@@ -1,0 +1,45 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJpZCI6ICJzY20taWQtYmF6IiwgImNvbmZpZ3VyYXRpb24iOiBbeyJrZXkiOiAidXJsIiwgInZh
+      bHVlIjogImh0dHA6Ly9leGFtcGxlLmNvbS9iYXoifSwgeyJrZXkiOiAidXNlcm5hbWUiLCAidmFs
+      dWUiOiAiYWRtaW4ifSwgeyJrZXkiOiAicGFzc3dvcmQiLCAidmFsdWUiOiAic2VjcmV0In1dLCAi
+      YXV0b191cGRhdGUiOiB0cnVlLCAicGx1Z2luX21ldGFkYXRhIjogeyJ2ZXJzaW9uIjogIjEiLCAi
+      aWQiOiAiZ2l0aHViLnByIn0sICJuYW1lIjogImJheiJ9
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['261']
+      Content-Type: [application/json]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: http://localhost:8153/go/api/admin/scms
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWQzWrDMBCE734Kox7bWITSUgx5hd58KKWYjbSxRfSHfpqmIe9eSTZOSyCXHme0
+        82l3TlVdk14KvfekrU9JJe1R7haV9OgwazKGYFtKpWEgR+ND+7J+eqSDoWAFBa6Epp4pT7fwTUr2
+        /DABuWE3eCndDKZhnN7l+N/oTmj+n11aBQGdANlrUDizq5lPRGaTNLgSfJXXLm6ZTP5iWBkHoXuF
+        ATgEuDQ15QcRxrhtrCPz0p/ovDA6v63J8hnEYPpoEyHTg4tYbGb0TgzRQZgi74WxHLzHY+ZEJ2d6
+        5oOM+KsF/AJlJTbMqKvyr0AeXTnwmlZquxm24P3BOH4Jo2buaAPyfsHcH57XrOte38Zucyn8ozpX
+        PxSfN6puAgAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Wed, 05 Oct 2016 20:44:59 GMT']
+      ETag: ['"345a6cb2b9e9e7867455953285cdcd03--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=u2s40rt45ioc7c2fa0tcr4t;Path=/go;Expires=Wed, 19-Oct-2016
+          20:44:59 GMT;HttpOnly']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [22358380-08fb-4fd8-94cc-f7b019a06638]
+      X-Runtime: ['0.597000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

@@ -42,6 +42,7 @@ from yagocd.resources.pipeline import PipelineManager
 from yagocd.resources.pipeline_config import PipelineConfigManager
 from yagocd.resources.plugin_info import PluginInfoManager
 from yagocd.resources.property import PropertyManager
+from yagocd.resources.scm import SCMManager
 from yagocd.resources.stage import StageManager
 from yagocd.resources.user import UserManager
 from yagocd.resources.version import VersionManager
@@ -91,6 +92,7 @@ class Yagocd(object):
     def server_url(self):
         """
         Property for getting server url.
+
         :return: server url for this instance.
         """
         return self._session.server_url
@@ -98,7 +100,7 @@ class Yagocd(object):
     @property
     def agents(self):
         """
-        Property for accessing ``AgentManager`` instance, which is used to manage agents.
+        Property for accessing :class:`AgentManager` instance, which is used to manage agents.
 
         :rtype: yagocd.resources.agent.AgentManager
         """
@@ -107,7 +109,7 @@ class Yagocd(object):
     @property
     def artifacts(self):
         """
-        Property for accessing ``ArtifactManager`` instance, which is used to manage artifacts.
+        Property for accessing :class:`ArtifactManager` instance, which is used to manage artifacts.
 
         :rtype: yagocd.resources.artifact.ArtifactManager
         """
@@ -116,7 +118,7 @@ class Yagocd(object):
     @property
     def configurations(self):
         """
-        Property for accessing ``ConfigurationManager`` instance, which is used to manage configurations.
+        Property for accessing :class:`ConfigurationManager` instance, which is used to manage configurations.
 
         :rtype: yagocd.resources.configuration.ConfigurationManager
         """
@@ -125,7 +127,7 @@ class Yagocd(object):
     @property
     def environments(self):
         """
-        Property for accessing ``EnvironmentManager`` instance, which is used to manage environments.
+        Property for accessing :class:`EnvironmentManager` instance, which is used to manage environments.
 
         :rtype: yagocd.resources.environment.EnvironmentManager
         """
@@ -134,7 +136,7 @@ class Yagocd(object):
     @property
     def feeds(self):
         """
-        Property for accessing ``FeedManager`` instance, which is used to manage feeds.
+        Property for accessing :class:`FeedManager` instance, which is used to manage feeds.
 
         :rtype: yagocd.resources.feed.FeedManager
         """
@@ -143,7 +145,7 @@ class Yagocd(object):
     @property
     def jobs(self):
         """
-        Property for accessing ``JobManager`` instance, which is used to manage feeds.
+        Property for accessing :class:`JobManager` instance, which is used to manage feeds.
 
         :rtype: yagocd.resources.job.JobManager
         """
@@ -152,7 +154,7 @@ class Yagocd(object):
     @property
     def info(self):
         """
-        Property for accessing ``InfoManager`` instance, which is used to general server info.
+        Property for accessing :class:`InfoManager` instance, which is used to general server info.
 
         :rtype: yagocd.resources.info.InfoManager
         """
@@ -161,7 +163,7 @@ class Yagocd(object):
     @property
     def materials(self):
         """
-        Property for accessing ``MaterialManager`` instance, which is used to manage materials.
+        Property for accessing :class:`MaterialManager` instance, which is used to manage materials.
 
         :rtype: yagocd.resources.material.MaterialManager
         """
@@ -170,7 +172,7 @@ class Yagocd(object):
     @property
     def pipelines(self):
         """
-        Property for accessing ``PipelineManager`` instance, which is used to manage pipelines.
+        Property for accessing :class:`PipelineManager` instance, which is used to manage pipelines.
 
         :rtype: yagocd.resources.pipeline.PipelineManager
         """
@@ -179,7 +181,7 @@ class Yagocd(object):
     @property
     def pipeline_configs(self):
         """
-        Property for accessing ``PipelineConfigManager`` instance, which is used to manage pipeline configurations.
+        Property for accessing :class:`PipelineConfigManager` instance, which is used to manage pipeline configurations.
 
         :rtype: yagocd.resources.pipeline_config.PipelineConfigManager
         """
@@ -188,7 +190,7 @@ class Yagocd(object):
     @property
     def plugin_info(self):
         """
-        Property for accessing ``PluginInfoManager`` instance, which is used to manage pipeline configurations.
+        Property for accessing :class:`PluginInfoManager` instance, which is used to manage pipeline configurations.
 
         :rtype: yagocd.resources.plugin_info.PluginInfoManager
         """
@@ -197,16 +199,25 @@ class Yagocd(object):
     @property
     def properties(self):
         """
-        Property for accessing ``PropertyManager`` instance, which is used to manage properties of the jobs.
+        Property for accessing :class:`PropertyManager` instance, which is used to manage properties of the jobs.
 
         :rtype: yagocd.resources.property.PropertyManager
         """
         return PropertyManager(session=self._session)
 
     @property
+    def scms(self):
+        """
+        Property for accessing :class:`SCMManager` instance, which is used to manage pluggable SCM materials.
+
+        :rtype: yagocd.resources.scm.SCMManager
+        """
+        return SCMManager(session=self._session)
+
+    @property
     def stages(self):
         """
-        Property for accessing ``StageManager`` instance, which is used to manage stages.
+        Property for accessing :class:`StageManager` instance, which is used to manage stages.
 
         :rtype: yagocd.resources.stage.StageManager
         """
@@ -215,7 +226,7 @@ class Yagocd(object):
     @property
     def users(self):
         """
-        Property for accessing ``UserManager`` instance, which is used to manage users.
+        Property for accessing :class:`UserManager` instance, which is used to manage users.
 
         :rtype: yagocd.resources.user.UserManager
         """
@@ -224,7 +235,7 @@ class Yagocd(object):
     @property
     def versions(self):
         """
-        Property for accessing ``VersionManager`` instance, which is used to get server info.
+        Property for accessing :class:`VersionManager` instance, which is used to get server info.
 
         :rtype: yagocd.resources.version.VersionManager
         """
