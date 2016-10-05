@@ -115,12 +115,12 @@ class SCMManager(BaseManager):
 
     def update(self, name, config, etag):
         """
-        Update some attributes of an environment.
+        Update some attributes of SCM material.
 
-        :param name: name of environment to update.
-        :param config: updated environment configuration.
-        :param etag: etag value from current environment resource.
-        :rtype: (yagocd.resources.environment.EnvironmentConfig, str)
+        :param name: name of SCM material to update.
+        :param config: updated SCM material configuration.
+        :param etag: etag value from current SCM material.
+        :rtype: (yagocd.resources.scm.SCMMaterial, str)
         """
         response = self._session.patch(
             path='{base_api}/admin/scms/{name}'.format(
