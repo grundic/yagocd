@@ -40,14 +40,15 @@ class AgentManager(BaseManager):
 
     :versionadded: 15.2.0.
 
-    :warning: Please note that this API requires using v3 of the API using `Accept: application/vnd.go.cd.v3+json`
+    :warning: Please note that this API requires using v3 of the API using `Accept: application/vnd.go.cd.v4+json`
     """
 
-    ACCEPT_HEADER = 'application/vnd.go.cd.v3+json'
+    ACCEPT_HEADER = 'application/vnd.go.cd.v4+json'
 
     VERSION_TO_ACCEPT_HEADER = {
         '16.1.0': 'application/vnd.go.cd.v1+json',
         '16.7.0': 'application/vnd.go.cd.v2+json',
+        '16.9.0': 'application/vnd.go.cd.v3+json',
     }
 
     def __iter__(self):

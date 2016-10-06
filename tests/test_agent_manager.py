@@ -65,8 +65,10 @@ class BaseTestAgentManager(AbstractTestManager):
             return 'application/vnd.go.cd.v1+json'
         elif LooseVersion(server_version) <= LooseVersion('16.7.0'):
             return 'application/vnd.go.cd.v2+json'
-        else:
+        elif LooseVersion(server_version) <= LooseVersion('16.9.0'):
             return 'application/vnd.go.cd.v3+json'
+        else:
+            return 'application/vnd.go.cd.v4+json'
 
 
 class TestListAsList(BaseTestAgentManager, ReturnValueMixin):
