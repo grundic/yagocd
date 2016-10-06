@@ -36,6 +36,8 @@ class UserManager(BaseManager):
     """
     The users API allows users with administrator role to manage users.
 
+    `Official documentation. <https://api.go.cd/current/#users>`_
+
     :versionadded: 15.2.0.
     """
 

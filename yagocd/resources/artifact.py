@@ -37,6 +37,8 @@ class ArtifactManager(BaseManager):
     """
     The artifacts API allows users to query and create artifacts of a job.
 
+    `Official documentation. <https://api.go.cd/current/#artifacts>`_
+
     :versionadded: 14.3.0.
     """
 

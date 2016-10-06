@@ -35,6 +35,8 @@ class MaterialManager(BaseManager):
     """
     The materials API allows users to query and notify materials in the Go configuration.
 
+    `Official documentation. <https://api.go.cd/current/#materials>`_
+
     :versionadded: 14.3.0.
     """
 

@@ -36,6 +36,8 @@ class VersionManager(BaseManager):
     """
     The Version API allows users to get the GoCD server version details.
 
+    `Official documentation. <https://api.go.cd/current/#version>`_
+
     :versionadded: 16.6.0.
     """
 

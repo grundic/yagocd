@@ -36,6 +36,8 @@ class SCMManager(BaseManager):
     """
     The pluggable SCM API allows users to view, create and update the SCM object.
 
+    `Official documentation. <https://api.go.cd/current/#scms>`_
+
     :note: Please keep in mind that this API works with pluggable SCM materials,
      which means that you have to install specific SCM plugin to the GoCD server
      in order to work with it.

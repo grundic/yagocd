@@ -35,6 +35,8 @@ class StageManager(BaseManager):
     """
     The stages API allows users to view stage information and operate on it.
 
+    `Official documentation. <https://api.go.cd/current/#stages>`_
+
     :versionadded: 14.3.0.
     """
 

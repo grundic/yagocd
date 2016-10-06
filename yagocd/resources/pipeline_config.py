@@ -38,6 +38,8 @@ class PipelineConfigManager(BaseManager):
     """
     The pipeline config API allows users with administrator role to manage pipeline config.
 
+    `Official documentation. <https://api.go.cd/current/#pipeline-config>`_
+
     :versionadded: 15.3.0.
     """
 

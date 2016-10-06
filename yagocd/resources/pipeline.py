@@ -42,6 +42,10 @@ class PipelineManager(BaseManager):
     """
     The pipelines API allows users to view pipeline information and operate on it.
 
+    `Official documentation. <https://api.go.cd/current/#pipelines>`_
+
+    `Pipeline groups documentation. <https://api.go.cd/current/#pipeline-groups>`_
+
     :versionadded: 14.3.0.
     """
 

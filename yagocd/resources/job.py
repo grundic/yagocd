@@ -37,6 +37,8 @@ class JobManager(BaseManager):
     """
     The jobs API allows users to view job information.
 
+    `Official documentation. <https://api.go.cd/current/#jobs>`_
+
     :versionadded: 14.3.0.
     """
 

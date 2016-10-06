@@ -35,6 +35,8 @@ class FeedManager(BaseManager):
     """
     The feed API allows users to view feed information.
 
+    `Official documentation. <https://api.go.cd/current/#feeds>`_
+
     :versionadded: 14.3.0.
     """
 

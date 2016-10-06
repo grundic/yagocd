@@ -38,6 +38,8 @@ class AgentManager(BaseManager):
     """
     The agents API allows users with administrator role to manage agents.
 
+    `Official documentation. <https://api.go.cd/current/#agents>`_
+
     :versionadded: 15.2.0.
 
     :warning: Please note that this API requires using v3 of the API using `Accept: application/vnd.go.cd.v4+json`

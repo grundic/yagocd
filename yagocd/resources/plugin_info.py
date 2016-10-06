@@ -35,6 +35,8 @@ class PluginInfoManager(BaseManager):
     The plugin info API allows users with administrator role
     to fetch information about installed plugins.
 
+    `Official documentation. <https://api.go.cd/current/#plugin-info>`_
+
     :versionadded: 16.7.0.
     """
 

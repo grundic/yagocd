@@ -37,6 +37,8 @@ class EnvironmentManager(BaseManager):
     The environment config API allows users with administrator role
     to manage environment config.
 
+    `Official documentation. <https://api.go.cd/current/#environment-config>`_
+
     :versionadded: 16.7.0.
     """
 

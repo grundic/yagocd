@@ -39,6 +39,8 @@ class PropertyManager(BaseManager):
     """
     The properties API allows managing of job properties.
 
+    `Official documentation. <https://api.go.cd/current/#properties>`_
+
     :versionadded: 14.3.0.
 
     This class implements dictionary like methods for similar use.

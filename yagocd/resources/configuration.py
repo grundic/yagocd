@@ -36,6 +36,8 @@ class ConfigurationManager(BaseManager):
     The configuration API allows users with administration role
     to view and manage configuration.
 
+    `Official documentation. <https://api.go.cd/current/#configuration>`_
+
     :versionadded: 14.3.0.
     """
 
