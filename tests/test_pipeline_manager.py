@@ -232,11 +232,11 @@ class TestGet(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin):
 
 
 class TestStatus(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin):
-    NAME = "Consumer_Website"
+    NAME = "UnPausedPipeline"
 
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/status_Consumer_Website") as cass:
+        with my_vcr.use_cassette("pipeline/status_{}".format(self.NAME)) as cass:
             return cass, manager.status(self.NAME)
 
     @pytest.fixture()
@@ -266,12 +266,12 @@ class TestStatus(BaseTestPipelineManager, AbstractTestManager, ReturnValueMixin)
 
 
 class TestPause(BaseTestPipelineManager, AbstractTestManager, ConfirmHeaderMixin):
-    NAME = 'Consumer_Website'
+    NAME = 'UnPausedPipeline'
     REASON = 'Test pause reason'
 
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pause_Consumer_Website") as cass:
+        with my_vcr.use_cassette("pipeline/pause_{}".format(self.NAME)) as cass:
             return cass, manager.pause(self.NAME, self.REASON)
 
     @pytest.fixture()
@@ -287,7 +287,7 @@ class TestPause(BaseTestPipelineManager, AbstractTestManager, ConfirmHeaderMixin
         return 'application/json'
 
     def test_pause(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/pause_Consumer_Website_complex"):
+        with my_vcr.use_cassette("pipeline/pause_{}_complex".format(self.NAME)):
             manager.unpause(self.NAME)
 
             result = manager.pause(self.NAME, self.REASON)
@@ -302,11 +302,11 @@ class TestPause(BaseTestPipelineManager, AbstractTestManager, ConfirmHeaderMixin
 
 
 class TestUnpause(BaseTestPipelineManager, AbstractTestManager, ConfirmHeaderMixin):
-    NAME = "Consumer_Website"
+    NAME = "PausedPipeline"
 
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website") as cass:
+        with my_vcr.use_cassette("pipeline/unpause_{}".format(self.NAME)) as cass:
             return cass, manager.unpause(self.NAME)
 
     @pytest.fixture()
@@ -322,7 +322,7 @@ class TestUnpause(BaseTestPipelineManager, AbstractTestManager, ConfirmHeaderMix
         return 'application/json'
 
     def test_unpause(self, manager, my_vcr):
-        with my_vcr.use_cassette("pipeline/unpause_Consumer_Website_complex"):
+        with my_vcr.use_cassette("pipeline/unpause_{}_complex".format(self.NAME)):
             manager.pause(self.NAME, '')
 
             result = manager.unpause(self.NAME)

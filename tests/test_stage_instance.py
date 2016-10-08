@@ -25,6 +25,7 @@
 # THE SOFTWARE.
 #
 ###############################################################################
+import re
 
 import mock
 import pytest
@@ -56,14 +57,18 @@ class TestStageInstance(object):
         jobs_mock.assert_called_once_with()
 
     def test_url_from_pipeline(self, stage_instance_from_pipeline):
-        assert stage_instance_from_pipeline.url == '{server}go/pipelines/Consumer_Website/31/Commit/1'.format(
+        url_re = re.compile('{server}go/pipelines/Consumer_Website/\d+/Commit/\d+'.format(
             server=stage_instance_from_pipeline._session._options['server']
-        )
+        ))
+
+        assert url_re.match(stage_instance_from_pipeline.url)
 
     def test_url_from_history(self, stage_instance_from_stage_history):
-        assert stage_instance_from_stage_history.url == '{server}go/pipelines/Consumer_Website/31/Commit/1'.format(
+        url_re = re.compile(r'{server}go/pipelines/Consumer_Website/\d+/Commit/\d+'.format(
             server=stage_instance_from_stage_history._session._options['server']
-        )
+        ))
+
+        assert url_re.match(stage_instance_from_stage_history.url)
 
     def test_pipeline_is_not_none(self, stage_instance_from_pipeline):
         assert stage_instance_from_pipeline.pipeline is not None
