@@ -85,7 +85,8 @@ def my_vcr(gocd_docker):
     )
 
 
-CONTAINER_NAME = 'yagocd-server'
+SERVER_CONTAINER_NAME = 'yagocd-server'
+AGENT_CONTAINER_NAME = 'yagocd-agent'
 CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 
@@ -120,11 +121,12 @@ def fresh_run(request):
 @pytest.fixture(scope="session", params=TESTING_VERSIONS)
 def gocd_docker(request, use_docker, fresh_run):
     if use_docker:
-        start_container(version_tag=request.param)
+        start_docker_server(version_tag=request.param)
+        start_docker_agent(version_tag=request.param)
         wait_till_started()
 
         def fin():
-            stop_container()
+            stop_containers()
 
         request.addfinalizer(fin)
 
@@ -144,14 +146,14 @@ def gocd_docker(request, use_docker, fresh_run):
     return request.param
 
 
-def start_container(version_tag):
-    print('Starting Docker container [{} version]...'.format(version_tag))  # noqa
+def start_docker_server(version_tag):
+    print('Starting GoCD server in docker container [{} version]...'.format(version_tag))  # noqa
     output = subprocess.check_output([
         "/usr/local/bin/docker",
         "ps",
         "--quiet",
         "--filter=name={container_name}".format(
-            container_name=CONTAINER_NAME),
+            container_name=SERVER_CONTAINER_NAME),
     ])
 
     if not output:
@@ -166,17 +168,42 @@ def start_container(version_tag):
             ),
             "--workdir=/workspace",
             "--name={container_name}".format(
-                container_name=CONTAINER_NAME
+                container_name=SERVER_CONTAINER_NAME
             ),
-            "gocd/gocd-dev:{tag}".format(tag=version_tag),
+            "gocd/gocd-server:{tag}".format(tag=version_tag),
             "/bin/bash",
             "-c",
             "'/workspace/bootstrap.sh'",
         ])
 
 
+def start_docker_agent(version_tag):
+    print('Starting GoCD agent in docker container [{} version]...'.format(version_tag))  # noqa
+    output = subprocess.check_output([
+        "/usr/local/bin/docker",
+        "ps",
+        "--quiet",
+        "--filter=name={container_name}".format(
+            container_name=AGENT_CONTAINER_NAME),
+    ])
+
+    if not output:
+        subprocess.check_call([
+            "/usr/local/bin/docker",
+            "run",
+            "--detach",
+            "--link={server_container_name}:go-server".format(
+                server_container_name=SERVER_CONTAINER_NAME
+            ),
+            "--name={container_name}".format(
+                container_name=AGENT_CONTAINER_NAME
+            ),
+            "gocd/gocd-agent:{tag}".format(tag=version_tag),
+        ])
+
+
 def wait_till_started():
-    sys.stdout.write('Waiting for availability of GoCD in Docker.')
+    sys.stdout.write('Waiting for availability of GoCD server in Docker.')
     while True:
         try:
             requests.get("http://localhost:8153/go")
@@ -187,10 +214,11 @@ def wait_till_started():
             break
 
 
-def stop_container():
+def stop_containers():
     subprocess.check_call([
         "/usr/local/bin/docker",
         "rm",
         "-f",
-        CONTAINER_NAME
+        SERVER_CONTAINER_NAME,
+        AGENT_CONTAINER_NAME
     ])
