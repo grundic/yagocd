@@ -26,6 +26,7 @@
 #
 ###############################################################################
 import json
+from distutils.version import LooseVersion
 
 from yagocd.resources import Base, BaseManager
 from yagocd.util import since
@@ -120,7 +121,12 @@ class EnvironmentManager(BaseManager):
         :param etag: etag value from current environment resource.
         :rtype: (yagocd.resources.environment.EnvironmentConfig, str)
         """
-        response = self._session.patch(
+
+        api_method = self._session.put
+        if LooseVersion(self._session.server_version) <= LooseVersion('16.9.0'):
+            api_method = self._session.patch
+
+        response = api_method(
             path='{base_api}/admin/environments/{name}'.format(
                 base_api=self.base_api, name=name),
             headers={

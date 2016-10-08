@@ -26,6 +26,7 @@
 #
 ###############################################################################
 import json
+from distutils.version import LooseVersion
 
 from yagocd.resources import Base, BaseManager
 from yagocd.util import since
@@ -124,7 +125,11 @@ class SCMManager(BaseManager):
         :param etag: etag value from current SCM material.
         :rtype: (yagocd.resources.scm.SCMMaterial, str)
         """
-        response = self._session.patch(
+        api_method = self._session.put
+        if LooseVersion(self._session.server_version) <= LooseVersion('16.9.0'):
+            api_method = self._session.patch
+
+        response = api_method(
             path='{base_api}/admin/scms/{name}'.format(
                 base_api=self.base_api, name=name),
             headers={

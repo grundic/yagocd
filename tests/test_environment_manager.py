@@ -25,6 +25,8 @@
 # THE SOFTWARE.
 #
 ###############################################################################
+from distutils.version import LooseVersion
+
 import pytest
 from mock import mock
 from six import string_types
@@ -160,8 +162,10 @@ class TestUpdate(BaseManager, ReturnValueMixin):
         return '/go/api/admin/environments/{}'.format(self.NAME)
 
     @pytest.fixture()
-    def expected_request_method(self):
-        return 'PATCH'
+    def expected_request_method(self, manager):
+        if LooseVersion(manager._session.server_version) <= LooseVersion('16.9.0'):
+            return 'PATCH'
+        return 'PUT'
 
     @pytest.fixture()
     def expected_return_type(self):
