@@ -1,0 +1,49 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/xml]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1i3glajt5c6ql1k3t5g094prrv]
+      User-Agent: [python-requests/2.11.1]
+    method: GET
+    uri: http://localhost:8153/go/api/pipelines.xml
+  response:
+    body: {string: "<pipelines>\n <link rel=\"self\" href=\"http://localhost:8153/go/api/pipelines.xml\"/>\n
+        \   <pipeline href=\"http://localhost:8153/go/api/pipelines/Shared_Services/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/Consumer_Website/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/B2B_Website/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/Deploy_UAT/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/Automated_Tests/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/Production_Services/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/Production_Consumer/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/Production_B2B/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/SimplePipeline/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/PausedPipeline/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/UnPausedPipeline/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/ParametrizedPipeline/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/NotifyGitMaterial/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/TestSchedule-39a7be3e/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/TestSchedule-631fa1d6/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/TestSchedule-bfb99c42/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/TestSchedule-15fe0bd1/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/TestScheduleWithInstance-39a7be3e/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/TestScheduleWithInstance-631fa1d6/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/TestScheduleWithInstance-bfb99c42/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/TestScheduleWithInstance-15fe0bd1/stages.xml\"
+        />\n    <pipeline href=\"http://localhost:8153/go/api/pipelines/CancelledPipeline/stages.xml\"
+        />\n</pipelines>"}
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Type: [application/xml; charset=utf-8]
+      Date: ['Sat, 08 Oct 2016 19:58:43 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [85116417-2f01-4df5-866c-fe9541ce447b]
+      X-Runtime: ['0.492000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

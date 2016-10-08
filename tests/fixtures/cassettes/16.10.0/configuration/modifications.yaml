@@ -1,0 +1,43 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1i3glajt5c6ql1k3t5g094prrv]
+      User-Agent: [python-requests/2.11.1]
+    method: GET
+    uri: http://localhost:8153/go/api/config/revisions
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAL2VQYtkRQzHv4r0aYXZoZJKJRVvXsS7uBfxkKoka4M9I9Ozh0X87psRVLpXnAWH
+        ObzDK95L5Zfk/89Pvx9OPg7fHJhCU3cQrhU4GrKF5bZAybbADjeHD+d4uLNT1Nfmp+NdHT0en16B
+        ZOhggSbEN4d9fzodH3/4/tv6sMtYPvZGV2uTIjO6brZZF6Uzs7dhIlKx3t+/i4fz8f6ufgO+hXbb
+        vnpD0OGt9JYJk2VIPURAe3NHHZKdyCvXvnZj/7qinPcvcbK/I0354+YvRBchMbXNY0KIZnbvI8U7
+        9W49vwSx6US6RKTmFRf76rOJtwAjnrws1OuS3lbICm/+Gogtg13VsTuOSW1uUG6Yq1LDgrxE/O74
+        a5w/nh/j9DknD+yXnMvdOmcHJyg22SmWxpoTGRZs75vMF70G54xYMJIgMwtsjk3qOQHUkBivWvnj
+        b+8fzOMakrmuxEtImcPGorWX6+i2sgiNFIloTejbB8ReGK8BaU+aGWBuY1gNazUAuQaqevuknfbf
+        88qdqa586v8lYkNZ2GNUhqV4pgUwZc+sIRWtOiai7fV5H8ct3rY3iDTfbkhtVRjroGj/giHjHwwu
+        9VPYqqmMnOG0qZTCukt2uYyfxWgTG/VxhRE+zeq4k6N0H1qlWUoay5eCriqRjN73S2GgpyrW+Acv
+        ajqa7mTRqMo1to1fgNG6sMLVwBHFjgyzpLJaqa6ZYCXOfZbSRqkZvCz0pTBKIhVaSse6MhBK63VL
+        OYWnl+jH8xgyu0K7wuAWvRwPRo0TihLnDrTWrU6mMijhJPZ8saFKLcfmULPWdqPZFqEFDIHpJa/n
+        MXj2gr9aVyQMMWHrMsBeTcaqFm7wGBZtjFI+1vp4MW0QLIoyIx7VhEaqWVYBY0OVWG0+s3X/xCj7
+        q/JeaUN6VL62pfxYZu1XmQtq2U6UaQhZi1jWWv8T4+dP1/RyZj4IAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 08 Oct 2016 19:58:38 GMT']
+      ETag: ['"5e46234847948355e0052fc7ee5be747--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [b4f41c88-d7a7-4faf-a279-42c63b6584d3]
+      X-Runtime: ['0.128000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

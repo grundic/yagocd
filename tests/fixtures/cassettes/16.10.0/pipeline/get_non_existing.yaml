@@ -1,0 +1,29 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1i3glajt5c6ql1k3t5g094prrv]
+      User-Agent: [python-requests/2.11.1]
+    method: GET
+    uri: http://localhost:8153/go/api/pipelines/pipeline_instance_non_existing/instance/1
+  response:
+    body: {string: 'Pipeline named [pipeline_instance_non_existing] is not known.
+        { Pipeline named [pipeline_instance_non_existing] is not known. }
+
+'}
+    headers:
+      Cache-Control: [no-cache]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 08 Oct 2016 19:58:55 GMT']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [2b490041-2f56-48ae-b831-703fb0135307]
+      X-Runtime: ['0.015000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 404, message: Not Found}
+version: 1

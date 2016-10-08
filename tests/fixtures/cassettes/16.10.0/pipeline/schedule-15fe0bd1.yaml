@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJ2YXJpYWJsZXMiOiB7Ik1ZX1ZBUklBQkxFIjogInNvbWUgdmFsdWUifSwgInNlY3VyZV92YXJp
+      YWJsZXMiOiB7Ik1ZX1NFQ1JFVF9WQVJJQUJMRSI6ICJzZWNyZXQgdmFyaWFibGUifX0=
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Confirm: ['true']
+      Connection: [keep-alive]
+      Content-Length: ['107']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=1i3glajt5c6ql1k3t5g094prrv]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: http://localhost:8153/go/api/pipelines/TestSchedule-15fe0bd1/schedule
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAAtKLSxNLS5RKMlXKE7OSE0pzUlVKMgsSM3JzEtVCAHKBENFdQ1N01INklIMFRKT
+        k1MLSlJTuABFfEBGPAAAAA==
+    headers:
+      Cache-Control: [no-cache]
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 08 Oct 2016 19:58:58 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [88cdeeb4-639e-4e88-9047-1e60d09c4fb9]
+      X-Runtime: ['0.153000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 202, message: Accepted}
+version: 1

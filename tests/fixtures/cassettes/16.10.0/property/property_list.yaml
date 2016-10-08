@@ -1,0 +1,25 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1i3glajt5c6ql1k3t5g094prrv]
+      User-Agent: [python-requests/2.11.1]
+    method: GET
+    uri: http://localhost:8153/go/properties/Shared_Services/7/Commit/1/build
+  response:
+    body: {string: 'cruise_agent,cruise_job_duration,cruise_job_id,cruise_job_result,cruise_pipeline_counter,cruise_pipeline_label,cruise_stage_counter,cruise_timestamp_01_scheduled,cruise_timestamp_02_assigned,cruise_timestamp_03_preparing,cruise_timestamp_04_building,cruise_timestamp_05_completing,cruise_timestamp_06_completed,foo_bar
+
+        vagrant-ubuntu-trusty-64,0,148,Passed,7,7,1,2016-05-02T15:14:43Z,2016-05-02T15:15:09Z,2016-05-02T15:15:18Z,2016-05-02T15:15:20Z,2016-05-02T15:15:21Z,2016-05-02T15:15:21Z,100500
+
+'}
+    headers:
+      Content-Disposition: [Inline; filename=buildProperties.csv]
+      Content-Length: ['496']
+      Content-Type: [text/csv; charset=ISO-8859-1]
+      Date: ['Sat, 08 Oct 2016 19:59:20 GMT']
+    status: {code: 200, message: OK}
+version: 1

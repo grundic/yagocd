@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1i3glajt5c6ql1k3t5g094prrv]
+      User-Agent: [python-requests/2.11.1]
+    method: GET
+    uri: http://localhost:8153/go/api/stages/CancelledPipeline/defaultStage/history/0
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAALWTP2+DMBDFv8vNDEDABNZsnSJ1rCpk8JG4MjbCplKK+O49E0Q7kP6Rks1673z3
+        /NN5BOv4CS0ULyNo3iIUILDhg3LP3oAAeNf15h1FWV3I5KKVmtQ3U21dejIVmT1aOpN64LpGpVCQ
+        SIOcrzyYtlPoZk0KKLIwJbM+oxiosBRzVZRkaZ6yLIv3eT69BtDJDpXUWNZm0A57KHbfxCXEOu64
+        GLeyXN/EVekunb9oh7pGa5dEaUK91zkQzV36QZem+RqvB6Wm4BHQjtzaH4kxFm0RYzuWxHmWM7bf
+        Jhb/k9ga5BdcYXRfXPWZa7+T99wyxsLbzNKMsd02s+hxWxaGf8Tmg/GT1NxJo6EYwTSNRZpGDZxx
+        XF0/A6Esrfzw7wqn6RPo3Dsi2gMAAA==
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Sat, 08 Oct 2016 19:59:34 GMT']
+      ETag: ['"8e335c3b43fb1864f2d7845191dfcc24--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [1e96bcaf-9dda-48c4-b1ff-5b5282d7f691]
+      X-Runtime: ['0.012000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

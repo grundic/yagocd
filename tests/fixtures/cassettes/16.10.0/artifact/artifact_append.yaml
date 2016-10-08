@@ -1,0 +1,26 @@
+interactions:
+- request:
+    body: !!binary |
+      LS04Zjc2OGUyYWJjODE0MTg3YjNiMGM2ZDk3NmExNDEyNQ0KQ29udGVudC1EaXNwb3NpdGlvbjog
+      Zm9ybS1kYXRhOyBuYW1lPSJmaWxlIjsgZmlsZW5hbWU9ImFydGlmYWN0LWFwcGVuZC50eHQiDQoN
+      CkRhdGEgdG8gYXBwZW5kLg0KLS04Zjc2OGUyYWJjODE0MTg3YjNiMGM2ZDk3NmExNDEyNS0tDQo=
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['170']
+      Content-Type: [multipart/form-data; boundary=8f768e2abc814187b3b0c6d976a14125]
+      Cookie: [JSESSIONID=1i3glajt5c6ql1k3t5g094prrv]
+      User-Agent: [python-requests/2.11.1]
+    method: PUT
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file-append.txt
+  response:
+    body: {string: File path/to/the/file-append.txt was appended successfully}
+    headers:
+      Content-Language: [en-US]
+      Content-Length: ['58']
+      Content-Type: [text/plain; charset=UTF-8]
+      Date: ['Sat, 08 Oct 2016 19:58:37 GMT']
+    status: {code: 200, message: OK}
+version: 1
