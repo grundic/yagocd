@@ -44,6 +44,7 @@ from yagocd.resources.plugin_info import PluginInfoManager
 from yagocd.resources.property import PropertyManager
 from yagocd.resources.scm import SCMManager
 from yagocd.resources.stage import StageManager
+from yagocd.resources.template import TemplateManager
 from yagocd.resources.user import UserManager
 from yagocd.resources.version import VersionManager
 from yagocd.session import Session
@@ -222,6 +223,15 @@ class Yagocd(object):
         :rtype: yagocd.resources.stage.StageManager
         """
         return StageManager(session=self._session)
+
+    @property
+    def templates(self):
+        """
+        Property for accessing :class:`TemplateManager` instance, which is used to manage templates.
+
+        :rtype: yagocd.resources.template.TemplateManager
+        """
+        return TemplateManager(session=self._session)
 
     @property
     def users(self):

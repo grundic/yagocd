@@ -116,6 +116,14 @@ yagocd.resources.stage module
     :undoc-members:
     :show-inheritance:
 
+yagocd.resources.template module
+--------------------------------
+
+.. automodule:: yagocd.resources.template
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 yagocd.resources.user module
 ----------------------------
 

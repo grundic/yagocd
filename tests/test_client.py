@@ -43,6 +43,7 @@ from yagocd.resources import (
     property as prop,
     scm,
     stage,
+    template,
     user,
     version
 )
@@ -123,6 +124,9 @@ class TestManagers(object):
 
     def test_stages(self, go_fixture):
         assert isinstance(go_fixture.stages, stage.StageManager)
+
+    def test_templates(self, go_fixture):
+        assert isinstance(go_fixture.templates, template.TemplateManager)
 
     def test_users(self, go_fixture):
         assert isinstance(go_fixture.users, user.UserManager)

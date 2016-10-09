@@ -1,0 +1,50 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJzdGFnZXMiOiBbeyJjbGVhbl93b3JraW5nX2RpcmVjdG9yeSI6IGZhbHNlLCAibmFtZSI6ICJm
+      b28tc3RhZ2UiLCAiam9icyI6IFt7InJ1bl9pbnN0YW5jZV9jb3VudCI6IG51bGwsICJuYW1lIjog
+      ImZvby1qb2IiLCAiZW52aXJvbm1lbnRfdmFyaWFibGVzIjogW10sICJ0aW1lb3V0IjogMCwgInJl
+      c291cmNlcyI6IFtdLCAidGFza3MiOiBbeyJ0eXBlIjogImV4ZWMiLCAiYXR0cmlidXRlcyI6IHsi
+      d29ya2luZ19kaXJlY3RvcnkiOiBudWxsLCAiY29tbWFuZCI6ICJscyJ9fV19XSwgImVudmlyb25t
+      ZW50X3ZhcmlhYmxlcyI6IFtdLCAibmV2ZXJfY2xlYW51cF9hcnRpZmFjdHMiOiBmYWxzZSwgImZl
+      dGNoX21hdGVyaWFscyI6IHRydWV9XSwgIm5hbWUiOiAiZm9vIn0=
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['380']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=1i3glajt5c6ql1k3t5g094prrv]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: http://localhost:8153/go/api/admin/templates
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWT3W7bMAyF7/0UgXeb1hiKAUNeZQgERaZtLTJpSFS6rvC7l1Yc1z/pcrE7U/x0
+        eHRkvWe7Xa6cxXPID7t3qaQO4KqpkrrxMNR5w9wdisKR0a6hwIef33+8FDUVurOFLluLBUPbOc0Q
+        ioooTwL9/qpakvlKNIiqaDzX9GzK4ttN5MkQVrZeylQWy/82d7h9KtQtjAOycUie1kRyOEJaCKxr
+        GAL6lchp9gx8Sky+v7UqYNOoVkZ4q92wl32EqW0caFSv5M8Wa1VaD4bJvwlWCf3JIVzAq0THTmnP
+        ttKGw4bTXefpot0sGVnlty75C9EYCGFyN2yI3JC3fzVbwsUuaXpy43Fnq8f9HIkB/BaZvvvxq58c
+        Al6sJ2wBWV20hHJazZj08990+gx7HvgmdCHzhS0fUVmUu0ADylBEFhSjcwuKbQsUh9Y14KXGQ6fb
+        NDwEit48wliH8/Jk69NdsfHa4A+YhbXU1czeniJDWF3bPIJqbeSOnZEnVGaIy91JakQMta1Ozy53
+        YeNIgHs/8qC1Ivvsq2qd0+lBkvOX8A9MHkUHgqasFoZuw4/T2z9mffYByGki5w8FAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Sun, 09 Oct 2016 11:20:16 GMT']
+      ETag: ['"72b81adc4237c0cfd41d0419768d6822--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=kkiwznw2b4fxy031bhufke6e;Path=/go;Expires=Sun, 23-Oct-2016
+          11:20:16 GMT;HttpOnly']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [e123c86f-0c24-4efb-9049-25e6240d4bf4]
+      X-Runtime: ['0.384000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

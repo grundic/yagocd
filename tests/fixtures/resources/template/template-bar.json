@@ -1,0 +1,30 @@
+{
+    "name": "bar",
+    "stages": [
+        {
+            "name": "bar-stage",
+            "fetch_materials": true,
+            "clean_working_directory": false,
+            "never_cleanup_artifacts": false,
+            "environment_variables": [],
+            "jobs": [
+                {
+                    "name": "bar-job",
+                    "run_instance_count": null,
+                    "timeout": 0,
+                    "environment_variables": [],
+                    "resources": [],
+                    "tasks": [
+                        {
+                            "type": "exec",
+                            "attributes": {
+                                "command": "ls",
+                                "working_directory": null
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
