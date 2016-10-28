@@ -36,6 +36,7 @@ from tests import AbstractTestManager, ConfirmHeaderMixin, RequestContentTypeHea
 from yagocd.exception import RequestError
 from yagocd.resources import material
 from yagocd.resources import pipeline
+from yagocd.resources import stage
 
 
 @pytest.fixture()
@@ -566,6 +567,14 @@ class TestValueStreamMap(BaseTestPipelineManager, AbstractTestManager, ReturnVal
             assert all(isinstance(i, (pipeline.PipelineInstance, material.ModificationEntity)) for i in result)
 
         return check_value
+
+    def test_stages(self, _execute_test_action):
+        _, result = _execute_test_action
+        for item in result:
+            assert hasattr(item, 'data')
+            if isinstance(item, pipeline.PipelineInstance):
+                assert all(isinstance(s, dict) for s in item.data.stages)
+                assert all(isinstance(s, stage.StageInstance) for s in item.stages())
 
 
 class TestMagicMethods(object):

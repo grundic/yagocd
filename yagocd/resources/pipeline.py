@@ -375,31 +375,29 @@ class PipelineManager(BaseManager):
         nodes = list()
         dependencies = dict()
 
-        for level in data.levels:
+        for level in data['levels']:
             for node_item in level.nodes:
                 dependencies[node_item.id] = node_item.parents
 
                 if node_item.node_type == 'PIPELINE':
                     for instance in node_item.instances:
-                        pipeline_data = EasyDict({
-                            'id': node_item.id,
-                            'name': node_item.name,
-                            'counter': instance.counter,
-                            'label': instance.label,
-                            'type': node_item.node_type.capitalize(),
-                            'stages': []
-                        })
+                        pipeline_data = dict(
+                            id=node_item.id,
+                            name=node_item.name,
+                            counter=instance.counter,
+                            label=instance.label,
+                            type=node_item.node_type.capitalize(),
+                            stages=[]
+                        )
 
                         for stage in instance.stages:
-                            stage_data = EasyDict({
-                                'pipeline_name': node_item.name,
-                                'pipeline_counter': instance.counter,
-                                'name': stage.name,
-                                'status': stage.status,
-                            })
-                            pipeline_data.stages.append(
-                                StageInstance(session=self._session, data=stage_data, pipeline=None)
+                            stage_data = dict(
+                                pipeline_name=node_item.name,
+                                pipeline_counter=instance.counter,
+                                name=stage.name,
+                                status=stage.status
                             )
+                            pipeline_data['stages'].append(stage_data)
 
                         nodes.append(PipelineInstance(session=self._session, data=pipeline_data))
                 elif node_item.node_type in ['GIT', 'MERCURIAL', 'SUBVERSION']:
