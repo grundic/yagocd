@@ -72,24 +72,30 @@ class YagocdUtil(object):
 
 
 class Since(object):
+    # Parameter for controlling version compatibility checks.
+    # Setting this to `False` will skip checking the server
+    # version on each function call.
+    ENABLED = True
+
     def __init__(self, since_version):
         self._since_version = LooseVersion(since_version)
 
     def __call__(self, entity):
         @functools.wraps(entity)
         def decorated(*args, **kwargs):
-            this = args[0]
-            server_version = this._session.server_version
-            if LooseVersion(server_version) < self._since_version:
-                name = "{}.{}".format(this.__class__.__name__, entity.__name__)
-                raise RuntimeError(
-                    "Method `{name}` is not supported on '{server_version}' "
-                    "version of GoCD, it has been added only in '{since_version}' version!".format(
-                        name=name,
-                        server_version=server_version,
-                        since_version=self._since_version
+            if self.ENABLED:
+                this = args[0]
+                server_version = this._session.server_version
+                if LooseVersion(server_version) < self._since_version:
+                    name = "{}.{}".format(this.__class__.__name__, entity.__name__)
+                    raise RuntimeError(
+                        "Method `{name}` is not supported on '{server_version}' "
+                        "version of GoCD, it has been added only in '{since_version}' version!".format(
+                            name=name,
+                            server_version=server_version,
+                            since_version=self._since_version
+                        )
                     )
-                )
 
             return entity(*args, **kwargs)
 
