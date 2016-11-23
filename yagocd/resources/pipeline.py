@@ -395,7 +395,8 @@ class PipelineManager(BaseManager):
                                 pipeline_name=node_item.name,
                                 pipeline_counter=instance.counter,
                                 name=stage.name,
-                                status=stage.status
+                                status=stage.status,
+                                counter=stage.locator.split('/')[-1]
                             )
                             pipeline_data['stages'].append(stage_data)
 
