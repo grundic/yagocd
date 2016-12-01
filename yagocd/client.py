@@ -89,6 +89,25 @@ class Yagocd(object):
 
         self._session = Session(auth, merged)
 
+        # manager instances
+        self._agent_manager = None
+        self._artifact_manager = None
+        self._configuration_manager = None
+        self._environment_manager = None
+        self._feed_manager = None
+        self._job_manager = None
+        self._info_manager = None
+        self._material_manager = None
+        self._pipeline_manager = None
+        self._pipeline_config_manager = None
+        self._plugin_info_manager = None
+        self._property_manager = None
+        self._scm_manager = None
+        self._stage_manager = None
+        self._template_manager = None
+        self._user_manager = None
+        self._version_manager = None
+
     @property
     def server_url(self):
         """
@@ -105,7 +124,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.agent.AgentManager
         """
-        return AgentManager(session=self._session)
+        if self._agent_manager is None:
+            self._agent_manager = AgentManager(session=self._session)
+        return self._agent_manager
 
     @property
     def artifacts(self):
@@ -114,7 +135,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.artifact.ArtifactManager
         """
-        return ArtifactManager(session=self._session)
+        if self._artifact_manager is None:
+            self._artifact_manager = ArtifactManager(session=self._session)
+        return self._artifact_manager
 
     @property
     def configurations(self):
@@ -123,7 +146,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.configuration.ConfigurationManager
         """
-        return ConfigurationManager(session=self._session)
+        if self._configuration_manager is None:
+            self._configuration_manager = ConfigurationManager(session=self._session)
+        return self._configuration_manager
 
     @property
     def environments(self):
@@ -132,7 +157,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.environment.EnvironmentManager
         """
-        return EnvironmentManager(session=self._session)
+        if self._environment_manager is None:
+            self._environment_manager = EnvironmentManager(session=self._session)
+        return self._environment_manager
 
     @property
     def feeds(self):
@@ -141,7 +168,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.feed.FeedManager
         """
-        return FeedManager(session=self._session)
+        if self._feed_manager is None:
+            self._feed_manager = FeedManager(session=self._session)
+        return self._feed_manager
 
     @property
     def jobs(self):
@@ -150,7 +179,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.job.JobManager
         """
-        return JobManager(session=self._session)
+        if self._job_manager is None:
+            self._job_manager = JobManager(session=self._session)
+        return self._job_manager
 
     @property
     def info(self):
@@ -159,7 +190,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.info.InfoManager
         """
-        return InfoManager(session=self._session)
+        if self._info_manager is None:
+            self._info_manager = InfoManager(session=self._session)
+        return self._info_manager
 
     @property
     def materials(self):
@@ -168,7 +201,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.material.MaterialManager
         """
-        return MaterialManager(session=self._session)
+        if self._material_manager is None:
+            self._material_manager = MaterialManager(session=self._session)
+        return self._material_manager
 
     @property
     def pipelines(self):
@@ -177,7 +212,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.pipeline.PipelineManager
         """
-        return PipelineManager(session=self._session)
+        if self._pipeline_manager is None:
+            self._pipeline_manager = PipelineManager(session=self._session)
+        return self._pipeline_manager
 
     @property
     def pipeline_configs(self):
@@ -186,7 +223,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.pipeline_config.PipelineConfigManager
         """
-        return PipelineConfigManager(session=self._session)
+        if self._pipeline_config_manager is None:
+            self._pipeline_config_manager = PipelineConfigManager(session=self._session)
+        return self._pipeline_config_manager
 
     @property
     def plugin_info(self):
@@ -195,7 +234,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.plugin_info.PluginInfoManager
         """
-        return PluginInfoManager(session=self._session)
+        if self._plugin_info_manager is None:
+            self._plugin_info_manager = PluginInfoManager(session=self._session)
+        return self._plugin_info_manager
 
     @property
     def properties(self):
@@ -204,7 +245,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.property.PropertyManager
         """
-        return PropertyManager(session=self._session)
+        if self._property_manager is None:
+            self._property_manager = PropertyManager(session=self._session)
+        return self._property_manager
 
     @property
     def scms(self):
@@ -213,7 +256,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.scm.SCMManager
         """
-        return SCMManager(session=self._session)
+        if self._scm_manager is None:
+            self._scm_manager = SCMManager(session=self._session)
+        return self._scm_manager
 
     @property
     def stages(self):
@@ -222,7 +267,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.stage.StageManager
         """
-        return StageManager(session=self._session)
+        if self._stage_manager is None:
+            self._stage_manager = StageManager(session=self._session)
+        return self._stage_manager
 
     @property
     def templates(self):
@@ -231,7 +278,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.template.TemplateManager
         """
-        return TemplateManager(session=self._session)
+        if self._template_manager is None:
+            self._template_manager = TemplateManager(session=self._session)
+        return self._template_manager
 
     @property
     def users(self):
@@ -240,7 +289,9 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.user.UserManager
         """
-        return UserManager(session=self._session)
+        if self._user_manager is None:
+            self._user_manager = UserManager(session=self._session)
+        return self._user_manager
 
     @property
     def versions(self):
@@ -249,4 +300,6 @@ class Yagocd(object):
 
         :rtype: yagocd.resources.version.VersionManager
         """
-        return VersionManager(session=self._session)
+        if self._version_manager is None:
+            self._version_manager = VersionManager(session=self._session)
+        return self._version_manager
