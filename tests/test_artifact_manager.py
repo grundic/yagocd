@@ -30,8 +30,7 @@ import zipfile
 
 import mock
 import pytest
-from six import BytesIO
-from six import binary_type, string_types
+from six import binary_type, BytesIO, string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import artifact

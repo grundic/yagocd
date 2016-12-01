@@ -30,8 +30,7 @@ import json
 
 import pytest
 
-from yagocd.resources import Base
-from yagocd.resources import agent
+from yagocd.resources import agent, Base
 
 
 class TestAgentEntity(object):
