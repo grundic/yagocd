@@ -15,9 +15,10 @@ unzip -o -d /var/lib/go-server/artifacts /tmp/artifacts.zip
 
 cp passwd /var/lib/go-server/
 
-# install plugin for testing pluggable SCM materials
+# install some plugin, required for some API calls
 mkdir -p /var/lib/go-server/plugins/external/
-cp github-pr-poller-1.2.4.jar /var/lib/go-server/plugins/external/github-pr-poller-1.2.4.jar
+cp github-pr-poller-1.2.4.jar /var/lib/go-server/plugins/external/
+cp docker-elastic-agents-0.6.1.jar /var/lib/go-server/plugins/external/
 
 chown -R go:go /var/lib/go-server/ /etc/go/
 

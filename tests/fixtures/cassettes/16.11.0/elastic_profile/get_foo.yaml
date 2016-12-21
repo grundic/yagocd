@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=s71x4ohoqbycodz3z34ot2z4]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: http://localhost:8153/go/api/elastic/profiles/foo
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWQzWrDMBCE734Ko15ji1IKwZCDD4b+EFJo6aUtRpFkW7GiFZJsKCHvXslRUlza
+        U287C/vN7BySNEW1FKq3qEgPXnltuWwuyuvO8KBR55wuMJZAiezAumJ5fXuDW8BEC8wlsU5QrA00
+        QnKLGwA0EY6LE5YB/YtqPdZD8hZyyvBVZGWk5cplZ+Kc1gjF/h+yiFMtWMQn0QKJgEfhi0lqObRC
+        1actZVNUUM6IbT6Lm/s3e27ikQHNjRM8tPs2GVwC9/wzoO73/gwtztuRyIGHfQuURQMc5ozxMdsO
+        QrJZDz9xlRqFAbX3SX6BPpSvZX23WVcrDNrhHRnJu1qXj1W9eXp5XmW75XcLH8kx+QL2iR2MHwIA
+        AA==
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Wed, 21 Dec 2016 14:11:42 GMT']
+      ETag: ['"d4c896b5bb7f0728e7e6835c6af2fdbd--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [cbbae303-9698-46ed-91c7-5a7cb984c776]
+      X-Runtime: ['0.013000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

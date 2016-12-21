@@ -33,6 +33,7 @@ from yagocd.resources import BaseManager
 from yagocd.resources.agent import AgentManager
 from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.configuration import ConfigurationManager
+from yagocd.resources.elastic_profile import ElasticAgentProfileManager
 from yagocd.resources.environment import EnvironmentManager
 from yagocd.resources.feed import FeedManager
 from yagocd.resources.info import InfoManager
@@ -93,6 +94,7 @@ class Yagocd(object):
         self._agent_manager = None
         self._artifact_manager = None
         self._configuration_manager = None
+        self._elastic_agent_profile_manager = None
         self._environment_manager = None
         self._feed_manager = None
         self._job_manager = None
@@ -149,6 +151,18 @@ class Yagocd(object):
         if self._configuration_manager is None:
             self._configuration_manager = ConfigurationManager(session=self._session)
         return self._configuration_manager
+
+    @property
+    def elastic_profiles(self):
+        """
+        Property for accessing :class:`ElasticAgentProfileManager` instance,
+        which is used to manage elastic agent profiles.
+
+        :rtype: yagocd.resources.elastic_profile.ElasticAgentProfileManager
+        """
+        if self._elastic_agent_profile_manager is None:
+            self._elastic_agent_profile_manager = ElasticAgentProfileManager(session=self._session)
+        return self._elastic_agent_profile_manager
 
     @property
     def environments(self):
