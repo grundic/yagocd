@@ -180,7 +180,13 @@ class TestDelete(AbstractTestManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_value(self):
-        return "User '{}' was deleted successfully.".format(self.USERNAME)
+        def check_value(result):
+            assert result in [
+                "User '{}' was deleted successfully.".format(self.USERNAME),
+                "The user '{}' was deleted successfully.".format(self.USERNAME),
+            ]
+
+        return check_value
 
 
 class TestMagicMethods(object):

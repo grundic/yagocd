@@ -1,0 +1,36 @@
+interactions:
+- request:
+    body: !!binary |
+      cmVwb3NpdG9yeV91cmw9aHR0cHMlM0ElMkYlMkZnaXRodWIuY29tJTJGZ3J1bmRpYyUyRnlhZ29j
+      ZC5naXQ=
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Confirm: ['true']
+      Connection: [keep-alive]
+      Content-Length: ['62']
+      Content-Type: [application/x-www-form-urlencoded]
+      Cookie: [JSESSIONID=alp4kizyr30d8ac3l0bhjo0r]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: http://localhost:8153/go/api/material/notify/git
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAB3LMQ6AIBBE0d5TTKkNZ7HwAhsYA3EFwoJeX2L93z8icUtnS6JIhlxemI8MQxlw
+        lgbJGDVM4rArxYiZ/YVG5SO5o6ZKTZmrbf9gXfowt3xdtt6aWwAAAA==
+    headers:
+      Cache-Control: [no-cache]
+      Content-Encoding: [gzip]
+      Content-Type: [text/plain; charset=UTF-8]
+      Date: ['Wed, 21 Dec 2016 15:15:40 GMT']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [b06b1765-b695-4f86-b6e9-81fd13377aeb]
+      X-Runtime: ['0.093000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 202, message: Accepted}
+version: 1

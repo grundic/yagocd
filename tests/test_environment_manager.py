@@ -207,7 +207,10 @@ class TestDelete(BaseManager, ReturnValueMixin):
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result == "Environment '{}' was deleted successfully.".format(self.NAME)
+            assert result in [
+                "Environment '{}' was deleted successfully.".format(self.NAME),
+                "The environment '{}' was deleted successfully.".format(self.NAME),
+            ]
 
         return check_value
 

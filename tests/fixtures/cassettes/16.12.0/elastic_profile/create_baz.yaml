@@ -1,0 +1,45 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJwcm9wZXJ0aWVzIjogW3sidmFsdWUiOiAiZ29jZGNvbnRyaWIvZ29jZC1kZXYtYnVpbGQiLCAi
+      a2V5IjogIkltYWdlIn0sIHsidmFsdWUiOiAiSkFWQV9IT01FPS9vcHQvamF2YVxuTUFLRV9PUFRT
+      PS1qOCIsICJrZXkiOiAiRW52aXJvbm1lbnQifV0sICJpZCI6ICJiYXoiLCAicGx1Z2luX2lkIjog
+      ImNkLmdvLmNvbnRyaWIuZWxhc3RpYy1hZ2VudC5kb2NrZXIifQ==
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['208']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=alp4kizyr30d8ac3l0bhjo0r]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: http://localhost:8153/go/api/elastic/profiles
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWQzWrDMBCE734Ko15ji1IKwZCDD4b+EFJo6aUtRrZke2NFEpJsaEPevZKjJLi0
+        p952Fvab2dlHcYxKDqI3KIv3TjltGG/OyulOM69RZ63KMOayJryTxmbL69sb3EpMFGDGibFQY6Vl
+        A5wZXJEvNBEOiyOWyvovqnFYB0lbmdYUXwVWQlombHIizmkNCPr/kFmYSqABHwULBB6P/BeTVHxo
+        QZTHbU2nqFJYDVU6i5u6N3umw5GWimkLzLf7NhmcA/fs06Pud+4MLU7bkfCB+X0raxoMsJ8Tysak
+        GoDTWQ8/cYUYQUuxc0l+gT7kr3l5t1kXKyyVxVsyknexzh+LcvP08rxKtstLCx/RIfoGvBNz4x8C
+        AAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Thu, 22 Dec 2016 09:53:17 GMT']
+      ETag: ['"5cb10e67b27dca60cb8cefe76e5cbf33--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=oq39v7ff6h4d7fxyy19v8lkb;Path=/go;Expires=Thu, 05-Jan-2017
+          09:53:17 GMT;HttpOnly']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [c7cd1364-2656-4cea-98ed-6028116cf193]
+      X-Runtime: ['0.128000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

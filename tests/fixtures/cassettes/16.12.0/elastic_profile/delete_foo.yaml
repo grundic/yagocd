@@ -1,0 +1,33 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      Cookie: [JSESSIONID=om82eshz113k1rfz57c9qk6uh]
+      User-Agent: [python-requests/2.12.3]
+    method: DELETE
+    uri: http://localhost:8153/go/api/elastic/profiles/foo
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAA3LQQqAIBAF0L2n+MzGXQfoHF1A9FvClNEoEdHdc/vgvQ6QnWZhpcyQZSOowVqJ
+        GHQ0nFfNRQmfa/W4gyFR2ZhgPcYxc1d9JnGf+wHZf1KUTQAAAA==
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Thu, 22 Dec 2016 09:53:18 GMT']
+      ETag: ['"1916df24354fdb1975d016c433dd2271--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [24c9d685-4039-4cb7-8663-ebb0fde62fc9]
+      X-Runtime: ['0.087000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

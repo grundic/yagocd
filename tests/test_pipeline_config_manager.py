@@ -181,7 +181,13 @@ class TestDelete(BaseTestPipelineConfigManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_value(self):
-        return "Pipeline '{}' was deleted successfully.".format(self.PIPELINE_NAME)
+        def check_value(result):
+            assert result in [
+                "Pipeline '{}' was deleted successfully.".format(self.PIPELINE_NAME),
+                "The pipeline '{}' was deleted successfully.".format(self.PIPELINE_NAME),
+            ]
+
+        return check_value
 
 
 class TestMagicMethods(object):

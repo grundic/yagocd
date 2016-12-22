@@ -1,0 +1,26 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=alp4kizyr30d8ac3l0bhjo0r]
+      User-Agent: [python-requests/2.12.3]
+    method: GET
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/.zip
+  response:
+    body:
+      string: !!binary |
+        UEsDBBQACAgIAOR5lUkAAAAAAAAAAAAAAAADAAAAdG8vAwBQSwcIAAAAAAIAAAAAAAAAUEsDBBQA
+        CAgIAOR5lUkAAAAAAAAAAAAAAAAHAAAAdG8vdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIUABQA
+        CAgIAOR5lUkAAAAAAgAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAB0by9QSwECFAAUAAgICADkeZVJ
+        AAAAAAIAAAAAAAAABwAAAAAAAAAAAAAAAAAzAAAAdG8vdGhlL1BLBQYAAAAAAgACAGYAAABqAAAA
+        AAA=
+    headers:
+      Content-Language: [en-US]
+      Content-Type: [application/zip]
+      Date: ['Wed, 21 Dec 2016 15:15:11 GMT']
+    status: {code: 200, message: OK}
+version: 1

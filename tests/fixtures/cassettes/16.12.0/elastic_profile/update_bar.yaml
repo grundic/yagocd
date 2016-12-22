@@ -1,0 +1,46 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJwcm9wZXJ0aWVzIjogW3sidmFsdWUiOiAiZ29jZGNvbnRyaWIvZ29jZC1kZXYtYnVpbGQiLCAi
+      a2V5IjogIkltYWdlIn0sIHsidmFsdWUiOiAidXBkYXRlZC12YWx1ZSIsICJrZXkiOiAiRW52aXJv
+      bm1lbnQifV0sICJpZCI6ICJiYXIiLCAicGx1Z2luX2lkIjogImNkLmdvLmNvbnRyaWIuZWxhc3Rp
+      Yy1hZ2VudC5kb2NrZXIiLCAiX2xpbmtzIjogeyJkb2MiOiB7ImhyZWYiOiAiaHR0cHM6Ly9hcGku
+      Z28uY2QvI2VsYXN0aWMtYWdlbnQtcHJvZmlsZXMifSwgInNlbGYiOiB7ImhyZWYiOiAiaHR0cDov
+      L2xvY2FsaG9zdDo4MTUzL2dvL2FwaS9lbGFzdGljL3Byb2ZpbGVzL2JhciJ9LCAiZmluZCI6IHsi
+      aHJlZiI6ICJodHRwOi8vbG9jYWxob3N0OjgxNTMvZ28vYXBpL2VsYXN0aWMvcHJvZmlsZXMvOnBy
+      b2ZpbGVfaWQifX19
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['411']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=om82eshz113k1rfz57c9qk6uh]
+      If-Match: ['"b2152b1cf57ac8f43f368fc47fe78cfd--gzip"']
+      User-Agent: [python-requests/2.12.3]
+    method: PUT
+    uri: http://localhost:8153/go/api/elastic/profiles/bar
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWQQWvEIBCF7/kVwV7XSCmFknsP/Q1LCUYnZoiroiZQlv3v1cQEUtpTb/MezDfv
+        zb2qa9JpNFMgbX1PKukAejhU0qOHrMkYo2sZ01ZwPdoQ27fn1xemLOMOGWgeIgrmvB1QQ2A992Ql
+        PC4bVlrxFzUkbII0yjZCsqfColyBiXQnnmkDGvn/kG2ZOpQFX5UTBDOe5BardHpWaLrNFXKNak30
+        2DenuE2qOcG+5K0DHxHyd6/rgSPwBF8Z9XFLa+SyuwvXM2RfWSHLAZZnKmGh/Yxanv7wE/duFvTW
+        3FKSX6CzkzyCpJtxFP6sHtU3/fJUVwoCAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Thu, 22 Dec 2016 09:53:17 GMT']
+      ETag: ['"ea81560a58d1e7c3d4ccd7b51b88d483--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [76e38781-43a3-4920-81ff-7496ebd9352e]
+      X-Runtime: ['0.133000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

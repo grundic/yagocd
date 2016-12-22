@@ -7,7 +7,7 @@ interactions:
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
       Content-Length: ['0']
-      Cookie: [JSESSIONID=s71x4ohoqbycodz3z34ot2z4]
+      Cookie: [JSESSIONID=15ffp6p4p5ltj1el2g7chytvdt]
       User-Agent: [python-requests/2.12.3]
     method: DELETE
     uri: http://localhost:8153/go/api/elastic/profiles/foo
@@ -20,13 +20,13 @@ interactions:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
       Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Wed, 21 Dec 2016 14:17:34 GMT']
+      Date: ['Thu, 22 Dec 2016 10:17:32 GMT']
       ETag: ['"1916df24354fdb1975d016c433dd2271--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
       X-Content-Type-Options: [nosniff]
       X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [df9adb46-4dcc-42a6-9b80-f85ab3b2d7d1]
-      X-Runtime: ['0.066000']
+      X-Request-Id: [a1c666f4-1c19-4adf-a1b9-35fd0af22540]
+      X-Runtime: ['0.087000']
       X-UA-Compatible: [chrome=1]
       X-XSS-Protection: [1; mode=block]
     status: {code: 200, message: OK}

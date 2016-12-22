@@ -56,8 +56,8 @@ class BaseManager(AbstractTestManager):
                 "id": "bar",
                 "plugin_id": "cd.go.contrib.elastic-agent.docker",
                 "properties": [
-                    {"key": "mykey", "value": "myvalue"},
-                    {"key": "another-key", "value": "hello-value"}
+                    {"key": "Image", "value": "gocdcontrib/gocd-dev-build"},
+                    {"key": "Environment", "value": "JAVA_HOME=/opt/java\nMAKE_OPTS=-j8"},
                 ]
             })
 
@@ -135,7 +135,10 @@ class TestCreate(BaseManager, ReturnValueMixin):
             return cass, manager.create(dict(
                 id=self.ID,
                 plugin_id="cd.go.contrib.elastic-agent.docker",
-                properties=[{"key": "foo", "value": "bar"}]
+                properties=[
+                    {"key": "Image", "value": "gocdcontrib/gocd-dev-build"},
+                    {"key": "Environment", "value": "JAVA_HOME=/opt/java\nMAKE_OPTS=-j8"},
+                ]
             ))
 
     @pytest.fixture()
@@ -159,8 +162,8 @@ class TestCreate(BaseManager, ReturnValueMixin):
     def expected_return_value(self):
         def check_value(result):
             assert result[0].data.id == self.ID
-            assert result[0].data.properties[0].key == 'foo'
-            assert result[0].data.properties[0].value == 'bar'
+            assert result[0].data.properties[0].key == 'Image'
+            assert result[0].data.properties[0].value == 'gocdcontrib/gocd-dev-build'
 
         return check_value
 

@@ -1,0 +1,28 @@
+interactions:
+- request:
+    body: !!binary |
+      LS1lNWMzYmZiMThkZTQ0N2IyYWM4NTFjODllZjFlMmIwYg0KQ29udGVudC1EaXNwb3NpdGlvbjog
+      Zm9ybS1kYXRhOyBuYW1lPSJmaWxlIjsgZmlsZW5hbWU9ImFydGlmYWN0LnR4dCINCg0KU2FtcGxl
+      IHRlc3QgZGF0YS4KRm9vIGFuZCBCYXIuDQotLWU1YzNiZmIxOGRlNDQ3YjJhYzg1MWM4OWVmMWUy
+      YjBiLS0NCg==
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Confirm: ['true']
+      Connection: [keep-alive]
+      Content-Length: ['178']
+      Content-Type: [multipart/form-data; boundary=e5c3bfb18de447b2ac851c89ef1e2b0b]
+      Cookie: [JSESSIONID=alp4kizyr30d8ac3l0bhjo0r]
+      User-Agent: [python-requests/2.12.3]
+    method: POST
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file.txt
+  response:
+    body: {string: File path/to/the/file.txt was created successfully}
+    headers:
+      Content-Language: [en-US]
+      Content-Length: ['50']
+      Content-Type: [text/plain; charset=UTF-8]
+      Date: ['Wed, 21 Dec 2016 15:15:12 GMT']
+    status: {code: 201, message: Created}
+version: 1
