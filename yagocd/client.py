@@ -39,6 +39,7 @@ from yagocd.resources.feed import FeedManager
 from yagocd.resources.info import InfoManager
 from yagocd.resources.job import JobManager
 from yagocd.resources.material import MaterialManager
+from yagocd.resources.package_repository import PackageRepositoryManager
 from yagocd.resources.pipeline import PipelineManager
 from yagocd.resources.pipeline_config import PipelineConfigManager
 from yagocd.resources.plugin_info import PluginInfoManager
@@ -100,6 +101,7 @@ class Yagocd(object):
         self._job_manager = None
         self._info_manager = None
         self._material_manager = None
+        self._package_repository_manager = None
         self._pipeline_manager = None
         self._pipeline_config_manager = None
         self._plugin_info_manager = None
@@ -218,6 +220,17 @@ class Yagocd(object):
         if self._material_manager is None:
             self._material_manager = MaterialManager(session=self._session)
         return self._material_manager
+
+    @property
+    def package_repositories(self):
+        """
+        Property for accessing :class:`PackageRepositoryManager` instance, which is used to manage pipelines.
+
+        :rtype: yagocd.resources.package_repository.PackageRepositoryManager
+        """
+        if self._package_repository_manager is None:
+            self._package_repository_manager = PackageRepositoryManager(session=self._session)
+        return self._package_repository_manager
 
     @property
     def pipelines(self):

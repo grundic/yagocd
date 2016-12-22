@@ -52,7 +52,7 @@ class ElasticAgentProfileManager(BaseManager):
 
     def __getitem__(self, profile_id):
         """
-        Method add possibility to get plugin info by the name using dictionary like syntax.
+        Method add possibility to get elastic agent by the name using dictionary like syntax.
 
         :param profile_id: id of the elastic profile to get the info.
         :rtype: yagocd.resources.elastic_profile.ElasticAgentProfile
@@ -82,7 +82,7 @@ class ElasticAgentProfileManager(BaseManager):
         Gets elastic agent profile config for specified profile.
 
         :param profile_id: id of the elastic agent profile to get.
-        :rtype: yagocd.resources.elastic_profile.ElasticAgentProfile
+        :rtype: (yagocd.resources.elastic_profile.ElasticAgentProfile, str)
         """
         response = self._session.get(
             path='{base_api}/elastic/profiles/{profile_id}'.format(
