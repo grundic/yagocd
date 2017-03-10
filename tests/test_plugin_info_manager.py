@@ -25,6 +25,8 @@
 # THE SOFTWARE.
 #
 ###############################################################################
+from distutils.version import LooseVersion
+
 import pytest
 from mock import mock
 
@@ -37,7 +39,16 @@ def manager(session_fixture):
     return plugin_info.PluginInfoManager(session=session_fixture)
 
 
-class TestList(AbstractTestManager, ReturnValueMixin):
+class BaseTestPluginInfoManager(AbstractTestManager):
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        if LooseVersion(server_version) <= LooseVersion('16.11.0'):
+            return 'application/vnd.go.cd.v1+json'
+        else:
+            return 'application/vnd.go.cd.v2+json'
+
+
+class TestList(BaseTestPluginInfoManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("plugin_info/list") as cass:
@@ -63,7 +74,7 @@ class TestList(AbstractTestManager, ReturnValueMixin):
         return check_value
 
 
-class TestGet(AbstractTestManager, ReturnValueMixin):
+class TestGet(BaseTestPluginInfoManager, ReturnValueMixin):
     NAME = 'yum'
 
     @pytest.fixture()

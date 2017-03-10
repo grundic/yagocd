@@ -40,6 +40,12 @@ class PluginInfoManager(BaseManager):
     :versionadded: 16.7.0.
     """
 
+    ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
+
+    VERSION_TO_ACCEPT_HEADER = {
+        '16.11.0': 'application/vnd.go.cd.v1+json',
+    }
+
     def __iter__(self):
         """
         Method add iterator protocol for the manager.
@@ -64,7 +70,8 @@ class PluginInfoManager(BaseManager):
         :rtype: list of yagocd.resources.plugin_info.PluginInfo
         """
         response = self._session.get(
-            path='{base_api}/admin/plugin_info'.format(base_api=self.base_api)
+            path='{base_api}/admin/plugin_info'.format(base_api=self.base_api),
+            headers={'Accept': self._accept_header()},
         )
 
         result = list()
@@ -83,7 +90,8 @@ class PluginInfoManager(BaseManager):
         response = self._session.get(
             path='{base_api}/admin/plugin_info/{name}'.format(
                 base_api=self.base_api, name=name
-            )
+            ),
+            headers={'Accept': self._accept_header()},
         )
 
         return PluginInfo(session=self._session, data=response.json())
