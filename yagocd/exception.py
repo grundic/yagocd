@@ -41,7 +41,13 @@ class RequestError(YagocdException):
     """
 
     def __init__(self, summary, response):
+        """
+        :type summary: str
+        :type response: requests.models.Response
+        """
         self.summary = summary
+        self.response = response
+
         # noinspection PyBroadException
         try:
             self.json = response.json()
