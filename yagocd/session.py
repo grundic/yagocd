@@ -138,7 +138,3 @@ class Session(object):
             context_path if context_path is not None else self._options['context_path'],
             api_path if api_path is not None else self._options['api_path']
         )
-
-
-if __name__ == '__main__':
-    pass
