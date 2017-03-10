@@ -27,6 +27,7 @@
 ###############################################################################
 import json
 import time
+from distutils.version import LooseVersion
 
 from easydict import EasyDict
 
@@ -379,7 +380,9 @@ class PipelineManager(BaseManager):
             for node_item in level.nodes:
                 dependencies[node_item.id] = node_item.parents
 
-                if node_item.node_type == 'PIPELINE':
+                if node_item.node_type == 'DUMMY':  # WTF?!
+                    continue
+                elif node_item.node_type == 'PIPELINE':
                     for instance in node_item.instances:
                         pipeline_data = dict(
                             id=node_item.id,
@@ -401,15 +404,16 @@ class PipelineManager(BaseManager):
                             pipeline_data['stages'].append(stage_data)
 
                         nodes.append(PipelineInstance(session=self._session, data=pipeline_data))
-                elif node_item.node_type in ['GIT', 'MERCURIAL', 'SUBVERSION']:
-                    for instance in node_item.instances:
-                        instance['id'] = node_item.id
-                        instance['type'] = node_item.node_type.capitalize()
-                        nodes.append(ModificationEntity(session=self._session, data=instance))
-                elif node_item.node_type == 'DUMMY':  # WTF?!
-                    continue
                 else:
-                    raise RuntimeError('Unknown node type "{}"!'.format(node_item))
+                    if LooseVersion(self._session.server_version) <= LooseVersion('16.5.0'):
+                        modifications = [m for m in node_item.instances]
+                    else:
+                        modifications = [m for sublist in node_item.material_revisions for m in sublist.modifications]
+
+                    for modification in modifications:
+                            modification['id'] = node_item.id
+                            modification['type'] = node_item.node_type.capitalize()
+                            nodes.append(ModificationEntity(session=self._session, data=modification))
 
         return YagocdUtil.build_graph(
             nodes=nodes,
