@@ -570,11 +570,20 @@ class TestValueStreamMap(BaseTestPipelineManager, AbstractTestManager, ReturnVal
 
     def test_stages(self, _execute_test_action):
         _, result = _execute_test_action
+
+        assert any(isinstance(i, pipeline.PipelineInstance) for i in result)
+        assert any(isinstance(i, material.ModificationEntity) for i in result)
+
         for item in result:
             assert hasattr(item, 'data')
             if isinstance(item, pipeline.PipelineInstance):
                 assert all(isinstance(s, dict) for s in item.data.stages)
                 assert all(isinstance(s, stage.StageInstance) for s in item.stages())
+            elif isinstance(item, material.ModificationEntity):
+                hasattr(item.data, 'user')
+                hasattr(item.data, 'type')
+                hasattr(item.data, 'comment')
+                hasattr(item.data, 'revision')
 
 
 class TestMagicMethods(object):
