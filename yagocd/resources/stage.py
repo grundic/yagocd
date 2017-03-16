@@ -343,3 +343,46 @@ class StageInstance(Base):
         for job in self.jobs():
             if job.data.name == name:
                 return job
+
+
+class StageResult(object):
+    """
+    Enumeration of the Stage results.
+
+    These values are used to represent real status of a Stage.
+    Looks like they're calculated as aggregated value of each
+    Job's status.
+
+    :url: https://github.com/gocd/gocd/blob/master/domain/src/com/thoughtworks/go/domain/StageResult.java
+    """
+    Passed = 'Passed'
+    Failed = 'Failed'
+    Cancelled = 'Cancelled'
+    Unknown = 'Unknown'
+
+
+class StageState(object):
+    """
+    Enumeration of the Stage statuses.
+
+    These statuses are used to determine general status of a given Stage
+    from the status of it's Jobs. The values from this enum are used in
+    Jobs `state` parameter.
+
+    :url: https://github.com/gocd/gocd/blob/master/domain/src/com/thoughtworks/go/domain/StageState.java
+    """
+    Building = 'Building'
+    Failing = 'Failing'
+    Passed = 'Passed'
+    Failed = 'Failed'
+    Unknown = 'Unknown'
+    Cancelled = 'Cancelled'
+
+    StateToResult = {
+        Building: StageResult.Unknown,
+        Failing: StageResult.Failed,
+        Passed: StageResult.Passed,
+        Failed: StageResult.Failed,
+        Unknown: StageResult.Unknown,
+        Cancelled: StageResult.Cancelled,
+    }
