@@ -26,6 +26,8 @@
 #
 ###############################################################################
 
+import json
+import os
 import zipfile
 
 import mock
@@ -64,6 +66,43 @@ class BaseTestArtifactManager(object):
             stage_counter=self.STAGE_COUNTER,
             job_name=self.JOB_NAME
         )
+
+    def _get_artifact_json(self, tests_dir, session_fixture, name):
+        with open(os.path.join(tests_dir, 'fixtures/resources/artifact/{}.json'.format(name))) as f:
+            data = json.load(f)
+
+        return artifact.Artifact(session_fixture, data)
+
+    @pytest.fixture()
+    def artifact_all(
+        self,
+        artifact_another_directory,
+        artifact_cruise_output,
+        artifact_dummy_txt,
+        artifact_yet_another_directory,
+    ):
+        return [
+            artifact_another_directory,
+            artifact_cruise_output,
+            artifact_dummy_txt,
+            artifact_yet_another_directory,
+        ]
+
+    @pytest.fixture()
+    def artifact_another_directory(self, tests_dir, session_fixture):
+        return self._get_artifact_json(tests_dir, session_fixture, 'another-directory')
+
+    @pytest.fixture()
+    def artifact_cruise_output(self, tests_dir, session_fixture):
+        return self._get_artifact_json(tests_dir, session_fixture, 'cruise-output')
+
+    @pytest.fixture()
+    def artifact_dummy_txt(self, tests_dir, session_fixture):
+        return self._get_artifact_json(tests_dir, session_fixture, 'dummy.txt')
+
+    @pytest.fixture()
+    def artifact_yet_another_directory(self, tests_dir, session_fixture):
+        return self._get_artifact_json(tests_dir, session_fixture, 'yet-another-directory')
 
 
 class TestList(AbstractTestManager, BaseTestArtifactManager, ReturnValueMixin):
@@ -105,6 +144,227 @@ class TestList(AbstractTestManager, BaseTestArtifactManager, ReturnValueMixin):
             all(isinstance(i, artifact.Artifact) for i in result)
 
         return check_value
+
+
+class TestWalk(BaseTestArtifactManager):
+    def test_dummy_txt(self, artifact_dummy_txt):
+        """:type artifact_dummy_txt: artifact.Artifact"""
+        assert artifact_dummy_txt.data.type == 'file'
+        assert artifact_dummy_txt.data.name == 'dummy.txt'
+
+        assert artifact_dummy_txt.pipeline_name == self.PIPELINE_NAME
+        assert artifact_dummy_txt.pipeline_counter == '33'
+        assert artifact_dummy_txt.stage_name == self.STAGE_NAME
+        assert artifact_dummy_txt.stage_counter == self.STAGE_COUNTER
+        assert artifact_dummy_txt.job_name == self.JOB_NAME
+        assert artifact_dummy_txt.path == '/dummy.txt'
+
+        with pytest.raises(StopIteration):
+            next(artifact_dummy_txt.walk())
+
+    def test_another_directory(self, artifact_another_directory):
+        """:type artifact_another_directory: artifact.Artifact"""
+        assert artifact_another_directory.data.type == 'folder'
+        assert artifact_another_directory.data.name == 'another-directory'
+
+        assert artifact_another_directory.pipeline_name == self.PIPELINE_NAME
+        assert artifact_another_directory.pipeline_counter == '33'
+        assert artifact_another_directory.stage_name == self.STAGE_NAME
+        assert artifact_another_directory.stage_counter == self.STAGE_COUNTER
+        assert artifact_another_directory.job_name == self.JOB_NAME
+        assert artifact_another_directory.path == '/another-directory/'
+
+        assert ('/another-directory/', [], []) == next(artifact_another_directory.walk())
+
+    def test_yet_another_directory(self, artifact_yet_another_directory):
+        """:type artifact_yet_another_directory: artifact.Artifact"""
+        assert artifact_yet_another_directory.data.type == 'folder'
+        assert artifact_yet_another_directory.data.name == 'yet-another-directory'
+
+        walk_iter = artifact_yet_another_directory.walk()
+
+        next_item = next(walk_iter)
+        assert (
+                   '/yet-another-directory/',
+                   [
+                       '/yet-another-directory/sub-dir-1/',
+                       '/yet-another-directory/sub-dir-2/',
+                   ],
+                   [
+                       '/yet-another-directory/some-file.txt',
+                   ]
+               ) == (
+                   next_item[0],
+                   [f.path for f in next_item[1]],
+                   [f.path for f in next_item[2]],
+               )
+
+        next_item = next(walk_iter)
+        assert (
+                   '/yet-another-directory/sub-dir-1',
+                   ['/yet-another-directory/sub-dir-1/sub-dir-3/'],
+                   []
+               ) == (
+                   next_item[0],
+                   [f.path for f in next_item[1]],
+                   [f.path for f in next_item[2]],
+               )
+
+        next_item = next(walk_iter)
+        assert (
+                   '/yet-another-directory/sub-dir-1/sub-dir-3',
+                   [],
+                   [
+                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-1.txt',
+                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-3.txt',
+                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-5.txt',
+                   ]
+               ) == (
+                   next_item[0],
+                   [f.path for f in next_item[1]],
+                   [f.path for f in next_item[2]],
+               )
+
+        next_item = next(walk_iter)
+        assert (
+                   '/yet-another-directory/sub-dir-2',
+                   [],
+                   []
+               ) == (
+                   next_item[0],
+                   [f.path for f in next_item[1]],
+                   [f.path for f in next_item[2]],
+               )
+
+        with pytest.raises(StopIteration):
+            next(walk_iter)
+
+    def test_yet_another_directory_not_topdown(self, artifact_yet_another_directory):
+        """:type artifact_yet_another_directory: artifact.Artifact"""
+        assert artifact_yet_another_directory.data.type == 'folder'
+        assert artifact_yet_another_directory.data.name == 'yet-another-directory'
+
+        walk_iter = artifact_yet_another_directory.walk(topdown=False)
+
+        next_item = next(walk_iter)
+        assert (
+                   '/yet-another-directory/sub-dir-1/sub-dir-3',
+                   [],
+                   [
+                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-1.txt',
+                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-3.txt',
+                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-5.txt',
+                   ]
+               ) == (
+                   next_item[0],
+                   [f.path for f in next_item[1]],
+                   [f.path for f in next_item[2]],
+               )
+
+        next_item = next(walk_iter)
+        assert (
+                   '/yet-another-directory/sub-dir-1',
+                   ['/yet-another-directory/sub-dir-1/sub-dir-3/'],
+                   []
+               ) == (
+                   next_item[0],
+                   [f.path for f in next_item[1]],
+                   [f.path for f in next_item[2]],
+               )
+
+        next_item = next(walk_iter)
+        assert (
+                   '/yet-another-directory/sub-dir-2',
+                   [],
+                   []
+               ) == (
+                   next_item[0],
+                   [f.path for f in next_item[1]],
+                   [f.path for f in next_item[2]],
+               )
+
+        next_item = next(walk_iter)
+        assert (
+                   '/yet-another-directory/',
+                   [
+                       '/yet-another-directory/sub-dir-1/',
+                       '/yet-another-directory/sub-dir-2/',
+                   ],
+                   [
+                       '/yet-another-directory/some-file.txt',
+                   ]
+               ) == (
+                   next_item[0],
+                   [f.path for f in next_item[1]],
+                   [f.path for f in next_item[2]],
+               )
+
+        with pytest.raises(StopIteration):
+            next(walk_iter)
+
+
+class TestJsonWalk(BaseTestArtifactManager):
+    pass
+
+
+class TestGetChildren(BaseTestArtifactManager):
+    @pytest.mark.parametrize('top, expected', [
+        (None, [
+            '/another-directory/',
+            '/cruise-output/',
+            '/dummy.txt',
+            '/yet-another-directory/',
+        ]),
+        ('', [
+            '/another-directory/',
+            '/cruise-output/',
+            '/dummy.txt',
+            '/yet-another-directory/',
+        ]),
+        ('/', [
+            '/another-directory/',
+            '/cruise-output/',
+            '/dummy.txt',
+            '/yet-another-directory/',
+        ]),
+
+        ('/another-directory', []),
+        ('/dummy.txt', None),
+        (
+            '/yet-another-directory',
+            [
+                '/yet-another-directory/sub-dir-1/',
+                '/yet-another-directory/sub-dir-2/',
+                '/yet-another-directory/some-file.txt'
+            ]
+        ),
+        (
+            '/cruise-output',
+            [
+                '/cruise-output/sub-directory-1/',
+                '/cruise-output/sub-directory-2/',
+                '/cruise-output/sub-directory-3/',
+                '/cruise-output/console.log',
+            ]
+        ),
+    ])
+    def test_parametrized(self, manager, artifact_all, top, expected):
+        result = manager._get_children(artifact_all, top)
+        if not expected:
+            assert result == expected
+        else:
+            assert [r.path for r in result] == expected
+
+    @pytest.mark.parametrize('top', [
+        'unknown-path',
+        'another-directory',
+        'another-directory/',
+        '//dummy.txt',
+        '/dummy',
+    ])
+    def test_non_existing_path(self, manager, artifact_all, top):
+        with pytest.raises(ValueError):
+            manager._get_children(artifact_all, top)
 
 
 class TestFile(BaseTestArtifactManager):

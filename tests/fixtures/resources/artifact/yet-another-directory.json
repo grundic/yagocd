@@ -1,0 +1,47 @@
+{
+    "files": [
+        {
+            "files": [
+                {
+                    "files": [
+                        {
+                            "name": "hello-1.txt",
+                            "type": "file",
+                            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/yet-another-directory/sub-dir-1/sub-dir-3/hello-1.txt"
+                        },
+                        {
+                            "name": "hello-3.txt",
+                            "type": "file",
+                            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/yet-another-directory/sub-dir-1/sub-dir-3/hello-3.txt"
+                        },
+                        {
+                            "name": "hello-5.txt",
+                            "type": "file",
+                            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/yet-another-directory/sub-dir-1/sub-dir-3/hello-5.txt"
+                        }
+                    ],
+                    "name": "sub-dir-3",
+                    "type": "folder",
+                    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/yet-another-directory/sub-dir-1/sub-dir-3"
+                }
+            ],
+            "name": "sub-dir-1",
+            "type": "folder",
+            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/yet-another-directory/sub-dir-1"
+        },
+        {
+            "files": [],
+            "name": "sub-dir-2",
+            "type": "folder",
+            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/yet-another-directory/sub-dir-2"
+        },
+        {
+            "name": "some-file.txt",
+            "type": "file",
+            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/yet-another-directory/some-file.txt"
+        }
+    ],
+    "name": "yet-another-directory",
+    "type": "folder",
+    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/yet-another-directory"
+}

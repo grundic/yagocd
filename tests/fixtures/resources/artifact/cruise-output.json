@@ -1,0 +1,85 @@
+{
+    "files": [
+        {
+            "files": [
+                {
+                    "files": [],
+                    "name": "sub-sub-directory-1",
+                    "type": "folder",
+                    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-1/sub-sub-directory-1"
+                },
+                {
+                    "files": [],
+                    "name": "sub-sub-directory-2",
+                    "type": "folder",
+                    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-1/sub-sub-directory-2"
+                },
+                {
+                    "name": "file-1.txt",
+                    "type": "file",
+                    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-1/file-1.txt"
+                }
+            ],
+            "name": "sub-directory-1",
+            "type": "folder",
+            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-1"
+        },
+        {
+            "files": [
+                {
+                    "files": [
+                        {
+                            "name": "file-3.txt",
+                            "type": "file",
+                            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-2/sub-sub-directory-3/file-3.txt"
+                        }
+                    ],
+                    "name": "sub-sub-directory-3",
+                    "type": "folder",
+                    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-2/sub-sub-directory-3"
+                },
+                {
+                    "name": "file-2.txt",
+                    "type": "file",
+                    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-2/file-2.txt"
+                }
+            ],
+            "name": "sub-directory-2",
+            "type": "folder",
+            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-2"
+        },
+        {
+            "files": [
+                {
+                    "files": [],
+                    "name": "sub-sub-directory-4",
+                    "type": "folder",
+                    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-3/sub-sub-directory-4"
+                },
+                {
+                    "files": [],
+                    "name": "sub-sub-directory-5",
+                    "type": "folder",
+                    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-3/sub-sub-directory-5"
+                },
+                {
+                    "files": [],
+                    "name": "sub-sub-directory-6",
+                    "type": "folder",
+                    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-3/sub-sub-directory-6"
+                }
+            ],
+            "name": "sub-directory-3",
+            "type": "folder",
+            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/sub-directory-3"
+        },
+        {
+            "name": "console.log",
+            "type": "file",
+            "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output/console.log"
+        }
+    ],
+    "name": "cruise-output",
+    "type": "folder",
+    "url": "http://localhost:8153/go/files/Shared_Services/33/Commit/1/build/cruise-output"
+}

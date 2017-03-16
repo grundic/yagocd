@@ -28,6 +28,7 @@
 
 import time
 
+from yagocd.exception import YagocdException
 from yagocd.resources import Base, BaseManager
 from yagocd.util import since
 
@@ -41,6 +42,13 @@ class ArtifactManager(BaseManager):
 
     :versionadded: 14.3.0.
     """
+
+    FOLDER_TYPE = 'folder'
+    FILE_TYPE = 'file'
+
+    TYPE_FIELD = 'type'
+    NAME_FIELD = 'name'
+    FILES_FIELD = 'files'
 
     def __init__(
         self,
@@ -81,12 +89,13 @@ class ArtifactManager(BaseManager):
 
     def __iter__(self):
         """
-        Method for iterating over all artifacts.
+        Method for iterating over all artifacts, using `walk`.
 
-        :return: An array of :class:`yagocd.resources.artifact.Artifact`.
-        :rtype: list of yagocd.resources.artifact.Artifact
+        :rtype: collections.Iterator[
+            (str, list[yagocd.resources.artifact.Artifact], list[yagocd.resources.artifact.Artifact])
+        ]
         """
-        return iter(self.list())
+        return iter(self.walk())
 
     def __getitem__(self, path):
         """
@@ -148,6 +157,105 @@ class ArtifactManager(BaseManager):
             artifacts.append(Artifact(session=self._session, data=data))
 
         return artifacts
+
+    def walk(
+        self,
+        top='/',
+        topdown=True,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+        job_name=None
+    ):
+        """
+        Artifact tree generator - analogue of `os.walk`.
+
+        :param top: root path, from which traversal would be started.
+        :param topdown: if is True or not specified, directories are scanned
+        from top-down. If topdown is set to False, directories are scanned
+        from bottom-up.
+        :param pipeline_name:
+        :param pipeline_counter:
+        :param stage_name:
+        :param stage_counter:
+        :param job_name:
+        :rtype: collections.Iterator[
+            (str, list[yagocd.resources.artifact.Artifact], list[yagocd.resources.artifact.Artifact])
+        ]
+        """
+        assert self._pipeline_name or pipeline_name
+        assert self._pipeline_counter or pipeline_counter
+        assert self._stage_name or stage_name
+        assert self._stage_counter or stage_counter
+        assert self._job_name or job_name
+
+        artifacts = self.list()
+        return self._json_walk(top=top, topdown=topdown, artifacts=artifacts)
+
+    def _json_walk(self, top, topdown, artifacts):
+        """
+        JSON walker - analogue of `os.walk`.
+        Recursively walks through internal representation of the Artifact object.
+
+        :param top: top or root path from which to start traversing.
+        :param topdown: if is True or not specified, directories are scanned
+        from top-down. If topdown is set to False, directories are scanned
+        from bottom-up.
+        :param artifacts: original list of artifacts, obtained from `list` method.
+        :rtype: collections.Iterator[
+            (str, list[yagocd.resources.artifact.Artifact], list[yagocd.resources.artifact.Artifact])
+        ]
+        """
+        folders = list()
+        files = list()
+        children = self._get_children(artifacts, top)
+        if children is None:
+            return
+
+        for artifact in children:
+            artifact_type = artifact.data.get(self.TYPE_FIELD)
+            if artifact_type == self.FOLDER_TYPE:
+                folders.append(artifact)
+            elif artifact_type == self.FILE_TYPE:
+                files.append(artifact)
+            else:
+                raise ValueError("Unknown artifact type '{}'!".format(artifact_type))
+
+        if topdown:
+            yield top, folders, files
+        for folder in folders:
+            new_path = self._session.urljoin(top, folder.data.get(self.NAME_FIELD))
+
+            for x in self._json_walk(new_path, topdown, children):
+                yield x
+
+        if not topdown:
+            yield top, folders, files
+
+    def _get_children(self, artifacts, path):
+        """
+        Method for extracting artifact children from a given artifacts list by some path.
+
+        :param artifacts: list of artifacts from which to extract path.
+        :param path: string representing POSIX path.
+        :return: nested artifacts, located at the given path.
+        :rtype: list[yagocd.resources.artifact.Artifact]
+        """
+        if not path or path in ['/']:
+            return artifacts
+
+        for candidate in artifacts:
+            if candidate.path.rstrip('/') == path.rstrip('/'):
+                children = candidate.data.get(self.FILES_FIELD)
+                if children is None:
+                    return  # case for a file type
+                else:
+                    return [Artifact(session=candidate._session, data=data) for data in children]
+        else:
+            raise ValueError("Can't find requested path '{path}' in the given artifacts '{artifacts}'!".format(
+                path=path, artifacts=artifacts)
+            )
 
     def file(
         self,
@@ -405,11 +513,97 @@ class ArtifactManager(BaseManager):
 
 
 class Artifact(Base):
-    def files(self):
-        return [ArtifactFile(session=self._session, data=data) for data in self.data.files]
+    """
+    Class, representing artifact of the build.
 
+    It could be one of file or folder.
+    """
 
-class ArtifactFile(Base):
+    SEP = '/'
+
+    PART_COUNT = 5
+
+    def __init__(self, session, data):
+        super(Artifact, self).__init__(session, data)
+
+        base = self._session.urljoin(self._session.server_url, self._session._options['context_path'], 'files')
+        parts = self.data.url.replace(base, '').strip(self.SEP).split(self.SEP, self.PART_COUNT)
+
+        self._pipeline_name = parts[0]
+        self._pipeline_counter = parts[1]
+        self._stage_name = parts[2]
+        self._stage_counter = parts[3]
+        self._job_name = parts[4]
+
+        self._path = self.SEP + parts[5]
+        if self.data.type == ArtifactManager.FOLDER_TYPE and not self._path.endswith(self.SEP):
+            self._path += self.SEP
+
+        self._manager = ArtifactManager(
+            session=session,
+            pipeline_name=self._pipeline_name,
+            pipeline_counter=self._pipeline_counter,
+            stage_name=self._stage_name,
+            stage_counter=self._stage_counter,
+            job_name=self._job_name
+        )
+
+    def __str__(self):
+        return self.__repr__()
+
+    def __repr__(self):
+        result = "<{cls}: '{path}'>".format(cls=self.__class__.__name__, path=self._path)
+        return result
+
+    def __iter__(self):
+        return iter(self.walk())
+
+    @property
+    def pipeline_name(self):
+        return self._pipeline_name
+
+    @property
+    def pipeline_counter(self):
+        return self._pipeline_counter
+
+    @property
+    def stage_name(self):
+        return self._stage_name
+
+    @property
+    def stage_counter(self):
+        return self._stage_counter
+
+    @property
+    def job_name(self):
+        return self._job_name
+
+    @property
+    def path(self):
+        return self._path
+
+    def walk(self, topdown=True):
+        """
+        Artifact tree generator - analogue of `os.walk`.
+
+        :param topdown: if is True or not specified, directories are scanned
+        from top-down. If topdown is set to False, directories are scanned
+        from bottom-up.
+        :rtype: collections.Iterator[
+            (str, list[yagocd.resources.artifact.Artifact], list[yagocd.resources.artifact.Artifact])
+        ]
+        """
+        return self._manager.walk(top=self._path, topdown=topdown)
+
     def fetch(self):
+        """
+        Method for getting artifact's content.
+        Could only be applicable for file type.
+
+        :return: content of the artifact.
+        """
+        if self.data.type == self._manager.FOLDER_TYPE:
+            raise YagocdException("Can't fetch folder <{}>, only file!".format(self._path))
+
         response = self._session.get(self.data.url)
         return response.content
