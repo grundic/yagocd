@@ -27,11 +27,11 @@
 ###############################################################################
 from yagocd.resources import Base, BaseManager
 from yagocd.resources.job import JobInstance
-from yagocd.util import since
+from yagocd.util import RequireParamMixin, since
 
 
 @since('14.3.0')
-class StageManager(BaseManager):
+class StageManager(BaseManager, RequireParamMixin):
     """
     The stages API allows users to view stage information and operate on it.
 
@@ -39,6 +39,9 @@ class StageManager(BaseManager):
 
     :versionadded: 14.3.0.
     """
+
+    RUN_RESOURCE_PATH = '{base_api}/run/{pipeline_name}/{pipeline_counter}/{stage_name}'
+    RESOURCE_PATH = '{base_api}/stages/{pipeline_name}/{stage_name}'
 
     def __init__(
         self,
@@ -71,7 +74,7 @@ class StageManager(BaseManager):
         assert self._stage_name or stage_name
 
         self._session.post(
-            path='{base_api}/run/{pipeline_name}/{pipeline_counter}/{stage_name}'.format(
+            path=self.RUN_RESOURCE_PATH.format(
                 base_api=self._session.base_api(api_path=''),
                 pipeline_name=self._pipeline_name or pipeline_name,
                 pipeline_counter=self._pipeline_counter or pipeline_counter,
@@ -92,14 +95,15 @@ class StageManager(BaseManager):
         :param stage_name: stage name.
         :return: a text confirmation.
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._stage_name or stage_name
+        func_args = locals()
+        pipeline_name = self._require_param('pipeline_name', func_args)
+        stage_name = self._require_param('stage_name', func_args)
 
         response = self._session.post(
-            path='{base_api}/stages/{pipeline_name}/{stage_name}/cancel'.format(
+            path=self._session.urljoin(self.RESOURCE_PATH, 'cancel').format(
                 base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                stage_name=self._stage_name or stage_name
+                pipeline_name=pipeline_name,
+                stage_name=stage_name
             ),
             headers={
                 'Accept': 'application/json',
@@ -128,18 +132,17 @@ class StageManager(BaseManager):
         :return: a stage instance object :class:`yagocd.resources.stage.StageInstance`.
         :rtype: yagocd.resources.stage.StageInstance
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._pipeline_counter or pipeline_counter
-        assert self._stage_name or stage_name
-        assert self._stage_counter or stage_counter
+        func_args = locals()
+        pipeline_name = self._require_param('pipeline_name', func_args)
+        pipeline_counter = self._require_param('pipeline_counter', func_args)
+        stage_name = self._require_param('stage_name', func_args)
+        stage_counter = self._require_param('stage_counter', func_args)
 
         response = self._session.get(
-            path='{base_api}/stages/{pipeline_name}/{stage_name}/instance/{pipeline_counter}/{stage_counter}'.format(
+            path=self._session.urljoin(self.RESOURCE_PATH, 'instance', pipeline_counter, stage_counter).format(
                 base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                pipeline_counter=self._pipeline_counter or pipeline_counter,
-                stage_name=self._stage_name or stage_name,
-                stage_counter=self._stage_counter or stage_counter
+                pipeline_name=pipeline_name,
+                stage_name=stage_name
             ),
             headers={'Accept': 'application/json'},
         )
@@ -159,15 +162,15 @@ class StageManager(BaseManager):
         :return: an array of stage instances :class:`yagocd.resources.stage.StageInstance`.
         :rtype: list of yagocd.resources.stage.StageInstance
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._stage_name or stage_name
+        func_args = locals()
+        pipeline_name = self._require_param('pipeline_name', func_args)
+        stage_name = self._require_param('stage_name', func_args)
 
         response = self._session.get(
-            path='{base_api}/stages/{pipeline_name}/{stage_name}/history/{offset}'.format(
+            path=self._session.urljoin(self.RESOURCE_PATH, 'history', offset).format(
                 base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                stage_name=self._stage_name or stage_name,
-                offset=offset,
+                pipeline_name=pipeline_name,
+                stage_name=stage_name
             ),
             headers={'Accept': 'application/json'},
         )

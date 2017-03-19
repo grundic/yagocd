@@ -41,6 +41,9 @@ class ConfigurationManager(BaseManager):
     :versionadded: 14.3.0.
     """
 
+    RESOURCE_PATH = '{base_api}/config'
+    ADMIN_RESOURCE_PATH = '{base_api}/admin/config'
+
     def modifications(self):
         """
         Lists the config repository modifications.
@@ -50,7 +53,7 @@ class ConfigurationManager(BaseManager):
         :return: An array of repository modifications.
         """
         response = self._session.get(
-            path='{base_api}/config/revisions'.format(base_api=self.base_api),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'revisions').format(base_api=self.base_api),
             headers={'Accept': 'application/json'},
         )
 
@@ -67,11 +70,7 @@ class ConfigurationManager(BaseManager):
         :return: the diff between two config repo modifications.
         """
         response = self._session.get(
-            path='{base_api}/config/diff/{start}/{end}'.format(
-                base_api=self.base_api,
-                start=start,
-                end=end
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'diff', start, end).format(base_api=self.base_api),
             headers={'Accept': 'text/plain'},
         )
 
@@ -87,10 +86,10 @@ class ConfigurationManager(BaseManager):
         :return: the contents of the configuration file.
         """
         response = self._session.get(
-            path='{base_api}/admin/config/{version}'.format(
-                base_api=self.base_api,
-                version='current.xml' if md5 is None else (md5 + '.xml'),
-            ),
+            path=self._session.urljoin(
+                self.ADMIN_RESOURCE_PATH,
+                'current.xml' if md5 is None else (md5 + '.xml')
+            ).format(base_api=self.base_api),
             headers={'Accept': 'application/xml'},
         )
 

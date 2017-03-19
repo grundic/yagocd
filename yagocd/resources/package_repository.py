@@ -41,7 +41,7 @@ class PackageRepositoryManager(BaseManager):
     :versionadded: 16.12.0.
     """
 
-    RESOURCE_PATH = 'admin/repositories'
+    RESOURCE_PATH = '{base_api}/admin/repositories'
 
     def __iter__(self):
         """
@@ -67,7 +67,7 @@ class PackageRepositoryManager(BaseManager):
         :rtype: (list of yagocd.resources.package_repository.PackageRepository, str)
         """
         response = self._session.get(
-            path='{base_api}/{resource_path}'.format(base_api=self.base_api, resource_path=self.RESOURCE_PATH)
+            path=self.RESOURCE_PATH.format(base_api=self.base_api)
         )
 
         result = list()
@@ -86,9 +86,7 @@ class PackageRepositoryManager(BaseManager):
         :rtype: (yagocd.resources.package_repository.PackageRepository, str)
         """
         response = self._session.get(
-            path='{base_api}/{resource_path}/{repo_id}'.format(
-                base_api=self.base_api, resource_path=self.RESOURCE_PATH, repo_id=repo_id
-            )
+            path=self._session.urljoin(self.RESOURCE_PATH, repo_id).format(base_api=self.base_api)
         )
 
         etag = response.headers['ETag']
@@ -103,7 +101,7 @@ class PackageRepositoryManager(BaseManager):
         :rtype: (yagocd.resources.package_repository.PackageRepository, str)
         """
         response = self._session.post(
-            path='{base_api}/{resource_path}'.format(base_api=self.base_api, resource_path=self.RESOURCE_PATH),
+            path=self.RESOURCE_PATH.format(base_api=self.base_api),
             headers={
                 'Accept': self._accept_header(),
                 'Content-Type': 'application/json',
@@ -125,8 +123,7 @@ class PackageRepositoryManager(BaseManager):
         """
 
         response = self._session.put(
-            path='{base_api}/{resource_path}/{repo_id}'.format(
-                base_api=self.base_api, resource_path=self.RESOURCE_PATH, repo_id=repo_id),
+            self._session.urljoin(self.RESOURCE_PATH, repo_id).format(base_api=self.base_api),
             headers={
                 'Accept': self._accept_header(),
                 'Content-Type': 'application/json',
@@ -148,8 +145,7 @@ class PackageRepositoryManager(BaseManager):
         """
 
         response = self._session.delete(
-            path='{base_api}/{resource_path}/{repo_id}'.format(
-                base_api=self.base_api, resource_path=self.RESOURCE_PATH, repo_id=repo_id),
+            self._session.urljoin(self.RESOURCE_PATH, repo_id).format(base_api=self.base_api),
             headers={
                 'Accept': self._accept_header(),
             },

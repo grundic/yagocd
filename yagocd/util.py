@@ -115,3 +115,41 @@ class Since(object):
 
 
 since = Since
+
+
+class RequireParamMixin(object):
+    def _require_param(self, name, values):
+        """
+        Method for finding the value for the given parameter name.
+
+        The value for the parameter could be extracted from two places:
+          * `values` dictionary
+          * `self._<name>` attribute
+
+        The use case for this method is that some resources are nested and
+        managers could have dependencies on parent data, for example
+        :class:`ArtifactManager` should know about pipeline, stage and job
+        in order to get data for specific instance of artifact. In case we
+        obtain this information from pipeline and going down to the
+        artifact, it will be provided in constructor for that manager.
+        But in case we would like to use functionality of specific manager
+        without getting parents -- directly from :class:`Yagocd`, then we
+        have to be able to execute method with given parameters for parents.
+
+        Current method - `_require_param` - is used to find out which
+        parameters should one use: either provided at construction time and
+        stored as `self._<name>` or provided as function arguments.
+
+        :param name: name of the parameter, which value to extract.
+        :param values: dictionary, which could contain the value
+        for our parameter.
+        :return: founded value or raises `ValueError`.
+        """
+        values = [values[name]]
+        instance_name = '_{}'.format(name)
+        values.append(getattr(self, instance_name, None))
+
+        try:
+            return next(item for item in values if item is not None)
+        except StopIteration:
+            raise ValueError("The value for parameter '{}' is required!".format(name))

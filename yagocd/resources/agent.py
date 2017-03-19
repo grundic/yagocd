@@ -45,6 +45,8 @@ class AgentManager(BaseManager):
     :warning: Please note that this API requires using v4 of the API using `Accept: application/vnd.go.cd.v4+json`
     """
 
+    RESOURCE_PATH = '{base_api}/agents'
+
     ACCEPT_HEADER = 'application/vnd.go.cd.v4+json'
 
     VERSION_TO_ACCEPT_HEADER = {
@@ -84,7 +86,7 @@ class AgentManager(BaseManager):
         :rtype: list of yagocd.resources.agent.AgentEntity
         """
         response = self._session.get(
-            path='{base_api}/agents'.format(base_api=self.base_api),
+            path=self.RESOURCE_PATH.format(base_api=self.base_api),
             headers={'Accept': self._accept_header()},
         )
 
@@ -130,9 +132,8 @@ class AgentManager(BaseManager):
         :rtype: yagocd.resources.agent.AgentEntity
         """
         response = self._session.get(
-            path='{base_api}/agents/{uuid}'.format(
-                base_api=self.base_api,
-                uuid=uuid,
+            path=self._session.urljoin(self.RESOURCE_PATH, uuid).format(
+                base_api=self.base_api
             ),
             headers={'Accept': self._accept_header()},
         )
@@ -151,9 +152,8 @@ class AgentManager(BaseManager):
         :rtype: yagocd.resources.agent.AgentEntity
         """
         response = self._session.patch(
-            path='{base_api}/agents/{uuid}'.format(
-                base_api=self.base_api,
-                uuid=uuid,
+            path=self._session.urljoin(self.RESOURCE_PATH, uuid).format(
+                base_api=self.base_api
             ),
             data=json.dumps(config),
             headers={
@@ -174,9 +174,8 @@ class AgentManager(BaseManager):
         :return: a message confirmation if the agent was deleted.
         """
         response = self._session.delete(
-            path='{base_api}/agents/{uuid}'.format(
-                base_api=self.base_api,
-                uuid=uuid,
+            path=self._session.urljoin(self.RESOURCE_PATH, uuid).format(
+                base_api=self.base_api
             ),
             headers={'Accept': self._accept_header()},
         )
@@ -196,10 +195,8 @@ class AgentManager(BaseManager):
         :rtype: list of yagocd.resources.job.JobInstance
         """
         response = self._session.get(
-            path='{base_api}/agents/{uuid}/job_run_history/{offset}'.format(
-                base_api=self.base_api,
-                uuid=uuid,
-                offset=offset
+            path=self._session.urljoin(self.RESOURCE_PATH, uuid, 'job_run_history', offset).format(
+                base_api=self.base_api
             ),
             headers={'Accept': 'application/json'},
         )

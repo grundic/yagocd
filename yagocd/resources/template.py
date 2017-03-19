@@ -42,6 +42,8 @@ class TemplateManager(BaseManager):
     :versionadded: 16.10.0.
     """
 
+    RESOURCE_PATH = '{base_api}/admin/templates'
+
     def __iter__(self):
         """
         Method add iterator protocol for the manager.
@@ -66,7 +68,7 @@ class TemplateManager(BaseManager):
         :rtype: (list of yagocd.resources.template.TemplateConfig, str)
         """
         response = self._session.get(
-            path='{base_api}/admin/templates'.format(base_api=self.base_api)
+            path=self.RESOURCE_PATH.format(base_api=self.base_api)
         )
 
         result = list()
@@ -89,9 +91,7 @@ class TemplateManager(BaseManager):
         :rtype: (yagocd.resources.template.TemplateConfig, str)
         """
         response = self._session.get(
-            path='{base_api}/admin/templates/{name}'.format(
-                base_api=self.base_api, name=name,
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api)
         )
 
         etag = response.headers['ETag']
@@ -105,7 +105,7 @@ class TemplateManager(BaseManager):
         :rtype: (yagocd.resources.template.TemplateConfig, str)
         """
         response = self._session.post(
-            path='{base_api}/admin/templates'.format(base_api=self.base_api),
+            path=self.RESOURCE_PATH.format(base_api=self.base_api),
             headers={
                 'Accept': self._accept_header(),
                 'Content-Type': 'application/json',
@@ -126,8 +126,7 @@ class TemplateManager(BaseManager):
         :rtype: (yagocd.resources.template.TemplateConfig, str)
         """
         response = self._session.put(
-            path='{base_api}/admin/templates/{name}'.format(
-                base_api=self.base_api, name=name),
+            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api),
             headers={
                 'Accept': self._accept_header(),
                 'Content-Type': 'application/json',

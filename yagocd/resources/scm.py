@@ -46,6 +46,8 @@ class SCMManager(BaseManager):
     :versionadded: 16.7.0.
     """
 
+    RESOURCE_PATH = '{base_api}/admin/scms'
+
     def __iter__(self):
         """
         Method add iterator protocol for the manager.
@@ -71,7 +73,7 @@ class SCMManager(BaseManager):
         :rtype: (list of yagocd.resources.scm.SCMMaterial, str)
         """
         response = self._session.get(
-            path='{base_api}/admin/scms'.format(base_api=self.base_api)
+            path=self.RESOURCE_PATH.format(base_api=self.base_api)
         )
 
         result = list()
@@ -89,9 +91,7 @@ class SCMManager(BaseManager):
         :rtype: (yagocd.resources.scm.SCMMaterial, str)
         """
         response = self._session.get(
-            path='{base_api}/admin/scms/{name}'.format(
-                base_api=self.base_api, name=name,
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api)
         )
 
         etag = response.headers['ETag']
@@ -105,7 +105,7 @@ class SCMManager(BaseManager):
         :rtype: (yagocd.resources.scm.SCMMaterial, str)
         """
         response = self._session.post(
-            path='{base_api}/admin/scms'.format(base_api=self.base_api),
+            path=self.RESOURCE_PATH.format(base_api=self.base_api),
             headers={
                 'Accept': self._accept_header(),
                 'Content-Type': 'application/json',
@@ -130,8 +130,7 @@ class SCMManager(BaseManager):
             api_method = self._session.patch
 
         response = api_method(
-            path='{base_api}/admin/scms/{name}'.format(
-                base_api=self.base_api, name=name),
+            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api),
             headers={
                 'Accept': self._accept_header(),
                 'Content-Type': 'application/json',

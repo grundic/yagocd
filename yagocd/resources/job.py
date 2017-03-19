@@ -29,11 +29,11 @@
 from yagocd.resources import Base, BaseManager
 from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.property import PropertyManager
-from yagocd.util import since
+from yagocd.util import RequireParamMixin, since
 
 
 @since('14.3.0')
-class JobManager(BaseManager):
+class JobManager(BaseManager, RequireParamMixin):
     """
     The jobs API allows users to view job information.
 
@@ -41,6 +41,21 @@ class JobManager(BaseManager):
 
     :versionadded: 14.3.0.
     """
+
+    RESOURCE_PATH = '{base_api}/jobs'
+
+    def __init__(
+        self,
+        session,
+        pipeline_name=None,
+        stage_name=None,
+        job_name=None,
+    ):
+        super(JobManager, self).__init__(session)
+
+        self._pipeline_name = pipeline_name
+        self._stage_name = stage_name
+        self._job_name = job_name
 
     def scheduled(self):
         """
@@ -51,13 +66,13 @@ class JobManager(BaseManager):
         :return: an array of scheduled job instances in XML format.
         """
         response = self._session.get(
-            path='{base_api}/jobs/scheduled.xml'.format(base_api=self.base_api),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'scheduled.xml').format(base_api=self.base_api),
             headers={'Accept': 'application/xml'},
         )
 
         return response.text
 
-    def history(self, pipeline_name, stage_name, job_name, offset=0):
+    def history(self, pipeline_name=None, stage_name=None, job_name=None, offset=0):
         """
         The job history allows users to list job instances of specified job.
         Supports pagination using offset which tells the API how many instances to skip.
@@ -66,13 +81,23 @@ class JobManager(BaseManager):
 
         :return: an array of jobs instances.
         """
+        func_args = locals()
+        pipeline_name = self._require_param('pipeline_name', func_args)
+        stage_name = self._require_param('stage_name', func_args)
+        job_name = self._require_param('job_name', func_args)
+
         response = self._session.get(
-            path='{base_api}/jobs/{pipeline_name}/{stage_name}/{job_name}/history/{offset}'.format(
-                base_api=self.base_api,
-                pipeline_name=pipeline_name,
-                stage_name=stage_name,
-                job_name=job_name,
-                offset=offset
+            path=(
+                self._session.urljoin(
+                    self.RESOURCE_PATH,
+                    pipeline_name,
+                    stage_name,
+                    job_name,
+                    'history',
+                    offset
+                )
+            ).format(
+                base_api=self.base_api
             ),
             headers={'Accept': 'application/xml'},
         )

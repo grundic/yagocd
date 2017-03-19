@@ -40,6 +40,8 @@ class PluginInfoManager(BaseManager):
     :versionadded: 16.7.0.
     """
 
+    RESOURCE_PATH = '{base_api}/admin/plugin_info'
+
     ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
 
     VERSION_TO_ACCEPT_HEADER = {
@@ -70,7 +72,7 @@ class PluginInfoManager(BaseManager):
         :rtype: list of yagocd.resources.plugin_info.PluginInfo
         """
         response = self._session.get(
-            path='{base_api}/admin/plugin_info'.format(base_api=self.base_api),
+            path=self.RESOURCE_PATH.format(base_api=self.base_api),
             headers={'Accept': self._accept_header()},
         )
 
@@ -88,9 +90,7 @@ class PluginInfoManager(BaseManager):
         :rtype: yagocd.resources.plugin_info.PluginInfo
         """
         response = self._session.get(
-            path='{base_api}/admin/plugin_info/{name}'.format(
-                base_api=self.base_api, name=name
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api),
             headers={'Accept': self._accept_header()},
         )
 

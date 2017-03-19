@@ -30,11 +30,11 @@ import time
 
 from yagocd.exception import YagocdException
 from yagocd.resources import Base, BaseManager
-from yagocd.util import since
+from yagocd.util import RequireParamMixin, since
 
 
 @since('14.3.0')
-class ArtifactManager(BaseManager):
+class ArtifactManager(BaseManager, RequireParamMixin):
     """
     The artifacts API allows users to query and create artifacts of a job.
 
@@ -42,6 +42,9 @@ class ArtifactManager(BaseManager):
 
     :versionadded: 14.3.0.
     """
+
+    RESOURCE_PATH = '{base_api}/files/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}'
+    PATH_PARAMETERS = ['pipeline_name', 'pipeline_counter', 'stage_name', 'stage_counter', 'job_name']
 
     FOLDER_TYPE = 'folder'
     FILE_TYPE = 'file'
@@ -128,29 +131,12 @@ class ArtifactManager(BaseManager):
         :return: An array of :class:`yagocd.resources.artifact.Artifact`.
         :rtype: list of yagocd.resources.artifact.Artifact
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._pipeline_counter or pipeline_counter
-        assert self._stage_name or stage_name
-        assert self._stage_counter or stage_counter
-        assert self._job_name or job_name
+
+        func_args = locals()
+        parameters = {p: self._require_param(p, func_args) for p in self.PATH_PARAMETERS}
 
         response = self._session.get(
-            path=(
-                '{base_api}'
-                '/files'
-                '/{pipeline_name}'
-                '/{pipeline_counter}'
-                '/{stage_name}'
-                '/{stage_counter}'
-                '/{job_name}.json'
-            ).format(
-                base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                pipeline_counter=self._pipeline_counter or pipeline_counter,
-                stage_name=self._stage_name or stage_name,
-                stage_counter=self._stage_counter or stage_counter,
-                job_name=self._job_name or job_name
-            ),
+            path=(self.RESOURCE_PATH + '.json').format(base_api=self.base_api, **parameters)
         )
         artifacts = list()
         for data in response.json():
@@ -175,22 +161,22 @@ class ArtifactManager(BaseManager):
         :param topdown: if is True or not specified, directories are scanned
         from top-down. If topdown is set to False, directories are scanned
         from bottom-up.
-        :param pipeline_name:
-        :param pipeline_counter:
-        :param stage_name:
-        :param stage_counter:
-        :param job_name:
+        :param pipeline_name: name of the pipeline.
+        :param pipeline_counter: pipeline counter.
+        :param stage_name: name of the stage.
+        :param stage_counter: stage counter.
+        :param job_name: name of the job.
         :rtype: collections.Iterator[
             (str, list[yagocd.resources.artifact.Artifact], list[yagocd.resources.artifact.Artifact])
         ]
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._pipeline_counter or pipeline_counter
-        assert self._stage_name or stage_name
-        assert self._stage_counter or stage_counter
-        assert self._job_name or job_name
-
-        artifacts = self.list()
+        artifacts = self.list(
+            pipeline_name=pipeline_name,
+            pipeline_counter=pipeline_counter,
+            stage_name=stage_name,
+            stage_counter=stage_counter,
+            job_name=job_name
+        )
         return self._json_walk(top=top, topdown=topdown, artifacts=artifacts)
 
     def _json_walk(self, top, topdown, artifacts):
@@ -251,7 +237,7 @@ class ArtifactManager(BaseManager):
                 if children is None:
                     return  # case for a file type
                 else:
-                    return [Artifact(session=candidate._session, data=data) for data in children]
+                    return [Artifact(session=self._session, data=data) for data in children]
         else:
             raise ValueError("Can't find requested path '{path}' in the given artifacts '{artifacts}'!".format(
                 path=path, artifacts=artifacts)
@@ -323,30 +309,12 @@ class ArtifactManager(BaseManager):
               the contents of the requested directory.
             * The requested directory contents in the form of a zip file.
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._pipeline_counter or pipeline_counter
-        assert self._stage_name or stage_name
-        assert self._stage_counter or stage_counter
-        assert self._job_name or job_name
+
+        func_args = locals()
+        parameters = {p: self._require_param(p, func_args) for p in self.PATH_PARAMETERS}
 
         response = self._session.get(
-            path=(
-                '{base_api}'
-                '/files'
-                '/{pipeline_name}'
-                '/{pipeline_counter}'
-                '/{stage_name}'
-                '/{stage_counter}'
-                '/{job_name}'
-                '/{path_to_folder}').format(
-                base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                pipeline_counter=self._pipeline_counter or pipeline_counter,
-                stage_name=self._stage_name or stage_name,
-                stage_counter=self._stage_counter or stage_counter,
-                job_name=self._job_name or job_name,
-                path_to_folder=path
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, path).format(base_api=self.base_api, **parameters)
         )
 
         if response.status_code == 202:
@@ -424,31 +392,12 @@ class ArtifactManager(BaseManager):
         :param job_name: name of the job.
         :return: an acknowledgement that the file was created.
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._pipeline_counter or pipeline_counter
-        assert self._stage_name or stage_name
-        assert self._stage_counter or stage_counter
-        assert self._job_name or job_name
+
+        func_args = locals()
+        parameters = {p: self._require_param(p, func_args) for p in self.PATH_PARAMETERS}
 
         response = self._session.post(
-            path=(
-                '{base_api}'
-                '/files'
-                '/{pipeline_name}'
-                '/{pipeline_counter}'
-                '/{stage_name}'
-                '/{stage_counter}'
-                '/{job_name}'
-                '/{path_to_file}'
-            ).format(
-                base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                pipeline_counter=self._pipeline_counter or pipeline_counter,
-                stage_name=self._stage_name or stage_name,
-                stage_counter=self._stage_counter or stage_counter,
-                job_name=self._job_name or job_name,
-                path_to_file=path
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, path).format(base_api=self.base_api, **parameters),
             files={'file': open(filename, 'rb')},
             headers={
                 'Confirm': 'true'
@@ -481,31 +430,12 @@ class ArtifactManager(BaseManager):
         :param job_name: name of the job.
         :return: an acknowledgement that the file was created.
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._pipeline_counter or pipeline_counter
-        assert self._stage_name or stage_name
-        assert self._stage_counter or stage_counter
-        assert self._job_name or job_name
+
+        func_args = locals()
+        parameters = {p: self._require_param(p, func_args) for p in self.PATH_PARAMETERS}
 
         response = self._session.put(
-            path=(
-                '{base_api}'
-                '/files'
-                '/{pipeline_name}'
-                '/{pipeline_counter}'
-                '/{stage_name}'
-                '/{stage_counter}'
-                '/{job_name}'
-                '/{path_to_file}'
-            ).format(
-                base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                pipeline_counter=self._pipeline_counter or pipeline_counter,
-                stage_name=self._stage_name or stage_name,
-                stage_counter=self._stage_counter or stage_counter,
-                job_name=self._job_name or job_name,
-                path_to_file=path
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, path).format(base_api=self.base_api, **parameters),
             files={'file': open(filename, 'rb')}
         )
 

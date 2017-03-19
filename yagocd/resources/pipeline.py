@@ -50,6 +50,10 @@ class PipelineManager(BaseManager):
     :versionadded: 14.3.0.
     """
 
+    GROUPS_RESOURCE_PATH = '{base_api}/config/pipeline_groups'
+    RESOURCE_PATH = '{base_api}/pipelines/{name}'
+    VSM_RESOURCE_PATH = '{base_api}/pipelines/value_stream_map/{name}'
+
     def __iter__(self):
         """
         Method add iterator protocol for the manager.
@@ -82,7 +86,7 @@ class PipelineManager(BaseManager):
         :rtype: list of yagocd.resources.pipeline.PipelineEntity
         """
         response = self._session.get(
-            path='{base_api}/config/pipeline_groups'.format(base_api=self.base_api),
+            path=self.GROUPS_RESOURCE_PATH.format(base_api=self.base_api),
             headers={'Accept': 'application/json'},
         )
 
@@ -130,11 +134,8 @@ class PipelineManager(BaseManager):
         :rtype: list of yagocd.resources.pipeline.PipelineInstance
         """
         response = self._session.get(
-            path='{base_api}/pipelines/{name}/history/{offset}'.format(
-                base_api=self.base_api,
-                name=name,
-                offset=offset
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'history', offset).format(
+                base_api=self.base_api, name=name),
             headers={'Accept': 'application/json'},
         )
 
@@ -189,11 +190,8 @@ class PipelineManager(BaseManager):
         :rtype: yagocd.resources.pipeline.PipelineInstance
         """
         response = self._session.get(
-            path='{base_api}/pipelines/{name}/instance/{counter}'.format(
-                base_api=self.base_api,
-                name=name,
-                counter=counter
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'instance', counter).format(
+                base_api=self.base_api, name=name),
             headers={'Accept': 'application/json'},
         )
 
@@ -209,10 +207,8 @@ class PipelineManager(BaseManager):
         :return: JSON containing information about pipeline state, wrapped in EasyDict class.
         """
         response = self._session.get(
-            path='{base_api}/pipelines/{name}/status'.format(
-                base_api=self.base_api,
-                name=name,
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'status').format(
+                base_api=self.base_api, name=name),
             headers={'Accept': 'application/json'},
         )
 
@@ -228,10 +224,8 @@ class PipelineManager(BaseManager):
         :param cause: reason for pausing the pipeline.
         """
         self._session.post(
-            path='{base_api}/pipelines/{name}/pause'.format(
-                base_api=self.base_api,
-                name=name,
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'pause').format(
+                base_api=self.base_api, name=name),
             data={'pauseCause': cause},
             headers={
                 'Accept': 'application/json',
@@ -248,10 +242,8 @@ class PipelineManager(BaseManager):
         :param name: name of the pipeline.
         """
         self._session.post(
-            path='{base_api}/pipelines/{name}/unpause'.format(
-                base_api=self.base_api,
-                name=name,
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'unpause').format(
+                base_api=self.base_api, name=name),
             headers={
                 'Accept': 'application/json',
                 'Confirm': 'true'
@@ -269,10 +261,8 @@ class PipelineManager(BaseManager):
         :return: a text confirmation.
         """
         response = self._session.post(
-            path='{base_api}/pipelines/{name}/releaseLock'.format(
-                base_api=self.base_api,
-                name=name,
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'releaseLock').format(
+                base_api=self.base_api, name=name),
             headers={
                 'Accept': 'application/json',
                 'Confirm': 'true'
@@ -297,10 +287,8 @@ class PipelineManager(BaseManager):
         data = dict((k, v) for k, v in data.items() if v is not None)
 
         response = self._session.post(
-            path='{base_api}/pipelines/{name}/schedule'.format(
-                base_api=self.base_api,
-                name=name,
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, 'schedule').format(
+                base_api=self.base_api, name=name),
             data=json.dumps(data),
             headers={
                 'Accept': 'application/json',
@@ -363,11 +351,8 @@ class PipelineManager(BaseManager):
         :param counter: pipeline counter.
         """
         response = self._session.get(
-            path='{base_api}/pipelines/value_stream_map/{name}/{counter}.json'.format(
-                base_api=self._session.base_api(api_path=''),
-                name=name,
-                counter=counter
-            ),
+            path=self._session.urljoin(self.VSM_RESOURCE_PATH, '{}.json'.format(counter)).format(
+                base_api=self._session.base_api(api_path=''), name=name),
             headers={'Accept': 'application/json'},
         )
 

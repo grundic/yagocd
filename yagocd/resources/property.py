@@ -31,11 +31,11 @@ import csv
 from six import StringIO
 
 from yagocd.resources import BaseManager
-from yagocd.util import since
+from yagocd.util import RequireParamMixin, since
 
 
 @since('14.3.0')
-class PropertyManager(BaseManager):
+class PropertyManager(BaseManager, RequireParamMixin):
     """
     The properties API allows managing of job properties.
 
@@ -46,7 +46,8 @@ class PropertyManager(BaseManager):
     This class implements dictionary like methods for similar use.
     """
 
-    URL_TEMPLATE = '{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}'
+    RESOURCE_PATH = '{base_api}/properties/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}/{job_name}'
+    PATH_PARAMETERS = ['pipeline_name', 'pipeline_counter', 'stage_name', 'stage_counter', 'job_name']
 
     def __init__(
         self,
@@ -140,23 +141,14 @@ class PropertyManager(BaseManager):
         :return: dictionary of properties.
         :rtype: dict[str, str]
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._pipeline_counter or pipeline_counter
-        assert self._stage_name or stage_name
-        assert self._stage_counter or stage_counter
-        assert self._job_name or job_name
+        func_args = locals()
+        parameters = {p: self._require_param(p, func_args) for p in self.PATH_PARAMETERS}
 
         response = self._session.get(
-            path=self.URL_TEMPLATE.format(
-                base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                pipeline_counter=self._pipeline_counter or pipeline_counter,
-                stage_name=self._stage_name or stage_name,
-                stage_counter=self._stage_counter or stage_counter,
-                job_name=self._job_name or job_name
-            ),
+            path=self.RESOURCE_PATH.format(base_api=self.base_api, **parameters),
             headers={'Accept': 'application/json'},
         )
+
         text = StringIO(response.text)
         parsed = list(csv.reader(text))
         properties = dict(zip(parsed[0], parsed[1]))
@@ -186,23 +178,14 @@ class PropertyManager(BaseManager):
         :param job_name: name of the job.
         :return: value of requested property.
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._pipeline_counter or pipeline_counter
-        assert self._stage_name or stage_name
-        assert self._stage_counter or stage_counter
-        assert self._job_name or job_name
+        func_args = locals()
+        parameters = {p: self._require_param(p, func_args) for p in self.PATH_PARAMETERS}
 
         response = self._session.get(
-            path=self._session.urljoin(self.URL_TEMPLATE, name).format(
-                base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                pipeline_counter=self._pipeline_counter or pipeline_counter,
-                stage_name=self._stage_name or stage_name,
-                stage_counter=self._stage_counter or stage_counter,
-                job_name=self._job_name or job_name,
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api, **parameters),
             headers={'Accept': 'application/json'},
         )
+
         text = StringIO(response.text)
         parsed = list(csv.reader(text))
         try:
@@ -225,23 +208,22 @@ class PropertyManager(BaseManager):
         :param limit_count: count limit for returned properties.
         :return: list of dictionaries as historical values.
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._stage_name or stage_name
-        assert self._job_name or job_name
+        func_args = locals()
 
-        params = {
-            'pipelineName': self._pipeline_name or pipeline_name,
-            'stageName': self._stage_name or stage_name,
-            'jobName': self._job_name or job_name,
+        parameters = {
+            'pipelineName': self._require_param('pipeline_name', func_args),
+            'stageName': self._require_param('stage_name', func_args),
+            'jobName': self._require_param('job_name', func_args),
         }
+
         if limit_pipeline is not None:
-            params['limitPipeline'] = limit_pipeline
+            parameters['limitPipeline'] = limit_pipeline
         if limit_count is not None:
-            params['limitCount'] = limit_count
+            parameters['limitCount'] = limit_count
 
         response = self._session.get(
             path='{base_api}/properties/search'.format(base_api=self.base_api),
-            params=params,
+            params=parameters,
             headers={'Accept': 'application/json'},
         )
 
@@ -274,25 +256,17 @@ class PropertyManager(BaseManager):
         :param job_name: name of the job.
         :return: an acknowledgement that the property was created.
         """
-        assert self._pipeline_name or pipeline_name
-        assert self._pipeline_counter or pipeline_counter
-        assert self._stage_name or stage_name
-        assert self._stage_counter or stage_counter
-        assert self._job_name or job_name
+
+        func_args = locals()
+        parameters = {p: self._require_param(p, func_args) for p in self.PATH_PARAMETERS}
 
         response = self._session.post(
-            path=self._session.urljoin(self.URL_TEMPLATE, name).format(
-                base_api=self.base_api,
-                pipeline_name=self._pipeline_name or pipeline_name,
-                pipeline_counter=self._pipeline_counter or pipeline_counter,
-                stage_name=self._stage_name or stage_name,
-                stage_counter=self._stage_counter or stage_counter,
-                job_name=self._job_name or job_name,
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api, **parameters),
             data={'value': value},
             headers={
                 'Accept': 'application/json',
                 'Confirm': 'true'
             },
         )
+
         return response.text

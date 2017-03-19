@@ -30,11 +30,11 @@ import json
 from easydict import EasyDict
 
 from yagocd.resources import BaseManager
-from yagocd.util import since
+from yagocd.util import RequireParamMixin, since
 
 
 @since('15.3.0')
-class PipelineConfigManager(BaseManager):
+class PipelineConfigManager(BaseManager, RequireParamMixin):
     """
     The pipeline config API allows users with administrator role to manage pipeline config.
 
@@ -42,6 +42,8 @@ class PipelineConfigManager(BaseManager):
 
     :versionadded: 15.3.0.
     """
+
+    RESOURCE_PATH = '{base_api}/admin/pipelines'
 
     ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
 
@@ -74,12 +76,10 @@ class PipelineConfigManager(BaseManager):
         :return: tuple of pipeline config object and current ETag value.
         :rtype: (dict, str)
         """
-        assert self._pipeline_name or pipeline_name
+        pipeline_name = self._require_param('pipeline_name', locals())
 
         response = self._session.get(
-            path='{base_api}/admin/pipelines/{pipeline_name}'.format(
-                base_api=self.base_api, pipeline_name=self._pipeline_name or pipeline_name
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, pipeline_name).format(base_api=self.base_api),
             headers={'Accept': self._accept_header()},
         )
 
@@ -100,11 +100,10 @@ class PipelineConfigManager(BaseManager):
         :return: tuple of updated pipeline config object and updated ETag.
         :rtype: (dict, str)
         """
-        assert self._pipeline_name or pipeline_name
+        pipeline_name = self._require_param('pipeline_name', locals())
+
         response = self._session.put(
-            path='{base_api}/admin/pipelines/{pipeline_name}'.format(
-                base_api=self.base_api, pipeline_name=self._pipeline_name or pipeline_name
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, pipeline_name).format(base_api=self.base_api),
             data=json.dumps(config),
             headers={
                 'Accept': self._accept_header(),
@@ -127,7 +126,7 @@ class PipelineConfigManager(BaseManager):
         :rtype: (dict, str)
         """
         response = self._session.post(
-            path='{base_api}/admin/pipelines'.format(base_api=self.base_api),
+            path=self.RESOURCE_PATH.format(base_api=self.base_api),
             data=json.dumps(config),
             headers={
                 'Accept': self._accept_header(),
@@ -149,12 +148,10 @@ class PipelineConfigManager(BaseManager):
         :return: A message confirmation if the pipeline was deleted.
         :rtype: str
         """
-        assert self._pipeline_name or pipeline_name
+        pipeline_name = self._require_param('pipeline_name', locals())
 
         response = self._session.delete(
-            path='{base_api}/admin/pipelines/{pipeline_name}'.format(
-                base_api=self.base_api, pipeline_name=self._pipeline_name or pipeline_name
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, pipeline_name).format(base_api=self.base_api),
             headers={
                 'Accept': self._accept_header(),
             },

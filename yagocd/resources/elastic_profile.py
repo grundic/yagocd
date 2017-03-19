@@ -42,6 +42,8 @@ class ElasticAgentProfileManager(BaseManager):
     :versionadded: 16.11.0.
     """
 
+    RESOURCE_PATH = '{base_api}/elastic/profiles'
+
     def __iter__(self):
         """
         Method add iterator protocol for the manager.
@@ -66,7 +68,7 @@ class ElasticAgentProfileManager(BaseManager):
         :rtype: (list of yagocd.resources.elastic_profile.ElasticAgentProfile, str)
         """
         response = self._session.get(
-            path='{base_api}/elastic/profiles'.format(base_api=self.base_api)
+            path=self.RESOURCE_PATH.format(base_api=self.base_api)
         )
 
         result = list()
@@ -85,8 +87,8 @@ class ElasticAgentProfileManager(BaseManager):
         :rtype: (yagocd.resources.elastic_profile.ElasticAgentProfile, str)
         """
         response = self._session.get(
-            path='{base_api}/elastic/profiles/{profile_id}'.format(
-                base_api=self.base_api, profile_id=profile_id
+            path=self._session.urljoin(self.RESOURCE_PATH, profile_id).format(
+                base_api=self.base_api
             )
         )
 
@@ -102,7 +104,7 @@ class ElasticAgentProfileManager(BaseManager):
         :rtype: (yagocd.resources.elastic_profile.ElasticAgentProfile, str)
         """
         response = self._session.post(
-            path='{base_api}/elastic/profiles'.format(base_api=self.base_api),
+            path=self.RESOURCE_PATH.format(base_api=self.base_api),
             headers={
                 'Accept': self._accept_header(),
                 'Content-Type': 'application/json',
@@ -124,8 +126,9 @@ class ElasticAgentProfileManager(BaseManager):
         """
 
         response = self._session.put(
-            path='{base_api}/elastic/profiles/{profile_id}'.format(
-                base_api=self.base_api, profile_id=profile_id),
+            path=self._session.urljoin(self.RESOURCE_PATH, profile_id).format(
+                base_api=self.base_api
+            ),
             headers={
                 'Accept': self._accept_header(),
                 'Content-Type': 'application/json',
@@ -147,8 +150,9 @@ class ElasticAgentProfileManager(BaseManager):
         """
 
         response = self._session.delete(
-            path='{base_api}/elastic/profiles/{profile_id}'.format(
-                base_api=self.base_api, profile_id=profile_id),
+            path=self._session.urljoin(self.RESOURCE_PATH, profile_id).format(
+                base_api=self.base_api
+            ),
             headers={
                 'Accept': self._accept_header(),
             },

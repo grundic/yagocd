@@ -184,57 +184,49 @@ class TestWalk(BaseTestArtifactManager):
         walk_iter = artifact_yet_another_directory.walk()
 
         next_item = next(walk_iter)
-        assert (
-                   '/yet-another-directory/',
-                   [
-                       '/yet-another-directory/sub-dir-1/',
-                       '/yet-another-directory/sub-dir-2/',
-                   ],
-                   [
-                       '/yet-another-directory/some-file.txt',
-                   ]
-               ) == (
-                   next_item[0],
-                   [f.path for f in next_item[1]],
-                   [f.path for f in next_item[2]],
-               )
+        assert ('/yet-another-directory/',
+                [
+                    '/yet-another-directory/sub-dir-1/',
+                    '/yet-another-directory/sub-dir-2/',
+                ],
+                [
+                    '/yet-another-directory/some-file.txt',
+                ]
+                ) == (next_item[0],
+                      [f.path for f in next_item[1]],
+                      [f.path for f in next_item[2]],
+                      )
 
         next_item = next(walk_iter)
-        assert (
-                   '/yet-another-directory/sub-dir-1',
-                   ['/yet-another-directory/sub-dir-1/sub-dir-3/'],
-                   []
-               ) == (
-                   next_item[0],
-                   [f.path for f in next_item[1]],
-                   [f.path for f in next_item[2]],
-               )
+        assert ('/yet-another-directory/sub-dir-1',
+                ['/yet-another-directory/sub-dir-1/sub-dir-3/'],
+                []
+                ) == (next_item[0],
+                      [f.path for f in next_item[1]],
+                      [f.path for f in next_item[2]],
+                      )
 
         next_item = next(walk_iter)
-        assert (
-                   '/yet-another-directory/sub-dir-1/sub-dir-3',
-                   [],
-                   [
-                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-1.txt',
-                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-3.txt',
-                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-5.txt',
-                   ]
-               ) == (
-                   next_item[0],
-                   [f.path for f in next_item[1]],
-                   [f.path for f in next_item[2]],
-               )
+        assert ('/yet-another-directory/sub-dir-1/sub-dir-3',
+                [],
+                [
+                    '/yet-another-directory/sub-dir-1/sub-dir-3/hello-1.txt',
+                    '/yet-another-directory/sub-dir-1/sub-dir-3/hello-3.txt',
+                    '/yet-another-directory/sub-dir-1/sub-dir-3/hello-5.txt',
+                ]
+                ) == (next_item[0],
+                      [f.path for f in next_item[1]],
+                      [f.path for f in next_item[2]],
+                      )
 
         next_item = next(walk_iter)
-        assert (
-                   '/yet-another-directory/sub-dir-2',
-                   [],
-                   []
-               ) == (
-                   next_item[0],
-                   [f.path for f in next_item[1]],
-                   [f.path for f in next_item[2]],
-               )
+        assert ('/yet-another-directory/sub-dir-2',
+                [],
+                []
+                ) == (next_item[0],
+                      [f.path for f in next_item[1]],
+                      [f.path for f in next_item[2]],
+                      )
 
         with pytest.raises(StopIteration):
             next(walk_iter)
@@ -247,57 +239,49 @@ class TestWalk(BaseTestArtifactManager):
         walk_iter = artifact_yet_another_directory.walk(topdown=False)
 
         next_item = next(walk_iter)
-        assert (
-                   '/yet-another-directory/sub-dir-1/sub-dir-3',
-                   [],
-                   [
-                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-1.txt',
-                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-3.txt',
-                       '/yet-another-directory/sub-dir-1/sub-dir-3/hello-5.txt',
-                   ]
-               ) == (
-                   next_item[0],
-                   [f.path for f in next_item[1]],
-                   [f.path for f in next_item[2]],
-               )
+        assert ('/yet-another-directory/sub-dir-1/sub-dir-3',
+                [],
+                [
+                    '/yet-another-directory/sub-dir-1/sub-dir-3/hello-1.txt',
+                    '/yet-another-directory/sub-dir-1/sub-dir-3/hello-3.txt',
+                    '/yet-another-directory/sub-dir-1/sub-dir-3/hello-5.txt',
+                ]
+                ) == (next_item[0],
+                      [f.path for f in next_item[1]],
+                      [f.path for f in next_item[2]],
+                      )
 
         next_item = next(walk_iter)
-        assert (
-                   '/yet-another-directory/sub-dir-1',
-                   ['/yet-another-directory/sub-dir-1/sub-dir-3/'],
-                   []
-               ) == (
-                   next_item[0],
-                   [f.path for f in next_item[1]],
-                   [f.path for f in next_item[2]],
-               )
+        assert ('/yet-another-directory/sub-dir-1',
+                ['/yet-another-directory/sub-dir-1/sub-dir-3/'],
+                []
+                ) == (next_item[0],
+                      [f.path for f in next_item[1]],
+                      [f.path for f in next_item[2]],
+                      )
 
         next_item = next(walk_iter)
-        assert (
-                   '/yet-another-directory/sub-dir-2',
-                   [],
-                   []
-               ) == (
-                   next_item[0],
-                   [f.path for f in next_item[1]],
-                   [f.path for f in next_item[2]],
-               )
+        assert ('/yet-another-directory/sub-dir-2',
+                [],
+                []
+                ) == (next_item[0],
+                      [f.path for f in next_item[1]],
+                      [f.path for f in next_item[2]],
+                      )
 
         next_item = next(walk_iter)
-        assert (
-                   '/yet-another-directory/',
-                   [
-                       '/yet-another-directory/sub-dir-1/',
-                       '/yet-another-directory/sub-dir-2/',
-                   ],
-                   [
-                       '/yet-another-directory/some-file.txt',
-                   ]
-               ) == (
-                   next_item[0],
-                   [f.path for f in next_item[1]],
-                   [f.path for f in next_item[2]],
-               )
+        assert ('/yet-another-directory/',
+                [
+                    '/yet-another-directory/sub-dir-1/',
+                    '/yet-another-directory/sub-dir-2/',
+                ],
+                [
+                    '/yet-another-directory/some-file.txt',
+                ]
+                ) == (next_item[0],
+                      [f.path for f in next_item[1]],
+                      [f.path for f in next_item[2]],
+                      )
 
         with pytest.raises(StopIteration):
             next(walk_iter)
@@ -608,4 +592,6 @@ class TestMagicMethods(BaseTestArtifactManager):
     def test_iterator_access(self, list_mock, manager):
         for _ in manager:
             pass
-        list_mock.assert_called_once_with()
+        list_mock.assert_called_once_with(
+            job_name=None, pipeline_counter=None, pipeline_name=None, stage_counter=None, stage_name=None
+        )

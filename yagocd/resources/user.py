@@ -41,6 +41,8 @@ class UserManager(BaseManager):
     :versionadded: 15.2.0.
     """
 
+    RESOURCE_PATH = '{base_api}/users'
+
     def __iter__(self):
         """
         Method add iterator protocol for the manager.
@@ -70,7 +72,7 @@ class UserManager(BaseManager):
         :rtype: list of yagocd.resources.user.UserEntity
         """
         response = self._session.get(
-            path='{base_api}/users'.format(base_api=self.base_api),
+            path=self.RESOURCE_PATH.format(base_api=self.base_api),
         )
 
         users = list()
@@ -90,10 +92,7 @@ class UserManager(BaseManager):
         :rtype: yagocd.resources.user.UserEntity
         """
         response = self._session.get(
-            path='{base_api}/users/{login}'.format(
-                base_api=self.base_api,
-                login=login
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, login).format(base_api=self.base_api)
         )
 
         return UserEntity(session=self._session, data=response.json())
@@ -111,7 +110,7 @@ class UserManager(BaseManager):
         :rtype: yagocd.resources.user.UserEntity
         """
         response = self._session.post(
-            path='{base_api}/users'.format(
+            path=self.RESOURCE_PATH.format(
                 base_api=self.base_api
             ),
             data=json.dumps(options),
@@ -134,10 +133,7 @@ class UserManager(BaseManager):
         :rtype: yagocd.resources.user.UserEntity
         """
         response = self._session.patch(
-            path='{base_api}/users/{login}'.format(
-                base_api=self.base_api,
-                login=login
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, login).format(base_api=self.base_api),
             data=json.dumps(options),
             headers={
                 'Content-Type': 'application/json'
@@ -156,10 +152,7 @@ class UserManager(BaseManager):
         :return: a message confirmation if the user was deleted.
         """
         response = self._session.delete(
-            path='{base_api}/users/{login}'.format(
-                base_api=self.base_api,
-                login=login
-            ),
+            path=self._session.urljoin(self.RESOURCE_PATH, login).format(base_api=self.base_api)
         )
 
         return response.json().get('message')

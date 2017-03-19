@@ -27,11 +27,11 @@
 ###############################################################################
 
 from yagocd.resources import BaseManager
-from yagocd.util import since
+from yagocd.util import RequireParamMixin, since
 
 
 @since('14.3.0')
-class FeedManager(BaseManager):
+class FeedManager(BaseManager, RequireParamMixin):
     """
     The feed API allows users to view feed information.
 
@@ -39,6 +39,24 @@ class FeedManager(BaseManager):
 
     :versionadded: 14.3.0.
     """
+
+    PIPELINES_RESOURCE_PATH = '{base_api}/pipelines'
+    STAGES_RESOURCE_PATH = '{base_api}/stages'
+
+    def __init__(
+        self,
+        session,
+        pipeline_name=None,
+        pipeline_counter=None,
+        stage_name=None,
+        stage_counter=None,
+    ):
+        super(FeedManager, self).__init__(session)
+
+        self._pipeline_name = pipeline_name
+        self._pipeline_counter = pipeline_counter
+        self._stage_name = stage_name
+        self._stage_counter = stage_counter
 
     def pipelines(self):
         """
@@ -49,7 +67,7 @@ class FeedManager(BaseManager):
         :return: an array of pipelines in XML format.
         """
         response = self._session.get(
-            path='{base_api}/pipelines.xml'.format(base_api=self.base_api),
+            path=(self.PIPELINES_RESOURCE_PATH + '.xml').format(base_api=self.base_api),
             headers={'Accept': 'application/xml'},
         )
 
@@ -65,10 +83,12 @@ class FeedManager(BaseManager):
         :return: a pipeline object in XML format.
         """
         response = self._session.get(
-            path='{base_api}/pipelines/{pipeline_name}/{pipeline_id}.xml'.format(
-                base_api=self.base_api,
-                pipeline_name='THIS_PARAMETER_IS_USELESS',  # WTF?!!
-                pipeline_id=pipeline_id,
+            path=self._session.urljoin(
+                self.PIPELINES_RESOURCE_PATH,
+                'THIS_PARAMETER_IS_USELESS',  # WTF?!!
+                '{}.xml'.format(pipeline_id)
+            ).format(
+                base_api=self.base_api
             ),
             headers={'Accept': 'application/xml'},
         )
@@ -84,10 +104,12 @@ class FeedManager(BaseManager):
         :param pipeline_name: name of pipeline, for which to list stages
         :return: an array of feed of stages in XML format.
         """
+
+        pipeline_name = self._require_param('pipeline_name', locals())
+
         response = self._session.get(
-            path='{base_api}/pipelines/{pipeline_name}/stages.xml'.format(
-                base_api=self.base_api,
-                pipeline_name=pipeline_name
+            path=self._session.urljoin(self.PIPELINES_RESOURCE_PATH, pipeline_name, 'stages.xml').format(
+                base_api=self.base_api
             ),
             headers={'Accept': 'application/xml'},
         )
@@ -104,9 +126,11 @@ class FeedManager(BaseManager):
         :return: a stage object in XML format.
         """
         response = self._session.get(
-            path='{base_api}/stages/{stage_id}.xml'.format(
-                base_api=self.base_api,
-                stage_id=stage_id
+            path=self._session.urljoin(
+                self.STAGES_RESOURCE_PATH,
+                '{}.xml'.format(stage_id)
+            ).format(
+                base_api=self.base_api
             ),
             headers={'Accept': 'application/xml'},
         )
@@ -125,13 +149,22 @@ class FeedManager(BaseManager):
         :param stage_counter: stage counter.
         :return: a stage object in XML format.
         """
+
+        func_args = locals()
+        pipeline_name = self._require_param('pipeline_name', func_args)
+        pipeline_counter = self._require_param('pipeline_counter', func_args)
+        stage_name = self._require_param('stage_name', func_args)
+        stage_counter = self._require_param('stage_counter', func_args)
+
         response = self._session.get(
-            path='{base_api}/pipelines/{pipeline_name}/{pipeline_counter}/{stage_name}/{stage_counter}.xml'.format(
+            path=self._session.urljoin(
+                self.PIPELINES_RESOURCE_PATH,
+                pipeline_name,
+                pipeline_counter,
+                stage_name,
+                '{}.xml'.format(stage_counter)
+            ).format(
                 base_api=self._session.base_api(api_path=''),  # WTF?!!
-                pipeline_name=pipeline_name,
-                pipeline_counter=pipeline_counter,
-                stage_name=stage_name,
-                stage_counter=stage_counter,
             ),
             headers={'Accept': 'application/xml'},
         )
