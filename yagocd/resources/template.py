@@ -44,6 +44,13 @@ class TemplateManager(BaseManager):
 
     RESOURCE_PATH = '{base_api}/admin/templates'
 
+    ACCEPT_HEADER = 'application/vnd.go.cd.v3+json'
+
+    VERSION_TO_ACCEPT_HEADER = {
+        '16.10.0': 'application/vnd.go.cd.v1+json',
+        '16.11.0': 'application/vnd.go.cd.v2+json',
+    }
+
     def __iter__(self):
         """
         Method add iterator protocol for the manager.
