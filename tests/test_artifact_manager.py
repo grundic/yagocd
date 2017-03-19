@@ -36,6 +36,7 @@ from six import binary_type, BytesIO, string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import artifact
+from yagocd.util import Since
 
 
 class BaseTestArtifactManager(object):
@@ -146,9 +147,24 @@ class TestList(AbstractTestManager, BaseTestArtifactManager, ReturnValueMixin):
         return check_value
 
 
+@mock.patch('yagocd.resources.artifact.ArtifactManager.list')
 class TestWalk(BaseTestArtifactManager):
-    def test_dummy_txt(self, artifact_dummy_txt):
+
+    @pytest.yield_fixture(autouse=True)
+    def disable_since(self):
+        _original = Since.ENABLED
+        Since.ENABLED = False
+
+        yield
+        Since.ENABLED = _original
+
+    def test_dummy_txt(self, list_mock, artifact_dummy_txt):
         """:type artifact_dummy_txt: artifact.Artifact"""
+
+        list_mock.return_value = [artifact_dummy_txt]
+
+        Since.ENABLED = False
+
         assert artifact_dummy_txt.data.type == 'file'
         assert artifact_dummy_txt.data.name == 'dummy.txt'
 
@@ -162,8 +178,11 @@ class TestWalk(BaseTestArtifactManager):
         with pytest.raises(StopIteration):
             next(artifact_dummy_txt.walk())
 
-    def test_another_directory(self, artifact_another_directory):
+    def test_another_directory(self, list_mock, artifact_another_directory):
         """:type artifact_another_directory: artifact.Artifact"""
+
+        list_mock.return_value = [artifact_another_directory]
+
         assert artifact_another_directory.data.type == 'folder'
         assert artifact_another_directory.data.name == 'another-directory'
 
@@ -176,8 +195,11 @@ class TestWalk(BaseTestArtifactManager):
 
         assert ('/another-directory/', [], []) == next(artifact_another_directory.walk())
 
-    def test_yet_another_directory(self, artifact_yet_another_directory):
+    def test_yet_another_directory(self, list_mock, artifact_yet_another_directory):
         """:type artifact_yet_another_directory: artifact.Artifact"""
+
+        list_mock.return_value = [artifact_yet_another_directory]
+
         assert artifact_yet_another_directory.data.type == 'folder'
         assert artifact_yet_another_directory.data.name == 'yet-another-directory'
 
@@ -231,8 +253,11 @@ class TestWalk(BaseTestArtifactManager):
         with pytest.raises(StopIteration):
             next(walk_iter)
 
-    def test_yet_another_directory_not_topdown(self, artifact_yet_another_directory):
+    def test_yet_another_directory_not_topdown(self, list_mock, artifact_yet_another_directory):
         """:type artifact_yet_another_directory: artifact.Artifact"""
+
+        list_mock.return_value = [artifact_yet_another_directory]
+
         assert artifact_yet_another_directory.data.type == 'folder'
         assert artifact_yet_another_directory.data.name == 'yet-another-directory'
 
@@ -589,8 +614,8 @@ class TestMagicMethods(BaseTestArtifactManager):
         directory_wait_mock.assert_called_once_with(path=path)
 
     @mock.patch('yagocd.resources.artifact.ArtifactManager.list')
-    def test_iterator_access(self, list_mock, manager):
-        for _ in manager:
+    def test_iterator_access(self, list_mock, mock_manager):
+        for _ in mock_manager:
             pass
         list_mock.assert_called_once_with(
             job_name=None, pipeline_counter=None, pipeline_name=None, stage_counter=None, stage_name=None
