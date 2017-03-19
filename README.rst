@@ -47,18 +47,17 @@ Quick example
         }
     )
 
-    for pipeline in go.pipelines:
-        for instance in pipeline:
-            for stage in instance:
-                for job in stage:
-                    # print artifact urls for each job
-                    for artifact in job.artifacts:
-                        for file_obj in artifact.files():
-                            print(file_obj.data.url)
+    for pipeline in go.pipelines:   # Iterate over all pipelines
+        for instance in pipeline:   # Iterate over each instance of some pipeline
+            for stage in instance:  # Iterate over each stages of some pipeline instance
+                for job in stage:   # Iterate over each job of some pipeline
+                    for root, folder, files in job.artifacts:  # Iterate over artifacts like `os.walk` manner
+                        for artifact in files:
+                            print(artifact.data.url)
 
                     # print property of each job
                     for key, value in job.properties.items():
-                        print "{} => {}".format(key, value)
+                        print("{} => {}".format(key, value))
 
 Different implementations of GoCD API
 -------------------------------------
