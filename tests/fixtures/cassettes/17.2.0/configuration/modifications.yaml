@@ -1,0 +1,43 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=1jfiig2cnm6v1dsigibbsbl8r]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: http://localhost:8153/go/api/config/revisions
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAMWWMW8kNwyF/0ow1QXwHUiKpER3aYL0QdIEKSiRulsgawdepwiC+++hm8PGLlwt
+        Mt3McAR+1HtP89s/xznkuD9Et8+ExrRoDcKtMZ2brj6MEeC4O55P5zzukQ0bWq8a4bvjsr7k2X/N
+        p8vp8eG4H3Z3/HXJpwd/qT08zqeH+vTz47eKA/sn+gTffWAZ/SMzeQ/tMPpgTmanWFsGMSonxk6A
+        tVi+r0XW4/l8ev75px9qkUxvTrCauFbDjLSNt8FoounTh5slsBxf774RthYwETbS6OTSeHsw7u0Y
+        c8F8S4gK/x8hGApiW4WhsIQm7aTl4EAjOHc1KQJAV4SgHSUje9rEqnSP3Rb7COCZud4Sguh4j/DH
+        0x95+fvynOebYK7ZYQOyx/I+MTpMwTGo48CxrQeTbm5XmLYW2JBk5AkeYwbXfQwwc6wRvcGUlzbe
+        w/zlz89PHnkLxpiJbpBzzt0MEZoAte5iNmuJuapg2NxXjB7mIOjhIr53mxGk1qAF0Q69tqM2ZTJB
+        U3jD2OV9scoL4QciHh8XloVc3Wtq5G+2ivqklrJx2DbliTj6GntmdFtsm8jXnHyFoWsRlx8tKPfI
+        4MVtgNpq3PZ0/S8GDAKu2dwWI2N4JVv5P6i3EKu5TmPLGdPQymfRKyvWFQbFNqPdMHWW1gRsbe2W
+        BQ/qi15jQOtqeFuMXgpcudN9M/XdSwXeqRrXNjBYwqxyLa4TENHqbdcS4awwQdFylzCM2AEq8gqj
+        jxIr3BhDIZtnZVnJibqx7pXk0LyeDFM0psEa197Qbd62prmX34AHzDJmolRkhLb5CkNHK1K9LQZ3
+        xRy4ytBIrRRCNWpaGCmeIDKpwlvl2huMk7OX/KQ2Adhs81ooC2vqVgfYa4xOrcZxY2/0ltWvrx6T
+        ++h1jYmqUXk8vP4K6uDpFWPH19//BZ+QErE6CAAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 04 Apr 2017 15:29:47 GMT']
+      ETag: ['"726e314aa8374303fe9e4a8b273adec0--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [9ed40829-984c-42e3-8f17-5a7cebd6bf48]
+      X-Runtime: ['0.063000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

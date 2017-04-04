@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJuYW1lIjogImJhciIsICJjb25maWd1cmF0aW9uIjogW3sidmFsdWUiOiAiTkVXLURVTU1ZLVZB
+      TFVFIiwgImtleSI6ICJ1cmwifSwgeyJ2YWx1ZSI6ICJhZG1pbiIsICJrZXkiOiAidXNlcm5hbWUi
+      fSwgeyJ2YWx1ZSI6ICJzZWNyZXQiLCAia2V5IjogInBhc3N3b3JkIn1dLCAiYXV0b191cGRhdGUi
+      OiB0cnVlLCAiaWQiOiAic2NtLWlkLWJhciIsICJwbHVnaW5fbWV0YWRhdGEiOiB7InZlcnNpb24i
+      OiAiMSIsICJpZCI6ICJnaXRodWIucHIifX0=
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['254']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=1jfiig2cnm6v1dsigibbsbl8r]
+      If-Match: ['"7eff689793f4f71ed246646a97406586--gzip"']
+      User-Agent: [python-requests/2.13.0]
+    method: PUT
+    uri: http://localhost:8153/go/api/admin/scms/bar
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWQX0vDMBTF3/spSnzULhRRpOCD4N7c3qoMkXKXZG1YmoT8cYyx726SlpYx9MXH
+        c3LPL/eeU5bnqBFc7i2q8lNQQVsmdpMKujMsatQ5pyuMhSIgOmVd9VQ+3ONWYdAcA+25xJb0Fm/B
+        oJQ93w1AqshvPBuAIb5oFaELrvBNJFymd1zS/6xT9eCY4SAaCT0b2dnIRzyyURgsOC3i5slNk8Gf
+        DC18y2XTMwcUHMxlDfmWu85vF3qYDvY3M5YrGd9KNH0G3qnG60CIdGc8SzZRcsdbb8ANkc/EmA7e
+        s2PkeCNGeuSD8GnD9fKjeK1Xq03x/vJWLy+quyJYZtJl15jU159hDdYelKFzmElijtox2kyY28Nj
+        Sep6venq57npr+yc/QAU5aJWagIAAA==
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Tue, 04 Apr 2017 15:30:45 GMT']
+      ETag: ['"a5d32e68b59074750b7fe15fb38b7e97--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [400b685b-ee70-4529-abbc-3cc5d21f7cc2]
+      X-Runtime: ['0.602000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
