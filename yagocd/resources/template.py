@@ -75,7 +75,8 @@ class TemplateManager(BaseManager):
         :rtype: (list of yagocd.resources.template.TemplateConfig, str)
         """
         response = self._session.get(
-            path=self.RESOURCE_PATH.format(base_api=self.base_api)
+            path=self.RESOURCE_PATH.format(base_api=self.base_api),
+            headers={'Accept': self._accept_header()}
         )
 
         result = list()
@@ -98,7 +99,8 @@ class TemplateManager(BaseManager):
         :rtype: (yagocd.resources.template.TemplateConfig, str)
         """
         response = self._session.get(
-            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api)
+            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api),
+            headers={'Accept': self._accept_header()}
         )
 
         etag = response.headers['ETag']

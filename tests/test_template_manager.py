@@ -27,6 +27,7 @@
 ###############################################################################
 import json
 import os
+from distutils.version import LooseVersion
 
 import pytest
 from mock import mock
@@ -50,6 +51,15 @@ class BaseManager(AbstractTestManager):
     def template_bar(self, tests_dir):
         path = os.path.join(tests_dir, 'fixtures/resources/template/template-bar.json')
         return json.load(open(path))
+
+    @pytest.fixture()
+    def expected_accept_headers(self, server_version):
+        if LooseVersion(server_version) <= LooseVersion('16.10.0'):
+            return 'application/vnd.go.cd.v1+json'
+        elif LooseVersion(server_version) <= LooseVersion('16.11.0'):
+            return 'application/vnd.go.cd.v2+json'
+        else:
+            return 'application/vnd.go.cd.v3+json'
 
 
 class TestList(BaseManager, ReturnValueMixin):

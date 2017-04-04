@@ -9,7 +9,7 @@ interactions:
       cmtpbmdfZGlyZWN0b3J5IjogZmFsc2UsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXSwgImZl
       dGNoX21hdGVyaWFscyI6IHRydWV9XSwgIm5hbWUiOiAiYmFyIn0=
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
+      Accept: [application/vnd.go.cd.v2+json]
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
@@ -33,7 +33,7 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
       Date: ['Tue, 01 Nov 2016 08:40:49 GMT']
       ETag: ['"fbf744f8ff3dbed1fbad548fb8dea640--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
@@ -47,7 +47,7 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
+      Accept: [application/vnd.go.cd.v2+json]
       Accept-Encoding: ['gzip, deflate']
       Authorization: [Basic YWRtaW46MTIzNDU=]
       Connection: [keep-alive]
@@ -69,7 +69,7 @@ interactions:
     headers:
       Cache-Control: ['max-age=0, private, must-revalidate']
       Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
       Date: ['Tue, 01 Nov 2016 08:40:49 GMT']
       ETag: ['"fbf744f8ff3dbed1fbad548fb8dea640--gzip"']
       Vary: ['Accept-Encoding, User-Agent']
