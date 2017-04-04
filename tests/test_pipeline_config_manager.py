@@ -47,8 +47,10 @@ class BaseTestPipelineConfigManager(AbstractTestManager):
     def expected_accept_headers(self, server_version):
         if LooseVersion(server_version) <= LooseVersion('16.6.0'):
             return 'application/vnd.go.cd.v1+json'
-        else:
+        elif LooseVersion(server_version) <= LooseVersion('16.12.0'):
             return 'application/vnd.go.cd.v2+json'
+        else:
+            return 'application/vnd.go.cd.v3+json'
 
 
 class TestGet(BaseTestPipelineConfigManager, ReturnValueMixin):

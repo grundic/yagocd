@@ -45,10 +45,11 @@ class PipelineConfigManager(BaseManager, RequireParamMixin):
 
     RESOURCE_PATH = '{base_api}/admin/pipelines'
 
-    ACCEPT_HEADER = 'application/vnd.go.cd.v2+json'
+    ACCEPT_HEADER = 'application/vnd.go.cd.v3+json'
 
     VERSION_TO_ACCEPT_HEADER = {
         '16.6.0': 'application/vnd.go.cd.v1+json',
+        '16.12.0': 'application/vnd.go.cd.v2+json',
     }
 
     def __init__(self, session, pipeline_name=None):
