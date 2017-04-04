@@ -1,0 +1,49 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJzdGFnZXMiOiBbeyJmZXRjaF9tYXRlcmlhbHMiOiB0cnVlLCAiY2xlYW5fd29ya2luZ19kaXJl
+      Y3RvcnkiOiBmYWxzZSwgIm5hbWUiOiAiQkFaLVNUQUdFIiwgIm5ldmVyX2NsZWFudXBfYXJ0aWZh
+      Y3RzIjogZmFsc2UsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXSwgImpvYnMiOiBbeyJ0aW1l
+      b3V0IjogMCwgInRhc2tzIjogW3sidHlwZSI6ICJleGVjIiwgImF0dHJpYnV0ZXMiOiB7Indvcmtp
+      bmdfZGlyZWN0b3J5IjogbnVsbCwgImNvbW1hbmQiOiAibHMifX1dLCAicmVzb3VyY2VzIjogW10s
+      ICJuYW1lIjogImJhci1qb2IiLCAicnVuX2luc3RhbmNlX2NvdW50IjogbnVsbCwgImVudmlyb25t
+      ZW50X3ZhcmlhYmxlcyI6IFtdfV19XSwgIm5hbWUiOiAiYmFyIn0=
+    headers:
+      Accept: [application/vnd.go.cd.v3+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['380']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=xipunyrnf9l21vjtao0u421e7]
+      If-Match: ['"fbf744f8ff3dbed1fbad548fb8dea640--gzip"']
+      User-Agent: [python-requests/2.13.0]
+    method: PUT
+    uri: http://localhost:8153/go/api/admin/templates/bar
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWTwW6cMBCG7zzFil53g6oqUrW3VKr6AO2p1coyZgBnjQfZ403SiHfvwALB7CZ7
+        6I3xfP7n92/8mmw2qTDaHn2637xyxbUHU84V17WDvk5ronafZQaVNDV62n/9fP8lqzCTrc5k0Wib
+        ETStkQQ+y6VLB4Fue1YtUL0n6lmVNe4qVMWdxuzTJLNTaEtdxUKltsV/29tPn8LKBsYByTgkHdZY
+        sj/EsOBJVtBH9Gcg59kT+O3h9+7nr4cf39Pt1CqBVC0aHuG0NP1ecgHmtjIgrXhCd9S2EoV2oAjd
+        C2Ml02+chRM4MdChFdKRLqUif8HJtnV4kmaRDK/SSzv480Ep8H52128IVKPTfyVptNEubjo043EX
+        q4ftEgke3CUyf3fjVzc7BHvSDm0DlsRJcij5asasnz5i/hb2MvAodL6dHZNpZMsFK7Tl+7IKhMJg
+        iVEbjIko0g1g6FvngGONm04v03DgMTh1CyPpj/HJ1qc7Y+O1wTOoyNrQlURO54HAr65tGUG5NnLF
+        zsijFaqPy1xJakQUNo0cnl1q/IUjBq79yL3WiuyS96p1TvmNJJcv4QOMH0ULjA5ZRYam4Yf57R+S
+        LvkHc473BREFAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
+      Date: ['Tue, 04 Apr 2017 16:36:49 GMT']
+      ETag: ['"18802502fe135d44800f12048dc1f180--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [f7e23196-4a09-47ff-9fb7-f09873c30351]
+      X-Runtime: ['0.104000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

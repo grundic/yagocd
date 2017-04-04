@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v3+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=xipunyrnf9l21vjtao0u421e7]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKVW227bMAx9z1cE3h67GF1RbAiwh64Ihg3rBW1WbBgKQZbpWKssGbqka4v8+yjH
+        duRLL1jfLJI6pM4hmTxMptOICC5vTDSfPuAJzwZE1p7wnGvw5yi3tpzHsVCMilwZO/+4f3gQr1RM
+        Sx7TtOAyLnkJiAYmPqeaFmA1v4f0vLZGFeJmb5smVeyxLAbTIOhspVg64yp+0+C+Y0pmfNUFyrhM
+        X13vvPkkEuuuE0zqJJGgCQhioSgFteDB3z4cn/04XW6iyg+SJgJIi4E5b7hcYWBGhYEqpsLFm6PM
+        VBEBvnRCVLZyGw3aC/R7gqbrOuOaayULkJasqeY+/zbEV95yYYA5DWEdlbmp5eQXuTq6+Hr0+fsi
+        ap1rKlztnVbf0/33Bx3KXwq/ODlfPpnhGVSr3WjNl4vji8VyBBgk03elhZS0KdZnP++Pl4dfPhyZ
+        T/+TbvuGV2ZsZStQXhRLjEhl78rq+orbHTy12CiJs2CCDke70yIcFryTu2TGVBH7mXmXQqFiA3rN
+        GZhZiOgHD4zlklquZNBptTPjAisc2rlcg7akdXcE39HVu0WdVcSV6bapQ37RmWgqWe6fUVDjUQOf
+        cUmhUoczlSmRjhVkciqEuiVMKNl2YO3e9Fg3lq7GpqPROIWMOmEvfdiO+wwsy0moWKdBmAAqya3S
+        ftJJyjUwq/TdcBgAmSNVtCsJ1ZZnlFkziKNlqRU2UVfopiuMYyilibrk5grXSKPk7hY6tWr2QWC9
+        3gtDnAm2ShvSfm8aMoNef2znTHr40R+V7PgOOR/j/ZtKok5l2knCJaomGRCmnLQD/T01vADlRl1P
+        b8exmqpr4+tsUPbi9MpvArIfDUJ6m63PZYek7VPBKKfZc1pZam5e8ICmW+AvsGFxjyyTXS2e9myQ
+        pfaW1BhIo4Hrup8HY5UkzIsnRsSpQ3BXFbT64Y5KzaVFyQYVY9jYfHnEXuTmhXRbmjzDdDigT4Th
+        rJa4EHnFZaegJvl1bwlZTas/BcQqFfJS9XGz4CabyT8nWTNVlAkAAA==
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
+      Date: ['Tue, 04 Apr 2017 16:36:13 GMT']
+      ETag: ['"82f95ffd23872c7afb7ffda29f4469cc--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [a0d43614-1a84-4283-9c7b-4026d879e280]
+      X-Runtime: ['0.049000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

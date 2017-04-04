@@ -51,6 +51,7 @@ TESTING_VERSIONS = [
     '16.10.0',
     '16.11.0',
     '16.12.0',
+    '17.1.0',
 ]
 
 
@@ -201,6 +202,7 @@ def start_docker_agent(version_tag):
             "--name={container_name}".format(
                 container_name=AGENT_CONTAINER_NAME
             ),
+            "-eGO_SERVER_URL=https://172.17.0.2:8154/go",
             "gocd/gocd-agent:{tag}".format(tag=version_tag),
         ])
 

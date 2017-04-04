@@ -1,0 +1,83 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJzdGFnZXMiOiBbeyJmZXRjaF9tYXRlcmlhbHMiOiB0cnVlLCAiY2xlYW5fd29ya2luZ19kaXJl
+      Y3RvcnkiOiBmYWxzZSwgIm5hbWUiOiAiYmFyLXN0YWdlIiwgIm5ldmVyX2NsZWFudXBfYXJ0aWZh
+      Y3RzIjogZmFsc2UsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXSwgImpvYnMiOiBbeyJ0aW1l
+      b3V0IjogMCwgInRhc2tzIjogW3sidHlwZSI6ICJleGVjIiwgImF0dHJpYnV0ZXMiOiB7Indvcmtp
+      bmdfZGlyZWN0b3J5IjogbnVsbCwgImNvbW1hbmQiOiAibHMifX1dLCAicmVzb3VyY2VzIjogW10s
+      ICJuYW1lIjogImJhci1qb2IiLCAicnVuX2luc3RhbmNlX2NvdW50IjogbnVsbCwgImVudmlyb25t
+      ZW50X3ZhcmlhYmxlcyI6IFtdfV19XSwgIm5hbWUiOiAiYmFyIn0=
+    headers:
+      Accept: [application/vnd.go.cd.v3+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['380']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=xipunyrnf9l21vjtao0u421e7]
+      User-Agent: [python-requests/2.13.0]
+    method: POST
+    uri: http://localhost:8153/go/api/admin/templates
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWT3W6jMBCF73mKyHubFlXVSqu8ShVZxgzgjZlB9jhtt+LdaxxC+Uk3F71jPJ/P
+        HB/jj2y3E9IaPHlx2H3EKtYebDVVsW4cDLVomLtDnlvSyjbk+fDn6fdzXlOuOpOrsjWYM7SdVQw+
+        L5QTSaDfX1RL0t+J+qgaNR5r0uWjofzXVeZBE1amXgpVBssf2ztcPyWqFsYB2ThEpLUoORwiLXhW
+        NQwRvSRymj0DHxIj9tdWBawb2cYRzig77GUXYGprCwrlK7mTwVqWxoFmcu8RqyL9xSGcwclEh04q
+        x6ZSmv2GU13n6KzsLJm4yu9d8ueD1uD95G7YELghZ/4pNoSLXbHpyI7Hna0e93MkeHBbZPrux69+
+        cgh4No6wBWR5VjGUYjVj0hd/qfgKex74JvRIioUtF1AajHeBGqSmgBxRDNYuKDYtUBhal4CXGned
+        btNw4Ck4fQ9j5U/Lk61Pd8HGa4M30AtrqauYnSkCg19d2zyCam3khp2RJ5R6iMveSGpENLWtSs9O
+        WL9xFIFbP/KgtSL77LtqnVNxJ8n5S/gPFh9FBxFNWS0MXYcfp7d/zPrsEy8ObNARBQAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
+      Date: ['Tue, 04 Apr 2017 16:36:49 GMT']
+      ETag: ['"fbf744f8ff3dbed1fbad548fb8dea640--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [16be7b18-8945-48bd-a37d-924f7095e87a]
+      X-Runtime: ['0.116000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v3+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=xipunyrnf9l21vjtao0u421e7]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: http://localhost:8153/go/api/admin/templates/bar
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWT3W6jMBCF73mKyHubFlXVSqu8ShVZxgzgjZlB9jhtt+LdaxxC+Uk3F71jPJ/P
+        HB/jj2y3E9IaPHlx2H3EKtYebDVVsW4cDLVomLtDnlvSyjbk+fDn6fdzXlOuOpOrsjWYM7SdVQw+
+        L5QTSaDfX1RL0t+J+qgaNR5r0uWjofzXVeZBE1amXgpVBssf2ztcPyWqFsYB2ThEpLUoORwiLXhW
+        NQwRvSRymj0DHxIj9tdWBawb2cYRzig77GUXYGprCwrlK7mTwVqWxoFmcu8RqyL9xSGcwclEh04q
+        x6ZSmv2GU13n6KzsLJm4yu9d8ueD1uD95G7YELghZ/4pNoSLXbHpyI7Hna0e93MkeHBbZPrux69+
+        cgh4No6wBWR5VjGUYjVj0hd/qfgKex74JvRIioUtF1AajHeBGqSmgBxRDNYuKDYtUBhal4CXGned
+        btNw4Ck4fQ9j5U/Lk61Pd8HGa4M30AtrqauYnSkCg19d2zyCam3khp2RJ5R6iMveSGpENLWtSs9O
+        WL9xFIFbP/KgtSL77LtqnVNxJ8n5S/gPFh9FBxFNWS0MXYcfp7d/zPrsEy8ObNARBQAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
+      Date: ['Tue, 04 Apr 2017 16:36:49 GMT']
+      ETag: ['"fbf744f8ff3dbed1fbad548fb8dea640--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [9fbf0864-c629-4e21-85ee-37990f5bcfed]
+      X-Runtime: ['0.020000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

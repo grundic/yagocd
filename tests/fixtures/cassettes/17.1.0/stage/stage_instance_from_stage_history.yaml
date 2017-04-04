@@ -1,0 +1,38 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=19wmtrb4f7f6tyi7d68ztui3e]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: http://localhost:8153/go/api/stages/Consumer_Website/Commit/history/0
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAM3WwY6kIBAA0H+psweBKkSv+wN7m8NkY2ilZ5jQaAQ3men0vw+2Tmezu14ZjwJV
+        Ug9QrhCifjEBmucrTCbMLkIDP3UIpocCRjsaZ71pvb6Y1PFj8GG+mKl9Mqdgo0lD3obTGp0SxXXM
+        ZXQm3uP/zbglOs3WLY+2h0YyXkDoXk0/O9O3/T0NQylkKVUtUNS3X4/AlP1i4z31NPt2OLfdMPto
+        Jmj87FwBehyn4bd2bXwfl4Awd50JAb560htO76m9e9V+KfyPIh+ZBFtnhgoLeLQCg1vxbUok1Z4S
+        MqGoLrMrlZsSlodRwhr/q8Sp4pKUQsytxOt1ZqI+kNLOXuJYqUSVFjS7ktqUKn4gpZ29lJRIkJAi
+        u1K1KS3rdxQllDtKVDEkKWV2Jbkp0YH2ktg7cVSVRJKz7Eq0KS3rdxQlVu0pSULiyLMr4aa0fMaP
+        olTunrh0GyDGKbuS+FI6zj9OqF0lqhkqobIr8W1m5d+3yjSRUb9Yr6MdPDRXGM7nYFKFiTMOUbv1
+        SprGmDbYj6WQ8nb7BGJlhwu8CwAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/json; charset=utf-8]
+      Date: ['Tue, 04 Apr 2017 16:36:45 GMT']
+      ETag: ['"5191d3c0be7efff4c6ad014f68250925--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [dd835eff-2ce5-4780-992d-1f55bc2c570b]
+      X-Runtime: ['0.022000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
