@@ -1,0 +1,46 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJwbHVnaW5fbWV0YWRhdGEiOiB7ImlkIjogInl1bSIsICJ2ZXJzaW9uIjogIjEifSwgIm5hbWUi
+      OiAidXBkYXRlZC1uYW1lIiwgIl9saW5rcyI6IHsiZmluZCI6IHsiaHJlZiI6ICJodHRwOi8vbG9j
+      YWxob3N0OjgxNTMvZ28vYXBpL2FkbWluL3JlcG9zaXRvcmllcy86cmVwb19pZCJ9LCAiZG9jIjog
+      eyJocmVmIjogImh0dHBzOi8vYXBpLmdvY2QuaW8vI3BhY2thZ2UtcmVwb3NpdG9yaWVzIn0sICJz
+      ZWxmIjogeyJocmVmIjogImh0dHA6Ly9sb2NhbGhvc3Q6ODE1My9nby9hcGkvYWRtaW4vcmVwb3Np
+      dG9yaWVzL3JlcG9zaXRvcnktYmFyIn19LCAiY29uZmlndXJhdGlvbiI6IFt7InZhbHVlIjogImh0
+      dHA6Ly9iYXIuZXhhbXBsZS5jb20iLCAia2V5IjogIlJFUE9fVVJMIn1dLCAiX2VtYmVkZGVkIjog
+      eyJwYWNrYWdlcyI6IFtdfSwgInJlcG9faWQiOiAicmVwb3NpdG9yeS1iYXIifQ==
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['445']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=rte48uu9le7wuqi47lp3c1]
+      If-Match: ['"e7860f192645039031cd3cb74c50e4d9--gzip"']
+      User-Agent: [python-requests/2.13.0]
+    method: PUT
+    uri: http://localhost:8153/go/api/admin/repositories/repository-bar
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAK2QT2uEMBDF734KSa/VsJRC8d5boWWhp7LIbDK6wfwjiaWy7HdvEq3aQ2+9+ebF
+        35s316IsSSuFHjxpymtUUXuU3aqivjhMmlxCsA2l0jCQF+ND83R4fKC9oWAFBa6Epg6t8SIYJ9Bv
+        YqrO4EjG3e7nDG7YXxE+ZkRi3RvGa2HonQU2QI/VHv6b1gnN/2PjJqlW8IVeLAnkZ9zMn7tS2dag
+        MHmj5RCQV1lnx8qxF7pVGCBasN14hk2jIkuFT3ReGJ2mB7IGM6M70Y8Owux95MdrzwGn9MPx+e21
+        fT++LKxEAzni7gJx1Rq/QFmJNTNq63fKMS2qM3KO2xHJcnSfQ/PolLYqbsU3MsXbbDQCAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Wed, 05 Apr 2017 08:19:12 GMT']
+      ETag: ['"522ca705f8cf15d8238664c70b3e7897--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [6252aa97-8baa-41cb-a857-cc3aa4d68739]
+      X-Runtime: ['0.251000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

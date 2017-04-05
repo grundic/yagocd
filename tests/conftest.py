@@ -41,18 +41,19 @@ from yagocd import Yagocd
 from yagocd.session import Session
 
 TESTING_VERSIONS = [
-    '16.1.0',
-    '16.2.1',
-    '16.3.0',
-    '16.6.0',
-    '16.7.0',
-    '16.8.0',
-    '16.9.0',
-    '16.10.0',
-    '16.11.0',
-    '16.12.0',
-    '17.1.0',
-    '17.2.0',
+    ('16.1.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('16.2.1', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('16.3.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('16.6.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('16.7.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('16.8.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('16.9.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('16.10.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('16.11.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('16.12.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('17.1.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('17.2.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
+    ('v17.3.0', 'gocd-server', 'gocd-agent-alpine-3.5'),
 ]
 
 
@@ -125,9 +126,11 @@ def fresh_run(request):
 
 @pytest.fixture(scope="session", params=TESTING_VERSIONS)
 def gocd_docker(request, use_docker, fresh_run):
+    version_tag, server_image, agent_image = request.param
+
     if use_docker:
-        start_docker_server(version_tag=request.param)
-        start_docker_agent(version_tag=request.param)
+        start_docker_server(server_image=server_image, version_tag=version_tag)
+        start_docker_agent(agent_image=agent_image, version_tag=version_tag)
         wait_till_started()
 
         def fin():
@@ -136,7 +139,7 @@ def gocd_docker(request, use_docker, fresh_run):
         request.addfinalizer(fin)
 
     if fresh_run:
-        cassette_library_dir = os.path.join(root_cassette_library_dir, request.param)
+        cassette_library_dir = os.path.join(root_cassette_library_dir, version_tag)
         if os.path.exists(cassette_library_dir):
             print("Removing existing cassettes from '{}'...".format(cassette_library_dir))  # noqa
             shutil.rmtree(cassette_library_dir)
@@ -148,10 +151,10 @@ def gocd_docker(request, use_docker, fresh_run):
         '*' * 47 + '\n',
     )  # noqa
 
-    return request.param
+    return version_tag
 
 
-def start_docker_server(version_tag):
+def start_docker_server(server_image, version_tag):
     print('Starting GoCD server in docker container [{} version]...'.format(version_tag))  # noqa
     output = subprocess.check_output([
         "/usr/local/bin/docker",
@@ -175,14 +178,14 @@ def start_docker_server(version_tag):
             "--name={container_name}".format(
                 container_name=SERVER_CONTAINER_NAME
             ),
-            "gocd/gocd-server:{tag}".format(tag=version_tag),
+            "gocd/{server_image}:{tag}".format(server_image=server_image, tag=version_tag),
             "/bin/bash",
             "-c",
             "'/workspace/bootstrap.sh'",
         ])
 
 
-def start_docker_agent(version_tag):
+def start_docker_agent(agent_image, version_tag):
     print('Starting GoCD agent in docker container [{} version]...'.format(version_tag))  # noqa
     output = subprocess.check_output([
         "/usr/local/bin/docker",
@@ -204,7 +207,7 @@ def start_docker_agent(version_tag):
                 container_name=AGENT_CONTAINER_NAME
             ),
             "-eGO_SERVER_URL=https://172.17.0.2:8154/go",
-            "gocd/gocd-agent:{tag}".format(tag=version_tag),
+            "gocd/{agent_image}:{tag}".format(agent_image=agent_image, tag=version_tag),
         ])
 
 

@@ -1,0 +1,44 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=rte48uu9le7wuqi47lp3c1]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/.zip
+  response:
+    body: {string: ''}
+    headers:
+      Content-Language: [en-US]
+      Content-Length: ['0']
+      Date: ['Wed, 05 Apr 2017 08:18:40 GMT']
+    status: {code: 202, message: Accepted}
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=rte48uu9le7wuqi47lp3c1]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/.zip
+  response:
+    body:
+      string: !!binary |
+        UEsDBBQACAgIAFRChUoAAAAAAAAAAAAAAAADAAAAdG8vAwBQSwcIAAAAAAIAAAAAAAAAUEsDBBQA
+        CAgIAFRChUoAAAAAAAAAAAAAAAAHAAAAdG8vdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIUABQA
+        CAgIAFRChUoAAAAAAgAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAB0by9QSwECFAAUAAgICABUQoVK
+        AAAAAAIAAAAAAAAABwAAAAAAAAAAAAAAAAAzAAAAdG8vdGhlL1BLBQYAAAAAAgACAGYAAABqAAAA
+        AAA=
+    headers:
+      Content-Language: [en-US]
+      Content-Type: [application/zip]
+      Date: ['Wed, 05 Apr 2017 08:18:40 GMT']
+    status: {code: 200, message: OK}
+version: 1

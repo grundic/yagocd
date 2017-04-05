@@ -150,6 +150,9 @@ class TestSupport(BaseTestInfoManager, AbstractTestManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_value(self, manager, gocd_docker):
+        if gocd_docker.startswith('v'):
+            gocd_docker = gocd_docker[1:]
+
         def check_value(result):
             if LooseVersion(manager._session.server_version) <= LooseVersion('16.3.0'):
                 assert gocd_docker in result

@@ -1,0 +1,35 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Cookie: [JSESSIONID=rte48uu9le7wuqi47lp3c1]
+      User-Agent: [python-requests/2.13.0]
+    method: GET
+    uri: http://localhost:8153/go/api/admin/repositories/repository-foo
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAK2QQWuEMBCF7/4KSa9dw1IKxXtvhZaFnsoi02TUYJIJJpbKsv+9ibpqD7315puJ
+        33tvLlmes0or23lW5peoovao61VF3faYNGtDcCXnmgTolnwon46PD7whDk5xkEZZ3qMjrwL1Cv0m
+        xkNNxCbc9X72kCT+svDRIxKLhoQsFPE7B6KDBg97+G9araz8j8RlUpWSCz1bHNhtXM6fu1LT2oLB
+        265Yp04PjbKVwQASAmz3nUHjYNgS/wt7r8im6ZGtpoJsrZqhhzDvPqbHa8cOx/TD6fnttXo/vSys
+        RAM94K59DFTgNxinsRBktm7nyaZC84lS4nZAthzcT6bT6JxSZdfsB2L2kaQwAgAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Wed, 05 Apr 2017 08:19:09 GMT']
+      ETag: ['"ac7aad443a6b69557318f3e77a3ceb7f--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [003fcdf5-b565-4483-8a2c-8966fb2fd325]
+      X-Runtime: ['0.022000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

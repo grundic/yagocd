@@ -57,6 +57,9 @@ class TestGet(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_value(self, gocd_docker):
+        if gocd_docker.startswith('v'):
+            gocd_docker = gocd_docker[1:]
+
         def check_value(result):
             assert result.full_version.startswith(gocd_docker)
 
