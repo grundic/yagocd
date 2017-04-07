@@ -34,6 +34,7 @@ from yagocd.resources.agent import AgentManager
 from yagocd.resources.artifact import ArtifactManager
 from yagocd.resources.configuration import ConfigurationManager
 from yagocd.resources.elastic_profile import ElasticAgentProfileManager
+from yagocd.resources.encryption import EncryptionManager
 from yagocd.resources.environment import EnvironmentManager
 from yagocd.resources.feed import FeedManager
 from yagocd.resources.info import InfoManager
@@ -97,6 +98,7 @@ class Yagocd(object):
         self._artifact_manager = None
         self._configuration_manager = None
         self._elastic_agent_profile_manager = None
+        self._encryption_manager = None
         self._environment_manager = None
         self._feed_manager = None
         self._job_manager = None
@@ -155,6 +157,18 @@ class Yagocd(object):
         if self._configuration_manager is None:
             self._configuration_manager = ConfigurationManager(session=self._session)
         return self._configuration_manager
+
+    @property
+    def encryption(self):
+        """
+        Property for accessing :class:`EncryptionManager` instance,
+        which is used to manage encryption.
+
+        :rtype: yagocd.resources.encryption.EncryptionManager
+        """
+        if self._encryption_manager is None:
+            self._encryption_manager = EncryptionManager(session=self._session)
+        return self._encryption_manager
 
     @property
     def elastic_profiles(self):

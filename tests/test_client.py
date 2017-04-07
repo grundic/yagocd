@@ -34,6 +34,7 @@ from yagocd.resources import (
     artifact,
     configuration,
     elastic_profile,
+    encryption,
     environment,
     feed,
     info,
@@ -100,6 +101,9 @@ class TestManagers(object):
 
     def test_feeds(self, go_fixture):
         assert isinstance(go_fixture.feeds, feed.FeedManager)
+
+    def test_encryption(self, go_fixture):
+        assert isinstance(go_fixture.encryption, encryption.EncryptionManager)
 
     def test_environments(self, go_fixture):
         assert isinstance(go_fixture.environments, environment.EnvironmentManager)
