@@ -1,0 +1,50 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJuYW1lIjogImR1bW15IiwgInN0YWdlcyI6IFt7Im5hbWUiOiAiZHVtbXktc3RhZ2UiLCAiam9i
+      cyI6IFt7Im5hbWUiOiAiZHVtbXktam9iIiwgInJlc291cmNlcyI6IFtdLCAidGltZW91dCI6IDAs
+      ICJ0YXNrcyI6IFt7InR5cGUiOiAiZXhlYyIsICJhdHRyaWJ1dGVzIjogeyJ3b3JraW5nX2RpcmVj
+      dG9yeSI6IG51bGwsICJjb21tYW5kIjogImxzIn19XSwgInJ1bl9pbnN0YW5jZV9jb3VudCI6IG51
+      bGwsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXX1dLCAiZmV0Y2hfbWF0ZXJpYWxzIjogdHJ1
+      ZSwgIm5ldmVyX2NsZWFudXBfYXJ0aWZhY3RzIjogZmFsc2UsICJlbnZpcm9ubWVudF92YXJpYWJs
+      ZXMiOiBbXSwgImNsZWFuX3dvcmtpbmdfZGlyZWN0b3J5IjogZmFsc2V9XX0=
+    headers:
+      Accept: [application/vnd.go.cd.v3+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['386']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=rte48uu9le7wuqi47lp3c1]
+      User-Agent: [python-requests/2.13.0]
+    method: POST
+    uri: http://localhost:8153/go/api/admin/templates
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWU0W7jIBBF3/0Vkfc1rVWtKlX5lVWECB7bbICxYEibrfzvOyaOa5x087BvDBzu
+        XC7Gn8VmUwqj3TGUu80nV1wHMM1ccd15GOuyI+p3VWVQSdNhoN3by+vPqsVK9rqStdWuIrC9kQSh
+        qqO15zJJDNuLbo3qO9nAuqzy3KKqnzVWP65CTwpdo9tcqNGu/m+Du+tQOGlhalBMTco0x5KXY6Sp
+        QLKFMaZfiZ27Z+hTosrtdbEBUp2w3MZracbd5CPMy8qAdOId/VG7VtTagyL0Z8Yapr84ByfwItGx
+        F9KTbqSicMPJvvd4kmaRDs/SuU8OQ1QKQpjdjRsidej1H0kaXbaLFz2a6cCL2f12icQA/haZx8M0
+        GmaH4E7ao7PgSJwkh3JY9Zj1y994+Ip7Gfmd2JktM2M+OqEd34ZTIBRGRwy7aExGkbaAcVy6RJxr
+        PPR6m4eHgNGrRxjJcMzPtj7fBZsuDj5AZdbSqiTy+hAJwurilhE0ayN37Ew8OqHGuMydpCZEobUy
+        Pb7ShBtHDNz7lEetFTkU31XrnA4Pkly+hX9g/Cx6YDRllRm6Nt/Pf4B9MRR/AUIP40IZBQAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
+      Date: ['Fri, 07 Apr 2017 21:23:00 GMT']
+      ETag: ['"acf07a692434b0444ba539ab8de208ac--gzip"']
+      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
+      Set-Cookie: ['JSESSIONID=1vpqos69zda141u7brnh4msb50;Path=/go;Expires=Fri, 21-Apr-2017
+          21:23:00 GMT;HttpOnly']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [22460b40-fbd4-41d1-8c92-943f55ec8e07]
+      X-Runtime: ['1.346000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

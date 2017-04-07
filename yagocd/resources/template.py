@@ -147,6 +147,24 @@ class TemplateManager(BaseManager):
         etag = response.headers['ETag']
         return TemplateConfig(session=self._session, data=response.json(), etag=etag)
 
+    def delete(self, name):
+        """
+        Deletes a template from the config XML if it is not associated with any pipeline.
+
+        :param name: name of template to delete
+        :return: A message confirmation if the template was deleted.
+        :rtype: str
+        """
+
+        response = self._session.delete(
+            path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api),
+            headers={
+                'Accept': self._accept_header(),
+            },
+        )
+
+        return response.json().get('message')
+
 
 class TemplateConfig(Base):
     pass

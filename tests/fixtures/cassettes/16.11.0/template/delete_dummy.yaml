@@ -1,0 +1,33 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: [application/vnd.go.cd.v2+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['0']
+      Cookie: [JSESSIONID=dlde1rckz6816ctxl9aapfmt]
+      User-Agent: [python-requests/2.13.0]
+    method: DELETE
+    uri: http://localhost:8153/go/api/admin/templates/dummy
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKvmUlBQyk0tLk5MT1WyUlAKyUhVKEnNLchJLElVUE8pzc2tVFcoTyxWSEnNSS1J
+        TVEoLk1OBipPK83JqdRT4qrlAgAUYcUQQgAAAA==
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v2+json; charset=utf-8]
+      Date: ['Fri, 07 Apr 2017 21:17:41 GMT']
+      ETag: ['"18901d58917319aa5d993ef0a89a66d8--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [8cf0233d-480c-4e94-9cc3-adc86f95b457]
+      X-Runtime: ['0.522000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

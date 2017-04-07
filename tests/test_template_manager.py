@@ -31,6 +31,7 @@ from distutils.version import LooseVersion
 
 import pytest
 from mock import mock
+from six import string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import template
@@ -50,6 +51,11 @@ class BaseManager(AbstractTestManager):
     @pytest.fixture()
     def template_bar(self, tests_dir):
         path = os.path.join(tests_dir, 'fixtures/resources/template/template-bar.json')
+        return json.load(open(path))
+
+    @pytest.fixture()
+    def template_dummy(self, tests_dir):
+        path = os.path.join(tests_dir, 'fixtures/resources/template/template-dummy.json')
         return json.load(open(path))
 
     @pytest.fixture()
@@ -180,6 +186,35 @@ class TestUpdate(BaseManager, ReturnValueMixin):
             assert result.data['stages'][0]['name'] == self.STAGE_NAME
 
         return check_value
+
+
+class TestDelete(BaseManager, ReturnValueMixin):
+    NAME = 'dummy'
+
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr, template_dummy):
+        with my_vcr.use_cassette("template/prepare_delete_{}".format(self.NAME)):
+            result = manager.create(config=template_dummy)
+            print(result)
+
+        with my_vcr.use_cassette("template/delete_{}".format(self.NAME)) as cass:
+            return cass, manager.delete(name=self.NAME)
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/admin/templates/{}'.format(self.NAME)
+
+    @pytest.fixture()
+    def expected_request_method(self, manager):
+        return 'DELETE'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return string_types
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        return "The template '{}' was deleted successfully.".format(self.NAME)
 
 
 class TestMagicMethods(object):
