@@ -194,8 +194,7 @@ class TestDelete(BaseManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr, template_dummy):
         with my_vcr.use_cassette("template/prepare_delete_{}".format(self.NAME)):
-            result = manager.create(config=template_dummy)
-            print(result)
+            manager.create(config=template_dummy)
 
         with my_vcr.use_cassette("template/delete_{}".format(self.NAME)) as cass:
             return cass, manager.delete(name=self.NAME)
