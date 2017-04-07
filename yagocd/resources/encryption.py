@@ -34,13 +34,13 @@ from yagocd.util import since
 @since('17.1.0')
 class EncryptionManager(BaseManager):
     """
-    The encryption API allows users with any administrator privilege 
-    to get the cipher text(encrypted text) corresponding to any plain 
-    text value. You may use this cipher text in other APIs that allow 
+    The encryption API allows users with any administrator privilege
+    to get the cipher text(encrypted text) corresponding to any plain
+    text value. You may use this cipher text in other APIs that allow
     you to configure the pipelines and templates.
-    
-    :warning: This API is rate limited to 30 requests per minute to 
-    prevent brute force attacks that may allow attackers to guess the 
+
+    :warning: This API is rate limited to 30 requests per minute to
+    prevent brute force attacks that may allow attackers to guess the
     cipher key
 
     `Official documentation. <https://api.go.cd/current/#encryption>`_
