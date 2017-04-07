@@ -108,17 +108,12 @@ class TestList(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], list)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return list
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert all(isinstance(i, package.Package) for i in result[0])
+            assert all(isinstance(i, package.Package) for i in result)
 
         return check_value
 
@@ -141,17 +136,12 @@ class TestGet(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], package.Package)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return package.Package
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.id == self.ID
+            assert result.data.id == self.ID
 
         return check_value
 
@@ -187,18 +177,13 @@ class TestCreate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], package.Package)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return package.Package
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.id == self.ID
-            assert result[0].data.name == 'package.baz'
+            assert result.data.id == self.ID
+            assert result.data.name == 'package.baz'
 
         return check_value
 
@@ -209,10 +194,10 @@ class TestUpdate(BaseManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr, prepare_packages):
         with my_vcr.use_cassette("package/prepare_update_{}".format(self.ID)):
-            package, etag = manager.get(self.ID)
+            package = manager.get(self.ID)
         with my_vcr.use_cassette("package/update_{}".format(self.ID)) as cass:
             package.data.name = 'updated-name'
-            return cass, manager.update(package_id=self.ID, package=package.data, etag=etag)
+            return cass, manager.update(package_id=self.ID, package=package.data, etag=package.etag)
 
     @pytest.fixture()
     def expected_request_url(self):
@@ -224,17 +209,12 @@ class TestUpdate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], package.Package)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return package.Package
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.name == 'updated-name'
+            assert result.data.name == 'updated-name'
 
         return check_value
 

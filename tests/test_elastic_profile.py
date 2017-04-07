@@ -78,17 +78,12 @@ class TestList(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], list)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return list
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert all(isinstance(i, elastic_profile.ElasticAgentProfile) for i in result[0])
+            assert all(isinstance(i, elastic_profile.ElasticAgentProfile) for i in result)
 
         return check_value
 
@@ -111,17 +106,12 @@ class TestGet(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], elastic_profile.ElasticAgentProfile)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return elastic_profile.ElasticAgentProfile
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.id == self.ID
+            assert result.data.id == self.ID
 
         return check_value
 
@@ -151,19 +141,14 @@ class TestCreate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], elastic_profile.ElasticAgentProfile)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return elastic_profile.ElasticAgentProfile
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.id == self.ID
-            assert result[0].data.properties[0].key == 'Image'
-            assert result[0].data.properties[0].value == 'gocdcontrib/gocd-dev-build'
+            assert result.data.id == self.ID
+            assert result.data.properties[0].key == 'Image'
+            assert result.data.properties[0].value == 'gocdcontrib/gocd-dev-build'
 
         return check_value
 
@@ -174,10 +159,10 @@ class TestUpdate(BaseManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr, prepare_agent_profiles):
         with my_vcr.use_cassette("elastic_profile/prepare_update_{}".format(self.ID)):
-            profile, etag = manager.get(self.ID)
+            profile = manager.get(self.ID)
         with my_vcr.use_cassette("elastic_profile/update_{}".format(self.ID)) as cass:
             profile.data.properties[1]['value'] = 'updated-value'
-            return cass, manager.update(profile_id=self.ID, profile=profile.data, etag=etag)
+            return cass, manager.update(profile_id=self.ID, profile=profile.data, etag=profile.etag)
 
     @pytest.fixture()
     def expected_request_url(self):
@@ -189,17 +174,12 @@ class TestUpdate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], elastic_profile.ElasticAgentProfile)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return elastic_profile.ElasticAgentProfile
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.properties[1]['value'] == 'updated-value'
+            assert result.data.properties[1]['value'] == 'updated-value'
 
         return check_value
 

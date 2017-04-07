@@ -64,41 +64,39 @@ class PackageRepositoryManager(BaseManager):
         """
         Lists all available package repositories in cruise-config.xml.
 
-        :rtype: (list of yagocd.resources.package_repository.PackageRepository, str)
+        :rtype: list of yagocd.resources.package_repository.PackageRepository
         """
         response = self._session.get(
             path=self.RESOURCE_PATH.format(base_api=self.base_api)
         )
 
         result = list()
-        for data in response.json().get('_embedded', {}).get('package_repositories', {}):
-            result.append(PackageRepository(session=self._session, data=data))
-
         etag = response.headers['ETag']
+        for data in response.json().get('_embedded', {}).get('package_repositories', {}):
+            result.append(PackageRepository(session=self._session, data=data, etag=etag))
 
-        return result, etag
+        return result
 
     def get(self, repo_id):
         """
         Get a repository for a specified id.
 
         :param repo_id: id of the package repository to get.
-        :rtype: (yagocd.resources.package_repository.PackageRepository, str)
+        :rtype: yagocd.resources.package_repository.PackageRepository
         """
         response = self._session.get(
             path=self._session.urljoin(self.RESOURCE_PATH, repo_id).format(base_api=self.base_api)
         )
 
         etag = response.headers['ETag']
-
-        return PackageRepository(session=self._session, data=response.json()), etag
+        return PackageRepository(session=self._session, data=response.json(), etag=etag)
 
     def create(self, config):
         """
         Create the repository configuration in cruise-config.xml.
 
         :param config: new package repository configuration.
-        :rtype: (yagocd.resources.package_repository.PackageRepository, str)
+        :rtype: yagocd.resources.package_repository.PackageRepository
         """
         response = self._session.post(
             path=self.RESOURCE_PATH.format(base_api=self.base_api),
@@ -110,7 +108,7 @@ class PackageRepositoryManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return PackageRepository(session=self._session, data=response.json()), etag
+        return PackageRepository(session=self._session, data=response.json(), etag=etag)
 
     def update(self, repo_id, repository, etag):
         """
@@ -119,7 +117,7 @@ class PackageRepositoryManager(BaseManager):
         :param repo_id: id of the package repository to update.
         :param repository: updated package repository configuration.
         :param etag: etag value from current package repository.
-        :rtype: (yagocd.resources.package_repository.PackageRepository, str)
+        :rtype: yagocd.resources.package_repository.PackageRepository
         """
 
         response = self._session.put(
@@ -133,7 +131,7 @@ class PackageRepositoryManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return PackageRepository(session=self._session, data=response.json()), etag
+        return PackageRepository(session=self._session, data=response.json(), etag=etag)
 
     def delete(self, repo_id):
         """

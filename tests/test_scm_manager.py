@@ -80,17 +80,12 @@ class TestList(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], list)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return list
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert all(isinstance(i, scm.SCMMaterial) for i in result[0])
+            assert all(isinstance(i, scm.SCMMaterial) for i in result)
 
         return check_value
 
@@ -113,18 +108,13 @@ class TestGet(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], scm.SCMMaterial)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return scm.SCMMaterial
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.name == self.NAME
-            assert result[0].data.id == "scm-id-bar"
+            assert result.data.name == self.NAME
+            assert result.data.id == "scm-id-bar"
 
         return check_value
 
@@ -147,18 +137,13 @@ class TestCreate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], scm.SCMMaterial)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return scm.SCMMaterial
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.name == self.NAME
-            assert result[0].data.id == "scm-id-baz"
+            assert result.data.name == self.NAME
+            assert result.data.id == "scm-id-baz"
 
         return check_value
 
@@ -170,13 +155,13 @@ class TestUpdate(BaseManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr, prepare_scm_material, scm_material_bar):
         with my_vcr.use_cassette("scm/prepare_update_{}".format(self.NAME)):
-            _, etag = manager.get(self.NAME)  # noqa
+            original = manager.get(self.NAME)  # noqa
         with my_vcr.use_cassette("scm/update_{}".format(self.NAME)) as cass:
             scm_material_bar['configuration'][0]['value'] = self.NEW_VALUE
             return cass, manager.update(
                 name=self.NAME,
                 config=scm_material_bar,
-                etag=etag
+                etag=original.etag
             )
 
     @pytest.fixture()
@@ -191,17 +176,12 @@ class TestUpdate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], scm.SCMMaterial)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return scm.SCMMaterial
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.configuration[0].value == self.NEW_VALUE
+            assert result.data.configuration[0].value == self.NEW_VALUE
 
         return check_value
 

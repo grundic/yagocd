@@ -52,16 +52,16 @@ class SCMManager(BaseManager):
         """
         Method add iterator protocol for the manager.
 
-        :rtype: (list of yagocd.resources.scm.SCMMaterial, str)
+        :rtype: list of yagocd.resources.scm.SCMMaterial
         """
-        return iter(self.list()[0])
+        return iter(self.list())
 
     def __getitem__(self, name):
         """
         Method add possibility to get SCM material by the name using dictionary like syntax.
 
         :param name: scm material name.
-        :rtype: (yagocd.resources.scm.SCMMaterial, str)
+        :rtype: yagocd.resources.scm.SCMMaterial
         """
         return self.get(name=name)
 
@@ -70,39 +70,39 @@ class SCMManager(BaseManager):
         Lists all available pluggable scm materials,
         these are materials that are present in the in ``cruise-config.xml``.
 
-        :rtype: (list of yagocd.resources.scm.SCMMaterial, str)
+        :rtype: list of yagocd.resources.scm.SCMMaterial
         """
         response = self._session.get(
             path=self.RESOURCE_PATH.format(base_api=self.base_api)
         )
 
         result = list()
-        for data in response.json().get('_embedded', {}).get('scms', {}):
-            result.append(SCMMaterial(session=self._session, data=data))
-
         etag = response.headers['ETag']
-        return result, etag
+        for data in response.json().get('_embedded', {}).get('scms', {}):
+            result.append(SCMMaterial(session=self._session, data=data, etag=etag))
+
+        return result
 
     def get(self, name):
         """
         Gets pluggable scm material for a specified scm name.
 
         :param name: scm material name.
-        :rtype: (yagocd.resources.scm.SCMMaterial, str)
+        :rtype: yagocd.resources.scm.SCMMaterial
         """
         response = self._session.get(
             path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api)
         )
 
         etag = response.headers['ETag']
-        return SCMMaterial(session=self._session, data=response.json()), etag
+        return SCMMaterial(session=self._session, data=response.json(), etag=etag)
 
     def create(self, config):
         """
         Create a global SCM object.
 
         :param config: new SCM configuration.
-        :rtype: (yagocd.resources.scm.SCMMaterial, str)
+        :rtype: yagocd.resources.scm.SCMMaterial
         """
         response = self._session.post(
             path=self.RESOURCE_PATH.format(base_api=self.base_api),
@@ -114,7 +114,7 @@ class SCMManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return SCMMaterial(session=self._session, data=response.json()), etag
+        return SCMMaterial(session=self._session, data=response.json(), etag=etag)
 
     def update(self, name, config, etag):
         """
@@ -123,7 +123,7 @@ class SCMManager(BaseManager):
         :param name: name of SCM material to update.
         :param config: updated SCM material configuration.
         :param etag: etag value from current SCM material.
-        :rtype: (yagocd.resources.scm.SCMMaterial, str)
+        :rtype: yagocd.resources.scm.SCMMaterial
         """
         api_method = self._session.put
         if LooseVersion(self._session.server_version) <= LooseVersion('16.9.0'):
@@ -140,7 +140,7 @@ class SCMManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return SCMMaterial(session=self._session, data=response.json()), etag
+        return SCMMaterial(session=self._session, data=response.json(), etag=etag)
 
 
 class SCMMaterial(Base):

@@ -78,17 +78,12 @@ class TestList(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], list)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return list
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert all(isinstance(i, package_repository.PackageRepository) for i in result[0])
+            assert all(isinstance(i, package_repository.PackageRepository) for i in result)
 
         return check_value
 
@@ -111,17 +106,12 @@ class TestGet(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], package_repository.PackageRepository)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return package_repository.PackageRepository
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.repo_id == self.ID
+            assert result.data.repo_id == self.ID
 
         return check_value
 
@@ -151,18 +141,13 @@ class TestCreate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], package_repository.PackageRepository)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return package_repository.PackageRepository
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.repo_id == self.ID
-            assert result[0].data.name == 'repo.baz'
+            assert result.data.repo_id == self.ID
+            assert result.data.name == 'repo.baz'
 
         return check_value
 
@@ -173,10 +158,10 @@ class TestUpdate(BaseManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr, prepare_package_repositories):
         with my_vcr.use_cassette("package_repositories/prepare_update_{}".format(self.ID)):
-            repository, etag = manager.get(self.ID)
+            repository = manager.get(self.ID)
         with my_vcr.use_cassette("package_repositories/update_{}".format(self.ID)) as cass:
             repository.data.name = 'updated-name'
-            return cass, manager.update(repo_id=self.ID, repository=repository.data, etag=etag)
+            return cass, manager.update(repo_id=self.ID, repository=repository.data, etag=repository.etag)
 
     @pytest.fixture()
     def expected_request_url(self):
@@ -188,17 +173,12 @@ class TestUpdate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], package_repository.PackageRepository)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return package_repository.PackageRepository
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.name == 'updated-name'
+            assert result.data.name == 'updated-name'
 
         return check_value
 

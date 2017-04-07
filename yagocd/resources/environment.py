@@ -49,16 +49,16 @@ class EnvironmentManager(BaseManager):
         """
         Method add iterator protocol for the manager.
 
-        :rtype: (list of yagocd.resources.environment.EnvironmentConfig, str)
+        :rtype: list of yagocd.resources.environment.EnvironmentConfig
         """
-        return iter(self.list()[0])
+        return iter(self.list())
 
     def __getitem__(self, name):
         """
         Method add possibility to get environment by the name using dictionary like syntax.
 
         :param name: name of the environment to fetch.
-        :rtype: (yagocd.resources.environment.EnvironmentConfig, str)
+        :rtype: yagocd.resources.environment.EnvironmentConfig
         """
         return self.get(name=name)
 
@@ -66,25 +66,25 @@ class EnvironmentManager(BaseManager):
         """
         Lists all available environments.
 
-        :rtype: (list of yagocd.resources.environment.EnvironmentConfig, str)
+        :rtype: list of yagocd.resources.environment.EnvironmentConfig
         """
         response = self._session.get(
             path=self.RESOURCE_PATH.format(base_api=self.base_api)
         )
 
         result = list()
-        for data in response.json().get('_embedded', {}).get('environments', {}):
-            result.append(EnvironmentConfig(session=self._session, data=data))
-
         etag = response.headers['ETag']
-        return result, etag
+        for data in response.json().get('_embedded', {}).get('environments', {}):
+            result.append(EnvironmentConfig(session=self._session, data=data, etag=etag))
+
+        return result
 
     def get(self, name):
         """
         Gets environment by the given name.
 
         :param name: name of the environment to fetch.
-        :rtype: (yagocd.resources.environment.EnvironmentConfig, str)
+        :rtype: yagocd.resources.environment.EnvironmentConfig
         """
         response = self._session.get(
             path=self._session.urljoin(self.RESOURCE_PATH, name).format(
@@ -93,14 +93,14 @@ class EnvironmentManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return EnvironmentConfig(session=self._session, data=response.json()), etag
+        return EnvironmentConfig(session=self._session, data=response.json(), etag=etag)
 
     def create(self, config):
         """
         Creates an environment.
 
         :param config: new environment configuration.
-        :rtype: (yagocd.resources.environment.EnvironmentConfig, str)
+        :rtype: yagocd.resources.environment.EnvironmentConfig
         """
         response = self._session.post(
             path=self.RESOURCE_PATH.format(base_api=self.base_api),
@@ -112,7 +112,7 @@ class EnvironmentManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return EnvironmentConfig(session=self._session, data=response.json()), etag
+        return EnvironmentConfig(session=self._session, data=response.json(), etag=etag)
 
     def update(self, name, config, etag):
         """
@@ -121,7 +121,7 @@ class EnvironmentManager(BaseManager):
         :param name: name of environment to update.
         :param config: updated environment configuration.
         :param etag: etag value from current environment resource.
-        :rtype: (yagocd.resources.environment.EnvironmentConfig, str)
+        :rtype: yagocd.resources.environment.EnvironmentConfig
         """
 
         api_method = self._session.put
@@ -141,7 +141,7 @@ class EnvironmentManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return EnvironmentConfig(session=self._session, data=response.json()), etag
+        return EnvironmentConfig(session=self._session, data=response.json(), etag=etag)
 
     def delete(self, name):
         """

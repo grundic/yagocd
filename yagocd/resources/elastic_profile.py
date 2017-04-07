@@ -65,26 +65,25 @@ class ElasticAgentProfileManager(BaseManager):
         """
         Lists all available elastic agent profiles.
 
-        :rtype: (list of yagocd.resources.elastic_profile.ElasticAgentProfile, str)
+        :rtype: list of yagocd.resources.elastic_profile.ElasticAgentProfile
         """
         response = self._session.get(
             path=self.RESOURCE_PATH.format(base_api=self.base_api)
         )
 
         result = list()
-        for data in response.json().get('_embedded', {}).get('profiles', {}):
-            result.append(ElasticAgentProfile(session=self._session, data=data))
-
         etag = response.headers['ETag']
+        for data in response.json().get('_embedded', {}).get('profiles', {}):
+            result.append(ElasticAgentProfile(session=self._session, data=data, etag=etag))
 
-        return result, etag
+        return result
 
     def get(self, profile_id):
         """
         Gets elastic agent profile config for specified profile.
 
         :param profile_id: id of the elastic agent profile to get.
-        :rtype: (yagocd.resources.elastic_profile.ElasticAgentProfile, str)
+        :rtype: yagocd.resources.elastic_profile.ElasticAgentProfile
         """
         response = self._session.get(
             path=self._session.urljoin(self.RESOURCE_PATH, profile_id).format(
@@ -93,15 +92,14 @@ class ElasticAgentProfileManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-
-        return ElasticAgentProfile(session=self._session, data=response.json()), etag
+        return ElasticAgentProfile(session=self._session, data=response.json(), etag=etag)
 
     def create(self, config):
         """
         Creates an elastic agent profile.
 
         :param config: new elastic agent profile configuration.
-        :rtype: (yagocd.resources.elastic_profile.ElasticAgentProfile, str)
+        :rtype: yagocd.resources.elastic_profile.ElasticAgentProfile
         """
         response = self._session.post(
             path=self.RESOURCE_PATH.format(base_api=self.base_api),
@@ -113,7 +111,7 @@ class ElasticAgentProfileManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return ElasticAgentProfile(session=self._session, data=response.json()), etag
+        return ElasticAgentProfile(session=self._session, data=response.json(), etag=etag)
 
     def update(self, profile_id, profile, etag):
         """
@@ -122,7 +120,7 @@ class ElasticAgentProfileManager(BaseManager):
         :param profile_id: id of the elastic profile to update.
         :param profile: updated agent profile configuration.
         :param etag: etag value from current agent profile.
-        :rtype: (yagocd.resources.elastic_profile.ElasticAgentProfile, str)
+        :rtype: yagocd.resources.elastic_profile.ElasticAgentProfile
         """
 
         response = self._session.put(
@@ -138,7 +136,7 @@ class ElasticAgentProfileManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return ElasticAgentProfile(session=self._session, data=response.json()), etag
+        return ElasticAgentProfile(session=self._session, data=response.json(), etag=etag)
 
     def delete(self, profile_id):
         """

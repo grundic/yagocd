@@ -82,15 +82,20 @@ class BaseManager(object):
 
 
 class Base(object):
-    def __init__(self, session, data):
+    def __init__(self, session, data, etag=None):
         self._session = session
         self._data = EasyDict(data)
+        self._etag = etag
 
         self.base_api = self._session.base_api()
 
     @property
     def data(self):
         return self._data
+
+    @property
+    def etag(self):
+        return self._etag
 
     def __str__(self):
         return self.data.__str__()

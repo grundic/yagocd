@@ -64,17 +64,12 @@ class TestList(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], list)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return list
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert all(isinstance(i, environment.EnvironmentConfig) for i in result[0])
+            assert all(isinstance(i, environment.EnvironmentConfig) for i in result)
 
         return check_value
 
@@ -97,17 +92,12 @@ class TestGet(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], environment.EnvironmentConfig)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return environment.EnvironmentConfig
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.name == self.NAME
+            assert result.data.name == self.NAME
 
         return check_value
 
@@ -130,18 +120,13 @@ class TestCreate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], environment.EnvironmentConfig)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return environment.EnvironmentConfig
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.name == self.NAME
-            assert result[0].data.pipelines[0].name == 'Shared_Services'
+            assert result.data.name == self.NAME
+            assert result.data.pipelines[0].name == 'Shared_Services'
 
         return check_value
 
@@ -152,10 +137,10 @@ class TestUpdate(BaseManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr, prepare_environment):
         with my_vcr.use_cassette("environment/prepare_update_{}".format(self.NAME)):
-            env, etag = manager.get(self.NAME)
+            env = manager.get(self.NAME)
         with my_vcr.use_cassette("environment/update_{}".format(self.NAME)) as cass:
             env.data.pipelines.append(dict(name='Deploy_UAT'))
-            return cass, manager.update(name=self.NAME, config=dict(name='new_name'), etag=etag)
+            return cass, manager.update(name=self.NAME, config=dict(name='new_name'), etag=env.etag)
 
     @pytest.fixture()
     def expected_request_url(self):
@@ -169,17 +154,12 @@ class TestUpdate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], environment.EnvironmentConfig)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return environment.EnvironmentConfig
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.name == 'new_name'
+            assert result.data.name == 'new_name'
 
         return check_value
 

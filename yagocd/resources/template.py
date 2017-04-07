@@ -55,16 +55,16 @@ class TemplateManager(BaseManager):
         """
         Method add iterator protocol for the manager.
 
-        :rtype: (list of yagocd.resources.template.TemplateConfig, str)
+        :rtype: list of yagocd.resources.template.TemplateConfig
         """
-        return iter(self.list()[0])
+        return iter(self.list())
 
     def __getitem__(self, name):
         """
         Method add possibility to get template by the name using dictionary like syntax.
 
         :param name: template name.
-        :rtype: (yagocd.resources.template.TemplateConfig, str)
+        :rtype: yagocd.resources.template.TemplateConfig
         """
         return self.get(name=name)
 
@@ -72,7 +72,7 @@ class TemplateManager(BaseManager):
         """
         Lists all available templates with the associated pipelines’ names.
 
-        :rtype: (list of yagocd.resources.template.TemplateConfig, str)
+        :rtype: list of yagocd.resources.template.TemplateConfig
         """
         response = self._session.get(
             path=self.RESOURCE_PATH.format(base_api=self.base_api),
@@ -85,18 +85,18 @@ class TemplateManager(BaseManager):
         if LooseVersion(self._session.server_version) >= LooseVersion('16.11.0'):
             data_source = data_source.get('_embedded', {})
 
-        for data in data_source.get('templates', {}):
-            result.append(TemplateConfig(session=self._session, data=data))
-
         etag = response.headers['ETag']
-        return result, etag
+        for data in data_source.get('templates', {}):
+            result.append(TemplateConfig(session=self._session, data=data, etag=etag))
+
+        return result
 
     def get(self, name):
         """
         Gets template config for specified template name.
 
         :param name: name of the template.
-        :rtype: (yagocd.resources.template.TemplateConfig, str)
+        :rtype: yagocd.resources.template.TemplateConfig
         """
         response = self._session.get(
             path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api),
@@ -104,14 +104,14 @@ class TemplateManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return TemplateConfig(session=self._session, data=response.json()), etag
+        return TemplateConfig(session=self._session, data=response.json(), etag=etag)
 
     def create(self, config):
         """
         Creates a template config object.
 
         :param config: new template configuration.
-        :rtype: (yagocd.resources.template.TemplateConfig, str)
+        :rtype: yagocd.resources.template.TemplateConfig
         """
         response = self._session.post(
             path=self.RESOURCE_PATH.format(base_api=self.base_api),
@@ -123,7 +123,7 @@ class TemplateManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return TemplateConfig(session=self._session, data=response.json()), etag
+        return TemplateConfig(session=self._session, data=response.json(), etag=etag)
 
     def update(self, name, config, etag):
         """
@@ -132,7 +132,7 @@ class TemplateManager(BaseManager):
         :param name: name of the template to update.
         :param config: updated template configuration.
         :param etag: etag value from current template object.
-        :rtype: (yagocd.resources.template.TemplateConfig, str)
+        :rtype: yagocd.resources.template.TemplateConfig
         """
         response = self._session.put(
             path=self._session.urljoin(self.RESOURCE_PATH, name).format(base_api=self.base_api),
@@ -145,7 +145,7 @@ class TemplateManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return TemplateConfig(session=self._session, data=response.json()), etag
+        return TemplateConfig(session=self._session, data=response.json(), etag=etag)
 
 
 class TemplateConfig(Base):

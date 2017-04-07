@@ -27,9 +27,7 @@
 ###############################################################################
 import json
 
-from easydict import EasyDict
-
-from yagocd.resources import BaseManager
+from yagocd.resources import Base, BaseManager
 from yagocd.util import RequireParamMixin, since
 
 
@@ -61,8 +59,8 @@ class PipelineConfigManager(BaseManager, RequireParamMixin):
         Method add possibility to get pipeline config by the name using dictionary like syntax.
 
         :param pipeline_name: name of the pipeline.
-        :return: tuple of pipeline config object and current ETag value.
-        :rtype: (dict, str)
+        :return: pipeline config object.
+        :rtype: yagocd.resources.pipeline_config.PipelineConfig
         """
         return self.get(pipeline_name=pipeline_name)
 
@@ -74,8 +72,8 @@ class PipelineConfigManager(BaseManager, RequireParamMixin):
 
         :param pipeline_name: name of the pipeline. Could be skipped
           if name was configured from constructor.
-        :return: tuple of pipeline config object and current ETag value.
-        :rtype: (dict, str)
+        :return: pipeline config object.
+        :rtype: yagocd.resources.pipeline_config.PipelineConfig
         """
         pipeline_name = self._require_param('pipeline_name', locals())
 
@@ -85,7 +83,7 @@ class PipelineConfigManager(BaseManager, RequireParamMixin):
         )
 
         etag = response.headers['ETag']
-        return EasyDict(response.json()), etag
+        return PipelineConfig(session=self._session, data=response.json(), etag=etag)
 
     def edit(self, config, etag, pipeline_name=None):
         """
@@ -98,8 +96,8 @@ class PipelineConfigManager(BaseManager, RequireParamMixin):
         :param etag: etag value from current configuration resource.
         :param pipeline_name: name of the pipeline. Could be skipped
           if name was configured from constructor.
-        :return: tuple of updated pipeline config object and updated ETag.
-        :rtype: (dict, str)
+        :return: updated pipeline config object.
+        :rtype: yagocd.resources.pipeline_config.PipelineConfig
         """
         pipeline_name = self._require_param('pipeline_name', locals())
 
@@ -114,7 +112,7 @@ class PipelineConfigManager(BaseManager, RequireParamMixin):
         )
 
         etag = response.headers['ETag']
-        return EasyDict(response.json()), etag
+        return PipelineConfig(session=self._session, data=response.json(), etag=etag)
 
     def create(self, config):
         """
@@ -123,8 +121,8 @@ class PipelineConfigManager(BaseManager, RequireParamMixin):
         :versionadded: 15.3.0.
 
         :param config: configuration data.
-        :return: tuple of created pipeline config object and ETag.
-        :rtype: (dict, str)
+        :return: created pipeline config object.
+        :rtype: yagocd.resources.pipeline_config.PipelineConfig
         """
         response = self._session.post(
             path=self.RESOURCE_PATH.format(base_api=self.base_api),
@@ -136,7 +134,7 @@ class PipelineConfigManager(BaseManager, RequireParamMixin):
         )
 
         etag = response.headers['ETag']
-        return EasyDict(response.json()), etag
+        return PipelineConfig(session=self._session, data=response.json(), etag=etag)
 
     @since('16.6.0')
     def delete(self, pipeline_name=None):
@@ -159,3 +157,7 @@ class PipelineConfigManager(BaseManager, RequireParamMixin):
         )
 
         return response.json().get('message')
+
+
+class PipelineConfig(Base):
+    pass

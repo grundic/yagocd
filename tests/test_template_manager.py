@@ -78,17 +78,12 @@ class TestList(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], list)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return list
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert all(isinstance(i, template.TemplateConfig) for i in result[0])
+            assert all(isinstance(i, template.TemplateConfig) for i in result)
 
         return check_value
 
@@ -111,17 +106,12 @@ class TestGet(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], template.TemplateConfig)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return template.TemplateConfig
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.name == self.NAME
+            assert result.data.name == self.NAME
 
         return check_value
 
@@ -144,17 +134,12 @@ class TestCreate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], template.TemplateConfig)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return template.TemplateConfig
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data.name == self.NAME
+            assert result.data.name == self.NAME
 
         return check_value
 
@@ -167,14 +152,14 @@ class TestUpdate(BaseManager, ReturnValueMixin):
     def _execute_test_action(self, manager, my_vcr, template_bar):
         with my_vcr.use_cassette("template/prepare_update_{}".format(self.NAME)):
             manager.create(config=template_bar)
-            _, etag = manager.get(self.NAME)  # noqa
+            original = manager.get(self.NAME)  # noqa
 
         with my_vcr.use_cassette("template/update_{}".format(self.NAME)) as cass:
             template_bar['stages'][0]['name'] = self.STAGE_NAME
             return cass, manager.update(
                 name=self.NAME,
                 config=template_bar,
-                etag=etag
+                etag=original.etag
             )
 
     @pytest.fixture()
@@ -187,17 +172,12 @@ class TestUpdate(BaseManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], template.TemplateConfig)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return template.TemplateConfig
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            assert result[0].data['stages'][0]['name'] == self.STAGE_NAME
+            assert result.data['stages'][0]['name'] == self.STAGE_NAME
 
         return check_value
 

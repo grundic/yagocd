@@ -71,12 +71,7 @@ class TestGet(BaseTestPipelineConfigManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], dict)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return pipeline_config.PipelineConfig
 
     @pytest.fixture()
     def expected_return_value(self):
@@ -90,11 +85,11 @@ class TestEdit(BaseTestPipelineConfigManager, ReturnValueMixin):
     @pytest.fixture()
     def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline_config/edit_prepare_{}".format(self.PIPELINE_NAME)):
-            original, etag = manager.get(self.PIPELINE_NAME)
+            original = manager.get(self.PIPELINE_NAME)
             original.label_template = self.NEW_LABEL
 
         with my_vcr.use_cassette("pipeline_config/edit_{}".format(self.PIPELINE_NAME)) as cass:
-            return cass, manager.edit(original, etag, self.PIPELINE_NAME)
+            return cass, manager.edit(original.data, original.etag, self.PIPELINE_NAME)
 
     @pytest.fixture()
     def expected_request_url(self):
@@ -106,18 +101,13 @@ class TestEdit(BaseTestPipelineConfigManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], dict)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return pipeline_config.PipelineConfig
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            new_config, new_etag = result
-            assert new_config.label_template == self.NEW_LABEL
+            new_config = result
+            assert new_config.data.label_template == self.NEW_LABEL
 
         return check_value
 
@@ -145,18 +135,13 @@ class TestCreate(BaseTestPipelineConfigManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_type(self):
-        def check_types(result):
-            assert isinstance(result, tuple)
-            assert isinstance(result[0], dict)
-            assert isinstance(result[1], str)
-
-        return check_types
+        return pipeline_config.PipelineConfig
 
     @pytest.fixture()
     def expected_return_value(self):
         def check_value(result):
-            new_config, new_etag = result
-            assert new_config.name == self.PIPELINE_NAME
+            new_config = result
+            assert new_config.data.name == self.PIPELINE_NAME
 
         return check_value
 

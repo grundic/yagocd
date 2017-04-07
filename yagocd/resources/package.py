@@ -64,26 +64,25 @@ class PackageManager(BaseManager):
         """
         Lists all available packages, these are materials that are present in the in cruise-config.xml.
 
-        :rtype: (list of yagocd.resources.package.Package, str)
+        :rtype: list of yagocd.resources.package.Package
         """
         response = self._session.get(
             path=self.RESOURCE_PATH.format(base_api=self.base_api)
         )
 
         result = list()
-        for data in response.json().get('_embedded', {}).get('packages', {}):
-            result.append(Package(session=self._session, data=data))
-
         etag = response.headers['ETag']
+        for data in response.json().get('_embedded', {}).get('packages', {}):
+            result.append(Package(session=self._session, data=data, etag=etag))
 
-        return result, etag
+        return result
 
     def get(self, package_id):
         """
         Gets the package config for a specified package id.
 
         :param package_id: id of the package to get.
-        :rtype: (yagocd.resources.package.Package, str)
+        :rtype: yagocd.resources.package.Package
         """
         response = self._session.get(
             path=self._session.urljoin(self.RESOURCE_PATH, package_id).format(base_api=self.base_api)
@@ -91,14 +90,14 @@ class PackageManager(BaseManager):
 
         etag = response.headers['ETag']
 
-        return Package(session=self._session, data=response.json()), etag
+        return Package(session=self._session, data=response.json(), etag=etag)
 
     def create(self, config):
         """
         Creates a package with specified configurations.
 
         :param config: new package configuration.
-        :rtype: (yagocd.resources.package.Package, str)
+        :rtype: yagocd.resources.package.Package
         """
         response = self._session.post(
             path=self.RESOURCE_PATH.format(base_api=self.base_api),
@@ -110,7 +109,7 @@ class PackageManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return Package(session=self._session, data=response.json()), etag
+        return Package(session=self._session, data=response.json(), etag=etag)
 
     def update(self, package_id, package, etag):
         """
@@ -119,7 +118,7 @@ class PackageManager(BaseManager):
         :param package_id: id of the package repository to update.
         :param package: updated package configuration.
         :param etag: etag value from current package repository.
-        :rtype: (yagocd.resources.package.Package, str)
+        :rtype: yagocd.resources.package.Package
         """
 
         response = self._session.put(
@@ -133,7 +132,7 @@ class PackageManager(BaseManager):
         )
 
         etag = response.headers['ETag']
-        return Package(session=self._session, data=response.json()), etag
+        return Package(session=self._session, data=response.json(), etag=etag)
 
     def delete(self, package_id):
         """
