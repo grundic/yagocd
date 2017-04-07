@@ -147,7 +147,7 @@ class EnvironmentManager(BaseManager):
         """
         Deletes an environment.
 
-        :param name: name of the environment to fetch.
+        :param name: name of the environment to delete.
         :return: A message confirmation if the environment was deleted.
         :rtype: str
         """
