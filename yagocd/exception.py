@@ -51,6 +51,7 @@ class RequestError(YagocdException):
         # noinspection PyBroadException
         try:
             self.json = response.json()
+            assert isinstance(self.json, dict)
         except:
             self.json = {}
 
