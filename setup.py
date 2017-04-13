@@ -31,7 +31,7 @@ for dirpath, dirname, filenames in os.walk('yagocd'):
 
 setup(
     name='yagocd',
-    version='0.4.4',
+    version='1.0.0',
     description="Yet another Python client for ThoughtWorks GoCD REST API.",
     long_description=readme + '\n\n' + history,
     author="Grigory Chernyshev",
