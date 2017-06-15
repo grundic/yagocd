@@ -32,11 +32,23 @@ from six import string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
 from yagocd.resources import user
+from distutils.version import LooseVersion
 
 
 @pytest.fixture()
 def manager(session_fixture):
     return user.UserManager(session=session_fixture)
+
+
+@pytest.fixture(autouse=True)
+def skip_by_gocd_version(request, gocd_docker):
+    if gocd_docker.startswith('v'):
+        gocd_docker = gocd_docker[1:]
+
+    if request.node.get_marker('works_after'):
+        works_after_version = request.node.get_marker('works_after').args[0]
+        if LooseVersion(gocd_docker) < LooseVersion(works_after_version):
+            pytest.skip('This test works only after {}'.format(works_after_version))
 
 
 class TestList(AbstractTestManager, ReturnValueMixin):
@@ -87,44 +99,75 @@ class TestGet(AbstractTestManager, ReturnValueMixin):
 
     @pytest.fixture()
     def expected_return_value(self):
-        pytest.skip()
+        def check_value(result):
+            assert result.data.login_name == 'admin'
+
+        return check_value
 
 
-#
-#
-# class TestCreate(AbstractTestManager):
-#     OPTIONS = {
-#         'login_name': 'foobar',
-#         'enabled': True,
-#         'email': 'foo@bar.baz',
-#         'email_me': False,
-#         'checkin_aliases': ['foo', 'bar', 'baz']
-#     }
-#
-#     def test_create_request_url(self, manager, my_vcr):
-#         with my_vcr.use_cassette("user/create") as cass:
-#             manager.create(self.OPTIONS)
-#             assert cass.requests[0].path == '/go/api/users'
-#
-#     def test_create_request_method(self, manager, my_vcr):
-#         with my_vcr.use_cassette("user/create") as cass:
-#             manager.create(self.OPTIONS)
-#             assert cass.requests[0].method == 'POST'
-#
-#     def test_create_request_accept_headers(self, manager, my_vcr):
-#         with my_vcr.use_cassette("user/create") as cass:
-#             manager.create(self.OPTIONS)
-#             assert cass.requests[0].headers['accept'] == 'application/json'
-#
-#     def test_create_response_code(self, manager, my_vcr):
-#         with my_vcr.use_cassette("user/create") as cass:
-#             manager.create(self.OPTIONS)
-#             assert cass.responses[0]['status']['code'] == 200
-#
-#     def test_create_return_type(self, manager, my_vcr):
-#         with my_vcr.use_cassette("user/create"):
-#             result = manager.create(self.OPTIONS)
-#             assert isinstance(result, user.UserEntity)
+class TestCurrent(AbstractTestManager, ReturnValueMixin):
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
+        with my_vcr.use_cassette("user/get_current") as cass:
+            return cass, manager.current()
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/current_user'
+
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'GET'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return user.UserEntity
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
+            assert result.data.login_name == 'admin'
+
+        return check_value
+
+
+@pytest.mark.works_after('17.1.0')
+class TestCreate(AbstractTestManager, ReturnValueMixin):
+    OPTIONS = {
+        'login_name': 'foobar',
+        'enabled': True,
+        'email': 'foo@bar.baz',
+        'email_me': False,
+        'checkin_aliases': ['foo', 'bar', 'baz']
+    }
+
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
+        with my_vcr.use_cassette("user/create") as cass:
+            return cass, manager.create(self.OPTIONS)
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/users'
+
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'POST'
+
+    @pytest.fixture()
+    def expected_response_code(self, *args, **kwargs):
+        return 201
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return user.UserEntity
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
+            assert result.data.login_name == 'foobar'
+
+        return check_value
 
 
 class TestUpdate(AbstractTestManager, ReturnValueMixin):
@@ -141,6 +184,36 @@ class TestUpdate(AbstractTestManager, ReturnValueMixin):
     @pytest.fixture()
     def expected_request_url(self):
         return '/go/api/users/{0}'.format(self.USERNAME)
+
+    @pytest.fixture()
+    def expected_request_method(self):
+        return 'PATCH'
+
+    @pytest.fixture()
+    def expected_return_type(self):
+        return user.UserEntity
+
+    @pytest.fixture()
+    def expected_return_value(self):
+        def check_value(result):
+            assert result.data.email == self.OPTIONS['email']
+
+        return check_value
+
+
+class TestUpdateCurrent(AbstractTestManager, ReturnValueMixin):
+    OPTIONS = {
+        'email': 'admin@gocd.com'
+    }
+
+    @pytest.fixture()
+    def _execute_test_action(self, manager, my_vcr):
+        with my_vcr.use_cassette("user/update_current") as cass:
+            return cass, manager.update_current(self.OPTIONS)
+
+    @pytest.fixture()
+    def expected_request_url(self):
+        return '/go/api/current_user'
 
     @pytest.fixture()
     def expected_request_method(self):

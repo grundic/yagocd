@@ -42,6 +42,7 @@ class UserManager(BaseManager):
     """
 
     RESOURCE_PATH = '{base_api}/users'
+    CURRENT_USER_PATH = '{base_api}/current_user'
 
     def __iter__(self):
         """
@@ -97,11 +98,28 @@ class UserManager(BaseManager):
 
         return UserEntity(session=self._session, data=response.json())
 
+    @since('17.5.0')
+    def current(self):
+        """
+        Gets the current user.
+
+        :versionadded: 17.5.0.
+
+        :return: a current user object :class:`yagocd.resources.user.UserEntity`.
+        :rtype: yagocd.resources.user.UserEntity
+        """
+        response = self._session.get(
+            path=self.CURRENT_USER_PATH.format(base_api=self.base_api)
+        )
+
+        return UserEntity(session=self._session, data=response.json())
+
     @since('15.3.0')
     def create(self, options):
         """
         Creates a user.
-        @since 15.3.0.
+
+        :versionadded: 15.3.0.
 
         TODO: can't make this one work: returns 404 all the time.
 
@@ -119,7 +137,7 @@ class UserManager(BaseManager):
             }
         )
 
-        return response.text
+        return UserEntity(session=self._session, data=response.json())
 
     def update(self, login, options):
         """
@@ -134,6 +152,26 @@ class UserManager(BaseManager):
         """
         response = self._session.patch(
             path=self._session.urljoin(self.RESOURCE_PATH, login).format(base_api=self.base_api),
+            data=json.dumps(options),
+            headers={
+                'Content-Type': 'application/json'
+            }
+        )
+
+        return UserEntity(session=self._session, data=response.json())
+
+    @since('17.5.0')
+    def update_current(self, options):
+        """
+        Update some attributes of the current user.
+
+        :versionadded: 17.5.0.
+
+        :param options:
+        :return:
+        """
+        response = self._session.patch(
+            path=self.CURRENT_USER_PATH.format(base_api=self.base_api),
             data=json.dumps(options),
             headers={
                 'Content-Type': 'application/json'
