@@ -1,0 +1,46 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJfbGlua3MiOiB7InNlbGYiOiB7ImhyZWYiOiAiaHR0cDovL2xvY2FsaG9zdDo4MTUzL2dvL2Fw
+      aS9lbGFzdGljL3Byb2ZpbGVzL2JhciJ9LCAiZmluZCI6IHsiaHJlZiI6ICJodHRwOi8vbG9jYWxo
+      b3N0OjgxNTMvZ28vYXBpL2VsYXN0aWMvcHJvZmlsZXMvOnByb2ZpbGVfaWQifSwgImRvYyI6IHsi
+      aHJlZiI6ICJodHRwczovL2FwaS5nb2NkLmlvLyNlbGFzdGljLWFnZW50LXByb2ZpbGVzIn19LCAi
+      cHJvcGVydGllcyI6IFt7ImtleSI6ICJJbWFnZSIsICJ2YWx1ZSI6ICJnb2NkY29udHJpYi9nb2Nk
+      LWRldi1idWlsZCJ9LCB7ImtleSI6ICJFbnZpcm9ubWVudCIsICJ2YWx1ZSI6ICJ1cGRhdGVkLXZh
+      bHVlIn1dLCAicGx1Z2luX2lkIjogImNkLmdvLmNvbnRyaWIuZWxhc3RpYy1hZ2VudC5kb2NrZXIi
+      LCAiaWQiOiAiYmFyIn0=
+    headers:
+      Accept: [application/vnd.go.cd.v1+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['413']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
+      If-Match: ['"b2152b1cf57ac8f43f368fc47fe78cfd--gzip"']
+      User-Agent: [python-requests/2.13.0]
+    method: PUT
+    uri: http://localhost:8153/go/api/elastic/profiles/bar
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWRwWrEIBCG73mK4F5XpZRCyb2HPkMpi9FJMsTVoCZQlrz7jia7dGF76kWcX+fz
+        n99LVdcMDWtq1qrAjrmc7NyjO22qNqL3QnuXArYCrIoJNVc9uCSM1yPcmoKfICSESF1fpNT1pax0
+        NsJPRn2eqa3cLuqi7AxZ7702+wMy77mBhbczWsPK3fX4FPfhFgzencnJE+g8GZXA8E3YOLR+F7Mn
+        i27MRjcmi2C7e0X1ECDXbEhpaqS0Xis7+Jia95e3V/Io1YRyz0LS5B1aiDIH+Nswo3z+okbCEkTk
+        eQV6eXhIlt+Yj7wOnfm/zWbf5Q++57JWa3UFfDTRwgwCAAA=
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
+      Date: ['Wed, 14 Jun 2017 11:51:51 GMT']
+      ETag: ['"ea81560a58d1e7c3d4ccd7b51b88d483--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [65341a1e-84d1-4595-84f0-cf025d924948]
+      X-Runtime: ['0.146000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1

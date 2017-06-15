@@ -24,13 +24,8 @@ Here are some highlights:
 - *every* version of GoCD is meticulously tested, thanks to releases of it in Docker container. Here is a list
   of versions supported so far:
 
-  - 16.1.0
-  - 16.2.1
-  - 16.3.0
-  - 16.6.0
-  - 16.7.0
-  - 16.8.0
-  - 16.9.0
+  - 16.x.x
+  - 17.x.x
 
   Older version should work as well, but as they are not supported and there is no Docker images for them, you should
   use them on your own risk.

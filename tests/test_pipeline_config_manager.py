@@ -86,7 +86,7 @@ class TestEdit(BaseTestPipelineConfigManager, ReturnValueMixin):
     def _execute_test_action(self, manager, my_vcr):
         with my_vcr.use_cassette("pipeline_config/edit_prepare_{}".format(self.PIPELINE_NAME)):
             original = manager.get(self.PIPELINE_NAME)
-            original.label_template = self.NEW_LABEL
+            original.data.label_template = self.NEW_LABEL
 
         with my_vcr.use_cassette("pipeline_config/edit_{}".format(self.PIPELINE_NAME)) as cass:
             return cass, manager.edit(original.data, original.etag, self.PIPELINE_NAME)

@@ -54,6 +54,7 @@ TESTING_VERSIONS = [
     ('17.1.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
     ('17.2.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
     ('v17.3.0', 'gocd-server', 'gocd-agent-alpine-3.5'),
+    ('v17.5.0', 'gocd-server', 'gocd-agent-alpine-3.5'),
 ]
 
 

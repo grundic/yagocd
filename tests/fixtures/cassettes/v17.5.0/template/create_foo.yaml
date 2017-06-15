@@ -1,0 +1,47 @@
+interactions:
+- request:
+    body: !!binary |
+      eyJzdGFnZXMiOiBbeyJqb2JzIjogW3siZW52aXJvbm1lbnRfdmFyaWFibGVzIjogW10sICJydW5f
+      aW5zdGFuY2VfY291bnQiOiBudWxsLCAidGFza3MiOiBbeyJhdHRyaWJ1dGVzIjogeyJ3b3JraW5n
+      X2RpcmVjdG9yeSI6IG51bGwsICJjb21tYW5kIjogImxzIn0sICJ0eXBlIjogImV4ZWMifV0sICJu
+      YW1lIjogImZvby1qb2IiLCAidGltZW91dCI6IDAsICJyZXNvdXJjZXMiOiBbXX1dLCAibmV2ZXJf
+      Y2xlYW51cF9hcnRpZmFjdHMiOiBmYWxzZSwgImNsZWFuX3dvcmtpbmdfZGlyZWN0b3J5IjogZmFs
+      c2UsICJuYW1lIjogImZvby1zdGFnZSIsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXSwgImZl
+      dGNoX21hdGVyaWFscyI6IHRydWV9XSwgIm5hbWUiOiAiZm9vIn0=
+    headers:
+      Accept: [application/vnd.go.cd.v3+json]
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [Basic YWRtaW46MTIzNDU=]
+      Connection: [keep-alive]
+      Content-Length: ['380']
+      Content-Type: [application/json]
+      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
+      User-Agent: [python-requests/2.13.0]
+    method: POST
+    uri: http://localhost:8153/go/api/admin/templates
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAKWT3W7bMAyF7/0UgXeb1hiKAUNeZQgERaZtLTJpSFS6rvC7l1Yc1z/pcrE7U/x0
+        eHRkvWe7Xa6cxXPID7t3qaQO4KqpkrrxMNR5w9wdisKR0a6hwIef33+8FDUVurOFLluLBUPbOc0Q
+        ioooTwL9/qpakvlKNIiqaDzXZMpnS8W3m8yTIaxsvRSqLJb/be9w+1SoWxgHZOOQPK2J5HCItBBY
+        1zBE9CuR0+wZ+JSYfH9rVcCmUa2M8Fa7YS/7CFPbONCoXsmfLdaqtB4Mk38TrBL6k0O4gFeJjp3S
+        nm2lDYcNp7vO00W7WTKyym9d8heiMRDC5G7YELkhb/9qtoSLXdL05MbjzlaP+zkSA/gtMn3341c/
+        OQS8WE/YArK6aAnltJox6ee/6fQZ9jzwTehC5gtbPqKyKHeBBpShiCwoRucWFNsWKA6ta8BLjYdO
+        t2l4CBS9eYSxDuflydanu2LjtcEfMAtrqauZvT1FhrC6tnkE1drIHTsjT6jMEJe7k9SIGGpbnZ5d
+        7sLGkQD3fuRBa0X22VfVOqfTgyTnL+EfmDyKDgRNWS0M3YYfp7d/zPrsA6/kOUERBQAA
+    headers:
+      Cache-Control: ['max-age=0, private, must-revalidate']
+      Content-Encoding: [gzip]
+      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
+      Date: ['Wed, 14 Jun 2017 12:08:40 GMT']
+      ETag: ['"72b81adc4237c0cfd41d0419768d6822--gzip"']
+      Vary: ['Accept-Encoding, User-Agent']
+      X-Content-Type-Options: [nosniff]
+      X-Frame-Options: [SAMEORIGIN]
+      X-Request-Id: [8a2c2c62-3637-49e5-be30-77f82defe2dd]
+      X-Runtime: ['0.266000']
+      X-UA-Compatible: [chrome=1]
+      X-XSS-Protection: [1; mode=block]
+    status: {code: 200, message: OK}
+version: 1
