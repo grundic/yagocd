@@ -40,6 +40,7 @@ from yagocd.resources.feed import FeedManager
 from yagocd.resources.info import InfoManager
 from yagocd.resources.job import JobManager
 from yagocd.resources.material import MaterialManager
+from yagocd.resources.notification_filter import NotificationFilterManager
 from yagocd.resources.package import PackageManager
 from yagocd.resources.package_repository import PackageRepositoryManager
 from yagocd.resources.pipeline import PipelineManager
@@ -104,6 +105,7 @@ class Yagocd(object):
         self._job_manager = None
         self._info_manager = None
         self._material_manager = None
+        self._notification_filter_manager = None
         self._package_manager = None
         self._package_repository_manager = None
         self._pipeline_manager = None
@@ -225,6 +227,18 @@ class Yagocd(object):
         if self._info_manager is None:
             self._info_manager = InfoManager(session=self._session)
         return self._info_manager
+
+    @property
+    def notification_filters(self):
+        """
+        Property for accessing :class:`NotificationFilterManager` instance, which is used to manage notification
+        filters.
+
+        :rtype: yagocd.resources.notification_filter.NotificationFilterManager
+        """
+        if self._notification_filter_manager is None:
+            self._notification_filter_manager = NotificationFilterManager(session=self._session)
+        return self._notification_filter_manager
 
     @property
     def materials(self):

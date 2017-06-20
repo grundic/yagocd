@@ -39,6 +39,7 @@ from yagocd.resources import (
     feed,
     info,
     job,
+    notification_filter,
     material,
     package,
     package_repository,
@@ -113,6 +114,9 @@ class TestManagers(object):
 
     def test_info(self, go_fixture):
         assert isinstance(go_fixture.info, info.InfoManager)
+
+    def test_notification_filters(self, go_fixture):
+        assert isinstance(go_fixture.notification_filters, notification_filter.NotificationFilterManager)
 
     def test_materials(self, go_fixture):
         assert isinstance(go_fixture.materials, material.MaterialManager)
