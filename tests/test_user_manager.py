@@ -31,8 +31,8 @@ from mock import mock
 from six import string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
-from yagocd.resources import user
 from distutils.version import LooseVersion
+from yagocd.resources import user
 
 
 @pytest.fixture()
