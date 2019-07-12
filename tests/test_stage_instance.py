@@ -57,7 +57,7 @@ class TestStageInstance(object):
         jobs_mock.assert_called_once_with()
 
     def test_url_from_pipeline(self, stage_instance_from_pipeline):
-        url_re = re.compile('{server}go/pipelines/Consumer_Website/\d+/Commit/\d+'.format(
+        url_re = re.compile(r'{server}go/pipelines/Consumer_Website/\d+/Commit/\d+'.format(
             server=stage_instance_from_pipeline._session._options['server']
         ))
 
