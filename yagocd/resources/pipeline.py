@@ -74,7 +74,7 @@ class PipelineManager(BaseManager):
         return self.find(name=name)
 
     @since('14.3.0')
-    def list(self):
+    def list(self):  # noqa
         """
         List all available pipelines.
 
@@ -396,9 +396,9 @@ class PipelineManager(BaseManager):
                         modifications = [m for sublist in node_item.material_revisions for m in sublist.modifications]
 
                     for modification in modifications:
-                            modification['id'] = node_item.id
-                            modification['type'] = node_item.node_type.capitalize()
-                            nodes.append(ModificationEntity(session=self._session, data=modification))
+                        modification['id'] = node_item.id
+                        modification['type'] = node_item.node_type.capitalize()
+                        nodes.append(ModificationEntity(session=self._session, data=modification))
 
         return YagocdUtil.build_graph(
             nodes=nodes,

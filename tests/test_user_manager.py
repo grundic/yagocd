@@ -26,12 +26,13 @@
 #
 ###############################################################################
 
+from distutils.version import LooseVersion
+
 import pytest
 from mock import mock
 from six import string_types
 
 from tests import AbstractTestManager, ReturnValueMixin
-from distutils.version import LooseVersion
 from yagocd.resources import user
 
 

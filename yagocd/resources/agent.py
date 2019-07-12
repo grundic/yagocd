@@ -74,7 +74,7 @@ class AgentManager(BaseManager):
         """
         return self.get(uuid=uuid)
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all available agents, these are agents that are present in the
         <agents/> tag inside cruise-config.xml and also agents that are in
@@ -106,7 +106,7 @@ class AgentManager(BaseManager):
 
         return agents
 
-    def dict(self):
+    def dict(self):  # noqa
         """
         Wrapper for `list()` method, that transforms founded agents to
         dictionary by `uuid` key.

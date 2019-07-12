@@ -61,7 +61,7 @@ class ElasticAgentProfileManager(BaseManager):
         """
         return self.get(profile_id=profile_id)
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all available elastic agent profiles.
 

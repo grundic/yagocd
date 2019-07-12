@@ -68,7 +68,7 @@ class TemplateManager(BaseManager):
         """
         return self.get(name=name)
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all available templates with the associated pipelines’ names.
 

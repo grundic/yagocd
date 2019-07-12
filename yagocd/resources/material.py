@@ -40,7 +40,7 @@ class MaterialManager(BaseManager):
     :versionadded: 14.3.0.
     """
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all available materials, these are materials that are present in the in ``cruise-config.xml``.
 

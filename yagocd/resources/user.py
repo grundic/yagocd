@@ -63,7 +63,7 @@ class UserManager(BaseManager):
         """
         return self.get(login=login)
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all available users.
 

@@ -117,7 +117,7 @@ class ArtifactManager(BaseManager, RequireParamMixin):
         stage_name=None,
         stage_counter=None,
         job_name=None
-    ):
+    ):  # noqa
         """
         Lists all available artifacts in a job.
 
@@ -251,7 +251,7 @@ class ArtifactManager(BaseManager, RequireParamMixin):
         stage_name=None,
         stage_counter=None,
         job_name=None,
-    ):
+    ):  # noqa
         """
         Gets an artifact file by its path.
 

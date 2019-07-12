@@ -127,7 +127,7 @@ class PropertyManager(BaseManager, RequireParamMixin):
         stage_name=None,
         stage_counter=None,
         job_name=None
-    ):
+    ):  # noqa
         """
         Lists all job properties.
 

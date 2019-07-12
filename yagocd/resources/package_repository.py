@@ -60,7 +60,7 @@ class PackageRepositoryManager(BaseManager):
         """
         return self.get(repo_id=repo_id)
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all available package repositories in cruise-config.xml.
 

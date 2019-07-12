@@ -65,7 +65,7 @@ class SCMManager(BaseManager):
         """
         return self.get(name=name)
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all available pluggable scm materials,
         these are materials that are present in the in ``cruise-config.xml``.

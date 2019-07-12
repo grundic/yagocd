@@ -65,7 +65,7 @@ class PluginInfoManager(BaseManager):
         """
         return self.get(name=name)
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all available plugin info.
 
