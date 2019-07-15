@@ -110,14 +110,14 @@ class ArtifactManager(BaseManager, RequireParamMixin):
         """
         return self.directory_wait(path=path)
 
-    def list(
+    def list(  # noqa
         self,
         pipeline_name=None,
         pipeline_counter=None,
         stage_name=None,
         stage_counter=None,
         job_name=None
-    ):  # noqa
+    ):
         """
         Lists all available artifacts in a job.
 

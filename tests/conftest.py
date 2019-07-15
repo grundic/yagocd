@@ -145,12 +145,12 @@ def gocd_docker(request, use_docker, fresh_run):
             print("Removing existing cassettes from '{}'...".format(cassette_library_dir))  # noqa
             shutil.rmtree(cassette_library_dir)
 
-    print(
+    print(  # noqa
         '\n',
         '*' * 47 + '\n',
         '********** Using GoCD version {} **********\n'.format(request.param),
         '*' * 47 + '\n',
-    )  # noqa
+    )
 
     return version_tag
 

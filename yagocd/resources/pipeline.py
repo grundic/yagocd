@@ -73,8 +73,8 @@ class PipelineManager(BaseManager):
         """
         return self.find(name=name)
 
-    @since('14.3.0')
-    def list(self):  # noqa
+    @since('14.3.0')  # noqa
+    def list(self):
         """
         List all available pipelines.
 

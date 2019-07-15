@@ -120,14 +120,14 @@ class PropertyManager(BaseManager, RequireParamMixin):
     def items(self):
         return self.list().items()
 
-    def list(
+    def list(  # noqa
         self,
         pipeline_name=None,
         pipeline_counter=None,
         stage_name=None,
         stage_counter=None,
         job_name=None
-    ):  # noqa
+    ):
         """
         Lists all job properties.
 
