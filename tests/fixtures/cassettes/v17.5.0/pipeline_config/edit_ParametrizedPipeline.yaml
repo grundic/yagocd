@@ -1,45 +1,44 @@
 interactions:
 - request:
-    body: !!binary |
-      eyJwYXJhbWV0ZXJzIjogW10sICJ0cmFja2luZ190b29sIjogbnVsbCwgInRlbXBsYXRlIjogbnVs
-      bCwgIm5hbWUiOiAiUGFyYW1ldHJpemVkUGlwZWxpbmUiLCAibGFiZWxfdGVtcGxhdGUiOiAiJHtD
-      T1VOVH0tc29tZS1uZXctdmFsdWUiLCAiZW52aXJvbm1lbnRfdmFyaWFibGVzIjogW3sic2VjdXJl
-      IjogZmFsc2UsICJuYW1lIjogIk1ZX1ZBUklBQkxFIiwgInZhbHVlIjogIk1ZIHZhbHVlIDEyMyJ9
-      LCB7InNlY3VyZSI6IGZhbHNlLCAibmFtZSI6ICJFTVBUWV9WQVJJQUJMRSIsICJ2YWx1ZSI6ICIi
-      fSwgeyJlbmNyeXB0ZWRfdmFsdWUiOiAidk9YekNUNUc3QXM9IiwgInNlY3VyZSI6IHRydWUsICJu
-      YW1lIjogIk1ZX1NFQ1JFVF9WQVJJQUJMRSJ9LCB7ImVuY3J5cHRlZF92YWx1ZSI6ICJ2T1h6Q1Q1
-      RzdBcz0iLCAic2VjdXJlIjogdHJ1ZSwgIm5hbWUiOiAiRU1QVFlfU0VDUkVUX1ZBUklBQkxFIn1d
-      LCAiZW5hYmxlX3BpcGVsaW5lX2xvY2tpbmciOiBmYWxzZSwgIl9saW5rcyI6IHsiZG9jIjogeyJo
-      cmVmIjogImh0dHBzOi8vYXBpLmdvY2QuaW8vI3BpcGVsaW5lLWNvbmZpZyJ9LCAic2VsZiI6IHsi
-      aHJlZiI6ICJodHRwOi8vbG9jYWxob3N0OjgxNTMvZ28vYXBpL2FkbWluL3BpcGVsaW5lcy9QYXJh
-      bWV0cml6ZWRQaXBlbGluZSJ9LCAiZmluZCI6IHsiaHJlZiI6ICJodHRwOi8vbG9jYWxob3N0Ojgx
-      NTMvZ28vYXBpL2FkbWluL3BpcGVsaW5lcy86cGlwZWxpbmVfbmFtZSJ9fSwgInRpbWVyIjogbnVs
-      bCwgInN0YWdlcyI6IFt7ImpvYnMiOiBbeyJydW5faW5zdGFuY2VfY291bnQiOiBudWxsLCAidGFz
-      a3MiOiBbeyJ0eXBlIjogImV4ZWMiLCAiYXR0cmlidXRlcyI6IHsicnVuX2lmIjogWyJwYXNzZWQi
-      XSwgIndvcmtpbmdfZGlyZWN0b3J5IjogbnVsbCwgImNvbW1hbmQiOiAicHJpbnRlbnYiLCAib25f
-      Y2FuY2VsIjogbnVsbH19XSwgIm5hbWUiOiAiZGVmYXVsdEpvYiIsICJ0YWJzIjogW10sICJ0aW1l
-      b3V0IjogbnVsbCwgInByb3BlcnRpZXMiOiBudWxsLCAiZW52aXJvbm1lbnRfdmFyaWFibGVzIjog
-      W3sic2VjdXJlIjogZmFsc2UsICJuYW1lIjogIkVOVl9WQVJfMSIsICJ2YWx1ZSI6ICIifV0sICJy
-      ZXNvdXJjZXMiOiBbXSwgImFydGlmYWN0cyI6IFtdfV0sICJuYW1lIjogImRlZmF1bHRTdGFnZSIs
-      ICJuZXZlcl9jbGVhbnVwX2FydGlmYWN0cyI6IGZhbHNlLCAiZW52aXJvbm1lbnRfdmFyaWFibGVz
-      IjogW10sICJhcHByb3ZhbCI6IHsidHlwZSI6ICJzdWNjZXNzIiwgImF1dGhvcml6YXRpb24iOiB7
-      InVzZXJzIjogW10sICJyb2xlcyI6IFtdfX0sICJjbGVhbl93b3JraW5nX2RpcmVjdG9yeSI6IGZh
-      bHNlLCAiZmV0Y2hfbWF0ZXJpYWxzIjogdHJ1ZX1dLCAibWF0ZXJpYWxzIjogW3sidHlwZSI6ICJn
-      aXQiLCAiYXR0cmlidXRlcyI6IHsic3VibW9kdWxlX2ZvbGRlciI6IG51bGwsICJkZXN0aW5hdGlv
-      biI6IG51bGwsICJuYW1lIjogbnVsbCwgImF1dG9fdXBkYXRlIjogdHJ1ZSwgInVybCI6ICJodHRw
-      czovL2dpdGh1Yi5jb20vZ29jZC1kZW1vL3NlcnZpY2VzLmdpdCIsICJzaGFsbG93X2Nsb25lIjog
-      ZmFsc2UsICJicmFuY2giOiAibWFzdGVyIiwgImludmVydF9maWx0ZXIiOiBmYWxzZSwgImZpbHRl
-      ciI6IG51bGx9fV19
+    body: !!python/unicode '{"tracking_tool": null, "enable_pipeline_locking": false,
+      "label_template": "${COUNT}-some-new-value", "parameters": [], "timer": null,
+      "materials": [{"attributes": {"name": null, "url": "https://github.com/gocd-demo/services.git",
+      "destination": null, "submodule_folder": null, "shallow_clone": false, "filter":
+      null, "auto_update": true, "branch": "master", "invert_filter": false}, "type":
+      "git"}], "_links": {"doc": {"href": "https://api.gocd.io/#pipeline-config"},
+      "self": {"href": "http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline"},
+      "find": {"href": "http://localhost:8153/go/api/admin/pipelines/:pipeline_name"}},
+      "template": null, "environment_variables": [{"secure": false, "value": "MY value
+      123", "name": "MY_VARIABLE"}, {"secure": false, "value": "", "name": "EMPTY_VARIABLE"},
+      {"encrypted_value": "vOXzCT5G7As=", "secure": true, "name": "MY_SECRET_VARIABLE"},
+      {"encrypted_value": "vOXzCT5G7As=", "secure": true, "name": "EMPTY_SECRET_VARIABLE"}],
+      "stages": [{"clean_working_directory": false, "name": "defaultStage", "fetch_materials":
+      true, "never_cleanup_artifacts": false, "environment_variables": [], "approval":
+      {"type": "success", "authorization": {"users": [], "roles": []}}, "jobs": [{"run_instance_count":
+      null, "tasks": [{"attributes": {"on_cancel": null, "working_directory": null,
+      "command": "printenv", "run_if": ["passed"]}, "type": "exec"}], "name": "defaultJob",
+      "tabs": [], "artifacts": [], "timeout": null, "environment_variables": [{"secure":
+      false, "value": "", "name": "ENV_VAR_1"}], "properties": null, "resources":
+      []}]}], "name": "ParametrizedPipeline"}'
     headers:
-      Accept: [application/vnd.go.cd.v3+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['1608']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=1pbda927wipyl13hhm0xmt9mw0]
-      If-Match: ['"4b13f13c82a7af22f95aa263689f9f68--gzip"']
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v3+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1608'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      If-Match:
+      - '"82f95ffd23872c7afb7ffda29f4469cc--gzip"'
+      User-Agent:
+      - python-requests/2.22.0
     method: PUT
     uri: http://localhost:8153/go/api/admin/pipelines/ParametrizedPipeline
   response:
@@ -60,17 +59,33 @@ interactions:
         sLhHlsm+Fkd7NkCpvSVWCtJo4Fr3cWys4Ig48diIOHWI3VUF9r/jUSkp11ayQcU2bGy+XMZe5O6F
         dGucPMN0OKBPhNlZLe1CpJ7LTkEN+Lq3hLTE/k8B0kKEvPg+bhbcZDf5Bwyj7BmjCQAA
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 12:23:00 GMT']
-      ETag: ['"a80f3ac4069a92b318fe3886731f8381--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [9697b3f6-1ad8-4a0c-9c53-fc489d49547c]
-      X-Runtime: ['0.399000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v3+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:27 GMT
+      etag:
+      - '"a80f3ac4069a92b318fe3886731f8381--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - c2d7cde1-338c-47ae-92dd-8626a2be3d4e
+      x-runtime:
+      - '0.118000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

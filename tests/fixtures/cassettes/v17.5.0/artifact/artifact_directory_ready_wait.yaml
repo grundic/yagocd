@@ -2,25 +2,38 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
     uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/.zip
   response:
     body:
       string: !!binary |
-        UEsDBBQACAgIAHZezkoAAAAAAAAAAAAAAAADAAAAdG8vAwBQSwcIAAAAAAIAAAAAAAAAUEsDBBQA
-        CAgIAHZezkoAAAAAAAAAAAAAAAAHAAAAdG8vdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIUABQA
-        CAgIAHZezkoAAAAAAgAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAB0by9QSwECFAAUAAgICAB2Xs5K
+        UEsDBBQACAgIAIVsD08AAAAAAAAAAAAAAAADAAAAdG8vAwBQSwcIAAAAAAIAAAAAAAAAUEsDBBQA
+        CAgIAIVsD08AAAAAAAAAAAAAAAAHAAAAdG8vdGhlLwMAUEsHCAAAAAACAAAAAAAAAFBLAQIUABQA
+        CAgIAIVsD08AAAAAAgAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAB0by9QSwECFAAUAAgICACFbA9P
         AAAAAAIAAAAAAAAABwAAAAAAAAAAAAAAAAAzAAAAdG8vdGhlL1BLBQYAAAAAAgACAGYAAABqAAAA
         AAA=
     headers:
-      Content-Language: [en-US]
-      Content-Type: [application/zip]
-      Date: ['Wed, 14 Jun 2017 11:51:47 GMT']
-    status: {code: 200, message: OK}
+      content-language:
+      - en-US
+      content-type:
+      - application/zip
+      date:
+      - Thu, 15 Aug 2019 13:36:15 GMT
+      transfer-encoding:
+      - chunked
+    status:
+      code: 200
+      message: OK
 version: 1

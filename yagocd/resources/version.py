@@ -28,10 +28,8 @@
 from easydict import EasyDict
 
 from yagocd.resources import BaseManager
-from yagocd.util import since
 
 
-@since('16.6.0')
 class VersionManager(BaseManager):
     """
     The Version API allows users to get the GoCD server version details.
@@ -47,3 +45,13 @@ class VersionManager(BaseManager):
         )
 
         return EasyDict(response.json())
+
+    @property
+    def raw_data(self):
+        if not hasattr(self, '_raw_data'):
+            self._raw_data = self.get()
+        return self._raw_data
+
+    @property
+    def version(self):
+        return self.raw_data.version

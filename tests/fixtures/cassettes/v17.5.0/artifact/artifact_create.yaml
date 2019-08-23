@@ -1,28 +1,42 @@
 interactions:
 - request:
-    body: !!binary |
-      LS0xMTY1YTJlNjFkNTA0MzI2ODk1NjE3Y2NmZmI0ZTUxYw0KQ29udGVudC1EaXNwb3NpdGlvbjog
-      Zm9ybS1kYXRhOyBuYW1lPSJmaWxlIjsgZmlsZW5hbWU9ImFydGlmYWN0LnR4dCINCg0KU2FtcGxl
-      IHRlc3QgZGF0YS4KRm9vIGFuZCBCYXIuDQotLTExNjVhMmU2MWQ1MDQzMjY4OTU2MTdjY2ZmYjRl
-      NTFjLS0NCg==
+    body: !!python/unicode "--bb490adb3ea7872b8fba15a7a51da9ad\r\nContent-Disposition:\
+      \ form-data; name=\"file\"; filename=\"artifact.txt\"\r\n\r\nSample test data.\n\
+      Foo and Bar.\r\n--bb490adb3ea7872b8fba15a7a51da9ad--\r\n"
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Confirm: ['true']
-      Connection: [keep-alive]
-      Content-Length: ['178']
-      Content-Type: [multipart/form-data; boundary=1165a2e61d504326895617ccffb4e51c]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Confirm:
+      - 'true'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '178'
+      Content-Type:
+      - multipart/form-data; boundary=bb490adb3ea7872b8fba15a7a51da9ad
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: POST
     uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file.txt
   response:
-    body: {string: File path/to/the/file.txt was created successfully}
+    body:
+      string: !!python/unicode 'File path/to/the/file.txt was created successfully'
     headers:
-      Content-Language: [en-US]
-      Content-Length: ['50']
-      Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Wed, 14 Jun 2017 11:51:48 GMT']
-    status: {code: 201, message: Created}
+      content-language:
+      - en-US
+      content-length:
+      - '50'
+      content-type:
+      - text/plain; charset=UTF-8
+      date:
+      - Thu, 15 Aug 2019 13:36:15 GMT
+    status:
+      code: 201
+      message: Created
 version: 1

@@ -1,24 +1,38 @@
 interactions:
 - request:
-    body: !!binary |
-      dmFsdWU9MTAwNTAw
+    body: !!python/unicode 'value=100500'
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Confirm: ['true']
-      Connection: [keep-alive]
-      Content-Length: ['12']
-      Content-Type: [application/x-www-form-urlencoded]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Confirm:
+      - 'true'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '12'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: POST
     uri: http://localhost:8153/go/properties/Shared_Services/7/Commit/1/build/foo_bar_baz
   response:
-    body: {string: Property 'foo_bar_baz' created with value '100500'}
+    body:
+      string: !!python/unicode 'Property ''foo_bar_baz'' created with value ''100500'''
     headers:
-      Content-Length: ['50']
-      Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Wed, 14 Jun 2017 11:54:04 GMT']
-    status: {code: 201, message: Created}
+      content-length:
+      - '50'
+      content-type:
+      - text/plain; charset=UTF-8
+      date:
+      - Thu, 15 Aug 2019 13:36:49 GMT
+    status:
+      code: 201
+      message: Created
 version: 1

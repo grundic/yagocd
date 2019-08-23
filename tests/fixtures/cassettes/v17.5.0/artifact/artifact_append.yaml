@@ -1,26 +1,40 @@
 interactions:
 - request:
-    body: !!binary |
-      LS02MWI3MjFmNGQ0NzE0M2I5YmIyODYyYzUzMDZiMGEzYw0KQ29udGVudC1EaXNwb3NpdGlvbjog
-      Zm9ybS1kYXRhOyBuYW1lPSJmaWxlIjsgZmlsZW5hbWU9ImFydGlmYWN0LWFwcGVuZC50eHQiDQoN
-      CkRhdGEgdG8gYXBwZW5kLg0KLS02MWI3MjFmNGQ0NzE0M2I5YmIyODYyYzUzMDZiMGEzYy0tDQo=
+    body: !!python/unicode "--e88acd5a0ad4fde5dd24cace400c1d19\r\nContent-Disposition:\
+      \ form-data; name=\"file\"; filename=\"artifact-append.txt\"\r\n\r\nData to\
+      \ append.\r\n--e88acd5a0ad4fde5dd24cace400c1d19--\r\n"
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['170']
-      Content-Type: [multipart/form-data; boundary=61b721f4d47143b9bb2862c5306b0a3c]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '170'
+      Content-Type:
+      - multipart/form-data; boundary=e88acd5a0ad4fde5dd24cace400c1d19
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: PUT
     uri: http://localhost:8153/go/files/Shared_Services/7/Commit/1/build/path/to/the/file-append.txt
   response:
-    body: {string: File path/to/the/file-append.txt was appended successfully}
+    body:
+      string: !!python/unicode 'File path/to/the/file-append.txt was appended successfully'
     headers:
-      Content-Language: [en-US]
-      Content-Length: ['58']
-      Content-Type: [text/plain; charset=UTF-8]
-      Date: ['Wed, 14 Jun 2017 11:51:48 GMT']
-    status: {code: 200, message: OK}
+      content-language:
+      - en-US
+      content-length:
+      - '58'
+      content-type:
+      - text/plain; charset=UTF-8
+      date:
+      - Thu, 15 Aug 2019 13:36:15 GMT
+    status:
+      code: 200
+      message: OK
 version: 1

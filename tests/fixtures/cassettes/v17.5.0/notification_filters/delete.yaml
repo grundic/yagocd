@@ -2,13 +2,20 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['0']
-      Cookie: [JSESSIONID=k33kk2mushmk1efkvnl4hbx5y]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: DELETE
     uri: http://localhost:8153/go/api/notification_filters/1
   response:
@@ -18,17 +25,33 @@ interactions:
         FQKgArFKcDXFJYnpYAUupbm5lQjx1LLUvBKQuGNODkI0N7EkOSM+OT83N7MEZH9aYk5xKliyVgeL
         U4zJc0pafn5SYhEFbgGSsVy1XABx7PBCLQEAAA==
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Tue, 20 Jun 2017 19:10:20 GMT']
-      ETag: ['"c0787c69b0165796ee0f46df842b683c--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [4b9f7af3-3165-4aea-ac23-c803233eeac1]
-      X-Runtime: ['0.081000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v1+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:23 GMT
+      etag:
+      - '"c0787c69b0165796ee0f46df842b683c--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - e6a4d3f7-713b-4a60-a998-eb12b0c4bd0a
+      x-runtime:
+      - '0.010000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

@@ -2,12 +2,18 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/xml]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=r4n80ifk2m70bj3wrmr162jy]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/xml
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=1jnfwuo30jjk1k6hskupm8hgs
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
     uri: http://localhost:8153/go/api/jobs/Consumer_Website/Commit/build/history/0
   response:
@@ -22,17 +28,33 @@ interactions:
         432ojY1eKExUaK5r1VgXalzLR5nPlKZlYDLfyX65BMyG+V8Q92jcvz/5rdQL9rtcfHw8/gLFy70n
         WgwAAA==
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:52:04 GMT']
-      ETag: ['"63b0470a2cda64bc0ad53b1ac3e0ea86--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [348d7cf8-c414-4ec2-858a-12e8cb4d7821]
-      X-Runtime: ['0.022000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:21 GMT
+      etag:
+      - '"63b0470a2cda64bc0ad53b1ac3e0ea86--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - b310231c-b581-4201-91c2-60b26d08cc28
+      x-runtime:
+      - '0.015000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

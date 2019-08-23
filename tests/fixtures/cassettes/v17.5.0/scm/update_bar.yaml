@@ -1,21 +1,28 @@
 interactions:
 - request:
-    body: !!binary |
-      eyJhdXRvX3VwZGF0ZSI6IHRydWUsICJuYW1lIjogImJhciIsICJjb25maWd1cmF0aW9uIjogW3si
-      a2V5IjogInVybCIsICJ2YWx1ZSI6ICJORVctRFVNTVktVkFMVUUifSwgeyJrZXkiOiAidXNlcm5h
-      bWUiLCAidmFsdWUiOiAiYWRtaW4ifSwgeyJrZXkiOiAicGFzc3dvcmQiLCAidmFsdWUiOiAic2Vj
-      cmV0In1dLCAicGx1Z2luX21ldGFkYXRhIjogeyJ2ZXJzaW9uIjogIjEiLCAiaWQiOiAiZ2l0aHVi
-      LnByIn0sICJpZCI6ICJzY20taWQtYmFyIn0=
+    body: !!python/unicode '{"auto_update": true, "configuration": [{"value": "NEW-DUMMY-VALUE",
+      "key": "url"}, {"value": "admin", "key": "username"}, {"value": "secret", "key":
+      "password"}], "plugin_metadata": {"version": "1", "id": "github.pr"}, "id":
+      "scm-id-bar", "name": "bar"}'
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['254']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      If-Match: ['"7eff689793f4f71ed246646a97406586--gzip"']
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '254'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      If-Match:
+      - '"7eff689793f4f71ed246646a97406586--gzip"'
+      User-Agent:
+      - python-requests/2.22.0
     method: PUT
     uri: http://localhost:8153/go/api/admin/scms/bar
   response:
@@ -28,17 +35,33 @@ interactions:
         s2PkeCNGeuSD8GnD9fKjeK1Xq03x/vJWLy+quyJYZtJl15jU159hDdYelKFzmElijtox2kyY28Nj
         Sep6venq57npr+yc/QAU5aJWagIAAA==
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:54:06 GMT']
-      ETag: ['"a5d32e68b59074750b7fe15fb38b7e97--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [7c9fff80-cb84-40f9-baf4-4126a31cc2f5]
-      X-Runtime: ['0.080000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v1+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:50 GMT
+      etag:
+      - '"a5d32e68b59074750b7fe15fb38b7e97--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 4a0f1e9b-899a-43e7-9609-92fc18ef436c
+      x-runtime:
+      - '0.042000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

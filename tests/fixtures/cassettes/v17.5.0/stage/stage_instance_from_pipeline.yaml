@@ -2,154 +2,147 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [text/html]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
-    uri: http://localhost:8153/go/about
+    uri: http://localhost:8153/go/api/version
   response:
     body:
       string: !!binary |
-        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
-        JAAA
+        H4sIAAAAAAAAAI2PwW7DIBBE7/4Ki1xSqQE7BCf2z1iAwaBgExmTS5R/zxLSqlVVKRek2WHezt6K
+        skS9s/M5oK68gQIdlNPfCrRZVNLIrOulI8R5yZ3xYe1ONaNk9IRfLLmqJVg/o2fo/plJg5f/gQKQ
+        IIdHLwdsPdn8BhQvCPoaQ6w+YoYr9ByLaN3Qz3ESakkeq1qWndGufTA8DWlNK8EEbxsNVRlXp0Yr
+        LfZNzRlrh4M8HlpK900O6uhc/2dduU3o3buoj8ySfpqgR1zcz3uhmokCg0nS2fnJX8nbXYt78QD9
+        q9v+tgEAAA==
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [text/html; charset=UTF-8]
-      Date: ['Wed, 14 Jun 2017 11:54:06 GMT']
-      ETag: ['"9a94b344382bbb7a26fed81278e1f22b--gzip"']
-      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=19gzeg2l2xkqy1w9r6ll3oa40l;Path=/go;Expires=Wed, 28-Jun-2017
-          11:54:06 GMT;HttpOnly']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [c2cbbbf6-e7eb-4eff-b569-8e6b7eaea653]
-      X-Runtime: ['0.047000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v1+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:51 GMT
+      etag:
+      - '"0cd32da3cbf372dbad9ad3dde45d17bd--gzip"'
+      expires:
+      - Thu, 01 Jan 1970 00:00:00 GMT
+      set-cookie:
+      - JSESSIONID=jdgxu6d2t2nnbbsshz5obhby;Path=/go;Expires=Thu, 29-Aug-2019 13:36:51
+        GMT;HttpOnly
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 1c62e189-16a5-4eff-af9b-e9ebcbbf6f86
+      x-runtime:
+      - '0.005000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=19gzeg2l2xkqy1w9r6ll3oa40l]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=jdgxu6d2t2nnbbsshz5obhby
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
     uri: http://localhost:8153/go/api/config/pipeline_groups
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAAO1XTW/USBD9K2i0x4T0d3flFoJ2tRKwaJMsB4RG1d3ViYXHtmwP2izKf6cmDMlM
-        wiHMRCtguFntbrvqvdevqt5+nDQ4o8nhpFT9ME72Jl3VUV01NEwO37672rt5/5w+UN12M2ru7vo4
-        qTFSzXt++3j819mr0yveMMOR+grrzxtK1ZxT3/UVHz6coIdoQi4lIYQopdCRjHc6RO2dTc7rlCKC
-        UkJpkmjAKGnc4lkI6YXjz4+X3SKoP6pFMJmG1FfdWLUNr539/eLwycU4dsPhwcF5NV7M49PUzg7O
-        25T3M83ag4H6D1Wi4Sm/3XvyrMcmXRw+meHAIU+u3u1NhhHPl6ktsz9uZzP+1woeZ001Tk9pWFt8
-        jek9H73+yHLp5AJ7ytOT5T+vd38jXl5TiUrZkHTUKWQnpSvCKie9cdlRwALa+QI+GXIYSqZUjM4W
-        sWRBZlu8UtsM8xn1X8dr7264pIVK5DmClCVaISArGchnlyTm4lCHgoBaF5eFsCZLJzwKoQQUDFLc
-        hvt6qbJ7Md8D9ZFJO15mPH1DcahG2oQ1EWwp2gNQSFFnitqRAqFBSYqQpSfw2pNXVgWvS3TWZ1OU
-        zQAmGE/bshZV3B3Cnqlnt1yt2tY/zE+pEl7HsaVvORsYJxckQQBhg9HORqMgZOSLiDEkq5WM1lDg
-        u5cAlTDkY9ZkfZEyPwCntTzuEYUWg9WJYk6ZQGnJCoqezZMD0NY6kC4By4q0L7EA6y9KkSg5yy5K
-        Bh4QwFeV/53K5Tl1dXs5Peq6esnwsCqTl9i/nx6lRN1IeVUsy3NnR6eb3OtfKvihVPD7vEmLRayv
-        fWRYFcLRfGwXVOebV6su07d5nh7DNwwp50WQhmuxMNkwdCUoIBSZK0DRXLUxeKsMYo5cDKDowArK
-        lhugGAkfANUdSd+pRFIGITSrFUIJKQiNLoANTimpfcagopMCFGvGRmVYR0GjtNyXobYyP0Sx95H8
-        GlWnPRY24+mL6vxizdHvczi56+GX08+brhvQFQ5vadqqx/rF0f/D0Rdn+cXR98sRl591K1zEwkjs
-        37jg/nnfzrsdnAMzFZzX48l4d8qrZl1NN7RuIO6fCIzXOB8obwWGDT4GmVH6AMBNE0QZkwvWoeA5
-        SWVEkWxxDIkJPCw5RK+CdqkQ8sClNgOjaZt9+re61vpBns9ml48AxlnzCHD8TNro+WHsq/+2g8Sr
-        CMaZEsAb4H5TRwgMjhHgUJIJYHTgPUkCBGWjyIYx5IY5IpUQKW0IST9vcpUOLnEBziPA8aod2ZI5
-        hJfLXDeaSHxBa6xFJ60KpEkrEAHJKGLJZEhZa1mKscLY6MkxdAlNzFJIAwDmAXXpvoq/Kc1FATlJ
-        F5TnNe1rQJ5W9Ea0/2CpOg4GZXY7kGosESAZtQOpSltI8N9//lTfsPX92fDZJu3SvV1Le3fu8Fra
-        u3Of19Le5m4bklqaLNBxjk6k4hG4P4vRx2KU4IZMucypYyg8I6bsHJBbzKqpRMW4bNeTfGnStuxI
-        jhcw1PUaslfvPgFm3s2iKBwAAA==
+        H4sIAAAAAAAAAO1XTW8bNxD9K4HQoxXzmxzfbActCiRpUNvNIQiEITm0F1ntCrurtK7h/96RoziS
+        7YMjGUUS5bbgkrsz7z2+mXl3NWpwSqODUam6fhjtjWbVjOqqoX508O799d7t+xf0kep2NqXm7q6r
+        UY2Rat7zy9XxH2evT695wxQH6iqsP20oVXNO3ayr+PDBCD1EE3IpCSFEKYWOZLzTIWrvbHJepxQR
+        lBJKk0QDRknjFs9CSC8cf364nC2C+q1aBJOpT101G6q24bWzP18ePLsYhll/sL9/Xg0X8/g8tdP9
+        8zblcaZpu99T97FK1D/nt3vPjjps0sXBsyn2HPLo+v3eqB/wfJnaMvvjdjrlf63gcdZUw+SU+rXF
+        N5g+8NGbjyyXTi6wozw5Wf7zZvdX4uU1laiUDUlHnUJ2UroirHLSG5cdBSygnS/gkyGHoWRKxehs
+        EUsWZLbFK7VNP59S9zBee3fDJS1UIs8RpCzRCgFZyUA+uyQxF4c6FATUurgshDVZOuFRCCWgYJDi
+        S7hvliq7F/M9UJ+YtONlxpO3FPtqoE1YE8GWoj0AhRR1pqgdKRAalKQIWXoCrz15ZVXwukRnfTZF
+        2QxggvG0LWtRxd0h7EgdfeFq1bb+Yn5KlfAmji19y9nAOLkgCQIIG4x2NhoFISNfRIwhWa1ktIYC
+        370EqIQhH7Mm64uU+RE4reVxjyi0GKxOFHPKBEpLVlD0bJ4cgLbWgXQJWFakfYkFWH9RikTJWXZR
+        MvCIAB5U/jcqlxc0q9vLyeFsVi8Z7ldl8gq7D5PDlGg2UF4Vy/Lc2eHpJvf6pwq+KxX8Om/SYhHr
+        Gx/pV4VwOB/aBdX59tWqy3Rtnqen8A1DynkRpOFaLEw2DF0JCghF5gpQNFdtDN4qg5gjFwMoOrCC
+        suUGKEbCR0B1R9J3KpGUQQjNaoVQQgpCowtgg1NKap8xqOikAMWasVEZ1lHQKC33ZaitzI9R7H0k
+        H6LqtMPCZjx5WZ1frDn6fQ5Hdz38cvJp000DusLhF5q26rF+cvT/cPTZWX5y9O1yxOVn3QoXsTAS
+        41sXHJ937Xy2g3NgpoLzejgZ7k551XRW0y2tG4j7BwLjDc57yluBYYOPQWaUPgBw0wRRxuSCdSh4
+        TlIZUSRbHENiAg9LDtGroF0qhDxwqc3AaNpmTP9UN1rfz/Pp9PIJwDhrHgHHuG+nNG7o7/FHrOe0
+        S1Lp+GHoqn+3E4xXEYwzJYA3wO2njhAYHCPAoSQTwOjAe5IECMpGkQ1jyP1zRCohUtoQkm7e5Crt
+        X+ICnCeA43U7sENzCK+WuW40oPiC1liLTloVSJNWIAKSUcSSyZCy1rIUY4Wx0ZNj6BKamKWQBgDM
+        I8rUfVF/VZqLenKSLijPaxprQB5e9Ea0f2epOg4GZXY7kGosESAZtQOpSltI8N9//FTfsvX93vDZ
+        Ju3SvV1Le3fu8Frau3Of19Le5m4bklqaLNBxjk6k4hG4P4vRx2KU4IZMucypYyg8MqbsHJBbjK6p
+        RMW4bNeTfG7StuxIjhcw1PUastfv/wPLulYfNxwAAA==
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:54:06 GMT']
-      ETag: ['"b58fd1b9ce17430d7acd93cb65842c86--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [42954425-8979-400d-92e2-5495ca2a21ca]
-      X-Runtime: ['0.041000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:51 GMT
+      etag:
+      - '"d2c2c8f9aefada7d96d10558ac5cd8d4--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 20600a19-aad5-4f9f-9a79-6c2881a5e6a1
+      x-runtime:
+      - '0.011000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=19gzeg2l2xkqy1w9r6ll3oa40l]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=jdgxu6d2t2nnbbsshz5obhby
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
     uri: http://localhost:8153/go/api/pipelines/Consumer_Website/history/0
   response:
@@ -185,17 +178,33 @@ interactions:
         H9lU9SKba8wUVV4jG434Uyq073s48GhEmfb+p1QoHm37Ge37IA60wppp4jmycV+W7d6DnYlsMiF7
         QvaVIZsrzZQc/sgLHcmyiTfIJofIvnv8B4X+JO1BTQAA
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:54:06 GMT']
-      ETag: ['"0391cf7c9efd00feca21044b2f25713c--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [2862319e-5b5a-4426-a414-b28a5b7d3f91]
-      X-Runtime: ['0.072000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:51 GMT
+      etag:
+      - '"0391cf7c9efd00feca21044b2f25713c--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - de812eaa-9a7d-4539-98b0-78ae1923d9f9
+      x-runtime:
+      - '0.023000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

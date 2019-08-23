@@ -2,16 +2,23 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
-    uri: http://localhost:8153/go/properties/search?stageName=Commit&jobName=build&pipelineName=Shared_Services
+    uri: http://localhost:8153/go/properties/search?pipelineName=Shared_Services&stageName=Commit&jobName=build
   response:
-    body: {string: 'cruise_agent,cruise_job_duration,cruise_job_id,cruise_job_result,cruise_pipeline_counter,cruise_pipeline_label,cruise_stage_counter,cruise_timestamp_01_scheduled,cruise_timestamp_02_assigned,cruise_timestamp_03_preparing,cruise_timestamp_04_building,cruise_timestamp_05_completing,cruise_timestamp_06_completed,foo_bar
+    body:
+      string: !!python/unicode 'cruise_agent,cruise_job_duration,cruise_job_id,cruise_job_result,cruise_pipeline_counter,cruise_pipeline_label,cruise_stage_counter,cruise_timestamp_01_scheduled,cruise_timestamp_02_assigned,cruise_timestamp_03_preparing,cruise_timestamp_04_building,cruise_timestamp_05_completing,cruise_timestamp_06_completed,foo_bar
 
         vagrant-ubuntu-trusty-64,0,1,Passed,1,1,1,2015-08-05T15:13:16Z,2015-08-05T15:13:23Z,2015-08-05T15:13:34Z,2015-08-05T15:13:35Z,2015-08-05T15:13:35Z,2015-08-05T15:13:35Z,
 
@@ -79,11 +86,17 @@ interactions:
 
         vagrant-ubuntu-trusty-64,0,608,Passed,33,33,1,2016-05-18T21:23:52Z,2016-05-18T21:25:50Z,2016-05-18T21:26:00Z,2016-05-18T21:26:02Z,2016-05-18T21:26:02Z,2016-05-18T21:26:03Z,
 
-'}
+        '
     headers:
-      Content-Disposition: [Inline; filename=buildProperties.csv]
-      Content-Length: ['5891']
-      Content-Type: [text/csv; charset=ISO-8859-1]
-      Date: ['Wed, 14 Jun 2017 11:54:03 GMT']
-    status: {code: 200, message: OK}
+      content-disposition:
+      - Inline; filename=buildProperties.csv
+      content-length:
+      - '5891'
+      content-type:
+      - text/csv; charset=ISO-8859-1
+      date:
+      - Thu, 15 Aug 2019 13:36:49 GMT
+    status:
+      code: 200
+      message: OK
 version: 1

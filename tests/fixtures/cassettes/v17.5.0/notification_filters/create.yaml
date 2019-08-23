@@ -1,17 +1,24 @@
 interactions:
 - request:
-    body: !!binary |
-      eyJwaXBlbGluZSI6ICJbQW55IFBpcGVsaW5lXSIsICJldmVudCI6ICJBbGwiLCAic3RhZ2UiOiAi
-      Zm9vYmFyIiwgIm1hdGNoX2NvbW1pdHMiOiBudWxsfQ==
+    body: !!python/unicode '{"match_commits": null, "pipeline": "[Any Pipeline]",
+      "event": "All", "stage": "foobar"}'
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['88']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '88'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: POST
     uri: http://localhost:8153/go/api/notification_filters
   response:
@@ -21,20 +28,33 @@ interactions:
         FQKgArFKcDXFJYnpCAXBIB6SbGpZal4JSNYxJwchmptYkpwRn5yfm5tZAnJFWmJOcSpYslYHi4OM
         yHOQS2lubiWVnWJMnlPS8vOTEosocAuQjOWq5QIANUM30b4BAAA=
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Tue, 20 Jun 2017 19:10:20 GMT']
-      ETag: ['"c11dc03eef7b1c1ed9996b53d4319a54--gzip"']
-      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=10fvtdsh9qr5v16d7gghmwij0m;Path=/go;Expires=Tue, 04-Jul-2017
-          19:10:20 GMT;HttpOnly']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [a0559682-7f01-412d-a72d-8cd470309aec]
-      X-Runtime: ['0.054000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v1+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:23 GMT
+      etag:
+      - '"c11dc03eef7b1c1ed9996b53d4319a54--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 33ea960d-e522-4285-b895-5f162cd94655
+      x-runtime:
+      - '0.011000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

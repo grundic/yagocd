@@ -41,9 +41,6 @@ from yagocd import Yagocd
 from yagocd.session import Session
 
 TESTING_VERSIONS = [
-    ('16.1.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
-    ('16.2.1', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
-    ('16.3.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
     ('16.6.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
     ('16.7.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),
     ('16.8.0', 'gocd-server-deprecated', 'gocd-agent-deprecated'),

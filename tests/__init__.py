@@ -92,7 +92,7 @@ class AbstractTestManager(object):
         """
         Special fixture to get server version from recorded cassette.
         """
-        with my_vcr.use_cassette("server_version_cache/server_version_cache"):
+        with my_vcr.use_cassette("version/get"):
             return manager._session.server_version
 
     def test_request_url(self, _execute_test_action, expected_request_url):

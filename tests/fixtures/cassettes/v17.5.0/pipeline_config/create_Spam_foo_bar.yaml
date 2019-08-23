@@ -1,31 +1,33 @@
 interactions:
 - request:
-    body: !!binary |
-      eyJncm91cCI6ICJmaXJzdCIsICJwaXBlbGluZSI6IHsibmFtZSI6ICJTcGFtX2Zvb19iYXIiLCAi
-      dGVtcGxhdGUiOiBudWxsLCAibWF0ZXJpYWxzIjogW3sidHlwZSI6ICJnaXQiLCAiYXR0cmlidXRl
-      cyI6IHsiZGVzdGluYXRpb24iOiAiZGVzdCIsICJpbnZlcnRfZmlsdGVyIjogZmFsc2UsICJuYW1l
-      IjogbnVsbCwgInVybCI6ICJnaXRAZ2l0aHViLmNvbTpzYW1wbGVfcmVwby9leGFtcGxlLmdpdCIs
-      ICJhdXRvX3VwZGF0ZSI6IHRydWUsICJzaGFsbG93X2Nsb25lIjogdHJ1ZSwgImJyYW5jaCI6ICJt
-      YXN0ZXIiLCAic3VibW9kdWxlX2ZvbGRlciI6IG51bGwsICJmaWx0ZXIiOiBudWxsfX1dLCAiZW5h
-      YmxlX3BpcGVsaW5lX2xvY2tpbmciOiB0cnVlLCAibGFiZWxfdGVtcGxhdGUiOiAiJHtDT1VOVH0i
-      LCAic3RhZ2VzIjogW3siam9icyI6IFt7InJ1bl9pbnN0YW5jZV9jb3VudCI6IG51bGwsICJ0YXNr
-      cyI6IFt7InR5cGUiOiAiZXhlYyIsICJhdHRyaWJ1dGVzIjogeyJydW5faWYiOiBbInBhc3NlZCJd
-      LCAid29ya2luZ19kaXJlY3RvcnkiOiBudWxsLCAiY29tbWFuZCI6ICJscyJ9fV0sICJuYW1lIjog
-      ImRlZmF1bHRKb2IiLCAidGltZW91dCI6IDAsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXSwg
-      InJlc291cmNlcyI6IFtdfV0sICJuYW1lIjogImRlZmF1bHRTdGFnZSIsICJuZXZlcl9jbGVhbnVw
-      X2FydGlmYWN0cyI6IGZhbHNlLCAiZW52aXJvbm1lbnRfdmFyaWFibGVzIjogW10sICJhcHByb3Zh
-      bCI6IHsidHlwZSI6ICJzdWNjZXNzIiwgImF1dGhvcml6YXRpb24iOiB7InVzZXJzIjogW10sICJy
-      b2xlcyI6IFtdfX0sICJjbGVhbl93b3JraW5nX2RpcmVjdG9yeSI6IGZhbHNlLCAiZmV0Y2hfbWF0
-      ZXJpYWxzIjogdHJ1ZX1dfX0=
+    body: !!python/unicode '{"pipeline": {"enable_pipeline_locking": true, "label_template":
+      "${COUNT}", "materials": [{"attributes": {"name": null, "url": "git@github.com:sample_repo/example.git",
+      "destination": "dest", "submodule_folder": null, "shallow_clone": true, "filter":
+      null, "auto_update": true, "branch": "master", "invert_filter": false}, "type":
+      "git"}], "template": null, "stages": [{"clean_working_directory": false, "name":
+      "defaultStage", "never_cleanup_artifacts": false, "fetch_materials": true, "environment_variables":
+      [], "approval": {"type": "success", "authorization": {"users": [], "roles":
+      []}}, "jobs": [{"run_instance_count": null, "tasks": [{"attributes": {"working_directory":
+      null, "command": "ls", "run_if": ["passed"]}, "type": "exec"}], "name": "defaultJob",
+      "timeout": 0, "environment_variables": [], "resources": []}]}], "name": "Spam_foo_bar"},
+      "group": "first"}'
     headers:
-      Accept: [application/vnd.go.cd.v3+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['872']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v3+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '872'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: POST
     uri: http://localhost:8153/go/api/admin/pipelines
   response:
@@ -44,20 +46,33 @@ interactions:
         IsuAGnAOG3YB7ZZ5Ipc0F8lIdcXDgRJfjh7yK82Uu6g1Eq5NedJaME+rl6Klg/UbHpfX5BVavDEm
         vkoyuzgraEy+WzwF3kJ++7knKh3J0zS+MqvT6h8I75xDcwcAAA==
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 12:23:01 GMT']
-      ETag: ['"4a1d664d69f0b3aee0660419d173e901--gzip"']
-      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Set-Cookie: ['JSESSIONID=14x1nhaig3ewzkan7hg0ptslh;Path=/go;Expires=Wed, 28-Jun-2017
-          12:23:01 GMT;HttpOnly']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [a67b85c3-7f85-4496-be1e-27065010b49a]
-      X-Runtime: ['0.265000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v3+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:28 GMT
+      etag:
+      - '"4a1d664d69f0b3aee0660419d173e901--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - ea57c3a8-8eb9-482e-a132-1b0e62a2eb50
+      x-runtime:
+      - '0.070000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

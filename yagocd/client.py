@@ -37,7 +37,6 @@ from yagocd.resources.elastic_profile import ElasticAgentProfileManager
 from yagocd.resources.encryption import EncryptionManager
 from yagocd.resources.environment import EnvironmentManager
 from yagocd.resources.feed import FeedManager
-from yagocd.resources.info import InfoManager
 from yagocd.resources.job import JobManager
 from yagocd.resources.material import MaterialManager
 from yagocd.resources.notification_filter import NotificationFilterManager
@@ -103,7 +102,6 @@ class Yagocd(object):
         self._environment_manager = None
         self._feed_manager = None
         self._job_manager = None
-        self._info_manager = None
         self._material_manager = None
         self._notification_filter_manager = None
         self._package_manager = None
@@ -216,17 +214,6 @@ class Yagocd(object):
         if self._job_manager is None:
             self._job_manager = JobManager(session=self._session)
         return self._job_manager
-
-    @property
-    def info(self):
-        """
-        Property for accessing :class:`InfoManager` instance, which is used to general server info.
-
-        :rtype: yagocd.resources.info.InfoManager
-        """
-        if self._info_manager is None:
-            self._info_manager = InfoManager(session=self._session)
-        return self._info_manager
 
     @property
     def notification_filters(self):

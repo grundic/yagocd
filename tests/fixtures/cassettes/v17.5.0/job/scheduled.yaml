@@ -2,30 +2,51 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/xml]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/xml
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
     uri: http://localhost:8153/go/api/jobs/scheduled.xml
   response:
-    body: {string: '<?xml version="1.0" encoding="UTF-8"?>
-
-
-        <scheduledJobs/>
-
-'}
+    body:
+      string: !!python/unicode "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n<scheduledJobs>\n\
+        \  <job name=\"defaultJob\" id=\"692\">\n    <link rel=\"self\" href=\"http://localhost:8153/go/tab/build/detail/CancelledPipeline/3/defaultStage/1/defaultJob\"\
+        />\n    <buildLocator>CancelledPipeline/3/defaultStage/1/defaultJob</buildLocator>\n\
+        \    <environmentVariables>\n      <variable name=\"MY_VARIABLE\"></variable>\n\
+        \      <variable name=\"MY_SECRET_VARIABLE\">****</variable>\n      <variable\
+        \ name=\"ENV_VAR_1\"></variable>\n    </environmentVariables>\n  </job>\n\
+        </scheduledJobs>\n"
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Type: [application/xml; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:52:11 GMT']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [1f62f7d3-e3af-4917-a017-d4f28478f22a]
-      X-Runtime: ['0.009000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/xml; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:22 GMT
+      transfer-encoding:
+      - chunked
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 6b269bfe-1db9-426e-bf49-f78f0970611c
+      x-runtime:
+      - '0.011000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

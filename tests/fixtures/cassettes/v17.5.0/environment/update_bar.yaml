@@ -1,17 +1,25 @@
 interactions:
 - request:
-    body: !!binary |
-      eyJuYW1lIjogIm5ld19uYW1lIn0=
+    body: !!python/unicode '{"name": "new_name"}'
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['20']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      If-Match: ['"654876c8df97ba5599b38e5732ae4abe--gzip"']
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '20'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      If-Match:
+      - '"654876c8df97ba5599b38e5732ae4abe--gzip"'
+      User-Agent:
+      - python-requests/2.22.0
     method: PUT
     uri: http://localhost:8153/go/api/admin/environments/bar
   response:
@@ -22,17 +30,33 @@ interactions:
         uvH6VzykemodrdfmiF7sitxBe2rQblsNkvnHprKgcmX2HcWzS+H1S9n22EO6HSy3u7Fk7lkru0S3
         rhwwqgHVwxXP2Mze3SbPHIoBAAA=
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:51:53 GMT']
-      ETag: ['"4946d898763bc66f1838f59bbf41d12c--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [5d5b109e-6681-4bbc-be77-b4cd012f75b7]
-      X-Runtime: ['0.054000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v1+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:19 GMT
+      etag:
+      - '"4946d898763bc66f1838f59bbf41d12c--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 73d68f87-64b5-41a7-9664-128e42619dfc
+      x-runtime:
+      - '0.048000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

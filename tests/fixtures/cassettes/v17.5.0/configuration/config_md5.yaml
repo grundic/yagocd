@@ -2,12 +2,18 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/xml]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/xml
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
     uri: http://localhost:8153/go/api/admin/config/412f48f7e2ff254e47564a6852ed7a2e.xml
   response:
@@ -36,11 +42,19 @@ interactions:
         vXG37w44ZS6djMENwn7YC4NxL+rDa9uEwB91A+a7URfAHQwHfXdCh9wNOO9OxoPIH/Fh81fUa3Ce
         etVP3Iuzs78ACdLab1IeAAA=
     headers:
-      Content-Encoding: [gzip]
-      Content-Length: ['1214']
-      Content-Type: [text/xml]
-      Date: ['Wed, 14 Jun 2017 11:51:49 GMT']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-CRUISE-CONFIG-MD5: [412f48f7e2ff254e47564a6852ed7a2e]
-    status: {code: 200, message: OK}
+      content-encoding:
+      - gzip
+      content-length:
+      - '1214'
+      content-type:
+      - text/xml
+      date:
+      - Thu, 15 Aug 2019 13:36:16 GMT
+      vary:
+      - Accept-Encoding, User-Agent
+      x-cruise-config-md5:
+      - 412f48f7e2ff254e47564a6852ed7a2e
+    status:
+      code: 200
+      message: OK
 version: 1

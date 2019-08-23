@@ -1,18 +1,24 @@
 interactions:
 - request:
-    body: !!binary |
-      eyJlbWFpbF9tZSI6IGZhbHNlLCAibG9naW5fbmFtZSI6ICJmb29iYXIiLCAiZW1haWwiOiAiZm9v
-      QGJhci5iYXoiLCAiZW5hYmxlZCI6IHRydWUsICJjaGVja2luX2FsaWFzZXMiOiBbImZvbyIsICJi
-      YXIiLCAiYmF6Il19
+    body: !!python/unicode '{"email_me": false, "checkin_aliases": ["foo", "bar",
+      "baz"], "enabled": true, "login_name": "foobar", "email": "foo@bar.baz"}'
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['126']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=mqmw8lllo0p1am9t0lqkgouw]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '126'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: POST
     uri: http://localhost:8153/go/api/users
   response:
@@ -24,21 +30,35 @@ interactions:
         0UMPPWFeJ8UF16cjONpyLxJsejipT6crEAvEa9xMaA4yGcgBY/7L1/XM24xSnm6lQPPmb9WlugJ+
         mYrGAgIAAA==
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Thu, 15 Jun 2017 12:14:07 GMT']
-      ETag: ['"5d91f296488f2f7131fabcba3b81a837--gzip"']
-      Expires: ['Thu, 01 Jan 1970 00:00:00 GMT']
-      Location: ['http://localhost:8153/go/api/users/foobar']
-      Set-Cookie: ['JSESSIONID=sbaf21lac1g17ajyymeqbu7i;Path=/go;Expires=Thu, 29-Jun-2017
-          12:14:07 GMT;HttpOnly']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [f6833cb3-b3f9-46ee-ad7a-40d6641d78f9]
-      X-Runtime: ['0.624000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 201, message: Created}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v1+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:53 GMT
+      etag:
+      - '"5d91f296488f2f7131fabcba3b81a837--gzip"'
+      location:
+      - http://localhost:8153/go/api/users/foobar
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 1d4f749d-deef-4f13-b414-b640e28a6a5f
+      x-runtime:
+      - '0.029000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 201
+      message: Created
 version: 1

@@ -75,11 +75,11 @@ class Session(object):
         This method requests the version from server and caches it
         in internal variable, so other resources could use it.
 
-        :return: server version parsed from `about` page.
+        :return: server version returned from version api endpoint.
         """
         if self.__server_version is None:
-            from yagocd.resources.info import InfoManager
-            self.__server_version = InfoManager(self).version
+            from yagocd.resources.version import VersionManager
+            self.__server_version = VersionManager(self).version
 
         return self.__server_version
 

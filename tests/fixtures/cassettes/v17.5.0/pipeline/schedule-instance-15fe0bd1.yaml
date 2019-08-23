@@ -2,12 +2,18 @@ interactions:
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
     uri: http://localhost:8153/go/api/pipelines/TestScheduleWithInstance-15fe0bd1/history/0
   response:
@@ -24,33 +30,57 @@ interactions:
         N6XxaQ4Ur4WTPctiP9tf1v22GaAsmiT4uvV/eOzp/t4d+2RxGLk2jEvpk/rZHMKNIyy32QCSXuLM
         8WzZFimwCaUWeXIcfz0PE8fbnlh0bHMT6RU3Ae5cQO9wEuzt5fYX1hoIUuoDAAA=
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:53:57 GMT']
-      ETag: ['"30a1f733513e8a6b62e09534c6434790--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [6cb08e03-36c0-4845-8115-86345f34d66f]
-      X-Runtime: ['0.016000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:43 GMT
+      etag:
+      - '"30a1f733513e8a6b62e09534c6434790--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 0146f252-5f2c-4c64-b545-e2b6fc782b4b
+      x-runtime:
+      - '0.006000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 - request:
-    body: !!binary |
-      eyJzZWN1cmVfdmFyaWFibGVzIjogeyJNWV9TRUNSRVRfVkFSSUFCTEUiOiAic2VjcmV0IHZhcmlh
-      YmxlIn0sICJ2YXJpYWJsZXMiOiB7Ik1ZX1ZBUklBQkxFIjogInNvbWUgdmFsdWUifX0=
+    body: !!python/unicode '{"variables": {"MY_VARIABLE": "some value"}, "secure_variables":
+      {"MY_SECRET_VARIABLE": "secret variable"}}'
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Confirm: ['true']
-      Connection: [keep-alive]
-      Content-Length: ['107']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Confirm:
+      - 'true'
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '107'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: POST
     uri: http://localhost:8153/go/api/pipelines/TestScheduleWithInstance-15fe0bd1/schedule
   response:
@@ -59,27 +89,48 @@ interactions:
         H4sIAAAAAAAAAAtKLSxNLS5RKMlXKE7OSE0pzUlVKMgsSM3JzEtVCAHKBENFwzNLMjzziksS85JT
         dQ1N01INklIMFRKTk1MLSlJTuAA6nhAFSAAAAA==
     headers:
-      Cache-Control: [no-cache]
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:53:57 GMT']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [bdebcba0-6264-4783-9a3b-576646a4956a]
-      X-Runtime: ['0.009000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 202, message: Accepted}
+      cache-control:
+      - no-cache
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:43 GMT
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 43905203-c6da-456a-9833-ebede6b4bae4
+      x-runtime:
+      - '0.005000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 202
+      message: Accepted
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
     uri: http://localhost:8153/go/api/pipelines/TestScheduleWithInstance-15fe0bd1/history/0
   response:
@@ -96,57 +147,95 @@ interactions:
         nSO41mTsXWn82I7itrBz4KvYL+6X87/dClAWLAu+TP0fHlu6fXTHNnscrDADF0qFrP5qDumthXk3
         N4CslzwJXNtqixy4CaVnedY4vr0Ao8DdHnny/Oam+4O5u4A+4GTY6+v1L9dYAlrrAwAA
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:53:57 GMT']
-      ETag: ['"403f3b72a55bbb7513d0ab3b314330de--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [07c1dc07-962a-4c7d-a711-e5da863a2b70]
-      X-Runtime: ['0.006000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:43 GMT
+      etag:
+      - '"403f3b72a55bbb7513d0ab3b314330de--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 16c3c0b4-0d03-4437-9a98-64531fbbfab1
+      x-runtime:
+      - '0.011000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 - request:
     body: null
     headers:
-      Accept: [application/json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      User-Agent:
+      - python-requests/2.22.0
     method: GET
     uri: http://localhost:8153/go/api/pipelines/TestScheduleWithInstance-15fe0bd1/history/0
   response:
     body:
       string: !!binary |
-        H4sIAAAAAAAAAO1TwY7TMBD9lZXPgY2TuGlyRUKC00oL4oBWlmOPu4bEjmxnUVn13xknabcsRULa
-        C0ioh6ie8bw3fu89klHsjBXROEvaR+K0DhBJm2ckuih60hZZagEezHcgLc0P+N+M0BsLgbSfH0kv
-        OsA+UpCMWDFgE/kAId7Ke1BTD59MvH9nQxRWwivKNOSdonNrnLzoufMKPMK8RkgpLPcTEtGiD5AR
-        vLVbUTyEqUdi5KP9at03ixO+uG6pYVtMsEdIhcUL/Ss5BVpg6b3r8Mwo0tZ5iVDHu1zNw2jV1FVF
-        i3Jbsfpw9/z2bWI2wyBf7jSXbrIxLWKnvs+IGEfvHnC9uB/TtTBJCSGQMyDSRj/hkm4Ej5AcP4MJ
-        YRZiqSxDkFK3xxFCDSat8fyR0gqsolg4UiCUJMapUFLcrZtMr7gUU4CkcfRmtwPPBySUtmjJW+cl
-        qKtufyWss/vBTYnpCp8Gnh8PSNYbXM3Dg0l0FxGOxwlBG4sAozc2KbCptWAVY2JDWbGFEsqiybcC
-        qgK0lqqRqiyp1hXLK9bVsCm6RooKXZKjCE1TIaaCIL0ZF5eipDdpF3Wz+nDVkSbTLs99qqBbB6eM
-        NnK2+Ep1PsF3jWaYpd6Umxx/rKYsIzjZ81XtJ/MkgCJnSfFl6ws8run1uT2uk81hEKbnQimf5F/d
-        Id0wgD13Z9JL3gt8NrUKm06OSulZn8UWKX8eRoGPu+PR8aOfTn442aA4A0q4h+wprPRFYaV/GtYb
-        EcIcx1+y+sYNYw/x56ye2n8X1U1RXYpq0q/espLS4q+PatUUl6NaMPY/qv9aVOdEvjip9HlS7w4/
-        AEgOmtGZBwAA
+        H4sIAAAAAAAAAO1TwWrcMBD9laCz21i25V37Wii0p0BaeihByNJoo9aWjCSnbMP+e0e2d7NJEyjk
+        0kLZg1nNaN4bvffuySh2xoponCXtPXFaB4ikzTMSXRQ9aYsstQAP5ieQluYH/G9G6I2FQNqv96QX
+        HWAfKUhGrBiwiXyCEK/lLaiphy8m3n6wIQor4Q1lGvJO0bk1Tl703HkFHmHeIqQUlvsJiWjRB8gI
+        3tqtKB7C1CMx8tl+t+6HxQnfXLfUsC0m2COkwuIz/Ss5BVpg6aPr8Mwo0m7yCqGOd7mah1FWs+2m
+        LvKyydnh5unt68RshkG+3Gku3WRjWsROfZ8RMY7e3eF6cT+ma2GSEkIgZ0CkjX7CJd0IHiE5fgYT
+        wizEUlmGIKVujyOEGkxa4+kjpRVYhTKdKBBKEuNUKCnu1k2mV1yKKUDSOHqz24HnAxJKW7TkvfMS
+        1EW3vxDW2f3gpsR0hU8Dz48HJOsNrubhziS6iwjH44SgjUWA0RubFKg3WrCKMVFTVmyhhLJo8q2A
+        qgCtpWqkKkuqdcXyinUbqIuukaJCl+S0apqmQkwFQXozLi5FSa/SLupq9eGqI02mXZ77VEG3Dk4Z
+        beRs8ZXqfILvGk3SlFZ1Wef4YxvKMoKTPV/VfjBPAihylhRftn6GxyW9PLfHZbI5DML0XCjlk/yr
+        O6QbBrDn7kx6yVuBz6ZWYdPJUSk967PYIuXPwyjwcXc8On7008kPJxsUZ0AJ95A9hJW+Kqz0T8N6
+        JUKY4/hbVt+5YewhPs7qqf2lqNbFc1Gd9dtsWUlp8ddHtWpeiGrB2P+o/mtRnRP56qTSp0m9OfwC
+        fa7F6pkHAAA=
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:54:01 GMT']
-      ETag: ['"9cdcfa14b743ab3a804979d53fa39a67--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [16af46ba-43da-4a1d-b133-2b165fb4093a]
-      X-Runtime: ['0.108000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:47 GMT
+      etag:
+      - '"d1059b5017bace3eecf52a427d72d9e9--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 4130bd83-473f-472a-934a-34084cacd19c
+      x-runtime:
+      - '0.012000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

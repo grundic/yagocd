@@ -1,24 +1,30 @@
 interactions:
 - request:
-    body: !!binary |
-      eyJfbGlua3MiOiB7InNlbGYiOiB7ImhyZWYiOiAiaHR0cDovL2xvY2FsaG9zdDo4MTUzL2dvL2Fw
-      aS9hZG1pbi9yZXBvc2l0b3JpZXMvcmVwb3NpdG9yeS1iYXIifSwgImZpbmQiOiB7ImhyZWYiOiAi
-      aHR0cDovL2xvY2FsaG9zdDo4MTUzL2dvL2FwaS9hZG1pbi9yZXBvc2l0b3JpZXMvOnJlcG9faWQi
-      fSwgImRvYyI6IHsiaHJlZiI6ICJodHRwczovL2FwaS5nb2NkLmlvLyNwYWNrYWdlLXJlcG9zaXRv
-      cmllcyJ9fSwgInBsdWdpbl9tZXRhZGF0YSI6IHsidmVyc2lvbiI6ICIxIiwgImlkIjogInl1bSJ9
-      LCAicmVwb19pZCI6ICJyZXBvc2l0b3J5LWJhciIsICJuYW1lIjogInVwZGF0ZWQtbmFtZSIsICJj
-      b25maWd1cmF0aW9uIjogW3sia2V5IjogIlJFUE9fVVJMIiwgInZhbHVlIjogImh0dHA6Ly9iYXIu
-      ZXhhbXBsZS5jb20ifV0sICJfZW1iZWRkZWQiOiB7InBhY2thZ2VzIjogW119fQ==
+    body: !!python/unicode '{"repo_id": "repository-bar", "_embedded": {"packages":
+      []}, "name": "updated-name", "_links": {"doc": {"href": "https://api.gocd.io/#package-repositories"},
+      "self": {"href": "http://localhost:8153/go/api/admin/repositories/repository-bar"},
+      "find": {"href": "http://localhost:8153/go/api/admin/repositories/:repo_id"}},
+      "plugin_metadata": {"version": "1", "id": "yum"}, "configuration": [{"key":
+      "REPO_URL", "value": "http://bar.example.com"}]}'
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['445']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      If-Match: ['"e7860f192645039031cd3cb74c50e4d9--gzip"']
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '445'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      If-Match:
+      - '"e7860f192645039031cd3cb74c50e4d9--gzip"'
+      User-Agent:
+      - python-requests/2.22.0
     method: PUT
     uri: http://localhost:8153/go/api/admin/repositories/repository-bar
   response:
@@ -30,17 +36,33 @@ interactions:
         MHmj5RCQV1lnx8qxF7pVGCBasN14hk2jIkuFT3ReGJ2mB7IGM6M70Y8Owux95MdrzwGn9MPx+e21
         fT++LKxEAzni7gJx1Rq/QFmJNTNq63fKMS2qM3KO2xHJcnSfQ/PolLYqbsU3MsXbbDQCAAA=
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:52:22 GMT']
-      ETag: ['"522ca705f8cf15d8238664c70b3e7897--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [2b982dc5-c3e6-4167-851a-289079a91a43]
-      X-Runtime: ['0.067000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v1+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:26 GMT
+      etag:
+      - '"522ca705f8cf15d8238664c70b3e7897--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - e2981302-a2de-43b4-9f26-9c21dad6f8d8
+      x-runtime:
+      - '0.044000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

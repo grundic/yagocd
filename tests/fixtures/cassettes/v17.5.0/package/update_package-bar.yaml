@@ -1,28 +1,33 @@
 interactions:
 - request:
-    body: !!binary |
-      eyJfbGlua3MiOiB7InNlbGYiOiB7ImhyZWYiOiAiaHR0cDovL2xvY2FsaG9zdDo4MTUzL2dvL2Fw
-      aS9hZG1pbi9wYWNrYWdlcy9wYWNrYWdlLWJhciJ9LCAiZmluZCI6IHsiaHJlZiI6ICJodHRwOi8v
-      bG9jYWxob3N0OjgxNTMvZ28vYXBpL2FkbWluL3BhY2thZ2VzLzpwYWNrYWdlX2lkIn0sICJkb2Mi
-      OiB7ImhyZWYiOiAiaHR0cHM6Ly9hcGkuZ29jZC5pby8jcGFja2FnZXMifX0sICJhdXRvX3VwZGF0
-      ZSI6IGZhbHNlLCAicGFja2FnZV9yZXBvIjogeyJfbGlua3MiOiB7InNlbGYiOiB7ImhyZWYiOiAi
-      aHR0cDovL2xvY2FsaG9zdDo4MTUzL2dvL2FwaS9hZG1pbi9yZXBvc2l0b3JpZXMvcmVwb3NpdG9y
-      eS1mb3ItcGFja2FnZSJ9LCAiZmluZCI6IHsiaHJlZiI6ICJodHRwOi8vbG9jYWxob3N0OjgxNTMv
-      Z28vYXBpL2FkbWluL3JlcG9zaXRvcmllcy86cmVwb19pZCJ9LCAiZG9jIjogeyJocmVmIjogImh0
-      dHBzOi8vYXBpLmdvY2QuaW8vI3BhY2thZ2UtcmVwb3NpdG9yaWVzIn19LCAibmFtZSI6ICJyZXBv
-      LmZvci5wYWNrYWdlIiwgImlkIjogInJlcG9zaXRvcnktZm9yLXBhY2thZ2UifSwgIm5hbWUiOiAi
-      dXBkYXRlZC1uYW1lIiwgImNvbmZpZ3VyYXRpb24iOiBbeyJrZXkiOiAiUEFDS0FHRV9TUEVDIiwg
-      InZhbHVlIjogIlRoaXMgaXMgYSBwYWNrYWdlIEJBUiJ9XSwgImlkIjogInBhY2thZ2UtYmFyIn0=
+    body: !!python/unicode '{"package_repo": {"_links": {"doc": {"href": "https://api.gocd.io/#package-repositories"},
+      "self": {"href": "http://localhost:8153/go/api/admin/repositories/repository-for-package"},
+      "find": {"href": "http://localhost:8153/go/api/admin/repositories/:repo_id"}},
+      "id": "repository-for-package", "name": "repo.for.package"}, "name": "updated-name",
+      "auto_update": false, "_links": {"doc": {"href": "https://api.gocd.io/#packages"},
+      "self": {"href": "http://localhost:8153/go/api/admin/packages/package-bar"},
+      "find": {"href": "http://localhost:8153/go/api/admin/packages/:package_id"}},
+      "configuration": [{"key": "PACKAGE_SPEC", "value": "This is a package BAR"}],
+      "id": "package-bar"}'
     headers:
-      Accept: [application/vnd.go.cd.v1+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['683']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      If-Match: ['"027912ca12f38902582cdb237b2fdd57--gzip"']
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v1+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '683'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      If-Match:
+      - '"027912ca12f38902582cdb237b2fdd57--gzip"'
+      User-Agent:
+      - python-requests/2.22.0
     method: PUT
     uri: http://localhost:8153/go/api/admin/packages/package-bar
   response:
@@ -35,17 +40,33 @@ interactions:
         rdbMs1SucJE5NQUzRDOnP4RwwWmoGSN0Vak9TxeTGEIupahY3SswTApb+uEvTpG09ODu7/LNS/68
         Ld522w2anH4D7z3+vWE6th/EgR8/5a/z7/QZnaIfMaQtKGADAAA=
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v1+json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 11:52:14 GMT']
-      ETag: ['"7417f0fa94dff833fdffc5d6cd7781ff--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [6d2a85e8-b44e-4ae9-8a09-fa7158f92adf]
-      X-Runtime: ['0.118000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v1+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:25 GMT
+      etag:
+      - '"7417f0fa94dff833fdffc5d6cd7781ff--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - 0086fe45-5084-4f66-93c9-f2fea426f7e5
+      x-runtime:
+      - '0.059000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1

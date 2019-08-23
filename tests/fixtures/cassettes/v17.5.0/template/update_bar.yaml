@@ -1,23 +1,29 @@
 interactions:
 - request:
-    body: !!binary |
-      eyJzdGFnZXMiOiBbeyJqb2JzIjogW3siZW52aXJvbm1lbnRfdmFyaWFibGVzIjogW10sICJydW5f
-      aW5zdGFuY2VfY291bnQiOiBudWxsLCAidGFza3MiOiBbeyJhdHRyaWJ1dGVzIjogeyJ3b3JraW5n
-      X2RpcmVjdG9yeSI6IG51bGwsICJjb21tYW5kIjogImxzIn0sICJ0eXBlIjogImV4ZWMifV0sICJu
-      YW1lIjogImJhci1qb2IiLCAidGltZW91dCI6IDAsICJyZXNvdXJjZXMiOiBbXX1dLCAibmV2ZXJf
-      Y2xlYW51cF9hcnRpZmFjdHMiOiBmYWxzZSwgImNsZWFuX3dvcmtpbmdfZGlyZWN0b3J5IjogZmFs
-      c2UsICJuYW1lIjogIkJBWi1TVEFHRSIsICJlbnZpcm9ubWVudF92YXJpYWJsZXMiOiBbXSwgImZl
-      dGNoX21hdGVyaWFscyI6IHRydWV9XSwgIm5hbWUiOiAiYmFyIn0=
+    body: !!python/unicode '{"stages": [{"clean_working_directory": false, "name":
+      "BAZ-STAGE", "never_cleanup_artifacts": false, "fetch_materials": true, "environment_variables":
+      [], "jobs": [{"run_instance_count": null, "tasks": [{"attributes": {"working_directory":
+      null, "command": "ls"}, "type": "exec"}], "name": "bar-job", "timeout": 0, "environment_variables":
+      [], "resources": []}]}], "name": "bar"}'
     headers:
-      Accept: [application/vnd.go.cd.v3+json]
-      Accept-Encoding: ['gzip, deflate']
-      Authorization: [Basic YWRtaW46MTIzNDU=]
-      Connection: [keep-alive]
-      Content-Length: ['380']
-      Content-Type: [application/json]
-      Cookie: [JSESSIONID=18o3zhwkpab059nwl0y3y1zgj]
-      If-Match: ['"fbf744f8ff3dbed1fbad548fb8dea640--gzip"']
-      User-Agent: [python-requests/2.13.0]
+      Accept:
+      - application/vnd.go.cd.v3+json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - Basic YWRtaW46MTIzNDU=
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '380'
+      Content-Type:
+      - application/json
+      Cookie:
+      - JSESSIONID=1fpp25trti0hiunytvqp739rl
+      If-Match:
+      - '"fbf744f8ff3dbed1fbad548fb8dea640--gzip"'
+      User-Agent:
+      - python-requests/2.22.0
     method: PUT
     uri: http://localhost:8153/go/api/admin/templates/bar
   response:
@@ -33,17 +39,33 @@ interactions:
         zsijFaqPy1xJakQUNo0cnl1q/IUjBq79yL3WiuyS96p1TvmNJJcv4QOMH0ULjA5ZRYam4Yf57R+S
         LvkHc473BREFAAA=
     headers:
-      Cache-Control: ['max-age=0, private, must-revalidate']
-      Content-Encoding: [gzip]
-      Content-Type: [application/vnd.go.cd.v3+json; charset=utf-8]
-      Date: ['Wed, 14 Jun 2017 12:08:41 GMT']
-      ETag: ['"18802502fe135d44800f12048dc1f180--gzip"']
-      Vary: ['Accept-Encoding, User-Agent']
-      X-Content-Type-Options: [nosniff]
-      X-Frame-Options: [SAMEORIGIN]
-      X-Request-Id: [cf1d7feb-962d-4d48-a82f-03fc1404328d]
-      X-Runtime: ['0.140000']
-      X-UA-Compatible: [chrome=1]
-      X-XSS-Protection: [1; mode=block]
-    status: {code: 200, message: OK}
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/vnd.go.cd.v3+json; charset=utf-8
+      date:
+      - Thu, 15 Aug 2019 13:36:52 GMT
+      etag:
+      - '"18802502fe135d44800f12048dc1f180--gzip"'
+      transfer-encoding:
+      - chunked
+      vary:
+      - Accept-Encoding, User-Agent
+      x-content-type-options:
+      - nosniff
+      x-frame-options:
+      - SAMEORIGIN
+      x-request-id:
+      - f87cde12-2253-4035-b2e0-086cecd91374
+      x-runtime:
+      - '0.060000'
+      x-ua-compatible:
+      - chrome=1
+      x-xss-protection:
+      - 1; mode=block
+    status:
+      code: 200
+      message: OK
 version: 1
