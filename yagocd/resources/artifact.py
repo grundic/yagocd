@@ -110,7 +110,7 @@ class ArtifactManager(BaseManager, RequireParamMixin):
         """
         return self.directory_wait(path=path)
 
-    def list(
+    def list(  # noqa
         self,
         pipeline_name=None,
         pipeline_counter=None,
@@ -251,7 +251,7 @@ class ArtifactManager(BaseManager, RequireParamMixin):
         stage_name=None,
         stage_counter=None,
         job_name=None,
-    ):
+    ):  # noqa
         """
         Gets an artifact file by its path.
 

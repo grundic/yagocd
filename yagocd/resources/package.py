@@ -60,7 +60,7 @@ class PackageManager(BaseManager):
         """
         return self.get(package_id=package_id)
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all available packages, these are materials that are present in the in cruise-config.xml.
 

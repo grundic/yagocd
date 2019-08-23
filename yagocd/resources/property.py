@@ -120,7 +120,7 @@ class PropertyManager(BaseManager, RequireParamMixin):
     def items(self):
         return self.list().items()
 
-    def list(
+    def list(  # noqa
         self,
         pipeline_name=None,
         pipeline_counter=None,

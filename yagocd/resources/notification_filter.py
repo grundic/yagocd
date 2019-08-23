@@ -51,7 +51,7 @@ class NotificationFilterManager(BaseManager):
         """
         return iter(self.list())
 
-    def list(self):
+    def list(self):  # noqa
         """
         Lists all notification filters for the authenticated user.
 

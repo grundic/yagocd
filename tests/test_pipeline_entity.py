@@ -98,16 +98,16 @@ class TestPipelineEntity(object):
         pipeline_entity.predecessors = [child_4]
 
         assert pipeline_entity.get_predecessors() == [child_4]
-        assert (sorted(pipeline_entity.get_predecessors(True), key=lambda x: x.data.name) ==
-                [child_1, child_2, child_3, child_4])
+        assert (sorted(pipeline_entity.get_predecessors(True), key=lambda x: x.data.name)
+                == [child_1, child_2, child_3, child_4])
 
         assert child_4.predecessors == [child_3]
-        assert (sorted(child_4.get_predecessors(True), key=lambda x: x.data.name) ==
-                [child_1, child_2, child_3])
+        assert (sorted(child_4.get_predecessors(True), key=lambda x: x.data.name)
+                == [child_1, child_2, child_3])
 
         assert child_3.predecessors == [child_1, child_2]
-        assert (sorted(child_3.get_predecessors(True), key=lambda x: x.data.name) ==
-                [child_1, child_2])
+        assert (sorted(child_3.get_predecessors(True), key=lambda x: x.data.name)
+                == [child_1, child_2])
 
         assert child_2.predecessors == [child_1]
         assert (sorted(child_2.get_predecessors(True), key=lambda x: x.data.name) == [child_1])
@@ -136,16 +136,16 @@ class TestPipelineEntity(object):
         pipeline_entity.descendants = [parent_1]
 
         assert pipeline_entity.get_descendants() == [parent_1]
-        assert (sorted(pipeline_entity.get_descendants(True), key=lambda x: x.data.name) ==
-                [parent_1, parent_2, parent_3, parent_4])
+        assert (sorted(pipeline_entity.get_descendants(True), key=lambda x: x.data.name)
+                == [parent_1, parent_2, parent_3, parent_4])
 
         assert parent_1.descendants == [parent_2]
-        assert (sorted(parent_1.get_descendants(True), key=lambda x: x.data.name) ==
-                [parent_2, parent_3, parent_4])
+        assert (sorted(parent_1.get_descendants(True), key=lambda x: x.data.name)
+                == [parent_2, parent_3, parent_4])
 
         assert parent_2.descendants == [parent_4, parent_3]
-        assert (sorted(parent_2.get_descendants(True), key=lambda x: x.data.name) ==
-                [parent_3, parent_4])
+        assert (sorted(parent_2.get_descendants(True), key=lambda x: x.data.name)
+                == [parent_3, parent_4])
 
         assert parent_3.descendants == [parent_4]
         assert (sorted(parent_3.get_descendants(True), key=lambda x: x.data.name) == [parent_4])
@@ -167,8 +167,8 @@ class TestPipelineEntity(object):
 
     def test_get_url(self, pipeline_entity):
         assert (
-            pipeline_entity.get_url('http://example.com', 'test_name') ==
-            'http://example.com/go/tab/pipeline/history/test_name'
+            pipeline_entity.get_url('http://example.com', 'test_name')
+            == 'http://example.com/go/tab/pipeline/history/test_name'
         )
 
     def test_url(self, pipeline_entity):

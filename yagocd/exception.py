@@ -52,7 +52,7 @@ class RequestError(YagocdException):
         try:
             self.json = response.json()
             assert isinstance(self.json, dict)
-        except:
+        except:  # noqa
             self.json = {}
 
     def __str__(self):
