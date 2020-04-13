@@ -41,7 +41,7 @@ class StageManager(BaseManager, RequireParamMixin):
     """
 
     RUN_RESOURCE_PATH = '{base_api}/run/{pipeline_name}/{pipeline_counter}/{stage_name}'
-    RESOURCE_PATH = '{base_api}/stages/{pipeline_name}/{stage_name}'
+    RESOURCE_PATH = '{base_api}/stages/'
 
     def __init__(
         self,
@@ -139,12 +139,12 @@ class StageManager(BaseManager, RequireParamMixin):
         stage_counter = self._require_param('stage_counter', func_args)
 
         response = self._session.get(
-            path=self._session.urljoin(self.RESOURCE_PATH, 'instance', pipeline_counter, stage_counter).format(
+            path=self._session.urljoin(self.RESOURCE_PATH, pipeline_name, pipeline_counter, stage_name, stage_counter).format(
                 base_api=self.base_api,
                 pipeline_name=pipeline_name,
                 stage_name=stage_name
             ),
-            headers={'Accept': 'application/json'},
+            headers={'Accept': 'application/vnd.go.cd.v2+json'},
         )
 
         return StageInstance(session=self._session, data=response.json(), pipeline=None)

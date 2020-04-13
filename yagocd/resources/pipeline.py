@@ -134,9 +134,9 @@ class PipelineManager(BaseManager):
         :rtype: list of yagocd.resources.pipeline.PipelineInstance
         """
         response = self._session.get(
-            path=self._session.urljoin(self.RESOURCE_PATH, 'history', offset).format(
+            path=self._session.urljoin(self.RESOURCE_PATH, 'history').format(
                 base_api=self.base_api, name=name),
-            headers={'Accept': 'application/json'},
+            headers={'Accept': 'application/vnd.go.cd.v1+json'},
         )
 
         instances = list()
